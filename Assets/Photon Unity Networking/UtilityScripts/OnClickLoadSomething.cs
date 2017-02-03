@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 /// <summary>
 /// This component makes it easy to switch scenes or open webpages on click.
-/// Requires a InputToEvent component on the camera to forward clicks on screen.
+/// Requires a InputToEvent component on the _camera to forward clicks on screen.
 /// </summary>
 public class OnClickLoadSomething : MonoBehaviour
 {
