@@ -31,8 +31,9 @@ public class Health : TrueSyncBehaviour
 
     IEnumerator Death()
     {
+        FP waitTime = .1;
         //send over information about how killed who
-        yield return new WaitForSeconds(.1f);
+        yield return waitTime;
         currHealth = maxHealth;
     }
 }
