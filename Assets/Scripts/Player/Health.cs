@@ -31,7 +31,7 @@ public class Health : TrueSyncBehaviour
     public void Death()
     {
         //send over information about how killed who
-        currHealth = maxHealth;
         tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
+        currHealth = maxHealth;
     }
 }
