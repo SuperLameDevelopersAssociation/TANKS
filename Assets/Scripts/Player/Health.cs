@@ -24,14 +24,15 @@ public class Health : TrueSyncBehaviour
 
         if (currHealth <= 0)
         {
-            Death();
+            tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
+            StartCoroutine(Death());
         }
     }
 
-    public void Death()
+    IEnumerator Death()
     {
         //send over information about how killed who
-        tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
+        yield return new WaitForSeconds(.1f);
         currHealth = maxHealth;
     }
 }
