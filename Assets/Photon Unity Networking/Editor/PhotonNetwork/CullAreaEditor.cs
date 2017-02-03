@@ -116,14 +116,14 @@ public class CullAreaEditor : Editor
         {
             EditorGUILayout.BeginVertical();
 
-            EditorGUILayout.LabelField("View and camera options", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("View and _camera options", EditorStyles.boldLabel);
             alignEditorCamera = EditorGUILayout.Toggle("Automatically align editor view with grid", alignEditorCamera);
 
             if (Camera.main != null)
             {
-                if (GUILayout.Button("Align main camera with grid"))
+                if (GUILayout.Button("Align main _camera with grid"))
                 {
-                    Undo.RecordObject(Camera.main.transform, "Align main camera with grid.");
+                    Undo.RecordObject(Camera.main.transform, "Align main _camera with grid.");
 
                     float yCoord = cullArea.YIsUpAxis ? cullArea.Center.y : Mathf.Max(cullArea.Size.x, cullArea.Size.y);
                     float zCoord = cullArea.YIsUpAxis ? -Mathf.Max(cullArea.Size.x, cullArea.Size.y) : cullArea.Center.y;
@@ -132,7 +132,7 @@ public class CullAreaEditor : Editor
                     Camera.main.transform.LookAt(cullArea.transform.position);
                 }
 
-                EditorGUILayout.LabelField("Current main camera position is " + Camera.main.transform.position.ToString());
+                EditorGUILayout.LabelField("Current main _camera position is " + Camera.main.transform.position.ToString());
             }
 
             EditorGUILayout.EndVertical();

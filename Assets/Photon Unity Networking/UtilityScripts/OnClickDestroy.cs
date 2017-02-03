@@ -16,7 +16,7 @@ using System.Collections;
 ///
 /// It makes sense to test those cases. Many are not breaking errors and you just have to be aware of them.
 ///
-/// Gets OnClick() calls by InputToEvent class attached to a camera.
+/// Gets OnClick() calls by InputToEvent class attached to a _camera.
 /// </remarks>
 [RequireComponent(typeof(PhotonView))]
 public class OnClickDestroy : Photon.MonoBehaviour
