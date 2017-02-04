@@ -9,6 +9,8 @@ public class Projectile : TrueSyncBehaviour
     [AddTracking]
     private FP destroyTime = 3;     //Time before projectile is destroyed
 
+    public FP damage; //I am not using this variable yet but I put this here to make sure my Shooting script has this set up so when it is implemented it works.
+
     public override void OnSyncedUpdate()
     {
         if (destroyTime <= 0)       //Check if its time to destroy the projectile

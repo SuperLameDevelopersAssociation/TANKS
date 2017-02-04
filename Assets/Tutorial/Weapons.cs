@@ -45,4 +45,14 @@ public class Weapons : MonoBehaviour
         if (duration.Length == 0)
             duration = new float[enumLength];
     }
+
+    public void ReturnInfo(int weaponType, Shooting player)
+    {
+        player.projectileType = projectileType[weaponType];
+        player.damage = damage[weaponType];
+        player.projectileSpeed = projectileSpeed[weaponType];
+        player.fireFreq = fireFreq[weaponType];
+        player.cooldown = cooldown[weaponType];
+        player.duration = duration[weaponType];
+    }
 }
