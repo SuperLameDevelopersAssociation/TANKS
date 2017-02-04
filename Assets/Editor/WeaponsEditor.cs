@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEditor;
 
 [CustomEditor(typeof(Weapons)), CanEditMultipleObjects]
 public class WeaponsEditor : Editor
 {
+    SerializedObject serObj;
     public SerializedProperty
         weaponType_Prop,
         projectileType_Prop,
@@ -12,45 +12,54 @@ public class WeaponsEditor : Editor
         prjectileSpeed_Prop,
         fireFreq_Prop,
         cooldown_Prop,
+        dd_Prop,
         duration_Prop;
+    
+    Weapons weapons;
+        
 
     void OnEnable()
     {
-        weaponType_Prop = serializedObject.FindProperty("weaponType");
-        projectileType_Prop = serializedObject.FindProperty("projectileType");
-        damage_Prop = serializedObject.FindProperty("damage");
-        prjectileSpeed_Prop = serializedObject.FindProperty("projectileSpeed");
-        fireFreq_Prop = serializedObject.FindProperty("fireFreq");
-        cooldown_Prop = serializedObject.FindProperty("cooldown");
-        duration_Prop = serializedObject.FindProperty("duration");
+        serObj = new SerializedObject(target);
+        weaponType_Prop = serObj.FindProperty("weaponType");
+        projectileType_Prop = serObj.FindProperty("projectileType");
+        damage_Prop = serObj.FindProperty("damage");
+        prjectileSpeed_Prop = serObj.FindProperty("projectileSpeed");
+        fireFreq_Prop = serObj.FindProperty("fireFreq");
+        cooldown_Prop = serObj.FindProperty("cooldown");
+        duration_Prop = serObj.FindProperty("duration");
+        weapons = target as Weapons; //grabs the script itself so that it can directly edit it
+        weapons.CreateArrays();     //declares the length of the arrays
     }
 
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
 
-        EditorGUILayout.PropertyField(weaponType_Prop, new GUIContent("Object"));
+        EditorGUILayout.PropertyField(weaponType_Prop, new GUIContent("Weapon Type"));
+
+        //======Using Enums, figures out the index of the enum selected=======
+        int enumIndex = weaponType_Prop.enumValueIndex;
         Weapons.WeaponType type = (Weapons.WeaponType)weaponType_Prop.enumValueIndex;
 
-        switch(type)
+        //======Sets the GameObject through the use of a Serialized Property========
+        SerializedProperty thisGameObject = projectileType_Prop.GetArrayElementAtIndex(enumIndex);
+        EditorGUILayout.PropertyField(thisGameObject, new GUIContent("Projectile Type"));
+        weapons.projectileType[enumIndex] = (GameObject)thisGameObject.objectReferenceValue;
+
+        //===========Sets the rest of the primitive values through the same system========
+        weapons.damage[enumIndex] = EditorGUILayout.IntField(new GUIContent("Damage"), weapons.damage[enumIndex]);
+
+        switch (type)
         {
-            case Weapons.WeaponType.Projectile:
-                EditorGUILayout.PropertyField(projectileType_Prop, new GUIContent("Projectile Type"));
-                EditorGUILayout.PropertyField(damage_Prop, new GUIContent("Damage Amount"));
-                EditorGUILayout.PropertyField(prjectileSpeed_Prop, new GUIContent("Projectile Speed"));
-                EditorGUILayout.PropertyField(fireFreq_Prop, new GUIContent("Fire Frequency"));
+            case Weapons.WeaponType.Projectile: //if a projectile based system
+                weapons.projectileSpeed[enumIndex] = EditorGUILayout.FloatField(new GUIContent("Projectile Speed"), weapons.projectileSpeed[enumIndex]);
+                weapons.fireFreq[enumIndex] = EditorGUILayout.FloatField(new GUIContent("Fire Frequency"), weapons.fireFreq[enumIndex]);
                 break;
-            case Weapons.WeaponType.Laser:
-                EditorGUILayout.PropertyField(projectileType_Prop, new GUIContent("Projectile Type"));
-                EditorGUILayout.PropertyField(damage_Prop, new GUIContent("Damage Amount"));
-                EditorGUILayout.PropertyField(cooldown_Prop, new GUIContent("Weapon Cooldown"));
-                EditorGUILayout.PropertyField(duration_Prop, new GUIContent("Active Duration"));
-                break;
+            case Weapons.WeaponType.Laser:      // if a non-projectile based system
             case Weapons.WeaponType.FlameThrower:
-                EditorGUILayout.PropertyField(projectileType_Prop, new GUIContent("Projectile Type"));
-                EditorGUILayout.PropertyField(damage_Prop, new GUIContent("Damage Amount"));
-                EditorGUILayout.PropertyField(cooldown_Prop, new GUIContent("Weapon Cooldown"));
-                EditorGUILayout.PropertyField(duration_Prop, new GUIContent("Active Duration"));
+                weapons.cooldown[enumIndex] = EditorGUILayout.FloatField(new GUIContent("Weapon Cooldown"), weapons.cooldown[enumIndex]);
+                weapons.duration[enumIndex] = EditorGUILayout.FloatField(new GUIContent("Duration"), weapons.duration[enumIndex]);
                 break;
         }
         serializedObject.ApplyModifiedProperties();
