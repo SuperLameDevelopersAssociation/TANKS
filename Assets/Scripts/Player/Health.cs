@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Health : TrueSyncBehaviour
 {
+    public GameObject explosionPrefab;
     public int maxHealth;
     [AddTracking]
     private int currHealth;
@@ -31,6 +32,7 @@ public class Health : TrueSyncBehaviour
 
     IEnumerator Death()
     {
+        Instantiate(explosionPrefab, transform.position, transform.rotation);
         FP waitTime = .1;
         //send over information about how killed who
         yield return waitTime;
