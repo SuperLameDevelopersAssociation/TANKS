@@ -48,17 +48,28 @@ public class Shooting : TrueSyncBehaviour
             TrueSyncInput.SetByte(2, 1);
         else
             TrueSyncInput.SetByte(2, 0);
+
+        if (Input.GetKey(KeyCode.R))
+            TrueSyncInput.SetByte(3, 1);
+        else
+            TrueSyncInput.SetByte(3, 0);
     }
 
     public override void OnSyncedUpdate()
     {
         byte fire = TrueSyncInput.GetByte(2);   //Get the input
+        byte reloadButton = TrueSyncInput.GetByte(3);
 
         switch(currentWeapon)
         {
             //For right now we only have projectiles and sustained weapons so I could do an if else for this but just in case in the future we come up with some other weapon type that does not fit either of 
             //The ones we have we would have to do a switch so i will do that for now just in case.
             case 0: //If weapon is the projectile
+
+                if(reloadButton == 1 && isReloading == 0)
+                {
+                    StartCoroutine(Reload());
+                }
                 if (fire == 1 && isReloading == 0 && isShooting == 0)         //Check if it was pressed
                 {
                     isShooting = 1;
