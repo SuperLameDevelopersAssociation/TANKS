@@ -39,7 +39,6 @@ public class Shooting : TrueSyncBehaviour
     bool overheated;    //If the weapon is overheated
     bool cooling;
 
-
     public override void OnSyncedStart()
     {
         currentWeapon = 0;        //You can use this to test
