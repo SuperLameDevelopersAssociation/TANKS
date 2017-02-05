@@ -14,6 +14,8 @@ public class Health : TrueSyncBehaviour
     public override void OnSyncedStart()
     {
         currHealth = maxHealth;
+        //StartCoroutine(Death()); //You can use this to test if it works over the network
+
         //Weapons = GameObject.FindGameObjectWithTag("GameManager").GetComponent<Weapons>();
     }
 
@@ -32,7 +34,7 @@ public class Health : TrueSyncBehaviour
 
     IEnumerator Death()
     {
-        Instantiate(explosionPrefab, transform.position, transform.rotation);
+        TrueSyncManager.SyncedInstantiate(explosionPrefab, tsTransform.position, tsTransform.rotation);
         FP waitTime = .1;
         //send over information about how killed who
         yield return waitTime;
