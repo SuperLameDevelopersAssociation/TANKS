@@ -20,20 +20,15 @@ public class Shooting : TrueSyncBehaviour
     [AddTracking]
     private byte isShooting = 0; //if isShooting = 0 then its false, else if its 1 then its true
 
-    Weapons weapons;
+    //Weapons weapons;
 
     //Weapon Variables
-    [HideInInspector]
     public GameObject projectileType;
-    [HideInInspector]
+    public GameObject sustainedProjectile;
     public int damage;
-    [HideInInspector]
     public FP projectileSpeed;
-    [HideInInspector]
     public float fireFreq;
-    [HideInInspector]
     public float cooldown;
-    [HideInInspector]
     public float duration;
 
     [HideInInspector]
@@ -49,8 +44,8 @@ public class Shooting : TrueSyncBehaviour
     {
         currentWeapon = 1;        //You can use this to test
         ammo = magazineSize;
-        weapons = GameObject.Find("GameManager").GetComponent<Weapons>();
-        weapons.ReturnInfo(currentWeapon, this);
+        //weapons = GameObject.Find("GameManager").GetComponent<Weapons>();
+        //weapons.ReturnInfo(currentWeapon, this);
 
     }
     public override void OnSyncedInput()
@@ -98,7 +93,7 @@ public class Shooting : TrueSyncBehaviour
                 }
                 else if (fire == 0 && laserHeat >= 0)
                 {
-                    projectileType.SetActive(false);
+                    sustainedProjectile.SetActive(false);
                     StartCoroutine(Cooling());
                 }
                 else if (laserHeat < 0)
@@ -106,11 +101,18 @@ public class Shooting : TrueSyncBehaviour
 
                 break;
             case 2: //If weapon is the flamethrower
-                if (fire == 1 && isShooting == 0)
+                if (fire == 1)
                 {
-                    isShooting = 1;
-                    FireSustained();
+                    if (!overheated)
+                        FireSustained();
                 }
+                else if (fire == 0 && laserHeat >= 0)
+                {
+                    sustainedProjectile.SetActive(false);
+                    StartCoroutine(Cooling());
+                }
+                else if (laserHeat < 0)
+                    laserHeat = 0;
                 break;
         }
     }
@@ -141,10 +143,10 @@ public class Shooting : TrueSyncBehaviour
 
     void FireSustained()
     {
-        if(!projectileType.activeInHierarchy)
+        if(!sustainedProjectile.activeInHierarchy)
         {
-            projectileType.GetComponent<Projectile>().damage = damage;
-            projectileType.SetActive(true);
+            sustainedProjectile.SetActive(true);
+            sustainedProjectile.GetComponent<Projectile>().damage = damage;
         }
 
         laserHeat = laserHeat + heatUpAmount;
