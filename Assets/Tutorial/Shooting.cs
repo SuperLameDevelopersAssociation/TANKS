@@ -8,6 +8,11 @@ public class Shooting : TrueSyncBehaviour
     [AddTracking]
     public FP reloadTime;
 
+    public int overheatMax;     //Max amount of heat that can be had
+    public float heatUpAmount = 1;  //How fast your weapon gains heat
+    public float cooldownHeatDownAmt = 5;    //How fast your weapon loses heat
+    public float overheatedHeatDownAmt = 2; //How fast your weapon loses heat when overheated
+
     [AddTracking]
     private FP ammo = 0;
     [AddTracking]
@@ -34,9 +39,15 @@ public class Shooting : TrueSyncBehaviour
     [HideInInspector]
     public int currentWeapon;   //This would be set in the script that instantiates the players. 
 
+    [AddTracking]
+    FP laserHeat;   //Current laser heat
+    bool overheated;    //If the weapon is overheated
+    bool cooling;
+
+
     public override void OnSyncedStart()
     {
-       // currentWeapon = 0;        //You can use this to test
+        currentWeapon = 1;        //You can use this to test
         ammo = magazineSize;
         weapons = GameObject.Find("GameManager").GetComponent<Weapons>();
         weapons.ReturnInfo(currentWeapon, this);
@@ -60,7 +71,7 @@ public class Shooting : TrueSyncBehaviour
         byte fire = TrueSyncInput.GetByte(2);   //Get the input
         byte reloadButton = TrueSyncInput.GetByte(3);
 
-        switch(currentWeapon)
+        switch (currentWeapon)
         {
             //For right now we only have projectiles and sustained weapons so I could do an if else for this but just in case in the future we come up with some other weapon type that does not fit either of 
             //The ones we have we would have to do a switch so i will do that for now just in case.
@@ -80,17 +91,25 @@ public class Shooting : TrueSyncBehaviour
                 }
                 break;
             case 1: //If weapon is the laser
-                if (fire == 1 && isShooting == 0)
+                if (fire == 1)
                 {
-                    isShooting = 1;
-                    StartCoroutine(FireSustained());
+                    if (!overheated)
+                        FireSustained();
                 }
+                else if (fire == 0 && laserHeat >= 0)
+                {
+                    projectileType.SetActive(false);
+                    StartCoroutine(Cooling());
+                }
+                else if (laserHeat < 0)
+                    laserHeat = 0;
+
                 break;
             case 2: //If weapon is the flamethrower
                 if (fire == 1 && isShooting == 0)
                 {
                     isShooting = 1;
-                    StartCoroutine(FireSustained());
+                    FireSustained();
                 }
                 break;
         }
@@ -120,16 +139,48 @@ public class Shooting : TrueSyncBehaviour
         isShooting = 0;
     }
 
-    IEnumerator FireSustained()
+    void FireSustained()
     {
-        print("FireSustained()");
-        projectileType.GetComponent<Projectile>().damage = damage;
-        //Activate Laser or Flamethrower
-        projectileType.SetActive(true);                 //The script that spawns the players should instantiate the prefab that has the laser/flamethrower positioned already meaning I just have to turn it on and off.
-        yield return new WaitForSeconds(duration);
-        projectileType.SetActive(false);
+        if(!projectileType.activeInHierarchy)
+        {
+            projectileType.GetComponent<Projectile>().damage = damage;
+            projectileType.SetActive(true);
+        }
 
-        yield return new WaitForSeconds(cooldown);
-        isShooting = 0;
+        laserHeat = laserHeat + heatUpAmount;
+        print("WeaponActive... Laserheat is at " + laserHeat);
+
+        if(laserHeat >= overheatMax)
+        {
+            StartCoroutine(Overheated());
+        }
+    }
+
+    IEnumerator Overheated()
+    {
+        overheated = true;
+        projectileType.SetActive(false);
+        for (FP i = laserHeat; i > 0; i = i - 1)
+        {
+            laserHeat = laserHeat - overheatedHeatDownAmt;
+            print("Overheating... LaserHeat is at " + laserHeat);
+            yield return new WaitForSeconds(.1f);
+            if(laserHeat <= 0)
+            {
+                overheated = false;
+            }
+        }
+    }
+
+    IEnumerator Cooling()
+    {
+        if(!cooling && !overheated && laserHeat > 0)
+        {
+            cooling = true;
+            laserHeat = laserHeat - cooldownHeatDownAmt;
+            print("Weapon Cooling Down.. Laserheat is at " + laserHeat);
+            yield return new WaitForSeconds(.1f);
+            cooling = false;
+        }
     }
 }
