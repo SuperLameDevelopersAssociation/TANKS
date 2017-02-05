@@ -42,7 +42,7 @@ public class Shooting : TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        currentWeapon = 1;        //You can use this to test
+        currentWeapon = 0;        //You can use this to test
         ammo = magazineSize;
         //weapons = GameObject.Find("GameManager").GetComponent<Weapons>();
         //weapons.ReturnInfo(currentWeapon, this);
