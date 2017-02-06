@@ -38,6 +38,7 @@ public class Shooting : TrueSyncBehaviour
     FP laserHeat;   //Current laser heat
     bool overheated;    //If the weapon is overheated
     bool cooling;
+    bool isHoldingTrigger;  //Fire1 is pressed/
 
     public override void OnSyncedStart()
     {
@@ -98,6 +99,10 @@ public class Shooting : TrueSyncBehaviour
                 else if (laserHeat < 0)
                     laserHeat = 0;
 
+                if (fire == 1)
+                    isHoldingTrigger = true;
+                else
+                    isHoldingTrigger = false;
 
                 break;
             case 2: //If weapon is the flamethrower
@@ -113,6 +118,11 @@ public class Shooting : TrueSyncBehaviour
                 }
                 else if (laserHeat < 0)
                     laserHeat = 0;
+
+                if (fire == 1)
+                    isHoldingTrigger = true;
+                else
+                    isHoldingTrigger = false;
                 break;
         }
     }
@@ -163,12 +173,21 @@ public class Shooting : TrueSyncBehaviour
         sustainedProjectile.SetActive(false);
         for (FP i = laserHeat; i > 0; i = i - 1)
         {
-            laserHeat = laserHeat - overheatedHeatDownAmt;
-            print("Overheating... LaserHeat is at " + laserHeat);
-            yield return new WaitForSeconds(.1f);
-            if(laserHeat <= 0)
+            if(!isHoldingTrigger)
             {
-                overheated = false;
+                print("Not holding trigger");
+                laserHeat = laserHeat - overheatedHeatDownAmt;
+                print("Overheating... LaserHeat is at " + laserHeat);
+                yield return new WaitForSeconds(.1f);
+                if (laserHeat <= 0)
+                {
+                    overheated = false;
+                }
+            }
+            else
+            {
+                i = i + 1;
+                yield return new WaitForSeconds(0);
             }
         }
     }
