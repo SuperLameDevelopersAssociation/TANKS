@@ -41,7 +41,7 @@ public class Shooting : TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        currentWeapon = 0;        //You can use this to test
+        currentWeapon = 1;        //You can use this to test
         ammo = magazineSize;
         //weapons = GameObject.Find("GameManager").GetComponent<Weapons>();
         //weapons.ReturnInfo(currentWeapon, this);
@@ -98,6 +98,7 @@ public class Shooting : TrueSyncBehaviour
                 else if (laserHeat < 0)
                     laserHeat = 0;
 
+
                 break;
             case 2: //If weapon is the flamethrower
                 if (fire == 1)
@@ -145,7 +146,6 @@ public class Shooting : TrueSyncBehaviour
         if(!sustainedProjectile.activeInHierarchy)
         {
             sustainedProjectile.SetActive(true);
-            sustainedProjectile.GetComponent<Projectile>().damage = damage;
         }
 
         laserHeat = laserHeat + heatUpAmount;
@@ -160,7 +160,7 @@ public class Shooting : TrueSyncBehaviour
     IEnumerator Overheated()
     {
         overheated = true;
-        projectileType.SetActive(false);
+        sustainedProjectile.SetActive(false);
         for (FP i = laserHeat; i > 0; i = i - 1)
         {
             laserHeat = laserHeat - overheatedHeatDownAmt;
