@@ -4,7 +4,7 @@ using TrueSync;
 
 public class AbilitiesBase : TrueSyncBehaviour
 {
-    [AddTracking]
+    [AddTracking, HideInInspector]
     public FP cooldown;
    
     public FP Cooldown
@@ -13,8 +13,5 @@ public class AbilitiesBase : TrueSyncBehaviour
         set { cooldown = value; }
     }
 
-    public virtual void ActivatePower()
-    {
-
-    }
+    public virtual void ActivatePower(){}
 }
