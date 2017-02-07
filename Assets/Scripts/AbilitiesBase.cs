@@ -5,7 +5,7 @@ using TrueSync;
 public class AbilitiesBase : TrueSyncBehaviour
 {
     [AddTracking]
-    private FP cooldown;
+    public FP cooldown;
    
     public FP Cooldown
     {
