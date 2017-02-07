@@ -15,7 +15,7 @@ public class PlayerMovement : TrueSyncBehaviour
         tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50));
 
         if (_camera == null)
-            _camera = transform.FindChild("Camera").gameObject;
+            _camera = transform.GetComponentInChildren<Camera>().gameObject;
 
         if (TrueSyncManager.LocalPlayer == owner) {
             _camera.SetActive(true);
