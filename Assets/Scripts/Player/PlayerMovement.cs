@@ -19,7 +19,6 @@ public class PlayerMovement : TrueSyncBehaviour
 
         if (TrueSyncManager.LocalPlayer == owner) {
             _camera.SetActive(true);
-            mouseLook.Init(transform, _camera.transform);
         }
 
         if (wheels.Length == 0)
@@ -45,7 +44,6 @@ public class PlayerMovement : TrueSyncBehaviour
 
         tsTransform.Translate(0, 0, accell, Space.Self);
         tsTransform.Rotate(0, steer, 0);
-        mouseLook.LookRotation(transform, _camera.transform);
 
         foreach (Animator anim in wheels)
         {

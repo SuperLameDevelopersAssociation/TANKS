@@ -15,6 +15,7 @@ public class MouseLook : MonoBehaviour {
     private Quaternion m_CharacterTargetRot;
     private Quaternion m_CameraTargetRot;
     private bool m_cursorIsLocked = true;
+    private Transform _camera;
 
     public void Init(Transform character, Transform camera)
     {
@@ -22,6 +23,15 @@ public class MouseLook : MonoBehaviour {
         m_CameraTargetRot = camera.localRotation;
     }
 
+    public void Start()
+    {
+        _camera = transform.FindChild("Camera").gameObject.transform;
+        Init(transform, _camera);
+    }
+
+    public void LateUpdate() {
+        LookRotation(transform, _camera);
+    }
 
     public void LookRotation(Transform character, Transform camera)
     {
