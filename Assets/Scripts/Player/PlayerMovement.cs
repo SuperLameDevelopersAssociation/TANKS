@@ -4,7 +4,6 @@ using TrueSync;
 
 public class PlayerMovement : TrueSyncBehaviour
 {
-    public MouseLook mouseLook = new MouseLook();
     public GameObject _camera;
     public int speed = 10;
     public int rotationSpeed = 150;
