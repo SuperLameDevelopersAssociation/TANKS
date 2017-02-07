@@ -20,8 +20,6 @@ public class Shooting : TrueSyncBehaviour
     [AddTracking]
     private byte isShooting = 0; //if isShooting = 0 then its false, else if its 1 then its true
 
-    //Weapons weapons;
-
     //Weapon Variables
     public GameObject projectileType;
     public GameObject sustainedProjectile;
@@ -43,10 +41,17 @@ public class Shooting : TrueSyncBehaviour
     public override void OnSyncedStart()
     {
         currentWeapon = 1;        //You can use this to test
-        ammo = magazineSize;
-        //weapons = GameObject.Find("GameManager").GetComponent<Weapons>();
-        //weapons.ReturnInfo(currentWeapon, this);
 
+        if (currentWeapon == 1 || currentWeapon == 2)
+        {
+            Sustained sustained = sustainedProjectile.GetComponent<Sustained>();
+            sustained.damage = damage;
+        }
+        else
+        {
+            ammo = magazineSize;
+            sustainedProjectile.SetActive(false);
+        }
     }
     public override void OnSyncedInput()
     {
@@ -86,6 +91,7 @@ public class Shooting : TrueSyncBehaviour
                 }
                 break;
             case 1: //If weapon is the laser
+            case 2: //If weapon is a flamethrower
                 if (fire == 1)
                 {
                     if (!overheated)
@@ -104,25 +110,6 @@ public class Shooting : TrueSyncBehaviour
                 else
                     isHoldingTrigger = false;
 
-                break;
-            case 2: //If weapon is the flamethrower
-                if (fire == 1)
-                {
-                    if (!overheated)
-                        FireSustained();
-                }
-                else if (fire == 0 && laserHeat >= 0)
-                {
-                    sustainedProjectile.SetActive(false);
-                    StartCoroutine(Cooling());
-                }
-                else if (laserHeat < 0)
-                    laserHeat = 0;
-
-                if (fire == 1)
-                    isHoldingTrigger = true;
-                else
-                    isHoldingTrigger = false;
                 break;
         }
     }
