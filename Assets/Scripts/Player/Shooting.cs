@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using TrueSync;
 
@@ -8,11 +9,13 @@ public class Shooting : TrueSyncBehaviour
     [AddTracking]
     public FP reloadTime;
 
+    //Sustained Based Vars
     public int overheatMax;     //Max amount of heat that can be had
     public float heatUpAmount = 1;  //How fast your weapon gains heat
     public float cooldownHeatDownAmt = 5;    //How fast your weapon loses heat
     public float overheatedHeatDownAmt = 2; //How fast your weapon loses heat when overheated
 
+    //Projectile Based Vars
     [AddTracking]
     private FP ammo = 0;
     [AddTracking]
@@ -21,16 +24,20 @@ public class Shooting : TrueSyncBehaviour
     private byte isShooting = 0; //if isShooting = 0 then its false, else if its 1 then its true
 
     //Weapon Variables
-    public GameObject projectileType;
-    public GameObject sustainedProjectile;
-    public int damage;
-    public FP projectileSpeed;
-    public float fireFreq;
-    public float cooldown;
-    public float duration;
-
     [HideInInspector]
-    public int currentWeapon;   //This would be set in the script that instantiates the players. 
+    public GameObject projectileType;
+    [HideInInspector]
+    public GameObject sustainedProjectile;
+    [HideInInspector]
+    public int damage;
+    [HideInInspector]
+    public float projectileSpeed;
+    [HideInInspector]
+    public float fireFreq;
+    [HideInInspector]
+    public float cooldown;
+
+    public enum CurrentWeapon {Projectile, Laser, Flamethrower};   //This would be set in the script that instantiates the players. 
 
     [AddTracking]
     FP laserHeat;   //Current laser heat
@@ -38,11 +45,12 @@ public class Shooting : TrueSyncBehaviour
     bool cooling;
     bool isHoldingTrigger;  //Fire1 is pressed/
 
+    public CurrentWeapon currentWeapon;
+
     public override void OnSyncedStart()
     {
-        currentWeapon = 1;        //You can use this to test
-
-        if (currentWeapon == 1 || currentWeapon == 2)
+        
+        if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
         {
             Sustained sustained = sustainedProjectile.GetComponent<Sustained>();
             sustained.damage = damage;
@@ -75,7 +83,7 @@ public class Shooting : TrueSyncBehaviour
         {
             //For right now we only have projectiles and sustained weapons so I could do an if else for this but just in case in the future we come up with some other weapon type that does not fit either of 
             //The ones we have we would have to do a switch so i will do that for now just in case.
-            case 0: //If weapon is the projectile
+            case CurrentWeapon.Projectile: //If weapon is the projectile
 
                 if(reloadButton == 1 && isReloading == 0)
                 {
@@ -90,8 +98,8 @@ public class Shooting : TrueSyncBehaviour
                         StartCoroutine(Reload());
                 }
                 break;
-            case 1: //If weapon is the laser
-            case 2: //If weapon is a flamethrower
+            case CurrentWeapon.Laser: //If weapon is the laser
+            case CurrentWeapon.Flamethrower: //If weapon is a flamethrower
                 if (fire == 1)
                 {
                     if (!overheated)

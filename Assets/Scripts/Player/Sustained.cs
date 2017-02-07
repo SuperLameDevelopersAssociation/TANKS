@@ -5,6 +5,8 @@ using System.Collections;
 public class Sustained : TrueSyncBehaviour
 {
     public int damage; //I am not using this variable yet but I put this here to make sure my Shooting script has this set up so when it is implemented it works.
+    [Tooltip("How often the sustained weapon does to the target")]
+    public float damageFreq;
 
     private bool isWaiting = false;
 
@@ -13,7 +15,6 @@ public class Sustained : TrueSyncBehaviour
     {
         if (!isWaiting)
         {
-            print(other.gameObject);
             if (other.gameObject.tag == "Player")   //Checks if collided with player
             {
                 Health hitPlayer = other.gameObject.GetComponent<Health>();     //Reference the players movement script
