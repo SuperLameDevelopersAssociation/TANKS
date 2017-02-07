@@ -4,6 +4,7 @@ using TrueSync;
 
 public class PlayerMovement : TrueSyncBehaviour
 {
+    public MouseLook mouseLook = new MouseLook();
     public GameObject _camera;
     public int speed = 10;
     public int rotationSpeed = 150;
@@ -16,8 +17,10 @@ public class PlayerMovement : TrueSyncBehaviour
         if (_camera == null)
             _camera = transform.FindChild("Camera").gameObject;
 
-        if (TrueSyncManager.LocalPlayer == owner)
+        if (TrueSyncManager.LocalPlayer == owner) {
             _camera.SetActive(true);
+            mouseLook.Init(transform, _camera.transform);
+        }
 
         if (wheels.Length == 0)
             Debug.LogError("No wheel animators found");
@@ -42,6 +45,7 @@ public class PlayerMovement : TrueSyncBehaviour
 
         tsTransform.Translate(0, 0, accell, Space.Self);
         tsTransform.Rotate(0, steer, 0);
+        mouseLook.LookRotation(transform, _camera.transform);
 
         foreach (Animator anim in wheels)
         {
