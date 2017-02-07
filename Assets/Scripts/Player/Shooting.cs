@@ -129,17 +129,17 @@ public class Shooting : TrueSyncBehaviour
 
     IEnumerator Reload()    //Reload and allow shooting after reloadTime
     {
-        print("Reloading");
+     //   print("Reloading");
         isReloading = 1;
         ammo = magazineSize;
         yield return new WaitForSeconds(3);
         isReloading = 0;
-        print("done reloading");
+      //  print("done reloading");
     }
 
     IEnumerator FireProjectile()
     {
-        print("FireProjectile()");
+        //print("FireProjectile()");
         //Instantiate bullet
         GameObject projectileObject = TrueSyncManager.SyncedInstantiate(projectileType, tsTransform.position, TSQuaternion.identity);
         Projectile projectile = projectileObject.GetComponent<Projectile>();    //Set the projectile script
@@ -159,7 +159,7 @@ public class Shooting : TrueSyncBehaviour
         }
 
         laserHeat = laserHeat + heatUpAmount;
-        print("WeaponActive... Laserheat is at " + laserHeat);
+       // print("WeaponActive... Laserheat is at " + laserHeat);
 
         if(laserHeat >= overheatMax)
         {
@@ -175,9 +175,9 @@ public class Shooting : TrueSyncBehaviour
         {
             if(!isHoldingTrigger)
             {
-                print("Not holding trigger");
+              //  print("Not holding trigger");
                 laserHeat = laserHeat - overheatedHeatDownAmt;
-                print("Overheating... LaserHeat is at " + laserHeat);
+             //   print("Overheating... LaserHeat is at " + laserHeat);
                 yield return new WaitForSeconds(.1f);
                 if (laserHeat <= 0)
                 {
@@ -198,7 +198,7 @@ public class Shooting : TrueSyncBehaviour
         {
             cooling = true;
             laserHeat = laserHeat - cooldownHeatDownAmt;
-            print("Weapon Cooling Down.. Laserheat is at " + laserHeat);
+         //   print("Weapon Cooling Down.. Laserheat is at " + laserHeat);
             yield return new WaitForSeconds(.1f);
             cooling = false;
         }
