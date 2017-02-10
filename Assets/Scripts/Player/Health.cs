@@ -17,9 +17,9 @@ public class Health : TrueSyncBehaviour
     }
 
 
-    public void TakeDamage(string tag)
+    public void TakeDamage(int damage)
     {
-        int damage = 5; //find how much damage the weapons type is from Weapons
+        //int damage = 5; //find how much damage the weapons type is from Weapons
         currHealth -= damage;
 
         if (currHealth <= 0)
