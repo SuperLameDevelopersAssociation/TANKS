@@ -24,19 +24,18 @@ public class ShootingEditor : Editor
 
     void OnEnable()
     {
-        serObj = new SerializedObject(target);
-        currentWeapon_Prop = serObj.FindProperty("currentWeapon");
-        weaponType_Prop = serObj.FindProperty("weaponType");
-        projectileType_Prop = serObj.FindProperty("projectileType");
-        sustainedProjectile_Prop = serObj.FindProperty("sustainedProjectile");
-        damage_Prop = serObj.FindProperty("damage");
-        prjectileSpeed_Prop = serObj.FindProperty("projectileSpeed");
-        fireFreq_Prop = serObj.FindProperty("fireFreq");
-        overheatMax_Prop = serObj.FindProperty("overheatMax");
-        heatUp_Prop = serObj.FindProperty("heatUpAmount");
-        cooldownHeatDownAmt_Prop = serObj.FindProperty("cooldownHeatDownAmt");
-        overheatedHeatDownAmt_Prop = serObj.FindProperty("overheatedHeatDownAmt");
-        cooldown_Prop = serObj.FindProperty("cooldown");
+        currentWeapon_Prop = serializedObject.FindProperty("currentWeapon");
+        weaponType_Prop = serializedObject.FindProperty("weaponType");
+        projectileType_Prop = serializedObject.FindProperty("projectileType");
+        sustainedProjectile_Prop = serializedObject.FindProperty("sustainedProjectile");
+        damage_Prop = serializedObject.FindProperty("damage");
+        prjectileSpeed_Prop = serializedObject.FindProperty("projectileSpeed");
+        fireFreq_Prop = serializedObject.FindProperty("fireFreq");
+        overheatMax_Prop = serializedObject.FindProperty("overheatMax");
+        heatUp_Prop = serializedObject.FindProperty("heatUpAmount");
+        cooldownHeatDownAmt_Prop = serializedObject.FindProperty("cooldownHeatDownAmt");
+        overheatedHeatDownAmt_Prop = serializedObject.FindProperty("overheatedHeatDownAmt");
+        cooldown_Prop = serializedObject.FindProperty("cooldown");
 
         shooting = target as Shooting;
 
