@@ -8,10 +8,12 @@ public class TeleportAbility : AbilitiesBase
     public int distance;
     [AddTracking]
     FP _cooldown;
+    PhysicsWorldManager manager;
 
     public override void OnSyncedStart()
     {
         StateTracker.AddTracking(this);
+        manager = new PhysicsWorldManager();
     }
 
     public override void OnSyncedInput()
@@ -38,7 +40,17 @@ public class TeleportAbility : AbilitiesBase
 
     public override void ActivatePower()
     {
-        tsTransform.position += tsTransform.forward * distance;
-        _cooldown = 5;
+        TSRay ray = new TSRay(tsTransform.position + (tsTransform.forward * 3.55f), tsTransform.forward);
+        TSRaycastHit hit = manager.Raycast(ray, distance + 5);
+        
+        if (hit != null)
+        {
+            //maybe show something on screen saying that you can't teleport
+        }
+        else
+        {
+            tsTransform.position += tsTransform.forward * distance;
+            _cooldown = 5;
+        }
     }
 }
