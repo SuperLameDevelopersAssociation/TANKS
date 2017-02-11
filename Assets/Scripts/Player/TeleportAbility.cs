@@ -4,37 +4,38 @@ using TrueSync;
 
 public class TeleportAbility : AbilitiesBase
 {
-    public KeyCode activationKey;
-    public int distance;
+    
+    public KeyCode activationKey;                   //Allow the designer to set the key press to activate the power
+    public int distance;                            //distance to allow the Raycast to find colliders
     [AddTracking]
-    FP _cooldown;
-    PhysicsWorldManager manager;
+    FP _cooldown;                                   //create a cooldown so the players don't spam the button
+    PhysicsWorldManager manager;                    //Instance that handles the Raycast. Should try the PhysicsWorldManager.instance
 
-    public override void OnSyncedStart()
+    public override void OnSyncedStart()            //TrueSync's version of OnStart()
     {
         StateTracker.AddTracking(this);
         manager = new PhysicsWorldManager();
     }
 
-    public override void OnSyncedInput()
+    public override void OnSyncedInput()                        //TrueSync uses this as input, rather than in Update()
     {
-        byte activationKeyPressed;
+        byte activationKeyPressed;                              //Variable/Flag to indicate button was pressed
         if (Input.GetKeyDown(activationKey))
-            activationKeyPressed = 1;
+            activationKeyPressed = 1;                           //1 is active
         else
-            activationKeyPressed = 0;
+            activationKeyPressed = 0;                           //0 is inactive
 
         TrueSyncInput.SetByte(6, activationKeyPressed);
     }
 
     public override void OnSyncedUpdate()
     {
-        byte activationKeyPressed = TrueSyncInput.GetByte(6);
+        byte activationKeyPressed = TrueSyncInput.GetByte(6);           //Checks for input
 
-        if (activationKeyPressed == 1 && _cooldown <= 0)
+        if (activationKeyPressed == 1 && _cooldown <= 0)                //Input is pressed and cooldown is zeroed
             ActivatePower();
 
-        if (_cooldown > 0)
+        if (_cooldown > 0)                                              //Subtract delta time from the overall time
             _cooldown -= TrueSyncManager.DeltaTime;
     }
 
@@ -46,6 +47,8 @@ public class TeleportAbility : AbilitiesBase
         if (hit != null)
         {
             //maybe show something on screen saying that you can't teleport
+
+            //How about like a flashing Exclamation point in the corner to indicate not available
         }
         else
         {
