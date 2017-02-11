@@ -24,17 +24,8 @@ public class Health : TrueSyncBehaviour
 
         if (currHealth <= 0)
         {
-            int xPos = Random.Range(-50, 50);
-            print(xPos);
-            int zPos = Random.Range(-50, 50);
-            print(zPos);
-            transform.position = new Vector3(xPos, 0, zPos);
-            tsTransform.position = new TSVector(xPos, 0, zPos);
-
-            //tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
-            //StartCoroutine(Death());
-
-            currHealth = maxHealth;
+            tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
+            StartCoroutine(Death());
         }
     }
 
