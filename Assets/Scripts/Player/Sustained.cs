@@ -27,6 +27,12 @@ public class Sustained : TrueSyncBehaviour
         }
     }
 
+    public void OnTriggerExit(Collider other)
+    {
+        print("We left " + other.name);
+        isWaiting = false;
+    }
+
     IEnumerator SendDamage()
     {
         print("SEND DAMAGE");

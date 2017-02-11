@@ -24,8 +24,17 @@ public class Health : TrueSyncBehaviour
 
         if (currHealth <= 0)
         {
-            tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
-            StartCoroutine(Death());
+            int xPos = Random.Range(-50, 50);
+            print(xPos);
+            int zPos = Random.Range(-50, 50);
+            print(zPos);
+            transform.position = new Vector3(xPos, 0, zPos);
+            tsTransform.position = new TSVector(xPos, 0, zPos);
+
+            //tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
+            //StartCoroutine(Death());
+
+            currHealth = maxHealth;
         }
     }
 
@@ -35,5 +44,10 @@ public class Health : TrueSyncBehaviour
         //send over information about how killed who
         yield return waitTime;
         currHealth = maxHealth;
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, 100 + 30 * owner.Id, 300, 30), "player: " + owner.Id + ", deaths: " + currHealth);
     }
 }
