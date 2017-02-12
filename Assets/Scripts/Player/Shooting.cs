@@ -47,6 +47,9 @@ public class Shooting : TrueSyncBehaviour
 
     public CurrentWeapon currentWeapon;
 
+    private GameObject gunBarrel;
+    private GameObject turretWrangler;
+
     public override void OnSyncedStart()
     {
         
@@ -57,6 +60,8 @@ public class Shooting : TrueSyncBehaviour
         }
         else
         {
+            gunBarrel = GameObject.Find("GunBarrel");
+            turretWrangler = GameObject.Find("TurretWrangler");
             ammo = magazineSize;
             sustainedProjectile.SetActive(false);
         }
@@ -137,8 +142,9 @@ public class Shooting : TrueSyncBehaviour
         //print("FireProjectile()");
         //Instantiate bullet
         GameObject projectileObject = TrueSyncManager.SyncedInstantiate(projectileType, tsTransform.position, TSQuaternion.identity);
+        projectileObject.GetComponent<TSTransform>().position = new TSVector(gunBarrel.transform.position.x, gunBarrel.transform.position.y, gunBarrel.transform.position.z);
         Projectile projectile = projectileObject.GetComponent<Projectile>();    //Set the projectile script
-        projectile.direction = tsTransform.forward; //Set the projectiles direction
+        projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
         projectile.owner = owner;   //Find the owner
         projectile.speed = projectileSpeed;
         projectile.damage = damage;
