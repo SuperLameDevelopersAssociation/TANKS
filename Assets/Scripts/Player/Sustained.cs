@@ -4,12 +4,12 @@ using System.Collections;
 
 public class Sustained : TrueSyncBehaviour
 {
-    public int damage; //I am not using this variable yet but I put this here to make sure my Shooting script has this set up so when it is implemented it works.
+    [HideInInspector]
+    public int damage;
     [Tooltip("How often the sustained weapon does to the target")]
     public float damageFreq;
 
     private bool isWaiting = false;
-
 
     public void OnTriggerStay (Collider other)
     {
@@ -35,6 +35,11 @@ public class Sustained : TrueSyncBehaviour
         isWaiting = false;
     }
 
+    public void OnTriggerExit(Collider other)
+    {
+        isWaiting = false;
+    }
 
-    
+
+
 }

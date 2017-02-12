@@ -30,6 +30,7 @@ public class Projectile : TrueSyncBehaviour
             if (hitPlayer.owner != owner)   //Checks to see if the player hit is an enemy and not yourself
             {
                 hitPlayer.TakeDamage(damage);
+                TrueSyncManager.SyncedDestroy(this.gameObject);
             }
         }
     }

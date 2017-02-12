@@ -36,4 +36,9 @@ public class Health : TrueSyncBehaviour
         yield return waitTime;
         currHealth = maxHealth;
     }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(10, 100 + 30 * owner.Id, 300, 30), "player: " + owner.Id + ", health: " + currHealth);
+    }
 }
