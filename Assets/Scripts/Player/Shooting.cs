@@ -60,8 +60,8 @@ public class Shooting : TrueSyncBehaviour
         }
         else
         {
-            gunBarrel = GameObject.Find("GunBarrel");
-            turretWrangler = GameObject.Find("TurretWrangler");
+            turretWrangler = transform.FindChild("TurretWrangler").gameObject;
+            gunBarrel = turretWrangler.transform.FindChild("Turret").transform.FindChild("Barrel").gameObject.transform.FindChild("GunBarrel").gameObject;
             ammo = magazineSize;
             sustainedProjectile.SetActive(false);
         }
