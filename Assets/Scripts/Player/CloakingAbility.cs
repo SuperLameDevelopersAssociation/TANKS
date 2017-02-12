@@ -6,8 +6,6 @@ public class CloakingAbility : AbilitiesBase
 {
     [AddTracking]
     FP _cooldown = 0;
-
-    public FP maxCoolDown;
     
     public Material cloakMaterial;                                  //Material to add to give cloaking effect
     public Renderer[] originalChildrenRender;                       //Grab the current children render so they can be reset after ability is done
