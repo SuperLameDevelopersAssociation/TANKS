@@ -14,7 +14,7 @@ public class TeleportAbility : AbilitiesBase
     public override void OnSyncedStart()            //TrueSync's version of OnStart()
     {
         StateTracker.AddTracking(this);
-        manager = new PhysicsWorldManager();
+        manager = PhysicsWorldManager.instance;
     }
 
     public override void OnSyncedInput()                        //TrueSync uses this as input, rather than in Update()
