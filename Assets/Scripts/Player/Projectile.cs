@@ -6,11 +6,18 @@ public class Projectile : TrueSyncBehaviour
     [HideInInspector]
     public FP speed = 15;           //Store speed for projectile
     [HideInInspector]
-    public TSVector direction;      //Store the direction
+    public Vector3 direction;       //Store the direction
     [AddTracking]
     private FP destroyTime = 3;     //Time before projectile is destroyed
 
     public int damage; //I am not using this variable yet but I put this here to make sure my Shooting script has this set up so when it is implemented it works.
+
+    public TSVector actualDirection;
+
+    public override void OnSyncedStart()
+    {
+        actualDirection = new TSVector(direction.x, direction.y, direction.z);
+    }
 
     public override void OnSyncedUpdate()
     {
@@ -18,7 +25,7 @@ public class Projectile : TrueSyncBehaviour
         {
             TrueSyncManager.SyncedDestroy(this.gameObject); //Destroy gameobject
         }
-        tsTransform.Translate(direction * speed * TrueSyncManager.DeltaTime);   //Move the projectile
+        tsTransform.Translate(actualDirection * speed * TrueSyncManager.DeltaTime);   //Move the projectile
         destroyTime -= TrueSyncManager.DeltaTime;   //Adjust the destroy time
     }
 
