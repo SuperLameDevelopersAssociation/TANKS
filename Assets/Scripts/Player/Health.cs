@@ -8,6 +8,8 @@ public class Health : TrueSyncBehaviour
     [AddTracking]
     private int currHealth;
 
+    public byte deaths;
+
     //Weapons weapons
 
     public override void OnSyncedStart()
@@ -17,7 +19,7 @@ public class Health : TrueSyncBehaviour
     }
 
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, int playerID)
     {
         //int damage = 5; //find how much damage the weapons type is from Weapons
         currHealth -= damage;
@@ -25,6 +27,10 @@ public class Health : TrueSyncBehaviour
         if (currHealth <= 0)
         {
             tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
+            deaths++;
+            PhotonNetwork.playerList[playerID].AddScore(1);
+            print(PhotonNetwork.playerList[playerID].GetScore() + ": the score for player:" + playerID);
+            //TrueSyncManager.Players[playerID];
             StartCoroutine(Death());
         }
     }

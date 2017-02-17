@@ -20,7 +20,7 @@ public class Sustained : TrueSyncBehaviour
                 Health hitPlayer = other.gameObject.GetComponent<Health>();     //Reference the players movement script
                 if (hitPlayer.owner != owner)   //Checks to see if the player hit is an enemy and not yourself
                 {
-                    hitPlayer.TakeDamage(damage);
+                    hitPlayer.TakeDamage(damage, this.ownerIndex);
                     StartCoroutine(SendDamage());
                 }
             }
