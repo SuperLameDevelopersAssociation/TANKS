@@ -50,9 +50,15 @@ public class Shooting : TrueSyncBehaviour
     private GameObject gunBarrel;
     private GameObject turretWrangler;
 
+    void Start()
+    {
+    }
+
     public override void OnSyncedStart()
     {
-        
+        //Instantiate bullet refab
+        //parameters are gameobject bullet, int number of pooled objects *note: this should be moved into start function
+        PoolManagerScript.instance.CreatePool(projectileType, 5);
         if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
         {
             Sustained sustained = sustainedProjectile.GetComponent<Sustained>();
@@ -140,14 +146,17 @@ public class Shooting : TrueSyncBehaviour
     IEnumerator FireProjectile()
     {
         //print("FireProjectile()");
-        //Instantiate bullet
-        GameObject projectileObject = TrueSyncManager.SyncedInstantiate(projectileType, tsTransform.position, TSQuaternion.identity);
-        projectileObject.GetComponent<TSTransform>().position = new TSVector(gunBarrel.transform.position.x, gunBarrel.transform.position.y, gunBarrel.transform.position.z);
-        Projectile projectile = projectileObject.GetComponent<Projectile>();    //Set the projectile script
-        projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
-        projectile.owner = owner;   //Find the owner
-        projectile.speed = projectileSpeed;
-        projectile.damage = damage;
+        //parameters are gameobject bullet, position, and rotation
+        PoolManagerScript.instance.ReuseObject(projectileType, TrueSync.TSVector.zero, TSQuaternion.identity);
+
+
+      // GameObject projectileObject = TrueSyncManager.SyncedInstantiate(projectileType, tsTransform.position, TSQuaternion.identity);
+      // projectileObject.GetComponent<TSTransform>().position = new TSVector(gunBarrel.transform.position.x, gunBarrel.transform.position.y, gunBarrel.transform.position.z);
+      // Projectile projectile = projectileObject.GetComponent<Projectile>();    //Set the projectile script
+      // projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
+      //  projectile.owner = owner;   //Find the owner
+      //projectile.speed = projectileSpeed;
+      //  projectile.damage = damage;
         yield return new WaitForSeconds(fireFreq);
         isShooting = 0;
     }

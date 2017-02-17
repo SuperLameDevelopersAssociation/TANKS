@@ -21,12 +21,12 @@ public class Projectile : TrueSyncBehaviour
 
     public override void OnSyncedUpdate()
     {
-        if (destroyTime <= 0)       //Check if its time to destroy the projectile
-        {
-            TrueSyncManager.SyncedDestroy(this.gameObject); //Destroy gameobject
-        }
-        tsTransform.Translate(actualDirection * speed * TrueSyncManager.DeltaTime);   //Move the projectile
-        destroyTime -= TrueSyncManager.DeltaTime;   //Adjust the destroy time
+        //if (destroyTime <= 0)       //Check if its time to destroy the projectile
+        //{
+        //    TrueSyncManager.SyncedDestroy(this.gameObject); //Destroy gameobject
+        //}
+        //tsTransform.Translate(actualDirection * speed * TrueSyncManager.DeltaTime);   //Move the projectile
+        //destroyTime -= TrueSyncManager.DeltaTime;   //Adjust the destroy time
     }
 
     public void OnSyncedTriggerEnter(TSCollision other)
