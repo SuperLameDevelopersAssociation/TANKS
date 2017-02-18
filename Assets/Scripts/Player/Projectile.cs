@@ -36,15 +36,7 @@ public class Projectile : TrueSyncBehaviour
             Health hitPlayer = other.gameObject.GetComponent<Health>();     //Reference the players movement script
             if (hitPlayer.owner != owner)   //Checks to see if the player hit is an enemy and not yourself
             {
-                if (hitPlayer.TakeDamage(damage)) //, this.owner.Id);
-                {
-                    if (TrueSyncManager.LocalPlayer == owner)
-                    {
-                        int thisID = owner.Id;
-                        PhotonNetwork.playerList[(thisID - 1)].AddScore(1);
-                        print(PhotonNetwork.playerList[(thisID - 1)].GetScore());
-                    }
-                }
+                hitPlayer.TakeDamage(damage, this.owner.Id);
                 TrueSyncManager.SyncedDestroy(this.gameObject);
             }
         }
