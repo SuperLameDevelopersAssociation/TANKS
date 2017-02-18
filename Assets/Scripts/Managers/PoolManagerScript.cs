@@ -44,7 +44,7 @@ public class PoolManagerScript : TrueSyncBehaviour
             }//end of forloop
         }//end of if
     }//end of function
-    public void ReuseObject(GameObject prefab, TSVector position, TSQuaternion rotation)
+    public void ReuseObject(GameObject prefab, TSVector position, TSVector direction, TSQuaternion rotation)
     {//The oldest object from the pool is re-used as the current one
         //in the example of 1,2,3, 1 was oldest (as it was instantiated first) so it would be the next one instantiated
         //1,2,3, 1,2,3,1,2,3, etc.
@@ -53,7 +53,7 @@ public class PoolManagerScript : TrueSyncBehaviour
         {
             ObjectInstance objectToReuse = poolDictionary[poolKey].Dequeue();
             poolDictionary[poolKey].Enqueue(objectToReuse);
-            objectToReuse.Reuse(position, rotation);
+            objectToReuse.Reuse(position, direction, rotation);
         }//end of if
     }//end of function
 
@@ -77,12 +77,14 @@ public class PoolManagerScript : TrueSyncBehaviour
                 poolObjectScript = gameObject.GetComponent<PoolObject>();
             }//end of if
         }//end of function
-        public void Reuse(TSVector position, TSQuaternion rotation)
+        public void Reuse(TSVector position, TSVector direction, TSQuaternion rotation)
         {
             //turning the object on and assiging the transforms
             gameObject.SetActive(true);
             gameObject.GetComponent<TSTransform>().position = position;
             gameObject.GetComponent<TSTransform>().rotation = rotation;
+            gameObject.GetComponent<Projectile>().actualDirection = direction;
+
 
             //if (hasPoolObjectComponent)
             //{

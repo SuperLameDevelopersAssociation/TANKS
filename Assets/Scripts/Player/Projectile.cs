@@ -16,7 +16,7 @@ public class Projectile : TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        actualDirection = new TSVector(direction.x, direction.y, direction.z);
+        // actualDirection = new TSVector(direction.x, direction.y, direction.z);
     }
 
     public override void OnSyncedUpdate()

@@ -144,19 +144,18 @@ public class Shooting : TrueSyncBehaviour
     }
 
     IEnumerator FireProjectile()
-    {
-        //print("FireProjectile()");
+    {//This script was modified by Chris... EL HERO!
         GameObject bullet = projectileType;
         bullet.GetComponent<TSTransform>().position = new TSVector(gunBarrel.transform.position.x, gunBarrel.transform.position.y, gunBarrel.transform.position.z);
         Projectile projectile = bullet.GetComponent<Projectile>();    //Set the projectile script
         projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
+        projectile.actualDirection = new TSVector(projectile.direction.x, projectile.direction.y, projectile.direction.z);
         projectile.owner = owner;   //Find the owner
         projectile.speed = projectileSpeed;
         projectile.damage = damage;//assigning the damage
         TSVector pos = new TSVector(gunBarrel.transform.position.x, gunBarrel.transform.position.y, gunBarrel.transform.position.z);
         //parameters are gameobject bullet, TSvector position, and TSVector rotation
-        PoolManagerScript.instance.ReuseObject(bullet, pos, TSQuaternion.identity);
-
+        PoolManagerScript.instance.ReuseObject(bullet, pos, projectile.actualDirection, TSQuaternion.identity);
         // projectileType = TrueSyncManager.SyncedInstantiate(projectileType, tsTransform.position, TSQuaternion.identity);
         yield return new WaitForSeconds(fireFreq);
         isShooting = 0;
