@@ -21,12 +21,13 @@ public class Projectile : TrueSyncBehaviour
 
     public override void OnSyncedUpdate()
     {
-        //if (destroyTime <= 0)       //Check if its time to destroy the projectile
-        //{
-        //    TrueSyncManager.SyncedDestroy(this.gameObject); //Destroy gameobject
-        //}
-        //tsTransform.Translate(actualDirection * speed * TrueSyncManager.DeltaTime);   //Move the projectile
-        //destroyTime -= TrueSyncManager.DeltaTime;   //Adjust the destroy time
+        if (destroyTime <= 0)       //Check if its time to destroy the projectile
+        {
+            destroyTime = 3;
+            gameObject.SetActive(false);
+        }
+        tsTransform.Translate(actualDirection * speed * TrueSyncManager.DeltaTime);   //Move the projectile
+        destroyTime -= TrueSyncManager.DeltaTime;   //Adjust the destroy time
     }
 
     public void OnSyncedTriggerEnter(TSCollision other)
@@ -36,8 +37,9 @@ public class Projectile : TrueSyncBehaviour
             Health hitPlayer = other.gameObject.GetComponent<Health>();     //Reference the players movement script
             if (hitPlayer.owner != owner)   //Checks to see if the player hit is an enemy and not yourself
             {
-                hitPlayer.TakeDamage(damage);
-                TrueSyncManager.SyncedDestroy(this.gameObject);
+                 hitPlayer.TakeDamage(damage);
+                 destroyTime = 3;
+                 gameObject.SetActive(false);
             }
         }
     }

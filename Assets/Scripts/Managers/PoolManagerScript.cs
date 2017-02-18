@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TrueSync;
 
-public class PoolManagerScript : MonoBehaviour
+public class PoolManagerScript : TrueSyncBehaviour
 {
     //ceating the dictionary that will allow us to cycle through our objects
     //from a specifically strict order (i.e. 1,2,3,1,2,3,1,2,3)
@@ -49,19 +49,16 @@ public class PoolManagerScript : MonoBehaviour
         //in the example of 1,2,3, 1 was oldest (as it was instantiated first) so it would be the next one instantiated
         //1,2,3, 1,2,3,1,2,3, etc.
         int poolKey = prefab.GetInstanceID();
-
         if (poolDictionary.ContainsKey(poolKey))
         {
             ObjectInstance objectToReuse = poolDictionary[poolKey].Dequeue();
             poolDictionary[poolKey].Enqueue(objectToReuse);
-
             objectToReuse.Reuse(position, rotation);
         }//end of if
     }//end of function
 
     public class ObjectInstance
     {
-
         GameObject gameObject;
         Transform transform;
 
@@ -87,10 +84,10 @@ public class PoolManagerScript : MonoBehaviour
             gameObject.GetComponent<TSTransform>().position = position;
             gameObject.GetComponent<TSTransform>().rotation = rotation;
 
-            if (hasPoolObjectComponent)
-            {
-               // poolObjectScript.OnObjectReuse();
-            }//end of if
+            //if (hasPoolObjectComponent)
+            //{
+            //   poolObjectScript.OnObjectReuse();
+            //}//end of if
         }//end of function
         public void SetParent(Transform parent)
         {

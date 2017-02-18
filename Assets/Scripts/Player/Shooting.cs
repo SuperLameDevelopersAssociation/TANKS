@@ -56,7 +56,7 @@ public class Shooting : TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        //Instantiate bullet refab
+        //Instantiate pool
         //parameters are gameobject bullet, int number of pooled objects *note: this should be moved into start function
         PoolManagerScript.instance.CreatePool(projectileType, 5);
         if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
@@ -146,17 +146,18 @@ public class Shooting : TrueSyncBehaviour
     IEnumerator FireProjectile()
     {
         //print("FireProjectile()");
-        //parameters are gameobject bullet, position, and rotation
-        PoolManagerScript.instance.ReuseObject(projectileType, TrueSync.TSVector.zero, TSQuaternion.identity);
+        GameObject bullet = projectileType;
+        bullet.GetComponent<TSTransform>().position = new TSVector(gunBarrel.transform.position.x, gunBarrel.transform.position.y, gunBarrel.transform.position.z);
+        Projectile projectile = bullet.GetComponent<Projectile>();    //Set the projectile script
+        projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
+        projectile.owner = owner;   //Find the owner
+        projectile.speed = projectileSpeed;
+        projectile.damage = damage;//assigning the damage
+        TSVector pos = new TSVector(gunBarrel.transform.position.x, gunBarrel.transform.position.y, gunBarrel.transform.position.z);
+        //parameters are gameobject bullet, TSvector position, and TSVector rotation
+        PoolManagerScript.instance.ReuseObject(bullet, pos, TSQuaternion.identity);
 
-
-      // GameObject projectileObject = TrueSyncManager.SyncedInstantiate(projectileType, tsTransform.position, TSQuaternion.identity);
-      // projectileObject.GetComponent<TSTransform>().position = new TSVector(gunBarrel.transform.position.x, gunBarrel.transform.position.y, gunBarrel.transform.position.z);
-      // Projectile projectile = projectileObject.GetComponent<Projectile>();    //Set the projectile script
-      // projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
-      //  projectile.owner = owner;   //Find the owner
-      //projectile.speed = projectileSpeed;
-      //  projectile.damage = damage;
+        // projectileType = TrueSyncManager.SyncedInstantiate(projectileType, tsTransform.position, TSQuaternion.identity);
         yield return new WaitForSeconds(fireFreq);
         isShooting = 0;
     }
@@ -176,7 +177,6 @@ public class Shooting : TrueSyncBehaviour
             StartCoroutine(Overheated());
         }
     }
-
     IEnumerator Overheated()
     {
         overheated = true;
@@ -201,7 +201,6 @@ public class Shooting : TrueSyncBehaviour
             }
         }
     }
-
     IEnumerator Cooling()
     {
         if(!cooling && !overheated && laserHeat > 0)
