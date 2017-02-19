@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections;
 using TrueSync;
+
 
 public class Shooting : TrueSyncBehaviour
 {
@@ -22,6 +24,7 @@ public class Shooting : TrueSyncBehaviour
     private byte isReloading = 0; //if isReloading = 0 then its false, else if its 1 then its true
     [AddTracking]
     private byte isShooting = 0; //if isShooting = 0 then its false, else if its 1 then its true
+    private Text ammoText;
 
     //Weapon Variables
     [HideInInspector]
@@ -65,6 +68,15 @@ public class Shooting : TrueSyncBehaviour
             ammo = magazineSize;
             sustainedProjectile.SetActive(false);
         }
+
+        if (GameObject.Find("Ammo")) {
+            ammoText = GameObject.Find("Ammo").GetComponent<Text>();
+        }
+        else {
+            Debug.LogError("There is no text object called AmmmoUI.");
+        }
+
+
     }
     public override void OnSyncedInput()
     {
@@ -203,5 +215,9 @@ public class Shooting : TrueSyncBehaviour
             yield return new WaitForSeconds(.1f);
             cooling = false;
         }
+    }
+
+    void OnGUI() {
+        ammoText.text = " " + ammo + " / " + magazineSize;
     }
 }
