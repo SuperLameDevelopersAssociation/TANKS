@@ -11,27 +11,23 @@ public class Health : TrueSyncBehaviour
 
     PointsManager pManager;
 
-    //Weapons weapons
-
     public override void OnSyncedStart()
     {
         currHealth = maxHealth;
         pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
     }
 
-
     public void TakeDamage(int damage, int playerID)
     {
-        //int damage = 5; //find how much damage the weapons type is from Weapons
         currHealth -= damage;
 
         if (currHealth <= 0)
         {
             tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
-
+            tsTransform.rotation = TSQuaternion.identity;
+            gameObject.GetComponent<TSRigidBody>().velocity = TSVector.zero;
             int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
             int killerId = (playerID - 1);
-
             currHealth = maxHealth;
             pManager.AwardPoints(killerId, killedId);
 
