@@ -1,0 +1,57 @@
+{
+    "format": {
+        "version": "1.0"
+    },
+    "shaders": {
+        "Main shader": {
+            "parameters": {
+                "ao_intensity": 0.75,
+                "emissive_intensity": 1,
+                "height_force": 1,
+                "nbSamples": 16
+            },
+            "shader": "pbr-metal-rough"
+        }
+    },
+    "texturesets": {
+        "Material _1310": {
+            "shader": "Main shader"
+        },
+        "Material _1311": {
+            "shader": "Main shader"
+        },
+        "Material _1312": {
+            "shader": "Main shader"
+        },
+        "Material _1313": {
+            "shader": "Main shader"
+        },
+        "Material _1314": {
+            "shader": "Main shader"
+        },
+        "Material _1315": {
+            "shader": "Main shader"
+        },
+        "Material _1316": {
+            "shader": "Main shader"
+        },
+        "Material _1317": {
+            "shader": "Main shader"
+        },
+        "Material _1318": {
+            "shader": "Main shader"
+        },
+        "Material _1319": {
+            "shader": "Main shader"
+        },
+        "Material _1331": {
+            "shader": "Main shader"
+        },
+        "Material _1344": {
+            "shader": "Main shader"
+        },
+        "Material _1357": {
+            "shader": "Main shader"
+        }
+    }
+}
