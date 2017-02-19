@@ -53,6 +53,17 @@ public class Shooting : TrueSyncBehaviour
     private GameObject gunBarrel;
     private GameObject turretWrangler;
 
+    void Start() {
+        if (GameObject.Find("Ammo"))
+        {
+            ammoText = GameObject.Find("Ammo").GetComponent<Text>();
+        }
+        else
+        {
+            Debug.LogError("There is no text object called AmmmoUI.");
+        }
+    }
+
     public override void OnSyncedStart()
     {
         
@@ -67,16 +78,7 @@ public class Shooting : TrueSyncBehaviour
             gunBarrel = turretWrangler.transform.FindChild("Turret").transform.FindChild("Barrel").gameObject.transform.FindChild("GunBarrel").gameObject;
             ammo = magazineSize;
             sustainedProjectile.SetActive(false);
-        }
-
-        if (GameObject.Find("Ammo")) {
-            ammoText = GameObject.Find("Ammo").GetComponent<Text>();
-        }
-        else {
-            Debug.LogError("There is no text object called AmmmoUI.");
-        }
-
-
+        }      
     }
     public override void OnSyncedInput()
     {
