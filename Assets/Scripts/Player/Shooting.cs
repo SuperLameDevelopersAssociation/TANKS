@@ -54,13 +54,13 @@ public class Shooting : TrueSyncBehaviour
     private GameObject turretWrangler;
 
     void Start() {
-        if (GameObject.Find("Ammo"))
+        if (transform.FindChild("Canvas").FindChild("Ammo"))
         {
-            ammoText = GameObject.Find("Ammo").GetComponent<Text>();
+            ammoText = transform.FindChild("Canvas").FindChild("Ammo").GetComponent<Text>();
         }
         else
         {
-            Debug.LogError("There is no text object called AmmmoUI.");
+            Debug.LogError("There is no text object called Ammmo.");
         }
     }
 
