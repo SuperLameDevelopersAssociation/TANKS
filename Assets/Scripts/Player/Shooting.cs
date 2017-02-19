@@ -57,7 +57,7 @@ public class Shooting : TrueSyncBehaviour
     public override void OnSyncedStart()
     {
         //Instantiate pool
-        //parameters are gameobject bullet, int number of pooled objects *note: this should be moved into start function
+        //parameters are gameobject bullet, int number of pooled objects
         PoolManagerScript.instance.CreatePool(projectileType, 5);
         if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
         {

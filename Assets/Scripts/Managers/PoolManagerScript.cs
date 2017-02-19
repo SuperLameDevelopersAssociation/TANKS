@@ -59,41 +59,36 @@ public class PoolManagerScript : TrueSyncBehaviour
 
     public class ObjectInstance
     {
-        GameObject gameObject;
-        Transform transform;
+        GameObject bullet; //the projectile
+        Transform bulletTransform; //the projectile transform
 
         bool hasPoolObjectComponent;
         PoolObject poolObjectScript;
 
         public ObjectInstance(GameObject objectInstance)
         {
-            gameObject = objectInstance;
-            transform = gameObject.transform;
-            gameObject.SetActive(false);
+            bullet = objectInstance;
+            bulletTransform = bullet.transform;
+            bullet.SetActive(false);
 
-            if (gameObject.GetComponent<PoolObject>())
+            if (bullet.GetComponent<PoolObject>())
             {
                 hasPoolObjectComponent = true;
-                poolObjectScript = gameObject.GetComponent<PoolObject>();
+                poolObjectScript = bullet.GetComponent<PoolObject>();
             }//end of if
         }//end of function
         public void Reuse(TSVector position, TSVector direction, TSQuaternion rotation)
         {
-            //turning the object on and assiging the transforms
-            gameObject.SetActive(true);
-            gameObject.GetComponent<TSTransform>().position = position;
-            gameObject.GetComponent<TSTransform>().rotation = rotation;
-            gameObject.GetComponent<Projectile>().actualDirection = direction;
-
-
-            //if (hasPoolObjectComponent)
-            //{
-            //   poolObjectScript.OnObjectReuse();
+            //turning the bullet object on and assiging the transforms
+            bullet.SetActive(true);
+            bullet.GetComponent<TSTransform>().position = position;
+            bullet.GetComponent<TSTransform>().rotation = rotation;
+            bullet.GetComponent<Projectile>().actualDirection = direction;
             //}//end of if
         }//end of function
         public void SetParent(Transform parent)
         {
-            transform.parent = parent;
+            bulletTransform.parent = parent;
         }//end of function
     }//end of inner class
 }//end of outer class

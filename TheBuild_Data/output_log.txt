@@ -1,0 +1,82 @@
+Initialize engine version: 5.4.0f3 (a6d8d714de6f)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 10.1]
+    Renderer: Intel(R) HD Graphics Family (ID=0x116)
+    Vendor:   Intel
+    VRAM:     880 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\TrueSync.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\TrueSync.dll into Unity Child Domain
+- Completed reload, in  0.067 seconds
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\System.dll (this message is harmless)
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 0.806111 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 2cd0 -> priority: 1 
+  Thread -> id: 2a8c -> priority: 1 
+Initialize engine version: 5.4.0f3 (a6d8d714de6f)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 10.1]
+    Renderer: Intel(R) HD Graphics Family (ID=0x116)
+    Vendor:   Intel
+    VRAM:     880 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\TrueSync.dll (this message is harmless)
+Loading C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\TrueSync.dll into Unity Child Domain
+- Completed reload, in  0.066 seconds
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\System.dll (this message is harmless)
+desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+UnloadTime: 1.053823 ms
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 2d68 -> priority: 1 
+  Thread -> id: 2fb8 -> priority: 1 
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\System.Configuration.dll (this message is harmless)
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\System.Xml.dll (this message is harmless)
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\System.Configuration.dll (this message is harmless)
+Platform assembly: C:\Users\Chris\Desktop\GitHub\TANKS\TheBuild_Data\Managed\System.Xml.dll (this message is harmless)
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 2.463586 ms
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 468.
+Total: 0.829436 ms (FindLiveObjects: 0.027523 ms CreateObjectMapping: 0.026123 ms MarkObjects: 0.764126 ms  DeleteObjects: 0.011195 ms)
+
+UnloadTime: 2.430931 ms
+
+Unloading 9 unused Assets to reduce memory usage. Loaded Objects now: 465.
+Total: 0.892880 ms (FindLiveObjects: 0.033587 ms CreateObjectMapping: 0.024724 ms MarkObjects: 0.821039 ms  DeleteObjects: 0.012595 ms)
+
