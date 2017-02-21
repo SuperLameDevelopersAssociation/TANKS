@@ -37,6 +37,7 @@ public class Health : TrueSyncBehaviour
             int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
             int killerId = (playerID - 1);
             currHealth = maxHealth;
+            healthBar.value = currHealth;
             pManager.AwardPoints(killerId, killedId);
 
         }
