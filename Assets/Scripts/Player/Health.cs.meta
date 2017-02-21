@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: fb579b11c4f4ee843be1f3f364154e6e
-timeCreated: 1486155092
-licenseType: Free
+timeCreated: 1487685630
+licenseType: Pro
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - healthBar: {fileID: 114000011238211274, guid: 326b0f284a68c2a4abbd3175928376b6,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

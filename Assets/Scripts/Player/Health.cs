@@ -15,7 +15,7 @@ public class Health : TrueSyncBehaviour
 
 	void Start()
 	{
-		healthBar.value = currHealth;
+		healthBar.value = maxHealth;
 	}
 
     public override void OnSyncedStart()
@@ -27,7 +27,7 @@ public class Health : TrueSyncBehaviour
     public void TakeDamage(int damage, int playerID)
     {
         currHealth -= damage;
-		healthBar.value -= damage;
+		healthBar.value = currHealth;
 
         if (currHealth <= 0)
         {

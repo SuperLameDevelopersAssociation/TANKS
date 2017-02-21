@@ -2,79 +2,47 @@ Initialize engine version: 5.4.0f3 (a6d8d714de6f)
 GfxDevice: creating device client; threaded=1
 Direct3D:
     Version:  Direct3D 11.0 [level 11.0]
-    Renderer: AMD Radeon R7 M260 (ID=0x6900)
-    Vendor:   ATI
-    VRAM:     2035 MB
+    Renderer: NVIDIA Quadro K2000 (ID=0xffe)
+    Vendor:   NVIDIA
+    VRAM:     2017 MB
 Begin MonoManager ReloadAssembly
-Platform assembly: C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\UnityEngine.dll (this message is harmless)
-Loading C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\UnityEngine.dll into Unity Child Domain
-Platform assembly: C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
-Loading C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
-Platform assembly: C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\Assembly-CSharp.dll (this message is harmless)
-Loading C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
-Platform assembly: C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\UnityEngine.UI.dll (this message is harmless)
-Loading C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-Platform assembly: C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
-Loading C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
-Platform assembly: C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\Photon3Unity3D.dll (this message is harmless)
-Loading C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
-Platform assembly: C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\TrueSync.dll (this message is harmless)
-Loading C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\TrueSync.dll into Unity Child Domain
-- Completed reload, in  0.082 seconds
-Platform assembly: C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\System.Core.dll (this message is harmless)
-Platform assembly: C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\System.dll (this message is harmless)
-desktop: 1366x768 60Hz; virtual: 1366x768 at 0,0
+Platform assembly: C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+Platform assembly: C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\TrueSync.dll (this message is harmless)
+Loading C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\TrueSync.dll into Unity Child Domain
+- Completed reload, in  0.319 seconds
+Platform assembly: C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\System.dll (this message is harmless)
+desktop: 1440x900 60Hz; virtual: 2880x900 at 0,0
 <RI> Initializing input.
 <RI> Input initialized.
 <RI> Initialized touch support.
-UnloadTime: 2.912323 ms
+UnloadTime: 0.939263 ms
 Setting up 1 worker threads for Enlighten.
-  Thread -> id: 24c8 -> priority: 1 
-Platform assembly: C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\System.Configuration.dll (this message is harmless)
-Platform assembly: C:\Users\Jolie\Documents\GitHub\TANKS\UItest_Data\Managed\System.Xml.dll (this message is harmless)
+  Thread -> id: e6c -> priority: 1 
+Platform assembly: C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\System.Configuration.dll (this message is harmless)
+Platform assembly: C:\Users\beckmajm\Desktop\GitHub\TANKS\UItest_Data\Managed\System.Xml.dll (this message is harmless)
 Unloading 6 Unused Serialized files (Serialized files now loaded: 0)
-UnloadTime: 3.088944 ms
+UnloadTime: 2.901885 ms
 
-Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 2564.
-Total: 1.860294 ms (FindLiveObjects: 0.101353 ms CreateObjectMapping: 0.136849 ms MarkObjects: 1.607123 ms  DeleteObjects: 0.014540 ms)
+Unloading 7 unused Assets to reduce memory usage. Loaded Objects now: 2445.
+Total: 1.603582 ms (FindLiveObjects: 0.121343 ms CreateObjectMapping: 0.145535 ms MarkObjects: 1.320190 ms  DeleteObjects: 0.015743 ms)
 
-QueueIncomingReliableWarning. This client buffers many incoming messages. This is OK temporarily. With lots of these warnings, check if you send too much or execute messages too slow. 
+Number of Players: 2
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
-QueueIncomingReliableWarning. This client buffers many incoming messages. This is OK temporarily. With lots of these warnings, check if you send too much or execute messages too slow. 
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-QueueIncomingReliableWarning. This client buffers many incoming messages. This is OK temporarily. With lots of these warnings, check if you send too much or execute messages too slow. 
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-QueueIncomingReliableWarning. This client buffers many incoming messages. This is OK temporarily. With lots of these warnings, check if you send too much or execute messages too slow. 
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-QueueIncomingReliableWarning. This client buffers many incoming messages. This is OK temporarily. With lots of these warnings, check if you send too much or execute messages too slow. 
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-QueueIncomingReliableWarning. This client buffers many incoming messages. This is OK temporarily. With lots of these warnings, check if you send too much or execute messages too slow. 
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-QueueIncomingReliableWarning. This client buffers many incoming messages. This is OK temporarily. With lots of these warnings, check if you send too much or execute messages too slow. 
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-QueueIncomingReliableWarning. This client buffers many incoming messages. This is OK temporarily. With lots of these warnings, check if you send too much or execute messages too slow. 
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-QueueIncomingReliableWarning. This client buffers many incoming messages. This is OK temporarily. With lots of these warnings, check if you send too much or execute messages too slow. 
- 
-(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
-
-QueueIncomingReliableWarning. This client buffers many incoming messages. This is OK temporarily. With lots of these warnings, check if you send too much or execute messages too slow. 
+Player dropped (stopped sending input)
  
 (Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/UnityEngineDebugBindings.gen.cpp Line: 42)
 
