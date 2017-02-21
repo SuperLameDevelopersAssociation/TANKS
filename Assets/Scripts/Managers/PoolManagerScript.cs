@@ -1,4 +1,4 @@
-﻿//Christopher Koester  AKA  ¡el héroe!
+﻿//Christopher Koester
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

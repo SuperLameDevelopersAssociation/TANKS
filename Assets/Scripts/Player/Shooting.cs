@@ -50,15 +50,20 @@ public class Shooting : TrueSyncBehaviour
     private GameObject gunBarrel;
     private GameObject turretWrangler;
 
+    FP _fireFreq;
+
+    public int poolSize = 10;
+
     void Start()
     {
+        _fireFreq = fireFreq;
     }
 
     public override void OnSyncedStart()
     {
         //Instantiate pool
         //parameters are gameobject bullet, int number of pooled objects
-        PoolManagerScript.instance.CreatePool(projectileType, 5);
+        PoolManagerScript.instance.CreatePool(projectileType, poolSize);
         if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
         {
             Sustained sustained = sustainedProjectile.GetComponent<Sustained>();
@@ -98,15 +103,15 @@ public class Shooting : TrueSyncBehaviour
 
                 if(reloadButton == 1 && isReloading == 0)
                 {
-                    StartCoroutine(Reload());
+                    TrueSyncManager.SyncedStartCoroutine(Reload());
                 }
                 if (fire == 1 && isReloading == 0 && isShooting == 0)         //Check if it was pressed
                 {
                     isShooting = 1;
                     ammo -= 1;    //Subtract ammo
-                    StartCoroutine(FireProjectile());
+                    TrueSyncManager.SyncedStartCoroutine(FireProjectile());
                     if (ammo <= 0)   //Check ammo, if zero reload
-                        StartCoroutine(Reload());
+                        TrueSyncManager.SyncedStartCoroutine(Reload());
                 }
                 break;
             case CurrentWeapon.Laser: //If weapon is the laser
@@ -119,7 +124,7 @@ public class Shooting : TrueSyncBehaviour
                 else if (fire == 0 && laserHeat >= 0)
                 {
                     sustainedProjectile.SetActive(false);
-                    StartCoroutine(Cooling());
+                    TrueSyncManager.SyncedStartCoroutine(Cooling());
                 }
                 else if (laserHeat < 0)
                     laserHeat = 0;
@@ -135,29 +140,28 @@ public class Shooting : TrueSyncBehaviour
 
     IEnumerator Reload()    //Reload and allow shooting after reloadTime
     {
-     //   print("Reloading");
         isReloading = 1;
         ammo = magazineSize;
-        yield return new WaitForSeconds(3);
+        yield return 3;
         isReloading = 0;
-      //  print("done reloading");
     }
 
     IEnumerator FireProjectile()
-    {//This script was modified by Chris... EL HERO!
+    {//This script was modified by Chris
         GameObject bullet = projectileType;
-        bullet.GetComponent<TSTransform>().position = new TSVector(gunBarrel.transform.position.x, gunBarrel.transform.position.y, gunBarrel.transform.position.z);
+
+        bullet.GetComponent<TSTransform>().position = gunBarrel.transform.position.ToTSVector();
         Projectile projectile = bullet.GetComponent<Projectile>();    //Set the projectile script
         projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
-        projectile.actualDirection = new TSVector(projectile.direction.x, projectile.direction.y, projectile.direction.z);
+        projectile.actualDirection = projectile.direction.ToTSVector();
         projectile.owner = owner;   //Find the owner
         projectile.speed = projectileSpeed;
         projectile.damage = damage;//assigning the damage
-        TSVector pos = new TSVector(gunBarrel.transform.position.x, gunBarrel.transform.position.y, gunBarrel.transform.position.z);
+        bullet.SetActive(true);
+        TSVector pos = gunBarrel.transform.position.ToTSVector();
         //parameters are gameobject bullet, TSvector position, and TSVector rotation
         PoolManagerScript.instance.ReuseObject(bullet, pos, projectile.actualDirection, TSQuaternion.identity);
-        // projectileType = TrueSyncManager.SyncedInstantiate(projectileType, tsTransform.position, TSQuaternion.identity);
-        yield return new WaitForSeconds(fireFreq);
+        yield return _fireFreq;
         isShooting = 0;
     }
 
@@ -173,7 +177,7 @@ public class Shooting : TrueSyncBehaviour
 
         if(laserHeat >= overheatMax)
         {
-            StartCoroutine(Overheated());
+            TrueSyncManager.SyncedStartCoroutine(Overheated());
         }
     }
     IEnumerator Overheated()
@@ -187,7 +191,7 @@ public class Shooting : TrueSyncBehaviour
               //  print("Not holding trigger");
                 laserHeat = laserHeat - overheatedHeatDownAmt;
              //   print("Overheating... LaserHeat is at " + laserHeat);
-                yield return new WaitForSeconds(.1f);
+                yield return 0.1;
                 if (laserHeat <= 0)
                 {
                     overheated = false;
@@ -196,7 +200,7 @@ public class Shooting : TrueSyncBehaviour
             else
             {
                 i = i + 1;
-                yield return new WaitForSeconds(0);
+                yield return 0;
             }
         }
     }
@@ -207,7 +211,7 @@ public class Shooting : TrueSyncBehaviour
             cooling = true;
             laserHeat = laserHeat - cooldownHeatDownAmt;
          //   print("Weapon Cooling Down.. Laserheat is at " + laserHeat);
-            yield return new WaitForSeconds(.1f);
+            yield return 0.1;
             cooling = false;
         }
     }
