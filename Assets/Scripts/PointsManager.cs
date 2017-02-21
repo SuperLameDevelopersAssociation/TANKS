@@ -16,6 +16,7 @@ public class PointsManager : TrueSyncBehaviour
 	Deathmatch deathmatch;
 
 	int killAmount;
+    int playerIndex;
 
 	void Start()
 	{
@@ -23,6 +24,7 @@ public class PointsManager : TrueSyncBehaviour
 		{
 			deathmatch = GameObject.Find ("Deathmatch").GetComponent<Deathmatch>();
 		}
+
 	}
     public override void OnSyncedStart()
     {
@@ -56,19 +58,25 @@ public class PointsManager : TrueSyncBehaviour
         }
     }
 
-	public void PlayerThatWon()
-	{
-		print("PlayerThatWon was called");
-		for (int index = 0; index < numberOfPlayers; index++) 
-		{
-			for (int j = 0; j < kills.Length; j++) 
-			{
-				print ("Checking kills");
-				if (j > killAmount)
-					killAmount = j;
-			}
-			if(kills[index] == killAmount)
-			print ("Player: " + (index + 1) + " Won with " + killAmount + " kills!");
-		}
-	}
+    public int PlayerThatWon()
+    {
+
+        //	print("PlayerThatWon was called");
+
+        for (int i = 0; i < kills.Length; i++)
+        {
+            int lastAmt = kills[i];
+            if (lastAmt > killAmount)
+            {
+                playerIndex = i;
+                killAmount = lastAmt;
+                print("Kill Amt: " + killAmount);
+            }
+            else if (lastAmt == killAmount)
+            {
+                return 100; //This just means its a tie.
+            }
+        }
+        return playerIndex;
+     }
 }

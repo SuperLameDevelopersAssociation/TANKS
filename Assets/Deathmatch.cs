@@ -42,7 +42,8 @@ public class Deathmatch : MonoBehaviour
 			StartCoroutine(MatchEnding ());
 		}
 
-		matchTime.text = string.Format("{0}:{1}", minutes, (int)seconds);
+        if(!matchEnding)
+		matchTime.text = string.Format("{0:#00}:{1:00}", minutes, (int)seconds);
 	}
 
 	public IEnumerator MatchEnding()
@@ -51,9 +52,13 @@ public class Deathmatch : MonoBehaviour
 		{
 			matchEnding = true;
 
-			pointsManager.PlayerThatWon ();
-			print ("Match Ending");
-			yield return new WaitForSeconds (matchEndingTime);
+			int player = pointsManager.PlayerThatWon ();
+            if (player != 100)
+                matchTime.text = "Player " + (player + 1) + " Won!";
+            else
+                matchTime.text = "Tie!";
+
+            yield return new WaitForSeconds (matchEndingTime);
 			SceneManager.LoadScene ("GameOver");
 		}
 	}
