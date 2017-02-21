@@ -7,21 +7,25 @@ public class Deathmatch : MonoBehaviour
 {
 	public Text matchTime;
 	public int matchTimeInMinutes;
+	public byte killsToWin;
+	public float matchEndingTime;
 
+	[HideInInspector]
+	public bool matchEnding;
+	
 	float minutes = 5;
 	float seconds = 0;
+	PointsManager pointsManager;
 
 	void Start()
 	{
+		pointsManager = GameObject.Find ("GameManager").GetComponent<PointsManager> ();
+		pointsManager.deathmatchActive = true;
 		minutes = matchTimeInMinutes;
 	}
 
 	void Update()
 	{
-		if (minutes <= 0) 
-		{
-			MatchEnding ();
-		}
 
 		if (seconds <= 0) 
 		{
@@ -32,12 +36,25 @@ public class Deathmatch : MonoBehaviour
 		{
 			seconds -= Time.deltaTime;
 		}
+
+		if (minutes <= 0 && seconds <= 0) 
+		{
+			StartCoroutine(MatchEnding ());
+		}
+
 		matchTime.text = string.Format("{0}:{1}", minutes, (int)seconds);
 	}
 
-	void MatchEnding()
+	public IEnumerator MatchEnding()
 	{
-		print ("Match Ending");
-		SceneManager.LoadScene ("GameOver");
+		if (!matchEnding) 
+		{
+			matchEnding = true;
+
+			pointsManager.PlayerThatWon ();
+			print ("Match Ending");
+			yield return new WaitForSeconds (matchEndingTime);
+			SceneManager.LoadScene ("GameOver");
+		}
 	}
 }
