@@ -11,6 +11,13 @@ public class Health : TrueSyncBehaviour
 
     PointsManager pManager;
 
+	public Slider healthBar;
+
+	void Start()
+	{
+		healthBar.value = currHealth;
+	}
+
     public override void OnSyncedStart()
     {
         currHealth = maxHealth;
@@ -20,6 +27,7 @@ public class Health : TrueSyncBehaviour
     public void TakeDamage(int damage, int playerID)
     {
         currHealth -= damage;
+		healthBar.value -= damage;
 
         if (currHealth <= 0)
         {
