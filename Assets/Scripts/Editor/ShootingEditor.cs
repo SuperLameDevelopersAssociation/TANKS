@@ -17,7 +17,8 @@ public class ShootingEditor : Editor
         heatUp_Prop,
         cooldownHeatDownAmt_Prop,
         overheatedHeatDownAmt_Prop,
-        cooldown_Prop;
+        cooldown_Prop,
+        poolSize_Prop;
 
     Shooting shooting;
 
@@ -36,6 +37,7 @@ public class ShootingEditor : Editor
         cooldownHeatDownAmt_Prop = serializedObject.FindProperty("cooldownHeatDownAmt");
         overheatedHeatDownAmt_Prop = serializedObject.FindProperty("overheatedHeatDownAmt");
         cooldown_Prop = serializedObject.FindProperty("cooldown");
+        poolSize_Prop = serializedObject.FindProperty("poolSize");
 
         shooting = target as Shooting;
 
@@ -64,6 +66,7 @@ public class ShootingEditor : Editor
             case Shooting.CurrentWeapon.Projectile: //if a projectile based system              
                 prjectileSpeed_Prop.floatValue = EditorGUILayout.FloatField(new GUIContent("Projectile Speed"), prjectileSpeed_Prop.floatValue);
                 fireFreq_Prop.floatValue = EditorGUILayout.FloatField(new GUIContent("Fire Frequency"), fireFreq_Prop.floatValue);
+                poolSize_Prop.intValue = EditorGUILayout.IntField(new GUIContent("Pool Size"), poolSize_Prop.intValue);
                 EditorGUILayout.PropertyField(projectileType_Prop, new GUIContent("Projectile Object"));
                 break;
             case Shooting.CurrentWeapon.Laser:      // if a non-projectile based system

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using TrueSync;
 
 public class Projectile : TrueSyncBehaviour
@@ -7,26 +8,28 @@ public class Projectile : TrueSyncBehaviour
     public FP speed = 15;           //Store speed for projectile
     [HideInInspector]
     public Vector3 direction;       //Store the direction
-    [AddTracking]
     private FP destroyTime = 3;     //Time before projectile is destroyed
 
-    public int damage; //I am not using this variable yet but I put this here to make sure my Shooting script has this set up so when it is implemented it works.
+    [HideInInspector]
+    public int damage; 
 
+    [HideInInspector]
     public TSVector actualDirection;
 
     public override void OnSyncedStart()
     {
-        actualDirection = new TSVector(direction.x, direction.y, direction.z);
+        // actualDirection = new TSVector(direction.x, direction.y, direction.z);
+    }
+
+    void OnEnable()
+    {
+        if(Time.timeSinceLevelLoad > 1)
+            TrueSyncManager.SyncedStartCoroutine(DestroyBullet(3));
     }
 
     public override void OnSyncedUpdate()
     {
-        if (destroyTime <= 0)       //Check if its time to destroy the projectile
-        {
-            TrueSyncManager.SyncedDestroy(this.gameObject); //Destroy gameobject
-        }
         tsTransform.Translate(actualDirection * speed * TrueSyncManager.DeltaTime);   //Move the projectile
-        destroyTime -= TrueSyncManager.DeltaTime;   //Adjust the destroy time
     }
 
     public void OnSyncedTriggerEnter(TSCollision other)
@@ -37,8 +40,14 @@ public class Projectile : TrueSyncBehaviour
             if (hitPlayer.owner != owner)   //Checks to see if the player hit is an enemy and not yourself
             {
                 hitPlayer.TakeDamage(damage, this.owner.Id);
-                TrueSyncManager.SyncedDestroy(this.gameObject);
+                TrueSyncManager.SyncedStartCoroutine(DestroyBullet(0));
             }
         }
+    }
+
+    IEnumerator DestroyBullet(FP waitTime)
+    {
+        yield return waitTime;
+        gameObject.SetActive(false);
     }
 }

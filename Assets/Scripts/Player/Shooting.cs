@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 using System;
 using System.Collections;
+using UnityEngine.UI;
 using TrueSync;
-
 
 public class Shooting : TrueSyncBehaviour
 {
@@ -24,7 +23,6 @@ public class Shooting : TrueSyncBehaviour
     private byte isReloading = 0; //if isReloading = 0 then its false, else if its 1 then its true
     [AddTracking]
     private byte isShooting = 0; //if isShooting = 0 then its false, else if its 1 then its true
-    private Text ammoText;
 
     //Weapon Variables
     [HideInInspector]
@@ -44,17 +42,23 @@ public class Shooting : TrueSyncBehaviour
 
     [AddTracking]
     FP laserHeat;   //Current laser heat
-    FP _fireFreq;
+	FP _fireFreq;
     bool overheated;    //If the weapon is overheated
     bool cooling;
     bool isHoldingTrigger;  //Fire1 is pressed/
 
     public CurrentWeapon currentWeapon;
 
+
+    Text ammoText;
+
     private GameObject gunBarrel;
     private GameObject turretWrangler;
 
-    void Start() {
+    public int poolSize = 10;
+
+	void Start() 
+	{
         if (transform.FindChild("Canvas").FindChild("Ammo"))
         {
             ammoText = transform.FindChild("Canvas").FindChild("Ammo").GetComponent<Text>();
@@ -69,7 +73,9 @@ public class Shooting : TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        
+        //Instantiate pool
+        //parameters are gameobject bullet, int number of pooled objects
+        PoolManagerScript.instance.CreatePool(projectileType, poolSize);
         if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
         {
             Sustained sustained = sustainedProjectile.GetComponent<Sustained>();
@@ -81,7 +87,7 @@ public class Shooting : TrueSyncBehaviour
             gunBarrel = turretWrangler.transform.FindChild("Turret").transform.FindChild("Barrel").gameObject.transform.FindChild("GunBarrel").gameObject;
             ammo = magazineSize;
             sustainedProjectile.SetActive(false);
-        }      
+        }
     }
     public override void OnSyncedInput()
     {
@@ -146,25 +152,27 @@ public class Shooting : TrueSyncBehaviour
 
     IEnumerator Reload()    //Reload and allow shooting after reloadTime
     {
-     //   print("Reloading");
         isReloading = 1;
         ammo = magazineSize;
         yield return 3;
         isReloading = 0;
-      //  print("done reloading");
     }
 
     IEnumerator FireProjectile()
-    {
-        //print("FireProjectile()");
-        //Instantiate bullet
-        GameObject projectileObject = TrueSyncManager.SyncedInstantiate(projectileType, tsTransform.position, TSQuaternion.identity);
-        projectileObject.GetComponent<TSTransform>().position = new TSVector(gunBarrel.transform.position.x, gunBarrel.transform.position.y, gunBarrel.transform.position.z);
-        Projectile projectile = projectileObject.GetComponent<Projectile>();    //Set the projectile script
+    {//This script was modified by Chris
+        GameObject bullet = projectileType;
+
+        bullet.GetComponent<TSTransform>().position = gunBarrel.transform.position.ToTSVector();
+        Projectile projectile = bullet.GetComponent<Projectile>();    //Set the projectile script
         projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
+        projectile.actualDirection = projectile.direction.ToTSVector();
         projectile.owner = owner;   //Find the owner
         projectile.speed = projectileSpeed;
-        projectile.damage = damage;
+        projectile.damage = damage;//assigning the damage
+        bullet.SetActive(true);
+        TSVector pos = gunBarrel.transform.position.ToTSVector();
+        //parameters are gameobject bullet, TSvector position, and TSVector rotation
+        PoolManagerScript.instance.ReuseObject(bullet, pos, projectile.actualDirection, TSQuaternion.identity);
         yield return _fireFreq;
         isShooting = 0;
     }
@@ -184,7 +192,6 @@ public class Shooting : TrueSyncBehaviour
             TrueSyncManager.SyncedStartCoroutine(Overheated());
         }
     }
-
     IEnumerator Overheated()
     {
         overheated = true;
@@ -209,7 +216,6 @@ public class Shooting : TrueSyncBehaviour
             }
         }
     }
-
     IEnumerator Cooling()
     {
         if(!cooling && !overheated && laserHeat > 0)
@@ -222,7 +228,8 @@ public class Shooting : TrueSyncBehaviour
         }
     }
 
-    void OnGUI() {
+    void OnGUI()
+    {
         ammoText.text = " " + ammo + " / " + magazineSize;
     }
 }
