@@ -11,6 +11,14 @@ public class Health : TrueSyncBehaviour
 
     PointsManager pManager;
 
+	public Slider healthBar;
+
+	void Start()
+	{
+        healthBar.maxValue = maxHealth;
+		healthBar.value = maxHealth;
+	}
+
     public override void OnSyncedStart()
     {
         currHealth = maxHealth;
@@ -20,6 +28,7 @@ public class Health : TrueSyncBehaviour
     public void TakeDamage(int damage, int playerID)
     {
         currHealth -= damage;
+		healthBar.value = currHealth;
 
         if (currHealth <= 0)
         {
@@ -29,6 +38,7 @@ public class Health : TrueSyncBehaviour
             int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
             int killerId = (playerID - 1);
             currHealth = maxHealth;
+            healthBar.value = currHealth;
             pManager.AwardPoints(killerId, killedId);
 
         }
