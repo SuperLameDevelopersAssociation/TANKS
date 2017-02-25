@@ -9,6 +9,8 @@ public class PlayerMovement : TrueSyncBehaviour
     public int rotationSpeed = 150;
     public Animator wheels;
 
+    private bool hasAnimator;
+
     public override void OnSyncedStart()
     {
         tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50));
@@ -20,7 +22,15 @@ public class PlayerMovement : TrueSyncBehaviour
             _camera.SetActive(true);
 
         if (wheels == null)
-            Debug.LogError("Wheel animator not found");
+        {
+            Debug.Log(gameObject.name + "does not have a wheel animator");
+            hasAnimator = false;
+        }
+        else
+        {
+            hasAnimator = true;
+        }
+            
     }
 
     public override void OnSyncedInput()
@@ -43,9 +53,12 @@ public class PlayerMovement : TrueSyncBehaviour
         tsTransform.Translate(0, 0, accell, Space.Self);
         tsTransform.Rotate(0, steer, 0);
 
-        if (accell != 0)
-            wheels.SetBool("IsMoving", true);
-        else
-            wheels.SetBool("IsMoving", false);
+        if (hasAnimator)
+        {
+            if (accell != 0)
+                wheels.SetBool("IsMoving", true);
+            else
+                wheels.SetBool("IsMoving", false);
+        }
     }
 }
