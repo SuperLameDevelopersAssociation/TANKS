@@ -1,0 +1,199 @@
+fileFormatVersion: 2
+guid: 23a5fd909eef4b740bb40ee0048186b2
+timeCreated: 1488051723
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Box001
+    100002: Box002
+    100004: Box003
+    100006: Box004
+    100008: Box005
+    100010: Box006
+    100012: Capsule003
+    100014: Capsule004
+    100016: Capsule005
+    100018: Capsule006
+    100020: Cylinder001
+    100022: Cylinder002
+    100024: Line001
+    100026: Line002
+    100028: Object004
+    100030: Object005
+    100032: OilTank001
+    100034: Sphere001
+    100036: Sphere002
+    100038: Sphere006
+    100040: Sphere007
+    100042: Sphere008
+    100044: Sphere009
+    100046: Sphere010
+    100048: Sphere011
+    100050: Sphere012
+    100052: //RootNode
+    100054: Tube001
+    400000: Box001
+    400002: Box002
+    400004: Box003
+    400006: Box004
+    400008: Box005
+    400010: Box006
+    400012: Capsule003
+    400014: Capsule004
+    400016: Capsule005
+    400018: Capsule006
+    400020: Cylinder001
+    400022: Cylinder002
+    400024: Line001
+    400026: Line002
+    400028: Object004
+    400030: Object005
+    400032: OilTank001
+    400034: Sphere001
+    400036: Sphere002
+    400038: Sphere006
+    400040: Sphere007
+    400042: Sphere008
+    400044: Sphere009
+    400046: Sphere010
+    400048: Sphere011
+    400050: Sphere012
+    400052: //RootNode
+    400054: Tube001
+    2300000: Box001
+    2300002: Box002
+    2300004: Box003
+    2300006: Box004
+    2300008: Box005
+    2300010: Box006
+    2300012: Capsule003
+    2300014: Capsule004
+    2300016: Capsule005
+    2300018: Cylinder001
+    2300020: Cylinder002
+    2300022: Line001
+    2300024: Line002
+    2300026: Object005
+    2300028: OilTank001
+    2300030: Sphere002
+    2300032: Sphere006
+    2300034: Sphere007
+    2300036: Sphere008
+    2300038: Sphere009
+    2300040: Sphere010
+    2300042: Sphere011
+    2300044: Sphere012
+    2300046: Tube001
+    3300000: Box001
+    3300002: Box002
+    3300004: Box003
+    3300006: Box004
+    3300008: Box005
+    3300010: Box006
+    3300012: Capsule003
+    3300014: Capsule004
+    3300016: Capsule005
+    3300018: Cylinder001
+    3300020: Cylinder002
+    3300022: Line001
+    3300024: Line002
+    3300026: Object005
+    3300028: OilTank001
+    3300030: Sphere002
+    3300032: Sphere006
+    3300034: Sphere007
+    3300036: Sphere008
+    3300038: Sphere009
+    3300040: Sphere010
+    3300042: Sphere011
+    3300044: Sphere012
+    3300046: Tube001
+    4300000: Line001
+    4300002: Line002
+    4300004: Box001
+    4300006: Capsule003
+    4300008: Box002
+    4300010: Box003
+    4300012: Box004
+    4300014: Tube001
+    4300016: OilTank001
+    4300018: Cylinder001
+    4300020: Capsule004
+    4300022: Capsule005
+    4300024: Cylinder002
+    4300026: Sphere002
+    4300028: Box005
+    4300030: Sphere006
+    4300032: Sphere007
+    4300034: Sphere008
+    4300036: Sphere009
+    4300038: Sphere010
+    4300040: Sphere011
+    4300042: Sphere012
+    4300044: Box006
+    4300046: Object005
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
