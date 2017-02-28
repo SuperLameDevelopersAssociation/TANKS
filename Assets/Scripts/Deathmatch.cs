@@ -2,44 +2,44 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using TrueSync;
 
-public class Deathmatch : MonoBehaviour 
+public class Deathmatch : TrueSyncBehaviour
 {
 	public Text matchTime;
 	public int matchTimeInMinutes;
 	public byte killsToWin;
-	public float matchEndingTime;
+	public int matchEndingTime;
 
 	[HideInInspector]
 	public bool matchEnding;
 	
-	float minutes = 5;
-	float seconds = 0;
+	FP minutes = 5;
+	FP seconds = 0;
 	PointsManager pointsManager;
 
-	void Start()
-	{
-		pointsManager = GameObject.Find ("GameManager").GetComponent<PointsManager> ();
+	public override void OnSyncedStart()
+	{        
+        pointsManager = GameObject.Find ("GameManager").GetComponent<PointsManager> ();
 		pointsManager.deathmatchActive = true;
 		minutes = matchTimeInMinutes;
-	}
+    }
 
-	void Update()
+    public override void OnSyncedUpdate()
 	{
-
 		if (seconds <= 0) 
 		{
-			minutes--;
+			minutes = minutes - 1;
 			seconds = 59;
 		} 
 		else if ((int)seconds >= 0) 
 		{
-			seconds -= Time.deltaTime;
+			seconds -= TrueSyncManager.DeltaTime;
 		}
 
 		if (minutes <= 0 && seconds <= 0) 
 		{
-			StartCoroutine(MatchEnding ());
+            TrueSyncManager.SyncedStartCoroutine(MatchEnding ());
 		}
 
         if(!matchEnding)
@@ -58,8 +58,8 @@ public class Deathmatch : MonoBehaviour
             else
                 matchTime.text = "Tie!";
 
-            yield return new WaitForSeconds (matchEndingTime);
+            yield return matchEndingTime;
 			SceneManager.LoadScene ("GameOver");
 		}
-	}
+	}    
 }

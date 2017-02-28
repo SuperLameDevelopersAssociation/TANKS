@@ -167,12 +167,13 @@ public class Shooting : TrueSyncBehaviour
         projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
         projectile.actualDirection = projectile.direction.ToTSVector();
         projectile.owner = owner;   //Find the owner
+        Debug.LogError("The owner " + owner.Name + " have fired! ");
         projectile.speed = projectileSpeed;
         projectile.damage = damage;//assigning the damage
         bullet.SetActive(true);
         TSVector pos = gunBarrel.transform.position.ToTSVector();
-        //parameters are gameobject bullet, TSvector position, and TSVector rotation
-        PoolManagerScript.instance.ReuseObject(bullet, pos, projectile.actualDirection, TSQuaternion.identity);
+        //parameters are gameobject bullet, TSvector position, and TSVector rotation , and owner
+        PoolManagerScript.instance.ReuseObject(bullet, pos, projectile.actualDirection, TSQuaternion.identity)
         yield return _fireFreq;
         isShooting = 0;
     }
