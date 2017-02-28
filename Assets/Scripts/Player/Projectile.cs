@@ -8,7 +8,6 @@ public class Projectile : TrueSyncBehaviour
     public FP speed = 15;           //Store speed for projectile
     [HideInInspector]
     public Vector3 direction;       //Store the direction
-    private FP destroyTime = 3;     //Time before projectile is destroyed
 
     [HideInInspector]
     public int damage; 

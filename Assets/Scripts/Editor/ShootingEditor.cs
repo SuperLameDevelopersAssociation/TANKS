@@ -20,9 +20,6 @@ public class ShootingEditor : Editor
         cooldown_Prop,
         poolSize_Prop;
 
-    Shooting shooting;
-
-
     void OnEnable()
     {
         currentWeapon_Prop = serializedObject.FindProperty("currentWeapon");
@@ -38,9 +35,6 @@ public class ShootingEditor : Editor
         overheatedHeatDownAmt_Prop = serializedObject.FindProperty("overheatedHeatDownAmt");
         cooldown_Prop = serializedObject.FindProperty("cooldown");
         poolSize_Prop = serializedObject.FindProperty("poolSize");
-
-        shooting = target as Shooting;
-
     }
 
     public override void OnInspectorGUI()
@@ -49,14 +43,7 @@ public class ShootingEditor : Editor
 
         EditorGUILayout.PropertyField(currentWeapon_Prop);
 
-        //EditorGUILayout.PropertyField(weaponType_Prop, new GUIContent("Weapon Type"));
-
-        //DrawDefaultInspector();
-
-        int enumIndex = currentWeapon_Prop.enumValueIndex;
         Shooting.CurrentWeapon type = (Shooting.CurrentWeapon)currentWeapon_Prop.enumValueIndex;
-
-        //weapons.projectileType[enumIndex] = (GameObject)thisGameObject.objectReferenceValue;
 
         //===========Sets the rest of the primitive values through the same system========
         damage_Prop.intValue = EditorGUILayout.IntField(new GUIContent("Damage"), damage_Prop.intValue);
