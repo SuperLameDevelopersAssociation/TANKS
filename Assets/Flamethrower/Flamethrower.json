@@ -1,0 +1,45 @@
+{
+    "format": {
+        "version": "1.0"
+    },
+    "shaders": {
+        "Main shader": {
+            "parameters": {
+                "ao_intensity": 0.75,
+                "emissive_intensity": 1,
+                "height_force": 1,
+                "nbSamples": 16
+            },
+            "shader": "pbr-metal-rough"
+        }
+    },
+    "texturesets": {
+        "Barrel": {
+            "shader": "Main shader"
+        },
+        "Body": {
+            "shader": "Main shader"
+        },
+        "Hone Input": {
+            "shader": "Main shader"
+        },
+        "Hose": {
+            "shader": "Main shader"
+        },
+        "Spicket": {
+            "shader": "Main shader"
+        },
+        "Starter": {
+            "shader": "Main shader"
+        },
+        "Stem": {
+            "shader": "Main shader"
+        },
+        "Tank": {
+            "shader": "Main shader"
+        },
+        "Tank Holder": {
+            "shader": "Main shader"
+        }
+    }
+}
