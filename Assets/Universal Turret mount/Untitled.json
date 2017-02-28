@@ -1,0 +1,48 @@
+{
+    "format": {
+        "version": "1.0"
+    },
+    "shaders": {
+        "Main shader": {
+            "parameters": {
+                "ao_intensity": 0.75,
+                "emissive_intensity": 1,
+                "height_force": 1,
+                "nbSamples": 16
+            },
+            "shader": "pbr-metal-rough"
+        }
+    },
+    "texturesets": {
+        "Block support": {
+            "shader": "Main shader"
+        },
+        "Gear": {
+            "shader": "Main shader"
+        },
+        "Low gear": {
+            "shader": "Main shader"
+        },
+        "Low post": {
+            "shader": "Main shader"
+        },
+        "Pins": {
+            "shader": "Main shader"
+        },
+        "Pivot Block": {
+            "shader": "Main shader"
+        },
+        "Support Arms": {
+            "shader": "Main shader"
+        },
+        "Turret": {
+            "shader": "Main shader"
+        },
+        "Turret Mount Plate": {
+            "shader": "Main shader"
+        },
+        "Turret Protect Plates": {
+            "shader": "Main shader"
+        }
+    }
+}
