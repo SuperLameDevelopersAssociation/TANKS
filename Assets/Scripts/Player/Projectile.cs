@@ -35,13 +35,9 @@ public class Projectile : TrueSyncBehaviour
     {
         if (other.gameObject.tag == "Player")   //Checks if collided with player
         {
-            Debug.LogError("You hit the object: " + other.gameObject.name);
             Health hitPlayer = other.gameObject.GetComponent<Health>();     //Reference the players movement script
-            Debug.LogError("The owner of the hit player is: " + hitPlayer.owner.Name);
-            Debug.LogError("The owner of the projectile is: " + owner.Name);
             if (hitPlayer.owner.Id != this.owner.Id)   //Checks to see if the player hit is an enemy and not yourself
             {
-                Debug.LogError("In Trigger");
                 hitPlayer.TakeDamage(damage, this.owner.Id);
                 TrueSyncManager.SyncedStartCoroutine(DestroyBullet(0));
             }

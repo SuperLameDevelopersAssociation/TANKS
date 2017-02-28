@@ -38,6 +38,8 @@ public class Shooting : TrueSyncBehaviour
     [HideInInspector]
     public float cooldown;
 
+    ObjectPooling objectPool;
+
     public enum CurrentWeapon {Projectile, Laser, Flamethrower};   //This would be set in the script that instantiates the players. 
 
     [AddTracking]
@@ -59,6 +61,7 @@ public class Shooting : TrueSyncBehaviour
 
 	void Start() 
 	{
+        objectPool = GameObject.Find("PoolManager").GetComponent<ObjectPooling>();
         if (transform.FindChild("Canvas").FindChild("Ammo"))
         {
             ammoText = transform.FindChild("Canvas").FindChild("Ammo").GetComponent<Text>();
@@ -160,20 +163,27 @@ public class Shooting : TrueSyncBehaviour
 
     IEnumerator FireProjectile()
     {//This script was modified by Chris
-        GameObject bullet = projectileType;
 
-        bullet.GetComponent<TSTransform>().position = gunBarrel.transform.position.ToTSVector();
-        Projectile projectile = bullet.GetComponent<Projectile>();    //Set the projectile script
+
+        GameObject obj = objectPool.GetPooledObject();
+
+        if (obj == null)
+        {
+            yield break;
+        }
+
+        obj.GetComponent<TSTransform>().position = gunBarrel.transform.position.ToTSVector();
+        obj.transform.rotation = transform.rotation;
+
+        Projectile projectile = obj.GetComponent<Projectile>();    //Set the projectile script
         projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
         projectile.actualDirection = projectile.direction.ToTSVector();
         projectile.owner = owner;   //Find the owner
-        Debug.LogError("The owner " + owner.Name + " have fired! ");
         projectile.speed = projectileSpeed;
         projectile.damage = damage;//assigning the damage
-        bullet.SetActive(true);
-        TSVector pos = gunBarrel.transform.position.ToTSVector();
-        //parameters are gameobject bullet, TSvector position, and TSVector rotation , and owner
-        PoolManagerScript.instance.ReuseObject(bullet, pos, projectile.actualDirection, TSQuaternion.identity)
+
+        obj.SetActive(true);
+
         yield return _fireFreq;
         isShooting = 0;
     }

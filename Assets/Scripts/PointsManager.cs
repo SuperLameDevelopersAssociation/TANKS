@@ -43,7 +43,7 @@ public class PointsManager : TrueSyncBehaviour
 		{
 			if (kills [indexKiller] >= deathmatch.killsToWin) 
 			{
-				StartCoroutine (deathmatch.MatchEnding ());
+				TrueSyncManager.SyncedStartCoroutine (deathmatch.MatchEnding ());
 			}
 		}
     }

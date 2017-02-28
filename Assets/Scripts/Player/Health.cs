@@ -27,7 +27,6 @@ public class Health : TrueSyncBehaviour
 
     public void TakeDamage(int damage, int playerID)
     {
-        Debug.LogError(owner.Name + " has taken " + damage + "!");
         currHealth -= damage;
 		healthBar.value = currHealth;
 
@@ -41,7 +40,6 @@ public class Health : TrueSyncBehaviour
             currHealth = maxHealth;
             healthBar.value = currHealth;
             pManager.AwardPoints(killerId, killedId);
-
         }
     }
 

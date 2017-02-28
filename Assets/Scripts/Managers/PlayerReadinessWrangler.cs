@@ -13,7 +13,7 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        //TrueSyncManager.PauseSimulation();
+        TrueSyncManager.PauseSimulation();
     }
 
     public override void OnGamePaused()
@@ -23,7 +23,6 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 
     public void CheckReadiness()
     {
-        print("checked readiness");
         for(int i = 0; i < numberOfPlayers; i++)
         {
             if (PhotonNetwork.playerList[i].GetScore() > 0)
