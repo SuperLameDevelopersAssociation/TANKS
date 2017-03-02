@@ -28,6 +28,11 @@ public class CloakingAbility : AbilitiesBase
             mats[i] = originalChildrenRender[i].material;           //Set mats array to originalChildrenRender
     }
 
+	void Update()
+	{
+		
+	}
+
     public override void OnSyncedInput()                            //TrueSync uses this as input, rather than in Update()
     {
         byte activationKeyPressed;                                  //Variable/Flag to indicate button was pressed

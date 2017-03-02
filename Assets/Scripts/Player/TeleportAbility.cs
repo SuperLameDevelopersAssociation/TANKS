@@ -18,6 +18,10 @@ public class TeleportAbility : AbilitiesBase
         manager = PhysicsWorldManager.instance;
     }
 
+	void Update()
+	{
+		
+	}
     public override void OnSyncedInput()                        //TrueSync uses this as input, rather than in Update()
     {
         byte activationKeyPressed;                              //Variable/Flag to indicate button was pressed

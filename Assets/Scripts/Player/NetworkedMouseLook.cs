@@ -56,7 +56,7 @@ public class NetworkedMouseLook : TrueSyncBehaviour
             transform.localRotation = m_CharacterTargetRot;
             _camera.localRotation = m_CameraTargetRot;
         }
-        UpdateCursorLock();
+     //   UpdateCursorLock();
     }
 
     public void SetCursorLock(bool value)
