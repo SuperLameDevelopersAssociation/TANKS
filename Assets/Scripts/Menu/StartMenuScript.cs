@@ -3,16 +3,24 @@ using UnityEditor.SceneManagement;
 
 public class StartMenuScript : MonoBehaviour
 {
+    [SerializeField]
+    GameObject menuPanel;
 
     // Use this for initialization
     public void Lobby()
-    {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Menu");
+    {//this takes you to nickname
+        menuPanel.SetActive(true);
+        gameObject.SetActive(false);
     }
 
-    // Use this for initialization
+    public void Return()
+    {//returns to main menu
+        gameObject.SetActive(true);
+        menuPanel.SetActive(false);
+    }
+
     public void ExitGame()
-    {
+    {//quits the damn game
         Application.Quit();
     }
 
