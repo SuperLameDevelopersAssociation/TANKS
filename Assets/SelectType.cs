@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using TrueSync;
 
-public class SelectType : MonoBehaviour 
+public class SelectType : TrueSyncBehaviour 
 {
 	public string componentName;
 	public string description;
+	public int positionInList;
+	public CustomizationManager customizationManager; 
 
 	public enum ComponentType
 	{
@@ -24,8 +27,31 @@ public class SelectType : MonoBehaviour
 	public Text armorLevel;
 	public Text armorLevelDescription;
 
+	void Start()
+	{
+		switch (currentComponent) 
+		{
+		case ComponentType.Hull:
+			hullInfo.text = "Hull: " + componentName;
+			break;
+		case ComponentType.Weapon:
+			weaponInfo.text = "Weapon: " + componentName;
+			break;
+		case ComponentType.Ability:
+			abilityInfo.text = "Ability: " + componentName;
+			abilityDescription.text = description;
+			break;
+		case ComponentType.ArmorLevel:
+			armorLevel.text = "Armor Level: " + componentName;
+			armorLevelDescription.text = description;
+			break;
+		}
+	}
+
 	public void AdjustInfo()
 	{
+		customizationManager.CollectInfo (currentComponent, positionInList);
+
 		switch (currentComponent) 
 		{
 			case ComponentType.Hull:
@@ -38,7 +64,7 @@ public class SelectType : MonoBehaviour
 				abilityInfo.text = "Ability: " + componentName;
 				abilityDescription.text = description;
 				break;
-		case ComponentType.ArmorLevel:
+			case ComponentType.ArmorLevel:
 				armorLevel.text = "Armor Level: " + componentName;
 				armorLevelDescription.text = description;
 				break;

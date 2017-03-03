@@ -1,10 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 using TrueSync;
+using UnityEngine.UI;
 
 public class PlayerReadinessWrangler : TrueSyncBehaviour
 {
+	public static bool ready;
     byte readinessCounter;
+	public GameObject customizationPanel;
+	public GameObject startGameMode;
+	public float timerLength;
+	public Text timeLeft; 
+	bool readyToLoad;
 
     void Start()
     {
@@ -29,15 +36,34 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
                 readinessCounter++;
         }
 
-        if (readinessCounter == numberOfPlayers)
-            TrueSyncManager.RunSimulation();
+		if (readinessCounter == numberOfPlayers)
+		{
+			StartCoroutine (Counter ());
+		}
         else
             readinessCounter = 0;
     }
 
-    IEnumerator UnPauseTimer()
-    {
-        yield return 5;
-        TrueSyncManager.RunSimulation();
-    }
+	IEnumerator Counter()
+	{
+		for (float i = timerLength; i > 0; i--) 
+		{
+			timeLeft.text = "" + i;
+			yield return new WaitForSeconds(1);
+		}
+
+		readyToLoad = true;
+		ready = true;
+
+		TrueSyncManager.RunSimulation();
+		startGameMode.SetActive (true);
+	}
+	public override void OnSyncedUpdate()
+	{
+		if (readyToLoad) {
+			foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player")) {
+				go.GetComponent<CustomizationManager> ().CustomizeTank ();
+			}
+		}
+	}
 }

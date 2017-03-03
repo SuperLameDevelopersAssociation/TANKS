@@ -244,3 +244,6 @@ public class Shooting : TrueSyncBehaviour
         ammoText.text = " " + ammo + " / " + magazineSize;
     }
 }
+
+
+///Use input to sync
