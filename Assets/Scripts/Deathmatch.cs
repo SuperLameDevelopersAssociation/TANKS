@@ -18,11 +18,15 @@ public class Deathmatch : TrueSyncBehaviour
 	FP seconds = 0;
 	PointsManager pointsManager;
 
+    void Start()
+    {
+        pointsManager = GameObject.Find("GameManager").GetComponent<PointsManager>();
+        pointsManager.deathmatchActive = true;
+    }
+
 	public override void OnSyncedStart()
-	{        
-        pointsManager = GameObject.Find ("GameManager").GetComponent<PointsManager> ();
-		pointsManager.deathmatchActive = true;
-		minutes = matchTimeInMinutes;
+	{
+        minutes = matchTimeInMinutes;
     }
 
     public override void OnSyncedUpdate()
