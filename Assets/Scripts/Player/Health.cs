@@ -13,6 +13,8 @@ public class Health : TrueSyncBehaviour
 
 	public Slider healthBar;
 
+    float armorBonus;        //resistance based on armor level
+
 	void Start()
 	{
         healthBar.maxValue = maxHealth;
@@ -23,10 +25,14 @@ public class Health : TrueSyncBehaviour
     {
         currHealth = maxHealth;
         pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
+        SetArmor(owner.Id + 3);
     }
 
     public void TakeDamage(int damage, int playerID)
     {
+        Debug.LogError("damage before armor: " + damage);        
+        damage -= (int)(damage * armorBonus);               //apply armor bonus
+        Debug.LogError("damage with armor: " + damage);
         currHealth -= damage;
 		healthBar.value = currHealth;
 
@@ -41,6 +47,13 @@ public class Health : TrueSyncBehaviour
             healthBar.value = currHealth;
             pManager.AwardPoints(killerId, killedId);
         }
+    }
+
+    //Sets the resistance given by armor and lowers speed according to the armor level
+    public void SetArmor(int armorLevel)
+    {
+        armorBonus = armorLevel / 10.0f;
+        GetComponent<PlayerMovement>().speed -= (int)TSMath.Ceiling(GetComponent<PlayerMovement>().speed * armorBonus);
     }
 
     void OnGUI()

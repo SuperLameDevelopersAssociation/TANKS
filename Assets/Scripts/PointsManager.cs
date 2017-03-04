@@ -31,7 +31,7 @@ public class PointsManager : TrueSyncBehaviour
         kills = new byte[numberOfPlayers];
         deaths = new byte[numberOfPlayers];
         
-        Debug.LogError("The number of Players is: " + numberOfPlayers + " and the length of kills is " + kills.Length);
+        //Debug.LogError("The number of Players is: " + numberOfPlayers + " and the length of kills is " + kills.Length);
         UpdateText();
     }
 
