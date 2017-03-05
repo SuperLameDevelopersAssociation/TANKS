@@ -13,10 +13,16 @@ public class Health : TrueSyncBehaviour
 
 	public Slider healthBar;
 
+    [Range(1, 5)]
+    public int armorLevel;
+
+    float armorBonus;
+
 	void Start()
 	{
         healthBar.maxValue = maxHealth;
 		healthBar.value = maxHealth;
+        SetArmor();
 	}
 
     public override void OnSyncedStart()
@@ -27,6 +33,7 @@ public class Health : TrueSyncBehaviour
 
     public void TakeDamage(int damage, int playerID)
     {
+        damage -= (int)(damage * armorBonus);               //apply armor bonus
         currHealth -= damage;
 		healthBar.value = currHealth;
 
@@ -41,6 +48,13 @@ public class Health : TrueSyncBehaviour
             healthBar.value = currHealth;
             pManager.AwardPoints(killerId, killedId);
         }
+    }
+    
+    //Sets the resistance given by armor and lowers speed according to the armor level
+    public void SetArmor()
+    {
+        armorBonus = armorLevel / 10.0f;
+        GetComponent<PlayerMovement>().speed -= (int)TSMath.Ceiling(GetComponent<PlayerMovement>().speed * armorBonus);
     }
 
     void OnGUI()
