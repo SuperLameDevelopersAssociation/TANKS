@@ -37,6 +37,8 @@ public class Shooting : TrueSyncBehaviour
     public float fireFreq;
     [HideInInspector]
     public float cooldown;
+    [HideInInspector]
+    public double damageMulitplier = 1;
 
     ObjectPooling objectPool;
 
@@ -51,8 +53,8 @@ public class Shooting : TrueSyncBehaviour
 
     public CurrentWeapon currentWeapon;
 
-
     Text ammoText;
+    Sustained sustained;
 
     private GameObject gunBarrel;
     private GameObject turretWrangler;
@@ -81,7 +83,7 @@ public class Shooting : TrueSyncBehaviour
         PoolManagerScript.instance.CreatePool(projectileType, poolSize);
         if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
         {
-            Sustained sustained = sustainedProjectile.GetComponent<Sustained>();
+            sustained = sustainedProjectile.GetComponent<Sustained>();
             sustained.damage = damage;
         }
         else
@@ -180,7 +182,8 @@ public class Shooting : TrueSyncBehaviour
         projectile.actualDirection = projectile.direction.ToTSVector();
         projectile.owner = owner;   //Find the owner
         projectile.speed = projectileSpeed;
-        projectile.damage = damage;//assigning the damage
+        projectile.damage = (int) (damage * damageMulitplier);//assigning the damage
+        print("Projectile Bullet damage is : " + projectile.damage);
 
         obj.SetActive(true);
 
@@ -195,6 +198,7 @@ public class Shooting : TrueSyncBehaviour
             sustainedProjectile.SetActive(true);
         }
 
+        sustained.damage = (int) (damage * damageMulitplier);
         laserHeat = laserHeat + heatUpAmount;
        // print("WeaponActive... Laserheat is at " + laserHeat);
 
@@ -242,5 +246,14 @@ public class Shooting : TrueSyncBehaviour
     void OnGUI()
     {
         ammoText.text = " " + ammo + " / " + magazineSize;
+    }
+
+    //===============Give Damage Boost (Called By DamageBoost)===========
+    public IEnumerator GiveDamageBoost(double multiplier,  int duration)
+    {
+        damageMulitplier = multiplier;
+        print("the multiplier is now: " + damageMulitplier);
+        yield return duration;
+        damageMulitplier = 1;
     }
 }

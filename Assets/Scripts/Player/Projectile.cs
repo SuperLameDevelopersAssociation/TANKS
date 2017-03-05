@@ -24,6 +24,8 @@ public class Projectile : TrueSyncBehaviour
     {
         if(Time.timeSinceLevelLoad > 1)
             TrueSyncManager.SyncedStartCoroutine(DestroyBullet(3));
+
+        print("The damage of the bullet is " + damage);
     }
 
     public override void OnSyncedUpdate()
