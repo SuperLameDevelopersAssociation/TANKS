@@ -13,11 +13,6 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 	public Text timeLeft; 
 	bool readyToLoad;
 
-    void Start()
-    {
-
-    }
-
     public override void OnSyncedStart()
     {
         TrueSyncManager.PauseSimulation();
@@ -38,7 +33,8 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 
 		if (readinessCounter == numberOfPlayers)
 		{
-			StartCoroutine (Counter ());
+			TrueSyncManager.RunSimulation();
+			TrueSyncManager.SyncedStartCoroutine(Counter());
 		}
         else
             readinessCounter = 0;
@@ -55,13 +51,15 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 		readyToLoad = true;
 		ready = true;
 
-		TrueSyncManager.RunSimulation();
 		startGameMode.SetActive (true);
 	}
+
 	public override void OnSyncedUpdate()
 	{
-		if (readyToLoad) {
-			foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player")) {
+		if (readyToLoad)
+		{
+			foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player")) 
+			{
 				go.GetComponent<CustomizationManager> ().CustomizeTank ();
 			}
 		}
