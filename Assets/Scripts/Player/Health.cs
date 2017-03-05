@@ -62,4 +62,14 @@ public class Health : TrueSyncBehaviour
         GUI.Label(new Rect(10, 100 + 30 * owner.Id, 300, 30), "player: " + owner.Id + ", health: " + currHealth);
         //GUI.Label(new Rect(10, 140 + 30 * owner.Id, 300, 30), "Deaths: " + deaths + ", Kills: " + PhotonNetwork.playerList[owner.Id].GetScore());
     }
+
+    public void DefenseBoost(int _maxHealth)
+    {
+        int originalMaxHealth = maxHealth;
+        int originalCurrHealth = currHealth;
+        maxHealth = _maxHealth;
+        bool defenseBoost = true;
+        print("the maxHealth is now: " + maxHealth);
+
+    }
 }

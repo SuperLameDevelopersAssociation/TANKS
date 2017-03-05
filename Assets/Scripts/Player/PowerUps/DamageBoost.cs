@@ -5,21 +5,20 @@ using TrueSync;
 public class DamageBoost : MonoBehaviour {
 
     public double mulitplier;
-    public int duration;
 
-    Shooting playerShooting;
+    Health playerHealth;
 
     public void OnSyncedTriggerEnter(TSCollision other)
     {
         if (other.gameObject.tag == "Player")   //Checks if collided with player
         {
-            playerShooting = other.gameObject.GetComponent<Shooting>();
+            playerHealth = other.gameObject.GetComponent<Health>();
 
-            if (playerShooting == null)
+            if (playerHealth == null)
                 Debug.LogError("There is no shooting script on " + other.gameObject.name);
             else
             {
-                TrueSyncManager.SyncedStartCoroutine(playerShooting.GiveDamageBoost(mulitplier, duration));
+                //TrueSyncManager.SyncedStartCoroutine(playerHealth.GiveDamageBoost(mulitplier, ));
                 TrueSyncManager.SyncedDestroy(this.gameObject);
             }
         }
