@@ -4,22 +4,19 @@ using TrueSync;
 
 public class HealthPickup : MonoBehaviour 
 {
-	Health currHealth;
+	Health playerCurrHealth;
 
 	public void OnSyncedTriggerEnter(TSCollision other)
 	{
-		if (other.gameObject.tag == "Player") 
+		if (other.gameObject.tag == "Player")   //Checks if collided with player
 		{
-			currHealth.gameObject.GetComponent<Health> ();
+			playerCurrHealth = other.gameObject.GetComponent<Health>();
 
-			if (currHealth == null) 
+			if (playerCurrHealth == null) //checks to see if the health script is attached
+				Debug.LogError("There is no health script on " + other.gameObject.name);
+			else
 			{
-				Debug.LogError ("The health script is not attached to " + other.gameObject.name);
-			} 
-			else 
-			{
-				TrueSyncManager.SyncedDestroy (this.gameObject);
-				//playerHealth += 20;
+				TrueSyncManager.SyncedDestroy(this.gameObject);
 			}
 		}
 	}
