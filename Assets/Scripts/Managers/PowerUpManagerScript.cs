@@ -6,16 +6,15 @@ using TrueSync;
 //christopher koester
 public class PowerUpManagerScript : TrueSyncBehaviour
 {
-public List<Transform> powerupLocations = new List<Transform>();
+    public List<Transform> spawnLocations = new List<Transform>();
     public FP respawnTime;
     private byte canSpawn = 1; //this is bool used for whether or not an item is currently spawning. 0 is false 1 is true
-    Object[] prefabs;
+    public Object[] prefabs;
     GameObject powerUp; //the curent spawned power up
-
 
     public override void OnSyncedStart()
     {
-        prefabs = Resources.LoadAll("Resources/PowerUps"); //loading all prefabs from the resources/powerups folder
+       prefabs = (Resources.LoadAll("PowerUps")); //loading all prefabs from the resources/powerups folder
     }
 
     //Update is called once per frame
@@ -23,7 +22,6 @@ public List<Transform> powerupLocations = new List<Transform>();
     {
         if (canSpawn == 1)
         {
-            print("is true");
             TrueSyncManager.SyncedStartCoroutine(Respawn());
         }
     }
@@ -31,18 +29,19 @@ public List<Transform> powerupLocations = new List<Transform>();
     IEnumerator Respawn()
     {//this function should be called each time after a player picks up a powerup
         canSpawn = 0;
-        print("is waiting");
         if (powerUp == null)
         {
-            print(prefabs = Resources.LoadAll("Resources/PowerUps"));
-            //Iterate through the recources folder and spawn a random powerup
+            //Iterate through the recources folder and choose from a random powerup
             powerUp = (GameObject)prefabs[Random.Range(0, prefabs.Length)];
             //spawning the powerup
-            GameObject spawn = Instantiate(powerUp);
-            print("spawned");
+            Instantiate(powerUp);
+            print(powerUp.GetComponent<TSTransform>().position);
+            //randomizing the spawn location for the powerup
+            powerUp.GetComponent<TSTransform>().position = spawnLocations[Random.Range(0, spawnLocations.Count)].transform.position.ToTSVector();
+            print(powerUp.GetComponent<TSTransform>().position);
         }
         yield return respawnTime;
+        //setting the boolean, canSpawn, to true
         canSpawn = 1;
-        print("done waiting");
     }
 }
