@@ -4,7 +4,7 @@ using TrueSync;
 
 public class DefensePickup : MonoBehaviour {
 
-    public int defenseMaxHealth;
+    public int defenseMaxHealth = 100;
 
     Health playerHealth;
 
@@ -15,10 +15,10 @@ public class DefensePickup : MonoBehaviour {
             playerHealth = other.gameObject.GetComponent<Health>();
 
             if (playerHealth == null)
-                Debug.LogError("There is no shooting script on " + other.gameObject.name);
+                Debug.LogError("There is no health script on " + other.gameObject.name);
             else
             {
-                //TrueSyncManager.SyncedStartCoroutine(playerShooting.GiveDamageBoost(mulitplier, duration));
+                playerHealth.DefenseBoost(defenseMaxHealth);
                 TrueSyncManager.SyncedDestroy(this.gameObject);
             }
         }

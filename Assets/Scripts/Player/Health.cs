@@ -8,6 +8,9 @@ public class Health : TrueSyncBehaviour
     public int maxHealth;
     [AddTracking]
     private int currHealth;
+    private int defenseDamage = 0;
+    private int originalMaxHealth;
+    private bool defenseBoost = false;
 
     PointsManager pManager;
 
@@ -22,6 +25,7 @@ public class Health : TrueSyncBehaviour
 	{
         healthBar.maxValue = maxHealth;
 		healthBar.value = maxHealth;
+        originalMaxHealth = maxHealth;
         SetArmor();
 	}
 
@@ -36,6 +40,16 @@ public class Health : TrueSyncBehaviour
         damage -= (int)(damage * armorBonus);               //apply armor bonus
         currHealth -= damage;
 		healthBar.value = currHealth;
+
+        if (defenseBoost)
+        {                                 // Check if the defense boost is depleted.
+            defenseDamage += damage;
+            print("Defense depletion is now at : " + defenseDamage);
+            if (defenseDamage >= 100)
+            {
+                EndDefenseBoost();
+            }
+        }
 
         if (currHealth <= 0)
         {
@@ -65,11 +79,23 @@ public class Health : TrueSyncBehaviour
 
     public void DefenseBoost(int _maxHealth)
     {
-        int originalMaxHealth = maxHealth;
-        int originalCurrHealth = currHealth;
-        maxHealth = _maxHealth;
-        bool defenseBoost = true;
-        print("the maxHealth is now: " + maxHealth);
+        if (maxHealth <= originalMaxHealth)
+        {
+            maxHealth += _maxHealth;
+            currHealth += _maxHealth;
+            defenseBoost = true;
+            print("the maxHealth is now: " + maxHealth);
+        }
+    }
 
+    public void EndDefenseBoost()
+    {
+        defenseBoost = false;
+        defenseDamage = 0;
+        if (currHealth > originalMaxHealth)
+        {
+            currHealth = originalMaxHealth;
+        }
+        maxHealth = originalMaxHealth;
     }
 }
