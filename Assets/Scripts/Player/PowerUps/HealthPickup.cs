@@ -16,6 +16,7 @@ public class HealthPickup : MonoBehaviour
 				Debug.LogError("There is no health script on " + other.gameObject.name);
 			else
 			{
+				playerCurrHealth.currHealth += 15;
 				TrueSyncManager.SyncedDestroy(this.gameObject);
 			}
 		}

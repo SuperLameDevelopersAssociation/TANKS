@@ -7,7 +7,7 @@ public class Health : TrueSyncBehaviour
 {
     public int maxHealth;
     [AddTracking]
-    private int currHealth;
+    public int currHealth;
 
     PointsManager pManager;
 
