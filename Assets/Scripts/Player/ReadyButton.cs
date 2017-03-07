@@ -10,7 +10,7 @@ public class ReadyButton : TrueSyncBehaviour {
 	// Use this for initialization
 	void Start () {
         readinessWrangler = GameObject.Find("GameManager").GetComponent<PlayerReadinessWrangler>();
-        gameObject.GetComponent<Button>().onClick.AddListener(() => { readinessWrangler.CheckReadiness(); });
+       // gameObject.GetComponent<Button>().onClick.AddListener(() => { readinessWrangler.CheckReadiness(); });
 	}
 	
 	public void AddScore()

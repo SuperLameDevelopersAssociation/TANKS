@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using TrueSync;
 using UnityEngine.UI;
 
@@ -12,10 +13,15 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 	public float timerLength;
 	public Text timeLeft; 
 	bool readyToLoad;
-
     public override void OnSyncedStart()
     {
         TrueSyncManager.PauseSimulation();
+    }
+
+    public override void OnSyncedInput()
+    {
+        byte startTimer = 0;
+        TrueSyncInput.SetByte(9, startTimer);
     }
 
     public override void OnGamePaused()
@@ -34,7 +40,8 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 		if (readinessCounter == numberOfPlayers)
 		{
 			TrueSyncManager.RunSimulation();
-			TrueSyncManager.SyncedStartCoroutine(Counter());
+            TrueSyncManager.SyncedStartCoroutine(Counter());
+            enabled = false;
 		}
         else
             readinessCounter = 0;
@@ -44,11 +51,15 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 	{
 		for (float i = timerLength; i > 0; i--) 
 		{
+            Debug.LogError(i);
 			timeLeft.text = "" + i;
-			yield return new WaitForSeconds(1);
+			yield return 1;
 		}
 
-		readyToLoad = true;
+        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            go.GetComponent<CustomizationManager>().CustomizeTank();
+        }
 		ready = true;
 
 		startGameMode.SetActive (true);
@@ -56,12 +67,6 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 
 	public override void OnSyncedUpdate()
 	{
-		if (readyToLoad)
-		{
-			foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player")) 
-			{
-				go.GetComponent<CustomizationManager> ().CustomizeTank ();
-			}
-		}
+        CheckReadiness();
 	}
 }
