@@ -11,7 +11,7 @@ public class NetworkedMouseLook : TrueSyncBehaviour
     public int MaximumX = 90;
     public bool smooth;
     public int smoothTime = 5;
-    public bool lockCursor = true;
+    public bool lockCursor = false;
 
     private Quaternion m_CharacterTargetRot;
     private Quaternion m_CameraTargetRot;
@@ -57,6 +57,7 @@ public class NetworkedMouseLook : TrueSyncBehaviour
             _camera.localRotation = m_CameraTargetRot;
         }
         UpdateCursorLock();
+        print("The forward in mouse look is " + transform.forward);
     }
 
     public void SetCursorLock(bool value)

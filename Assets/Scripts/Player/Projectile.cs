@@ -25,11 +25,12 @@ public class Projectile : TrueSyncBehaviour
         if(Time.timeSinceLevelLoad > 1)
             TrueSyncManager.SyncedStartCoroutine(DestroyBullet(3));
 
-        print("The damage of the bullet is " + damage);
+        print("the direction in projectile is " + actualDirection);
     }
 
     public override void OnSyncedUpdate()
     {
+        
         tsTransform.Translate(actualDirection * speed * TrueSyncManager.DeltaTime);   //Move the projectile
     }
 
