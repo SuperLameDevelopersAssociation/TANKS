@@ -20,8 +20,7 @@ public class Health : TrueSyncBehaviour
 
 	void Start()
 	{
-        healthBar.maxValue = maxHealth;
-		healthBar.value = maxHealth;
+		SetHealthBar();
         SetArmor();
 	}
 
@@ -56,6 +55,12 @@ public class Health : TrueSyncBehaviour
         armorBonus = armorLevel / 10.0f;
         GetComponent<PlayerMovement>().speed -= (int)TSMath.Ceiling(GetComponent<PlayerMovement>().speed * armorBonus);
     }
+
+	public void SetHealthBar()
+	{
+		healthBar.maxValue = maxHealth;
+		healthBar.value = maxHealth;
+	}
 
     void OnGUI()
     {
