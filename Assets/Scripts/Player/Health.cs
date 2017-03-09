@@ -20,6 +20,8 @@ public class Health : TrueSyncBehaviour
 
 	void Start()
 	{
+		healthBar.maxValue = maxHealth;
+		healthBar.value = maxHealth;
 		SetHealthBar();
         SetArmor();
 	}
@@ -58,8 +60,7 @@ public class Health : TrueSyncBehaviour
 
 	public void SetHealthBar()
 	{
-		healthBar.maxValue = maxHealth;
-		healthBar.value = maxHealth;
+		healthBar.value = currHealth;
 	}
 
     void OnGUI()

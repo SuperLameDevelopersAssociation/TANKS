@@ -17,13 +17,13 @@ public class HealthPickup : MonoBehaviour
 			else if (playerHealth.currHealth != playerHealth.maxHealth)
 			{
 				playerHealth.currHealth += 15;
-				playerHealth.SetHealthBar ();
 
 				if (playerHealth.currHealth > playerHealth.maxHealth) 
 				{
 					playerHealth.currHealth = playerHealth.maxHealth;
 				}
 				TrueSyncManager.SyncedDestroy(this.gameObject);
+				playerHealth.SetHealthBar ();
 			}
 		}
 	}
