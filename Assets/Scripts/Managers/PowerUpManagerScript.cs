@@ -29,9 +29,9 @@ public class PowerUpManagerScript : TrueSyncBehaviour
     //waiting to respawn an item (if no other item exists)
     IEnumerator Respawn()
     {//this function should be called each time after a player picks up a powerup
-        canSpawn = false;           
+        canSpawn = false;
         //Iterate through the recources folder and choose from a random powerup
-        powerUp = prefabs[Random.Range(0, prefabs.Length)];
+        powerUp = prefabs[TSRandom.Range(0, prefabs.Length)];
         //randomizing the spawn location for the powerup
         TSVector newPosition = spawnLocations[Random.Range(0, spawnLocations.Count)].GetComponent<TSTransform>().position;
         //spawning the powerup
