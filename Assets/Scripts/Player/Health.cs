@@ -21,14 +21,13 @@ public class Health : TrueSyncBehaviour
 	void Start()
 	{
 		healthBar.maxValue = maxHealth;
-		healthBar.value = maxHealth;
-		SetHealthBar();
         SetArmor();
 	}
 
     public override void OnSyncedStart()
     {
         currHealth = maxHealth;
+        SetHealthBar();
         pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
     }
 
