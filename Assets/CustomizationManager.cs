@@ -30,6 +30,7 @@ public class CustomizationManager : TrueSyncBehaviour
 		abilityChosen = 0;
 		armorLevelChosen = 1;
 	}
+
 	public void CollectInfo(SelectType.ComponentType component, int listPosition)
 	{
 		switch (component) 
@@ -52,9 +53,11 @@ public class CustomizationManager : TrueSyncBehaviour
 
 		}
 	}
-
-	public void CustomizeTank()
+		
+	[PunRPC]
+	public void CustomizeMyTank()
 	{
+		print ("Called");
 		hulls [hullChosen].SetActive (true);
 
 		switch (weaponChosen) 

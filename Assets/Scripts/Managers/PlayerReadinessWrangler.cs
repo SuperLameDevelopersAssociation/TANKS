@@ -13,8 +13,11 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 	public float timerLength;
 	public Text timeLeft; 
 	bool readyToLoad;
+	public GameObject[] playerReadinessPanel;
+
     public override void OnSyncedStart()
     {
+		playerReadinessPanel = GameObject.FindGameObjectsWithTag ("ReadyPanel");
         TrueSyncManager.PauseSimulation();
     }
 
@@ -39,32 +42,19 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 
 		if (readinessCounter == numberOfPlayers)
 		{
+			foreach (GameObject go in playerReadinessPanel) 
+			{
+				go.SetActive (false);
+			}
 			TrueSyncManager.RunSimulation();
-            TrueSyncManager.SyncedStartCoroutine(Counter());
+
+			startGameMode.SetActive (true);
             enabled = false;
 		}
         else
             readinessCounter = 0;
     }
-
-	IEnumerator Counter()
-	{
-		for (float i = timerLength; i > 0; i--) 
-		{
-            Debug.LogError(i);
-			timeLeft.text = "" + i;
-			yield return 1;
-		}
-
-        foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
-        {
-            go.GetComponent<CustomizationManager>().CustomizeTank();
-        }
-		ready = true;
-
-		startGameMode.SetActive (true);
-	}
-
+		
 	public override void OnSyncedUpdate()
 	{
         CheckReadiness();
