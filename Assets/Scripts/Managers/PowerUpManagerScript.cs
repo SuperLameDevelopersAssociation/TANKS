@@ -33,7 +33,7 @@ public class PowerUpManagerScript : TrueSyncBehaviour
         //Iterate through the recources folder and choose from a random powerup
         powerUp = prefabs[TSRandom.Range(0, prefabs.Length)];
         //randomizing the spawn location for the powerup
-        TSVector newPosition = spawnLocations[Random.Range(0, spawnLocations.Count)].GetComponent<TSTransform>().position;
+        TSVector newPosition = spawnLocations[TSRandom.Range(0, spawnLocations.Count)].GetComponent<TSTransform>().position;
         //spawning the powerup
         TrueSyncManager.SyncedInstantiate(powerUp, newPosition, TSQuaternion.identity);
         yield return respawnTime;
