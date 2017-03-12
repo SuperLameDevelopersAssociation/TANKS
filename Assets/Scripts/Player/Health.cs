@@ -7,7 +7,7 @@ public class Health : TrueSyncBehaviour
 {
     public int maxHealth;
     [AddTracking]
-    private int currHealth;
+    public int currHealth;
     private int defenseDamage = 0;
     private int originalMaxHealth;
     private bool defenseBoost = false;
@@ -32,6 +32,7 @@ public class Health : TrueSyncBehaviour
     public override void OnSyncedStart()
     {
         currHealth = maxHealth;
+		SetHealthBar();
         pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
     }
 
@@ -71,6 +72,27 @@ public class Health : TrueSyncBehaviour
         GetComponent<PlayerMovement>().speed -= (int)TSMath.Ceiling(GetComponent<PlayerMovement>().speed * armorBonus);
     }
 
+    public bool isHealthFull()
+    {
+        return currHealth == maxHealth;
+    }
+
+    public void AddHealth(int extraHealth)
+    {
+        currHealth += extraHealth;
+
+        if (currHealth > maxHealth)
+        {
+            currHealth = maxHealth;
+        }
+
+        SetHealthBar();
+    }
+
+	public void SetHealthBar()
+	{
+		healthBar.value = currHealth;
+	}
     void OnGUI()
     {
         GUI.Label(new Rect(10, 100 + 30 * owner.Id, 300, 30), "player: " + owner.Id + ", health: " + currHealth);
