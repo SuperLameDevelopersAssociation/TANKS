@@ -42,7 +42,7 @@ public class Health : TrueSyncBehaviour
     }
     public void RespawnTank(int playerID)
     {
-        tsTransform.position = ChooseRespawnPoint();
+        //tsTransform.position = ChooseRespawnPoint();
         tsTransform.rotation = TSQuaternion.identity;
         gameObject.GetComponent<TSRigidBody>().velocity = TSVector.zero;
         int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
@@ -51,9 +51,9 @@ public class Health : TrueSyncBehaviour
         healthBar.value = currHealth;
         pManager.AwardPoints(killerId, killedId);
     }
-    Vector3 ChooseRespawnPoint()
+    TSVector ChooseRespawnPoint()
     {
-        Vector3 temp;
+        TSVector temp;
         /* This section should include the Raycast check and advanced checking */
         GameObject[] playerTanks = GameObject.FindGameObjectsWithTag("Player");
         float[] dists = new float[playerTanks.Length];                                          //Check distance between objects
@@ -64,9 +64,13 @@ public class Health : TrueSyncBehaviour
         for (int i = 0; i < respawnLocations.Length; i++)
         {
             dists[0] = Vector3.Distance(playerTanks[0].gameObject.transform.position, respawnLocations[i].gameObject.transform.position);
+            dists[0] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>.tsTransform, respawnLocations[i].gameObject.transform.position);
             dists[1] = Vector3.Distance(playerTanks[1].gameObject.transform.position, respawnLocations[i].gameObject.transform.position);
+            dists[1] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>.tsTransform, respawnLocations[i].gameObject.transform.position);
             dists[2] = Vector3.Distance(playerTanks[2].gameObject.transform.position, respawnLocations[i].gameObject.transform.position);
+            dists[2] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>.tsTransform, respawnLocations[i].gameObject.transform.position);
             dists[3] = Vector3.Distance(playerTanks[3].gameObject.transform.position, respawnLocations[i].gameObject.transform.position);
+            dists[3] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>.tsTransform, respawnLocations[i].gameObject.transform.position);
 
             for (int j= 0; j < dists.Length; j++)
             {
