@@ -13,6 +13,7 @@ public class Health : TrueSyncBehaviour
     PointsManager pManager;
     public GameObject[] respawnLocations;                   //Stores references to empty game objects as respawn points
     int newSpawnLocation;
+    public float distanceFromNearestTankToSpawn;
 
     public bool testRespawn = false;
     public Slider healthBar;
@@ -34,17 +35,14 @@ public class Health : TrueSyncBehaviour
         currHealth -= damage;
         healthBar.value = currHealth;
 
-        if (currHealth <= 0 || testRespawn)        //Call on Respawn Method
+        if (currHealth <= 0)        //Call on Respawn Method
         {
             RespawnTank(playerID);
         }
     }
     public void RespawnTank(int playerID)
     {
-        newSpawnLocation = TSRandom.Range(0, respawnLocations.Length);
-
-        /* This section should include the Raycast check and advanced checking */
-        tsTransform.position = new TSVector(respawnLocations[newSpawnLocation].transform.position.x, 0, respawnLocations[newSpawnLocation].transform.position.z); //respawn randomly
+        tsTransform.position = ChooseRespawnPoint();
         tsTransform.rotation = TSQuaternion.identity;
         gameObject.GetComponent<TSRigidBody>().velocity = TSVector.zero;
         int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
@@ -52,6 +50,39 @@ public class Health : TrueSyncBehaviour
         currHealth = maxHealth;
         healthBar.value = currHealth;
         pManager.AwardPoints(killerId, killedId);
+    }
+    Vector3 ChooseRespawnPoint()
+    {
+        Vector3 temp;
+        /* This section should include the Raycast check and advanced checking */
+        GameObject[] playerTanks = GameObject.FindGameObjectsWithTag("Player");
+        float[] dists = new float[playerTanks.Length];                                          //Check distance between objects
+
+        newSpawnLocation = TSRandom.Range(0, respawnLocations.Length);
+
+        
+        for (int i = 0; i < respawnLocations.Length; i++)
+        {
+            dists[0] = Vector3.Distance(playerTanks[0].gameObject.transform.position, respawnLocations[i].gameObject.transform.position);
+            dists[1] = Vector3.Distance(playerTanks[1].gameObject.transform.position, respawnLocations[i].gameObject.transform.position);
+            dists[2] = Vector3.Distance(playerTanks[2].gameObject.transform.position, respawnLocations[i].gameObject.transform.position);
+            dists[3] = Vector3.Distance(playerTanks[3].gameObject.transform.position, respawnLocations[i].gameObject.transform.position);
+
+            for (int j= 0; j < dists.Length; j++)
+            {
+                if(dists[j] < distanceFromNearestTankToSpawn)
+                {
+                    temp = respawnLocations[i].transform.position;
+                    print("Respawn location is: " + respawnLocations[i].transform.position);
+                    return temp;
+                }
+                else
+                {
+                    temp = respawnLocations[TSRandom.Range(0, respawnLocations.Length)].transform.position;
+                }
+            }
+        }
+        return respawnLocations[TSRandom.Range(0, respawnLocations.Length)].transform.position; ;
     }
     void OnGUI()
     {
