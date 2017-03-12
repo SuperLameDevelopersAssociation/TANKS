@@ -8,7 +8,7 @@ public class SelectType : TrueSyncBehaviour
 	public string componentName;
 	public string description;
 	public int positionInList;
-	public CustomizationManager customizationManager; 
+	public StoreCustomizationVariables customizationManager; 
 
 	public enum ComponentType
 	{
@@ -29,6 +29,7 @@ public class SelectType : TrueSyncBehaviour
 
 	void Start()
 	{
+		customizationManager = GameObject.Find ("CustomizationManager").GetComponent<StoreCustomizationVariables> ();
 		switch (currentComponent) 
 		{
 		case ComponentType.Hull:
