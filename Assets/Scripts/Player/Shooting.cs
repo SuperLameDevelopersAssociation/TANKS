@@ -20,9 +20,9 @@ public class Shooting : TrueSyncBehaviour
     [AddTracking]
     private FP ammo = 0;
     [AddTracking]
-    private byte isReloading = 0; //if isReloading = 0 then its false, else if its 1 then its true
+    private bool isReloading = false; //if isReloading = 0 then its false, else if its 1 then its true
     [AddTracking]
-    private byte isShooting = 0; //if isShooting = 0 then its false, else if its 1 then its true
+    private bool isShooting = false; //if isShooting = 0 then its false, else if its 1 then its true
 
     //Weapon Variables
     [HideInInspector]
@@ -47,6 +47,7 @@ public class Shooting : TrueSyncBehaviour
     [AddTracking]
     FP laserHeat;   //Current laser heat
 	FP _fireFreq;
+    FP timeConverter = .1; //makes coortinues run every 1/10 of second
     bool overheated;    //If the weapon is overheated
     bool cooling;
     bool isHoldingTrigger;  //Fire1 is pressed/
@@ -54,7 +55,9 @@ public class Shooting : TrueSyncBehaviour
     public CurrentWeapon currentWeapon;
 
     Text ammoText;
+
     Sustained sustained;
+    ShootingSFX sfx;
 
     private GameObject gunBarrel;
     private GameObject turretWrangler;
@@ -64,6 +67,12 @@ public class Shooting : TrueSyncBehaviour
 	void Start() 
 	{
         objectPool = GameObject.Find("PoolManager").GetComponent<ObjectPooling>();
+        sfx = gameObject.GetComponent<ShootingSFX>();
+
+        if (sfx == null)
+            Debug.LogError("There is no ShootingSFX attached to " + gameObject.name);
+
+
         if (transform.FindChild("Canvas").FindChild("Ammo"))
         {
             ammoText = transform.FindChild("Canvas").FindChild("Ammo").GetComponent<Text>();
@@ -118,35 +127,47 @@ public class Shooting : TrueSyncBehaviour
             //The ones we have we would have to do a switch so i will do that for now just in case.
             case CurrentWeapon.Projectile: //If weapon is the projectile
 
-                if(reloadButton == 1 && isReloading == 0)
+                if (!isReloading)
                 {
-                    TrueSyncManager.SyncedStartCoroutine(Reload());
-                }
-                if (fire == 1 && isReloading == 0 && isShooting == 0)         //Check if it was pressed
-                {
-                    isShooting = 1;
-                    ammo -= 1;    //Subtract ammo
-                    TrueSyncManager.SyncedStartCoroutine(FireProjectile());
-                    if (ammo <= 0)   //Check ammo, if zero reload
+                    if (reloadButton == 1) //check if reload is pressed
+                    {
                         TrueSyncManager.SyncedStartCoroutine(Reload());
+                    }
+
+                    if (fire == 1)         //Check if fire was pressed
+                    {
+                        if (!isShooting)
+                        {
+                            isShooting = true;
+                            ammo -= 1;    //Subtract ammo
+                            TrueSyncManager.SyncedStartCoroutine(FireProjectile());
+                            if (ammo <= 0)   //Check ammo, if zero reload
+                                TrueSyncManager.SyncedStartCoroutine(Reload());
+                        }
+                    }
                 }
                 break;
             case CurrentWeapon.Laser: //If weapon is the laser
             case CurrentWeapon.Flamethrower: //If weapon is a flamethrower
-                if (fire == 1)
+                if (fire == 1)  
                 {
                     if (!overheated)
                         FireSustained();
                 }
-                else if (fire == 0 && laserHeat >= 0)
+                else 
                 {
-                    sustainedProjectile.SetActive(false);
-                    TrueSyncManager.SyncedStartCoroutine(Cooling());
+                    if (laserHeat >= 0)
+                    {
+                        sustainedProjectile.SetActive(false);
+                        TrueSyncManager.SyncedStartCoroutine(Cooling());
+                        sfx.StopSustainedSFX();
+                    }
                 }
-                else if (laserHeat < 0)
+
+                if (laserHeat < 0) //defensive code to check if laserHeat is ever negative
                     laserHeat = 0;
 
-                if (fire == 1)
+                if (fire == 1) 
                     isHoldingTrigger = true;
                 else
                     isHoldingTrigger = false;
@@ -157,15 +178,14 @@ public class Shooting : TrueSyncBehaviour
 
     IEnumerator Reload()    //Reload and allow shooting after reloadTime
     {
-        isReloading = 1;
+        isReloading = true;
         ammo = magazineSize;
-        yield return 3;
-        isReloading = 0;
+        yield return reloadTime;
+        isReloading = false;
     }
 
     IEnumerator FireProjectile()
     {//This script was modified by Chris
-
 
         GameObject obj = objectPool.GetPooledObject();
 
@@ -187,8 +207,10 @@ public class Shooting : TrueSyncBehaviour
 
         obj.SetActive(true);
 
+        sfx.PlayProjectileSFX();
+
         yield return _fireFreq;
-        isShooting = 0;
+        isShooting = false;
     }
 
     void FireSustained()
@@ -196,6 +218,7 @@ public class Shooting : TrueSyncBehaviour
         if(!sustainedProjectile.activeInHierarchy)
         {
             sustainedProjectile.SetActive(true);
+            sfx.PlaySustainedSFX(currentWeapon.ToString());
         }
 
         sustained.damage = (int) (damage * damageMulitplier);
@@ -211,20 +234,22 @@ public class Shooting : TrueSyncBehaviour
     {
         overheated = true;
         sustainedProjectile.SetActive(false);
+        sfx.StopSustainedSFX();
+
         for (FP i = laserHeat; i > 0; i = i - 1)
         {
             if(!isHoldingTrigger)
             {
               //  print("Not holding trigger");
                 laserHeat = laserHeat - overheatedHeatDownAmt;
-             //   print("Overheating... LaserHeat is at " + laserHeat);
-                yield return 0.1;
+                //   print("Overheating... LaserHeat is at " + laserHeat);
+                yield return timeConverter;
                 if (laserHeat <= 0)
                 {
                     overheated = false;
                 }
             }
-            else
+            else //traps the IEnumerator until the trigger is let gone
             {
                 i = i + 1;
                 yield return 0;
@@ -233,12 +258,13 @@ public class Shooting : TrueSyncBehaviour
     }
     IEnumerator Cooling()
     {
-        if(!cooling && !overheated && laserHeat > 0)
+        if(!cooling && !overheated)
         {
             cooling = true;
             laserHeat = laserHeat - cooldownHeatDownAmt;
-         //   print("Weapon Cooling Down.. Laserheat is at " + laserHeat);
-            yield return 0.1;
+            //   print("Weapon Cooling Down.. Laserheat is at " + laserHeat);
+
+            yield return timeConverter;
             cooling = false;
         }
     }
