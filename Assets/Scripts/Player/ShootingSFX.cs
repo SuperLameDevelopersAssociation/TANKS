@@ -17,14 +17,14 @@ public class ShootingSFX : MonoBehaviour {
             source.playOnAwake = false;
 	}
 
-    public void playProjectileSFX()
+    public void PlayProjectileSFX()
     {
         source.clip = projectile;
         source.loop = false;
         source.Play();
     }
 
-    public void playSustainedSFX(string sustainedType)
+    public void PlaySustainedSFX(string sustainedType)
     {
         source.loop = true;
 
@@ -35,7 +35,7 @@ public class ShootingSFX : MonoBehaviour {
         source.Play();
     }
 
-    public void stopSustainedSFX()
+    public void StopSustainedSFX()
     {
         if (source.isPlaying)
             source.Stop();

@@ -160,7 +160,7 @@ public class Shooting : TrueSyncBehaviour
                     {
                         sustainedProjectile.SetActive(false);
                         TrueSyncManager.SyncedStartCoroutine(Cooling());
-                        sfx.stopSustainedSFX();
+                        sfx.StopSustainedSFX();
                     }
                 }
 
@@ -207,7 +207,7 @@ public class Shooting : TrueSyncBehaviour
 
         obj.SetActive(true);
 
-        sfx.playProjectileSFX();
+        sfx.PlayProjectileSFX();
 
         yield return _fireFreq;
         isShooting = false;
@@ -218,8 +218,7 @@ public class Shooting : TrueSyncBehaviour
         if(!sustainedProjectile.activeInHierarchy)
         {
             sustainedProjectile.SetActive(true);
-            sfx.playSustainedSFX(currentWeapon.ToString());
-            print(currentWeapon.ToString() + " is returned by currentWeapon");
+            sfx.PlaySustainedSFX(currentWeapon.ToString());
         }
 
         sustained.damage = (int) (damage * damageMulitplier);
@@ -235,6 +234,8 @@ public class Shooting : TrueSyncBehaviour
     {
         overheated = true;
         sustainedProjectile.SetActive(false);
+        sfx.StopSustainedSFX();
+
         for (FP i = laserHeat; i > 0; i = i - 1)
         {
             if(!isHoldingTrigger)
