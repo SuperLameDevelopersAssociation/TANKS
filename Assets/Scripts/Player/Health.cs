@@ -14,6 +14,7 @@ public class Health : TrueSyncBehaviour
     public GameObject[] respawnLocations;                   //Stores references to empty game objects as respawn points
     int newSpawnLocation;
     public float distanceFromNearestTankToSpawn;
+    TSVector temp;
 
     public bool testRespawn = false;
     public Slider healthBar;
@@ -53,70 +54,32 @@ public class Health : TrueSyncBehaviour
     }
     TSVector ChooseRespawnPoint()
     {
-        TSVector temp;
         /* This section should include the Raycast check and advanced checking */
+        
         GameObject[] playerTanks = GameObject.FindGameObjectsWithTag("Player");
         FP[] dists = new FP[playerTanks.Length];                                          //Check distance between objects
 
         newSpawnLocation = TSRandom.Range(0, respawnLocations.Length);
 
-        
-        for (int i = 0; i < respawnLocations.Length; i++)
+        for (int i = 0; i < playerTanks.Length; i++)
         {
-            if (playerTanks.Length == 1)
+            dists[i] = TSVector.Distance(playerTanks[i].GetComponent<TSTransform>().position, respawnLocations[newSpawnLocation].GetComponent<TSTransform>().position);
+        }
+        for (int i = 0; i < dists.Length; i++)
+        {
+            if (dists[i] < distanceFromNearestTankToSpawn)
             {
-                dists[0] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
-                print(dists[0]);
+                temp = respawnLocations[newSpawnLocation].GetComponent<TSTransform>().position;
+                return temp;
             }
-            else if (playerTanks.Length == 2)
+            else
             {
-                dists[0] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
-                print(dists[0]);
-
-                dists[1] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, gameObject.GetComponent<TSTransform>().position);
-                print(dists[1]);
-            }
-            else if (playerTanks.Length == 3)
-            {
-                dists[0] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
-                print(dists[0]);
-
-                dists[1] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, gameObject.GetComponent<TSTransform>().position);
-                print(dists[1]);
-
-                dists[2] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
-                print(dists[2]);
-            }
-            else if (playerTanks.Length == 4)
-            {
-                dists[0] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
-                print(dists[0]);
-
-                dists[1] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, gameObject.GetComponent<TSTransform>().position);
-                print(dists[1]);
-
-                dists[2] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
-                print(dists[2]);
-
-                dists[3] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
-                print(dists[3]);
-            }
-
-            for (int j= 0; j < dists.Length; j++)
-            {
-                if(dists[j] < distanceFromNearestTankToSpawn)
-                {
-                    temp = respawnLocations[i].GetComponent<TSTransform>().position;
-                    print("Respawn location is: " + respawnLocations[i].GetComponent<TSTransform>().position);
-                    return temp;
-                }
-                else
-                {
-                    temp = respawnLocations[TSRandom.Range(0, respawnLocations.Length)].GetComponent<TSTransform>().position;
-                }
+                break;
             }
         }
-        return respawnLocations[TSRandom.Range(0, respawnLocations.Length)].GetComponent<TSTransform>().position; ;
+        temp = respawnLocations[newSpawnLocation].GetComponent<TSTransform>().position;
+        print(temp);
+        return temp;
     }
     void OnGUI()
     {
