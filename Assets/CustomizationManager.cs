@@ -18,9 +18,7 @@ public class CustomizationManager : TrueSyncBehaviour
 
 	void Start()
 	{
-		shooting = GetComponent<Shooting> ();
-		cloak = GetComponent<CloakingAbility> ();
-		teleport = GetComponent<TeleportAbility> ();
+
 	}
 
 	public override void OnSyncedStart()
@@ -35,12 +33,17 @@ public class CustomizationManager : TrueSyncBehaviour
             {
                 if (p == PhotonNetwork.playerList[i])
                 {
-                    if (PhotonNetwork.playerList[i].ID == owner.Id)
-                    {
-                        //I need to get a referebce to the players gameobject
-                    }
+                    /// I need to set component based on the player object im talking about
+                    /// 
+                    shooting = TrueSyncManager.allPlayers[i].GetComponent<Shooting>();
+                    cloak = TrueSyncManager.allPlayers[i].GetComponent<CloakingAbility>();
+                    teleport = TrueSyncManager.allPlayers[i].GetComponent<TeleportAbility>();
 
-                    hulls[hullChosen[i]].SetActive(true);
+
+                    hulls[0] = TrueSyncManager.allPlayers[i].transform.FindChild("Hull 1").gameObject;
+                    hulls[1] = TrueSyncManager.allPlayers[i].transform.FindChild("Hull 2").gameObject;
+
+                    hulls[hullChosen[i]].SetActive(true);   
 
                     switch (weaponChosen[i])
                     {
