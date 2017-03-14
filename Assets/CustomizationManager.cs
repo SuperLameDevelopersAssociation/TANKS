@@ -9,10 +9,10 @@ public class CustomizationManager : TrueSyncBehaviour
 	CloakingAbility cloak;
 	TeleportAbility teleport;
 
-	int hullChosen;
-	int weaponChosen;
-	int abilityChosen;
-	int armorLevelChosen;
+	public static int[] hullChosen;
+	public static int[] weaponChosen;
+    public static int[] abilityChosen;
+    public static int[] armorLevelChosen;
 
 	Shooting shooting;
 
@@ -25,57 +25,45 @@ public class CustomizationManager : TrueSyncBehaviour
 
 	public override void OnSyncedStart()
 	{		
-		hullChosen = 0;
-		weaponChosen = 0;
-		abilityChosen = 0;
-		armorLevelChosen = 1;
-	}
-	public void CollectInfo(SelectType.ComponentType component, int listPosition)
-	{
-		switch (component) 
-		{
-			case SelectType.ComponentType.Hull:
-			hullChosen = listPosition;
-			break;
-
-			case SelectType.ComponentType.Weapon:
-			weaponChosen = listPosition;
-			break;
-
-			case SelectType.ComponentType.Ability:
-			abilityChosen = listPosition;
-			break;
-
-			case SelectType.ComponentType.ArmorLevel:
-			armorLevelChosen = listPosition;
-			break;
-
-		}
 	}
 
-	public void CustomizeTank()
-	{
-		hulls [hullChosen].SetActive (true);
+    public void CustomizeMyTank()
+    {
+        foreach (PhotonPlayer p in PhotonNetwork.playerList)
+        {
+            for (int i = 0; i < PhotonNetwork.playerList.Length; i++)
+            {
+                if (p == PhotonNetwork.playerList[i])
+                {
+                    if (PhotonNetwork.playerList[i].ID == owner.Id)
+                    {
+                        //I need to get a referebce to the players gameobject
+                    }
 
-		switch (weaponChosen) 
-		{
-			case 0:
-				shooting.currentWeapon = Shooting.CurrentWeapon.Projectile;
-				break;
-			case 1:
-				shooting.currentWeapon = Shooting.CurrentWeapon.Flamethrower;
-				break;
-			case 2:
-				shooting.currentWeapon = Shooting.CurrentWeapon.Laser;
-				break;
-		}
+                    hulls[hullChosen[i]].SetActive(true);
 
-		if (abilityChosen == 0)
-			teleport.enabled = true;
-		else
-			cloak.enabled = true;
+                    switch (weaponChosen[i])
+                    {
+                        case 0:
+                            shooting.currentWeapon = Shooting.CurrentWeapon.Projectile;
+                            break;
+                        case 1:
+                            shooting.currentWeapon = Shooting.CurrentWeapon.Flamethrower;
+                            break;
+                        case 2:
+                            shooting.currentWeapon = Shooting.CurrentWeapon.Laser;
+                            break;
+                    }
+
+                    if (abilityChosen[i] == 0)
+                        teleport.enabled = true;
+                    else
+                        cloak.enabled = true;
 
 
-		//Armor level chosen....
-	}
+                    //Armor level chosen....
+                }
+            }
+        }
+    }
 }

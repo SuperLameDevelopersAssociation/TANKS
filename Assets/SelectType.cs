@@ -8,7 +8,7 @@ public class SelectType : TrueSyncBehaviour
 	public string componentName;
 	public string description;
 	public int positionInList;
-	public CustomizationManager customizationManager; 
+	public StoreCustomizationVariables customizationManager; 
 
 	public enum ComponentType
 	{

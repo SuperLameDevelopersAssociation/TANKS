@@ -51,14 +51,13 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 	{
 		for (float i = timerLength; i > 0; i--) 
 		{
-            Debug.LogError(i);
 			timeLeft.text = "" + i;
 			yield return 1;
 		}
 
         foreach (GameObject go in GameObject.FindGameObjectsWithTag("Player"))
         {
-            go.GetComponent<CustomizationManager>().CustomizeTank();
+           // go.GetComponent<CustomizationManager>().CustomizeTank();
         }
 		ready = true;
 
