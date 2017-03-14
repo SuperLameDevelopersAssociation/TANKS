@@ -63,20 +63,44 @@ public class Health : TrueSyncBehaviour
         
         for (int i = 0; i < respawnLocations.Length; i++)
         {
-            //dists[0] = Vector3.Distance(playerTanks[0].gameObject.transform.position, respawnLocations[i].gameObject.transform.position);
-            dists[0] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
-            print(dists[0]);
-            //dists[1] = Vector3.Distance(playerTanks[1].gameObject.transform.position, respawnLocations[i].gameObject.transform.position);
-            dists[1] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, gameObject.GetComponent<TSTransform>().position);
-            print(dists[1]);
-            /* Uncomment this code when we use four tanks players
-            //dists[2] = Vector3.Distance(playerTanks[2].gameObject.transform.position, respawnLocations[i].gameObject.transform.position);
-            dists[2] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
-            print(dists[2]);
-            //dists[3] = Vector3.Distance(playerTanks[3].gameObject.transform.position, respawnLocations[i].gameObject.transform.position);
-            dists[3] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
-            print(dists[3]);
-            */
+            if (playerTanks.Length == 1)
+            {
+                dists[0] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
+                print(dists[0]);
+            }
+            else if (playerTanks.Length == 2)
+            {
+                dists[0] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
+                print(dists[0]);
+
+                dists[1] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, gameObject.GetComponent<TSTransform>().position);
+                print(dists[1]);
+            }
+            else if (playerTanks.Length == 3)
+            {
+                dists[0] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
+                print(dists[0]);
+
+                dists[1] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, gameObject.GetComponent<TSTransform>().position);
+                print(dists[1]);
+
+                dists[2] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
+                print(dists[2]);
+            }
+            else if (playerTanks.Length == 4)
+            {
+                dists[0] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
+                print(dists[0]);
+
+                dists[1] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, gameObject.GetComponent<TSTransform>().position);
+                print(dists[1]);
+
+                dists[2] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
+                print(dists[2]);
+
+                dists[3] = TSVector.Distance(playerTanks[0].GetComponent<TSTransform>().position, respawnLocations[i].GetComponent<TSTransform>().position);
+                print(dists[3]);
+            }
 
             for (int j= 0; j < dists.Length; j++)
             {
