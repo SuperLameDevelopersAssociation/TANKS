@@ -61,6 +61,7 @@ public class Shooting : TrueSyncBehaviour
 
     private GameObject gunBarrel;
     private GameObject turretWrangler;
+    private GameObject muzzleFlash;
 
     public int poolSize = 10;
 
@@ -98,7 +99,14 @@ public class Shooting : TrueSyncBehaviour
         else
         {
             turretWrangler = transform.FindChild("TurretWrangler").gameObject;
-            gunBarrel = turretWrangler.transform.FindChild("Turret").transform.FindChild("Barrel").gameObject.transform.FindChild("GunBarrel").gameObject;
+            gunBarrel = turretWrangler.transform.FindChild("Projectile Control").transform.FindChild("GunBarrel").gameObject;
+            muzzleFlash = turretWrangler.transform.FindChild("Projectile Control").transform.FindChild("Box019").FindChild("Gun 1 Projectile").FindChild("Muzzle Flash").gameObject;
+
+            if (muzzleFlash == null)
+                Debug.LogError("There is no muzzleFlash on " + gameObject.name);
+            else
+                muzzleFlash.SetActive(false);
+
             ammo = magazineSize;
             sustainedProjectile.SetActive(false);
         }
@@ -207,9 +215,13 @@ public class Shooting : TrueSyncBehaviour
 
         obj.SetActive(true);
 
+        muzzleFlash.SetActive(true);
+
         sfx.PlayProjectileSFX();
 
         yield return _fireFreq;
+
+        muzzleFlash.SetActive(false);
         isShooting = false;
     }
 
