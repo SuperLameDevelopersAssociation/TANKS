@@ -99,7 +99,7 @@ public class Shooting : TrueSyncBehaviour
         else
         {
             turretWrangler = transform.FindChild("TurretWrangler").gameObject;
-            gunBarrel = turretWrangler.transform.FindChild("Projectile Control").transform.FindChild("GunBarrel").gameObject;
+            gunBarrel = turretWrangler.transform.FindChild("Projectile Control").FindChild("Box019").transform.FindChild("GunBarrel").gameObject;
             muzzleFlash = turretWrangler.transform.FindChild("Projectile Control").transform.FindChild("Box019").FindChild("Gun 1 Projectile").FindChild("Muzzle Flash").gameObject;
 
             if (muzzleFlash == null)
@@ -206,12 +206,11 @@ public class Shooting : TrueSyncBehaviour
         obj.transform.rotation = transform.rotation;
 
         Projectile projectile = obj.GetComponent<Projectile>();    //Set the projectile script
-        projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
+        projectile.direction = gunBarrel.transform.up; //Set the projectiles direction
         projectile.actualDirection = projectile.direction.ToTSVector();
         projectile.owner = owner;   //Find the owner
         projectile.speed = projectileSpeed;
         projectile.damage = (int) (damage * damageMulitplier);//assigning the damage
-        print("Projectile Bullet damage is : " + projectile.damage);
 
         obj.SetActive(true);
 
