@@ -7,13 +7,14 @@ public class PlayerMovement : TrueSyncBehaviour
     public GameObject _camera;
     public int speed = 10;
     public int rotationSpeed = 150;
-    public Animator wheels;
+     Animator wheels;
 
     private bool hasAnimator;
 
     public override void OnSyncedStart()
     {
         tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50));
+        wheels = GetComponent<Animator>();
 
         if (_camera == null)
             _camera = transform.FindChild("Camera").gameObject;
@@ -21,15 +22,15 @@ public class PlayerMovement : TrueSyncBehaviour
         if (TrueSyncManager.LocalPlayer == owner)
             _camera.SetActive(true);
 
-        if (wheels == null)
-        {
-            Debug.Log(gameObject.name + "does not have a wheel animator");
-            hasAnimator = false;
-        }
-        else
-        {
-            hasAnimator = true;
-        }
+        //if (wheels == null)
+        //{
+        //    Debug.Log(gameObject.name + "does not have a wheel animator");
+        //    hasAnimator = false;
+        //}
+        //else
+        //{
+        //    hasAnimator = true;
+        //}
             
     }
 
@@ -49,16 +50,24 @@ public class PlayerMovement : TrueSyncBehaviour
 
         accell *= speed * TrueSyncManager.DeltaTime;
         steer *= rotationSpeed * TrueSyncManager.DeltaTime;
+        if (accell != 0)//getting the direction and speed of tank for the tread animations
+        {
+            wheels.SetFloat("velocity", Input.GetAxis("Horizontal"));
+        }
+        else
+        {
+            wheels.speed = 0;
+        }
 
         tsTransform.Translate(0, 0, accell, Space.Self);
         tsTransform.Rotate(0, steer, 0);
 
-        if (hasAnimator)
-        {
-            if (accell != 0)
-                wheels.SetBool("IsMoving", true);
-            else
-                wheels.SetBool("IsMoving", false);
-        }
+        //if (hasAnimator)
+        //{
+        //    if (accell != 0)
+        //        wheels.SetBool("IsMoving", true);
+        //    else
+        //        wheels.SetBool("IsMoving", false);
+        //}
     }
 }
