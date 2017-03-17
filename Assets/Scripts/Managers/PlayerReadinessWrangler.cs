@@ -5,11 +5,10 @@ using TrueSync;
 public class PlayerReadinessWrangler : TrueSyncBehaviour
 {
     byte readinessCounter;
-	PlayerManager playerManager;
 
     void Start()
     {
-		playerManager = GameObject.Find ("GameManager").GetComponent<PlayerManager> ();
+
     }
 
     public override void OnSyncedStart()
@@ -30,11 +29,8 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
                 readinessCounter++;
         }
 
-		if (readinessCounter == numberOfPlayers) 
-		{
-			TrueSyncManager.RunSimulation ();
-			playerManager.StartTick ();
-		}
+        if (readinessCounter == numberOfPlayers)
+            TrueSyncManager.RunSimulation();
         else
             readinessCounter = 0;
     }
