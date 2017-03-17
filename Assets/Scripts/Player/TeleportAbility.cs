@@ -42,10 +42,12 @@ public class TeleportAbility : AbilitiesBase
 
     public override void ActivatePower()
     {
-        TSRay ray = new TSRay(tsTransform.position + (tsTransform.forward * 3.55f), tsTransform.forward);
-        TSRaycastHit hit = manager.Raycast(ray, distance + 5);
-        
-        if (hit != null)
+        //TSRay ray = new TSRay(tsTransform.position + (tsTransform.forward * 3.55f), tsTransform.forward);
+        //TSRaycastHit hit = manager.Raycast(ray, distance + 5);
+
+        Ray ray = new Ray(transform.position + (transform.forward * 3.55f), transform.forward);
+        RaycastHit hit;
+        if(Physics.Raycast(ray.origin, ray.direction, out hit, distance + 5))
         {
             //maybe show something on screen saying that you can't teleport
 
@@ -53,7 +55,7 @@ public class TeleportAbility : AbilitiesBase
         }
         else
         {
-            tsTransform.position += tsTransform.forward * distance;
+            transform.position += transform.forward * distance;
             _cooldown = maxCooldown;
         }
     }

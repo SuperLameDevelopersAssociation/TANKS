@@ -30,10 +30,10 @@ public class Projectile : TrueSyncBehaviour
 
     public override void OnSyncedUpdate()
     {
-        tsTransform.Translate(actualDirection * speed * TrueSyncManager.DeltaTime);   //Move the projectile
+        transform.Translate(actualDirection.ToVector() * (float)speed * (float)TrueSyncManager.DeltaTime);   //Move the projectile
     }
 
-    public void OnSyncedTriggerEnter(TSCollision other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")   //Checks if collided with player
         {

@@ -194,7 +194,7 @@ public class Shooting : TrueSyncBehaviour
             yield break;
         }
 
-        obj.GetComponent<TSTransform>().position = gunBarrel.transform.position.ToTSVector();
+        obj.transform.position = gunBarrel.transform.position;
         obj.transform.rotation = transform.rotation;
 
         Projectile projectile = obj.GetComponent<Projectile>();    //Set the projectile script

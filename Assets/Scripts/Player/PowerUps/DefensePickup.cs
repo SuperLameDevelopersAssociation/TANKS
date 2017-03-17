@@ -8,7 +8,7 @@ public class DefensePickup : MonoBehaviour {
 
     Health playerHealth;
 
-    public void OnSyncedTriggerEnter(TSCollision other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")   //Checks if collided with player
         {

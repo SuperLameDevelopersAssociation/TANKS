@@ -9,7 +9,7 @@ public class DamageBoost : MonoBehaviour {
 
     Shooting playerShooting;
 
-    public void OnSyncedTriggerEnter(TSCollision other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")   //Checks if collided with player
         {

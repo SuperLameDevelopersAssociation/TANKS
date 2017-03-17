@@ -13,7 +13,7 @@ public class PlayerMovement : TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50));
+        transform.position = new Vector3(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50));
 
         if (_camera == null)
             _camera = transform.FindChild("Camera").gameObject;
@@ -50,8 +50,8 @@ public class PlayerMovement : TrueSyncBehaviour
         accell *= speed * TrueSyncManager.DeltaTime;
         steer *= rotationSpeed * TrueSyncManager.DeltaTime;
 
-        tsTransform.Translate(0, 0, accell, Space.Self);
-        tsTransform.Rotate(0, steer, 0);
+        transform.Translate(0, 0, (float)accell, Space.Self);
+        transform.Rotate(0, (float)steer, 0);
 
         if (hasAnimator)
         {

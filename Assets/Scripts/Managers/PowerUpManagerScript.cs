@@ -35,9 +35,9 @@ public class PowerUpManagerScript : TrueSyncBehaviour
         // since it is checking if this exists on update, best to be defensive and make sure it is here
         powerUp.tag.Equals("Powerup"); 
         //randomizing the spawn location for the powerup
-        TSVector newPosition = spawnLocations[TSRandom.Range(0, spawnLocations.Count)].GetComponent<TSTransform>().position;
+        Vector3 newPosition = spawnLocations[TSRandom.Range(0, spawnLocations.Count)].position;
         //spawning the powerup
-        TrueSyncManager.SyncedInstantiate(powerUp, newPosition, TSQuaternion.identity);
+        TrueSyncManager.SyncedInstantiate(powerUp, newPosition.ToTSVector(), TSQuaternion.identity);
         yield return respawnTime;
         //setting the boolean, canSpawn, to true
         canSpawn = true;
