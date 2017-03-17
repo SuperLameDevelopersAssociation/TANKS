@@ -1,0 +1,292 @@
+fileFormatVersion: 2
+guid: d6505654f8534e342a4f80851791841e
+timeCreated: 1487491568
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Bip002
+    100002: Bip002 Footsteps
+    100004: Bip002 Head
+    100006: Bip002 HeadNub
+    100008: Bip002 L Calf
+    100010: Bip002 L Clavicle
+    100012: Bip002 L Finger0
+    100014: Bip002 L Finger0Nub
+    100016: Bip002 L Foot
+    100018: Bip002 L Forearm
+    100020: Bip002 L Hand
+    100022: Bip002 L Thigh
+    100024: Bip002 L Toe0
+    100026: Bip002 L Toe01
+    100028: Bip002 L Toe02
+    100030: Bip002 L Toe0Nub
+    100032: Bip002 L UpperArm
+    100034: Bip002 Neck
+    100036: Bip002 Pelvis
+    100038: Bip002 R Calf
+    100040: Bip002 R Clavicle
+    100042: Bip002 R Finger0
+    100044: Bip002 R Finger0Nub
+    100046: Bip002 R Foot
+    100048: Bip002 R Forearm
+    100050: Bip002 R Hand
+    100052: Bip002 R Thigh
+    100054: Bip002 R Toe0
+    100056: Bip002 R Toe01
+    100058: Bip002 R Toe02
+    100060: Bip002 R Toe0Nub
+    100062: Bip002 R UpperArm
+    100064: Bip002 Spine
+    100066: Bip002 Spine1
+    100068: Bip002 Spine2
+    100070: Bip002 Spine3
+    100072: Box001
+    100074: Box002
+    100076: Box003
+    100078: Box004
+    100080: Box005
+    100082: Box006
+    100084: Box007
+    100086: Box008
+    100088: C-Ext001
+    100090: C-Ext002
+    100092: IBeam
+    100094: IBeam001
+    100096: //RootNode
+    100098: Object001
+    100100: Object003
+    100102: Object004
+    100104: Object005
+    100106: Object006
+    100108: Object007
+    100110: Object008
+    100112: Object009
+    100114: Object010
+    100116: Object011
+    100118: Object012
+    100120: Object013
+    100122: Object014
+    100124: Object015
+    100126: Object016
+    100128: OilTank001
+    100130: OilTank002
+    400000: Bip002
+    400002: Bip002 Footsteps
+    400004: Bip002 Head
+    400006: Bip002 HeadNub
+    400008: Bip002 L Calf
+    400010: Bip002 L Clavicle
+    400012: Bip002 L Finger0
+    400014: Bip002 L Finger0Nub
+    400016: Bip002 L Foot
+    400018: Bip002 L Forearm
+    400020: Bip002 L Hand
+    400022: Bip002 L Thigh
+    400024: Bip002 L Toe0
+    400026: Bip002 L Toe01
+    400028: Bip002 L Toe02
+    400030: Bip002 L Toe0Nub
+    400032: Bip002 L UpperArm
+    400034: Bip002 Neck
+    400036: Bip002 Pelvis
+    400038: Bip002 R Calf
+    400040: Bip002 R Clavicle
+    400042: Bip002 R Finger0
+    400044: Bip002 R Finger0Nub
+    400046: Bip002 R Foot
+    400048: Bip002 R Forearm
+    400050: Bip002 R Hand
+    400052: Bip002 R Thigh
+    400054: Bip002 R Toe0
+    400056: Bip002 R Toe01
+    400058: Bip002 R Toe02
+    400060: Bip002 R Toe0Nub
+    400062: Bip002 R UpperArm
+    400064: Bip002 Spine
+    400066: Bip002 Spine1
+    400068: Bip002 Spine2
+    400070: Bip002 Spine3
+    400072: Box001
+    400074: Box002
+    400076: Box003
+    400078: Box004
+    400080: Box005
+    400082: Box006
+    400084: Box007
+    400086: Box008
+    400088: C-Ext001
+    400090: C-Ext002
+    400092: IBeam
+    400094: IBeam001
+    400096: //RootNode
+    400098: Object001
+    400100: Object003
+    400102: Object004
+    400104: Object005
+    400106: Object006
+    400108: Object007
+    400110: Object008
+    400112: Object009
+    400114: Object010
+    400116: Object011
+    400118: Object012
+    400120: Object013
+    400122: Object014
+    400124: Object015
+    400126: Object016
+    400128: OilTank001
+    400130: OilTank002
+    2300000: Box001
+    2300002: Box002
+    2300004: Box003
+    2300006: Box004
+    2300008: Box005
+    2300010: Box006
+    2300012: Box007
+    2300014: Box008
+    2300016: C-Ext001
+    2300018: C-Ext002
+    2300020: IBeam
+    2300022: IBeam001
+    2300024: Object001
+    2300026: Object003
+    2300028: Object004
+    2300030: Object005
+    2300032: Object006
+    2300034: Object007
+    2300036: Object008
+    2300038: Object009
+    2300040: Object010
+    2300042: Object011
+    2300044: Object012
+    2300046: Object013
+    2300048: Object014
+    2300050: Object015
+    2300052: Object016
+    2300054: OilTank001
+    2300056: OilTank002
+    3300000: Box001
+    3300002: Box002
+    3300004: Box003
+    3300006: Box004
+    3300008: Box005
+    3300010: Box006
+    3300012: Box007
+    3300014: Box008
+    3300016: C-Ext001
+    3300018: C-Ext002
+    3300020: IBeam
+    3300022: IBeam001
+    3300024: Object001
+    3300026: Object003
+    3300028: Object004
+    3300030: Object005
+    3300032: Object006
+    3300034: Object007
+    3300036: Object008
+    3300038: Object009
+    3300040: Object010
+    3300042: Object011
+    3300044: Object012
+    3300046: Object013
+    3300048: Object014
+    3300050: Object015
+    3300052: Object016
+    3300054: OilTank001
+    3300056: OilTank002
+    4300000: Box001
+    4300002: C-Ext001
+    4300004: Object001
+    4300006: Object003
+    4300008: IBeam
+    4300010: IBeam001
+    4300012: Object004
+    4300014: Object005
+    4300016: Object006
+    4300018: Object007
+    4300020: Object008
+    4300022: Object009
+    4300024: Object010
+    4300026: Object011
+    4300028: Object012
+    4300030: Box002
+    4300032: Object013
+    4300034: Box003
+    4300036: Object014
+    4300038: Box004
+    4300040: Object015
+    4300042: Box005
+    4300044: Object016
+    4300046: Box006
+    4300048: Box007
+    4300050: C-Ext002
+    4300052: OilTank001
+    4300054: OilTank002
+    4300056: Box008
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

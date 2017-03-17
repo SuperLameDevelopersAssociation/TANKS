@@ -20,8 +20,8 @@ public class Sustained : TrueSyncBehaviour
                 Health hitPlayer = other.gameObject.GetComponent<Health>();     //Reference the players movement script
                 if (hitPlayer.owner != owner)   //Checks to see if the player hit is an enemy and not yourself
                 {
-                    hitPlayer.TakeDamage(damage);
-                    StartCoroutine(SendDamage());
+                    hitPlayer.TakeDamage(damage, owner.Id);
+                    TrueSyncManager.SyncedStartCoroutine(SendDamage());
                 }
             }
         }
@@ -29,9 +29,8 @@ public class Sustained : TrueSyncBehaviour
 
     IEnumerator SendDamage()
     {
-        print("SEND DAMAGE");
         isWaiting = true;
-        yield return new WaitForSeconds(1f);
+        yield return 1;
         isWaiting = false;
     }
 
@@ -39,7 +38,4 @@ public class Sustained : TrueSyncBehaviour
     {
         isWaiting = false;
     }
-
-
-
 }
