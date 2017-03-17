@@ -13,6 +13,7 @@ public class Health : TrueSyncBehaviour
     private bool defenseBoost = false;
 
     PointsManager pManager;
+    SpawnManager sManager;
 
 	public Slider healthBar;
 
@@ -34,6 +35,7 @@ public class Health : TrueSyncBehaviour
         currHealth = maxHealth;
 		SetHealthBar();
         pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
+        sManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
     }
 
     public void TakeDamage(int damage, int playerID)
@@ -54,8 +56,9 @@ public class Health : TrueSyncBehaviour
 
         if (currHealth <= 0)
         {
-            tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
-            tsTransform.rotation = TSQuaternion.identity;
+            //tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
+            //tsTransform.rotation = TSQuaternion.identity;
+            sManager.Respawn(owner.Id);
             gameObject.GetComponent<TSRigidBody>().velocity = TSVector.zero;
             int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
             int killerId = (playerID - 1);

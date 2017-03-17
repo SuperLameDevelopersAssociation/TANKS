@@ -13,7 +13,7 @@ public class PlayerMovement : TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50));
+        //tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50));
 
         if (_camera == null)
             _camera = transform.FindChild("Camera").gameObject;
