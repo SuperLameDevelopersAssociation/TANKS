@@ -10,6 +10,7 @@ namespace TrueSync {
     [AddComponentMenu("")]
     public class TrueSyncManager : MonoBehaviour {
 
+        public static List<GameObject> allPlayers;
         private const float JitterTimeFactor = 0.001f;
 
         private const string serverSettingsAssetFile = "TrueSyncGlobalConfig";
@@ -212,6 +213,7 @@ namespace TrueSync {
         }
 
         void Start() {
+            allPlayers = new List<GameObject>();
             instance = this;
             Application.runInBackground = true;
 
@@ -297,6 +299,7 @@ namespace TrueSync {
                 foreach (GameObject prefab in playerPrefabs) {
                     GameObject prefabInst = Instantiate(prefab);
                     InitializeGameObject(prefabInst, prefabInst.transform.position.ToTSVector(), prefabInst.transform.rotation.ToTSQuaternion());
+                    allPlayers.Add(prefabInst);
 
                     TrueSyncBehaviour[] behaviours = prefabInst.GetComponentsInChildren<TrueSyncBehaviour>();
                     foreach (TrueSyncBehaviour behaviour in behaviours) {
