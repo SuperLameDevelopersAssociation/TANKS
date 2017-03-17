@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using TrueSync;
+using System.Collections.Generic;
 
 public class CustomizationManager : TrueSyncBehaviour 
 {
@@ -9,10 +10,10 @@ public class CustomizationManager : TrueSyncBehaviour
 	CloakingAbility cloak;
 	TeleportAbility teleport;
 
-	public static int[] hullChosen;
-	public static int[] weaponChosen;
-    public static int[] abilityChosen;
-    public static int[] armorLevelChosen;
+	public static List<int> hullChosen;
+	public static List<int> weaponChosen;
+	public static List<int> abilityChosen;
+	public static List<int> armorLevelChosen;
 
 	Shooting shooting;
 
@@ -23,10 +24,51 @@ public class CustomizationManager : TrueSyncBehaviour
 
 	public override void OnSyncedStart()
 	{		
+		hullChosen = new List<int>(PhotonNetwork.playerList.Length);
+		weaponChosen = new List<int>(PhotonNetwork.playerList.Length);
+		abilityChosen = new List<int>(PhotonNetwork.playerList.Length);
+		armorLevelChosen = new List<int>(PhotonNetwork.playerList.Length);
+
+		foreach (PhotonPlayer p in PhotonNetwork.playerList) {
+			for (int i = 0; i < PhotonNetwork.playerList.Length; i++) {
+				if (p == PhotonNetwork.playerList [i]) {
+					hulls [0] = TrueSyncManager.allPlayers [i].transform.FindChild ("Hull 1").gameObject;
+					hulls [1] = TrueSyncManager.allPlayers [i].transform.FindChild ("Hull 2").gameObject;
+				}
+			}
+		}
+	}
+
+	public static void UpdateList(List<int> hulls, List<int> weapons, List<int> abilities, List<int> armor)
+	{
+		print ("Hull List Length is : " + hulls.Count);
+		print ("weapons List Length is : " + weapons.Count);
+		print ("abilities List Length is : " + abilities.Count);
+		print ("armor List Length is : " + armor.Count);
+		hullChosen = new List<int>(hulls.Count);
+		weaponChosen = new List<int>(weapons.Count);
+		abilityChosen = new List<int>(abilities.Count);
+		armorLevelChosen = new List<int>(armor.Count);
+
+		hullChosen = hulls;
+		weaponChosen = weapons;
+		abilityChosen = abilities;
+		armorLevelChosen = armor;
 	}
 
     public void CustomizeMyTank()
     {
+		PhotonView[] photonViews = UnityEngine.Object.FindObjectsOfType<PhotonView>();
+		foreach (PhotonView view in photonViews)
+		{
+			var player = view.owner;
+			//Objects in the scene don't have an owner, its means view.owner will be null
+			if(player!=null){
+				var playerPrefabObject = view.gameObject;
+				//do works...
+			}
+		}
+
         foreach (PhotonPlayer p in PhotonNetwork.playerList)
         {
             for (int i = 0; i < PhotonNetwork.playerList.Length; i++)

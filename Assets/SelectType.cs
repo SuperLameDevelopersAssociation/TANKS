@@ -8,7 +8,7 @@ public class SelectType : TrueSyncBehaviour
 	public string componentName;
 	public string description;
 	public int positionInList;
-	public StoreCustomizationVariables customizationManager; 
+	public StoreCustomizationVariables storeCustomizationVariables; 
 
 	public enum ComponentType
 	{
@@ -50,7 +50,8 @@ public class SelectType : TrueSyncBehaviour
 
 	public void AdjustInfo()
 	{
-		customizationManager.CollectInfo (currentComponent, positionInList);
+		print ("storeing vars");
+		storeCustomizationVariables.CollectInfo (currentComponent, positionInList);
 
 		switch (currentComponent) 
 		{
@@ -69,5 +70,6 @@ public class SelectType : TrueSyncBehaviour
 				armorLevelDescription.text = description;
 				break;
 		}
+		print ("Updated text");
 	}
 }
