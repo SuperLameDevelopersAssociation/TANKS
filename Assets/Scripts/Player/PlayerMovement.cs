@@ -50,16 +50,14 @@ public class PlayerMovement : TrueSyncBehaviour
 
         accell *= speed * TrueSyncManager.DeltaTime;
         steer *= rotationSpeed * TrueSyncManager.DeltaTime;
-        if (accell != 0)//getting the direction and speed of tank for the tread animations
-        {
-            wheels.SetFloat("velocity", Input.GetAxis("Horizontal"));
-        }
-        else
-        {
-            wheels.speed = 0;
-        }
 
-        tsTransform.Translate(0, 0, accell, Space.Self);
+        //getting the direction and speed of tank for the tread animations
+         wheels.SetFloat("velocity", Input.GetAxis("Vertical"));
+
+
+
+
+            tsTransform.Translate(0, 0, accell, Space.Self);
         tsTransform.Rotate(0, steer, 0);
 
         //if (hasAnimator)
