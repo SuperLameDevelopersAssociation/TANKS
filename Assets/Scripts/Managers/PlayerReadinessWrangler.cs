@@ -13,7 +13,7 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        TrueSyncManager.PauseSimulation();
+        //TrueSyncManager.PauseSimulation();
     }
 
     public override void OnGamePaused()
