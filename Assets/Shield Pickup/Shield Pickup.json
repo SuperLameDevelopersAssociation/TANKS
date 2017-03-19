@@ -1,0 +1,58 @@
+{
+    "format": {
+        "version": "1.0"
+    },
+    "shaders": {
+        "Main shader": {
+            "parameters": {
+                "Common Parameters": {
+                    "ao_intensity": 0.75,
+                    "emissive_intensity": 1,
+                    "height_force": 1,
+                    "horizonFade": 1.2999999523162842,
+                    "nbSamples": 16
+                },
+                "Parallax Occlusion Mapping": {
+                    "maxPOMSamples": 16,
+                    "minPOMSamples": 4,
+                    "pomStrength": 1,
+                    "usePOM": false
+                }
+            },
+            "shader": "pbr-metal-rough",
+            "shaderInstance": "Main shader"
+        }
+    },
+    "texturesets": {
+        "Antenna": {
+            "shader": "Main shader"
+        },
+        "Base": {
+            "shader": "Main shader"
+        },
+        "Center Post": {
+            "shader": "Main shader"
+        },
+        "DefaultMaterial": {
+            "shader": "Main shader"
+        },
+        "Emmisive ": {
+            "shader": "Main shader"
+        },
+        "Lower Input Cap": {
+            "shader": "Main shader"
+        },
+        "Lower Input Cuff": {
+            "shader": "Main shader"
+        },
+        "Second Level": {
+            "shader": "Main shader"
+        },
+        "Upper Cap": {
+            "shader": "Main shader"
+        },
+        "UpperRibed": {
+            "shader": "Main shader"
+        }
+    }
+}
