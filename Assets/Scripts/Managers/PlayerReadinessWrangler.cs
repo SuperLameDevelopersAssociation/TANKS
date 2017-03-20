@@ -33,7 +33,7 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 		if (readinessCounter == numberOfPlayers) 
 		{
 			TrueSyncManager.RunSimulation ();
-			playerManager.StartTick ();
+			playerManager.SpawnPlayers ();
 		}
         else
             readinessCounter = 0;
