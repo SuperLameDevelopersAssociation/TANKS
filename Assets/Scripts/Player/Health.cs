@@ -59,7 +59,7 @@ public class Health : TrueSyncBehaviour
             //tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
             //tsTransform.rotation = TSQuaternion.identity;
             sManager.Respawn(owner.Id);
-            gameObject.GetComponent<TSRigidBody>().velocity = TSVector.zero;
+            //gameObject.GetComponent<TSRigidBody>().velocity = TSVector.zero;
             int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
             int killerId = (playerID - 1);
             currHealth = maxHealth;

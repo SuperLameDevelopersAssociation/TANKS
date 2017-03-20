@@ -45,7 +45,7 @@ public class Projectile : TrueSyncBehaviour
             }
         }
 
-        TrueSyncManager.SyncedStartCoroutine(DestroyBullet(0));
+        gameObject.SetActive(false);
     }
 
     IEnumerator DestroyBullet(FP waitTime)

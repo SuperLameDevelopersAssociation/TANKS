@@ -29,7 +29,9 @@ public class SpawnManager : TrueSyncBehaviour
 
     public void Respawn(byte playerID)
     {
-        players[playerID - 1].GetComponent<TSTransform>().position = spawnPoints[playerID - 1].transform.position.ToTSVector();
+        TSVector spawnPos = spawnPoints[playerID - 1].transform.position.ToTSVector();
+        players[playerID - 1].GetComponent<TSTransform>().position = new TSVector(spawnPos.x, 0, spawnPos.z);
         players[playerID - 1].GetComponent<TSTransform>().rotation = TSQuaternion.identity;
+        players[playerID - 1].GetComponent<TSRigidBody>().velocity = TSVector.zero;
     }
 }
