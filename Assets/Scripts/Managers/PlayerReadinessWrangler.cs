@@ -14,7 +14,7 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        TrueSyncManager.PauseSimulation();
+       // TrueSyncManager.PauseSimulation();
     }
 
     public override void OnGamePaused()
@@ -32,8 +32,8 @@ public class PlayerReadinessWrangler : TrueSyncBehaviour
 
 		if (readinessCounter == numberOfPlayers) 
 		{
-			TrueSyncManager.RunSimulation ();
-			playerManager.SpawnPlayers ();
+		//	TrueSyncManager.RunSimulation ();
+			//playerManager.SpawnPlayers ();
 		}
         else
             readinessCounter = 0;

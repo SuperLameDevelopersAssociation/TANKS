@@ -140,7 +140,7 @@ public class Shooting : TrueSyncBehaviour
                         {
                             isShooting = true;
                             ammo -= 1;    //Subtract ammo
-                            TrueSyncManager.SyncedStartCoroutine(FireProjectile());
+                          //  TrueSyncManager.SyncedStartCoroutine(FireProjectile());
                             if (ammo <= 0)   //Check ammo, if zero reload
                                 TrueSyncManager.SyncedStartCoroutine(Reload());
                         }
@@ -184,10 +184,10 @@ public class Shooting : TrueSyncBehaviour
         isReloading = false;
     }
 
-    IEnumerator FireProjectile()
-    {//This script was modified by Chris
-
-        GameObject obj = objectPool.GetPooledObject();
+   // IEnumerator FireProjectile()
+    //{//This script was modified by Chris
+		
+        /*GameObject obj = objectPool.GetPooledObject();
 
         if (obj == null)
         {
@@ -210,8 +210,8 @@ public class Shooting : TrueSyncBehaviour
         sfx.PlayProjectileSFX();
 
         yield return _fireFreq;
-        isShooting = false;
-    }
+        isShooting = false;*/
+   // }
 
     void FireSustained()
     {
