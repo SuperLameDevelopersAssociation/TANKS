@@ -36,6 +36,8 @@ public class Shooting : TrueSyncBehaviour
     [HideInInspector]
     public float fireFreq;
     [HideInInspector]
+    public float cooldown;
+    [HideInInspector]
     public double damageMulitplier = 1;
 
     ObjectPooling objectPool;
@@ -59,6 +61,9 @@ public class Shooting : TrueSyncBehaviour
 
     private GameObject gunBarrel;
     private GameObject turretWrangler;
+    private GameObject muzzleFlash;
+
+    public int poolSize = 10;
 
 	void Start() 
 	{
@@ -83,8 +88,6 @@ public class Shooting : TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        //Instantiate pool
-        //parameters are gameobject bullet, int number of pooled objects
         if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
         {
             sustained = sustainedProjectile.GetComponent<Sustained>();
@@ -93,7 +96,14 @@ public class Shooting : TrueSyncBehaviour
         else
         {
             turretWrangler = transform.FindChild("TurretWrangler").gameObject;
-            gunBarrel = turretWrangler.transform.FindChild("Turret").transform.FindChild("Barrel").gameObject.transform.FindChild("GunBarrel").gameObject;
+            gunBarrel = turretWrangler.transform.FindChild("Projectile Control").FindChild("Box019").transform.FindChild("GunBarrel").gameObject;
+            muzzleFlash = turretWrangler.transform.FindChild("Projectile Control").transform.FindChild("Box019").FindChild("Gun 1 Projectile").FindChild("Muzzle Flash").gameObject;
+
+            if (muzzleFlash == null)
+                Debug.LogError("There is no muzzleFlash on " + gameObject.name);
+            else
+                muzzleFlash.SetActive(false);
+
             ammo = magazineSize;
             sustainedProjectile.SetActive(false);
         }
@@ -180,7 +190,7 @@ public class Shooting : TrueSyncBehaviour
     }
 
     IEnumerator FireProjectile()
-    { 
+    {
         GameObject obj = objectPool.GetPooledObject();
 
         if (obj == null)
@@ -192,7 +202,7 @@ public class Shooting : TrueSyncBehaviour
         obj.transform.rotation = transform.rotation;
 
         Projectile projectile = obj.GetComponent<Projectile>();    //Set the projectile script
-        projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
+        projectile.direction = gunBarrel.transform.up; //Set the projectiles direction
         projectile.actualDirection = projectile.direction;
         projectile.owner = owner;   //Find the owner
         projectile.speed = projectileSpeed;
@@ -200,10 +210,13 @@ public class Shooting : TrueSyncBehaviour
 
         obj.SetActive(true);
 
-        if(sfx)
+        muzzleFlash.SetActive(true);
+
         sfx.PlayProjectileSFX();
 
         yield return _fireFreq;
+
+        muzzleFlash.SetActive(false);
         isShooting = false;
     }
 
@@ -217,7 +230,6 @@ public class Shooting : TrueSyncBehaviour
 
         sustained.damage = (int) (damage * damageMulitplier);
         laserHeat = laserHeat + heatUpAmount;
-       // print("WeaponActive... Laserheat is at " + laserHeat);
 
         if(laserHeat >= overheatMax)
         {
@@ -234,9 +246,7 @@ public class Shooting : TrueSyncBehaviour
         {
             if(!isHoldingTrigger)
             {
-              //  print("Not holding trigger");
                 laserHeat = laserHeat - overheatedHeatDownAmt;
-                //   print("Overheating... LaserHeat is at " + laserHeat);
                 yield return timeConverter;
                 if (laserHeat <= 0)
                 {
@@ -256,8 +266,6 @@ public class Shooting : TrueSyncBehaviour
         {
             cooling = true;
             laserHeat = laserHeat - cooldownHeatDownAmt;
-            //   print("Weapon Cooling Down.. Laserheat is at " + laserHeat);
-
             yield return timeConverter;
             cooling = false;
         }
@@ -272,7 +280,6 @@ public class Shooting : TrueSyncBehaviour
     public IEnumerator GiveDamageBoost(double multiplier,  int duration)
     {
         damageMulitplier = multiplier;
-        print("the multiplier is now: " + damageMulitplier);
         yield return duration;
         damageMulitplier = 1;
     }

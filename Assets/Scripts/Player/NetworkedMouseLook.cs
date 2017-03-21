@@ -16,12 +16,20 @@ public class NetworkedMouseLook : TrueSyncBehaviour
     private Quaternion m_CharacterTargetRot;
     private Quaternion m_CameraTargetRot;
     private bool m_cursorIsLocked = true;
+
+    private Animator _animator;
+    private float aimAngle;
+
     public Transform _camera;
 
     // Use this for initialization
     public override void OnSyncedStart () {
         m_CharacterTargetRot = transform.localRotation;
         m_CameraTargetRot = _camera.localRotation;
+
+        _animator = GetComponentInChildren<Animator>();
+
+        print(_animator.gameObject.name);
     }
 
     public override void OnSyncedInput()
@@ -47,9 +55,9 @@ public class NetworkedMouseLook : TrueSyncBehaviour
         if (smooth)
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, m_CharacterTargetRot,
-                smoothTime * (float)TrueSyncManager.DeltaTime);
+                smoothTime * Time.deltaTime);
             _camera.localRotation = Quaternion.Slerp(_camera.localRotation, m_CameraTargetRot,
-                smoothTime * (float)TrueSyncManager.DeltaTime);
+                smoothTime * Time.deltaTime);
         }
         else
         {
@@ -57,6 +65,7 @@ public class NetworkedMouseLook : TrueSyncBehaviour
             _camera.localRotation = m_CameraTargetRot;
         }
         UpdateCursorLock();
+        SetCameraAngleInAnimator();
     }
 
     public void SetCursorLock(bool value)
@@ -113,5 +122,18 @@ public class NetworkedMouseLook : TrueSyncBehaviour
         q.x = Mathf.Tan(0.5f * Mathf.Deg2Rad * angleX);
 
         return q;
+    }
+
+    void SetCameraAngleInAnimator()
+    {
+        if (_camera.localRotation.eulerAngles.x <= 90f)
+            aimAngle = -_camera.localRotation.eulerAngles.x; //when looking down, it goes from 0 upwards
+        else
+            aimAngle = 360 - _camera.localRotation.eulerAngles.x; //when looking up, it goes from 360 downwards
+
+
+        _animator.SetFloat("shootAngle", aimAngle);
+        //print("The rotation of the camera is " + aimAngle);
+
     }
 }
