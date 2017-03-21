@@ -42,14 +42,10 @@ public class PlayerMovement : TrueSyncBehaviour
         steer *= rotationSpeed * TrueSyncManager.DeltaTime;
 
         //getting the direction and speed of tank for the tread animations
-        //  wheels.SetFloat("velocity", Input.GetAxis("Vertical"));
         wheels.SetFloat("velocity", (float)accell * (speed * 10));
-
-
-
+        wheels.SetFloat("rotation", (float)accell * (rotationSpeed * 10));
 
         tsTransform.Translate(0, 0, accell, Space.Self);
         tsTransform.Rotate(0, steer, 0);
-
     }
 }
