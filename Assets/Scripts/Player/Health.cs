@@ -34,7 +34,7 @@ public class Health : TrueSyncBehaviour
     {
         currHealth = maxHealth;
 		SetHealthBar();
-        //pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
+        pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
         sManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
     }
 
@@ -57,14 +57,11 @@ public class Health : TrueSyncBehaviour
         if (currHealth <= 0)
         {
             sManager.Respawn(owner.Id);
-            //transform.position = new Vector3(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
-            //transform.rotation = Quaternion.identity;
-            //gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            //int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
-            //int killerId = (playerID - 1);
+            int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
+            int killerId = (playerID - 1);
             currHealth = maxHealth;
             healthBar.value = currHealth;
-            //pManager.AwardPoints(killerId, killedId);
+            pManager.AwardPoints(killerId, killedId);
         }
     }
     
@@ -96,10 +93,10 @@ public class Health : TrueSyncBehaviour
 	{
 		healthBar.value = currHealth;
 	}
+
     void OnGUI()
     {
         GUI.Label(new Rect(10, 100 + 30 * owner.Id, 300, 30), "player: " + owner.Id + ", health: " + currHealth);
-        //GUI.Label(new Rect(10, 140 + 30 * owner.Id, 300, 30), "Deaths: " + deaths + ", Kills: " + PhotonNetwork.playerList[owner.Id].GetScore());
     }
 
     public void DefenseBoost(int _maxHealth)
