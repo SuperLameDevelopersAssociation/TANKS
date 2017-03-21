@@ -63,7 +63,7 @@ public class Shooting : TrueSyncBehaviour
 	void Start() 
 	{
         objectPool = GameObject.Find("PoolManager").GetComponent<ObjectPooling>();
-        //sfx = gameObject.GetComponent<ShootingSFX>();
+        sfx = gameObject.GetComponent<ShootingSFX>();
 
         if (sfx == null)
             Debug.LogError("There is no ShootingSFX attached to " + gameObject.name);
