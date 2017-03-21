@@ -13,13 +13,13 @@ public class PlayerMovement : TrueSyncBehaviour
 
     public override void OnSyncedStart()
     {
-        transform.position = new Vector3(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50));
+        //transform.position = new Vector3(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50));
 
-        if (_camera == null)
-            _camera = transform.FindChild("Camera").gameObject;
+        //if (_camera == null)
+        //    _camera = transform.FindChild("Camera").gameObject;
 
-        if (TrueSyncManager.LocalPlayer == owner)
-            _camera.SetActive(true);
+        //if (TrueSyncManager.LocalPlayer == owner)
+        //    _camera.SetActive(true);
 
         if (wheels == null)
         {
