@@ -200,6 +200,7 @@ public class Shooting : TrueSyncBehaviour
 
         obj.SetActive(true);
 
+        if(sfx)
         sfx.PlayProjectileSFX();
 
         yield return _fireFreq;
