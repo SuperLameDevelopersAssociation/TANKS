@@ -107,6 +107,8 @@ public class Shooting : TrueSyncBehaviour
             ammo = magazineSize;
             sustainedProjectile.SetActive(false);
         }
+
+        print("shooting id: " + owner.Id);
     }
     public override void OnSyncedInput()
     {
