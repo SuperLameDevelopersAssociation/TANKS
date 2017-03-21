@@ -92,6 +92,7 @@ public class Shooting : TrueSyncBehaviour
         {
             sustained = sustainedProjectile.GetComponent<Sustained>();
             sustained.damage = damage;
+            sustained.owner = owner;
         }
         else
         {
@@ -107,8 +108,6 @@ public class Shooting : TrueSyncBehaviour
             ammo = magazineSize;
             sustainedProjectile.SetActive(false);
         }
-
-        print("shooting id: " + owner.Id);
     }
     public override void OnSyncedInput()
     {
