@@ -15,11 +15,6 @@ public class Projectile : TrueSyncBehaviour
     [HideInInspector]
     public Vector3 actualDirection;
 
-    public override void OnSyncedStart()
-    {
-        // actualDirection = new TSVector(direction.x, direction.y, direction.z);
-    }
-
     void OnEnable()
     {
         if(Time.timeSinceLevelLoad > 1)
@@ -31,7 +26,7 @@ public class Projectile : TrueSyncBehaviour
         transform.Translate(actualDirection * (float)speed * (float)TrueSyncManager.DeltaTime, Space.World);   //Move the projectile
     }
 
-    public void OnSyncedTriggerEnter(TSCollision other)
+    public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")   //Checks if collided with player
         {
