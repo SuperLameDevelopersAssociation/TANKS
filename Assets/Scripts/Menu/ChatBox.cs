@@ -9,7 +9,10 @@ public class ChatBox : PunBehaviour
     public GameObject chatPanel;
     public Text chatText;
     public InputField chatInput;
+
     private ScrollRect chatScroll;
+    private bool isToggled;
+
 
     void Start()
     {
@@ -53,13 +56,38 @@ public class ChatBox : PunBehaviour
             spawnIndex = 0;
         }
         this.chatText.text += string.Format("{0}: {1}\n", name, text);
+        chatPanel.SetActive(true);
 
         this.chatScroll.normalizedPosition = new Vector2(0, 0);
     }
 
     public void MultiplayerPanel_ChatToggle()
     {
-        chatPanel.SetActive(!chatPanel.activeSelf);
+        isToggled = !isToggled;
+
+        chatPanel.SetActive(isToggled);
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        for (int index = 0; index < players.Length; index++)
+        {
+            PlayerMovement player = players[index].GetComponent<PlayerMovement>(); ;
+            print("Get player " + player);
+
+            if (player.owner == TrueSyncManager.LocalPlayer)
+            {
+                if (chatPanel.activeSelf)
+                {
+                    player.StopMovement();
+                }
+                else
+                {
+                    player.RestartMovement();
+                }
+
+                print("Player " + index + " is local");
+            }
+        }
 
         if (chatPanel.activeSelf)
         {

@@ -9,7 +9,12 @@ public class PlayerMovement : TrueSyncBehaviour
     public int rotationSpeed = 150;
     public Animator wheels;
 
+    private int speedStore;
+    private int rotationStore;
     private bool hasAnimator;
+
+    void Start()
+    { }
 
     public override void OnSyncedStart()
     {
@@ -30,6 +35,9 @@ public class PlayerMovement : TrueSyncBehaviour
         {
             hasAnimator = true;
         }
+
+        speedStore = speed;
+        rotationStore = rotationSpeed;
             
     }
 
@@ -60,5 +68,17 @@ public class PlayerMovement : TrueSyncBehaviour
             else
                 wheels.SetBool("IsMoving", false);
         }
+    }
+
+    public void StopMovement()
+    {
+        speed = 0;
+        rotationSpeed = 0;
+    }
+
+    public void RestartMovement()
+    {
+        speed = speedStore;
+        rotationSpeed = rotationStore;
     }
 }
