@@ -19,7 +19,7 @@ public class HealthPickup : MonoBehaviour
 			else if (!playerHealth.isHealthFull()) //don't want to pick up the health if health if full
 			{
                 playerHealth.AddHealth(gainedHealth);
-				TrueSyncManager.SyncedDestroy(this.gameObject);
+				Destroy(this.gameObject);
 			}
 		}
 	}

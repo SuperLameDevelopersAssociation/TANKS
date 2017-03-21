@@ -19,7 +19,7 @@ public class DefensePickup : MonoBehaviour {
             else
             {
                 playerHealth.DefenseBoost(defenseMaxHealth);
-                TrueSyncManager.SyncedDestroy(this.gameObject);
+                Destroy(this.gameObject);
             }
         }
     }
