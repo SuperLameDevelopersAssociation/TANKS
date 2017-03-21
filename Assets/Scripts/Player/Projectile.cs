@@ -28,7 +28,7 @@ public class Projectile : TrueSyncBehaviour
 
     public override void OnSyncedUpdate()
     {
-        transform.Translate(actualDirection * (float)speed * (float)TrueSyncManager.DeltaTime);   //Move the projectile
+        transform.Translate(actualDirection * (float)speed * (float)TrueSyncManager.DeltaTime, Space.World);   //Move the projectile
     }
 
     public void OnSyncedTriggerEnter(TSCollision other)
