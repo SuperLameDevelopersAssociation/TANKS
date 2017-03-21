@@ -36,9 +36,10 @@ public class PowerUpManagerScript : TrueSyncBehaviour
         powerUp.tag.Equals("Powerup"); 
         //randomizing the spawn location for the powerup
         Vector3 newPosition = spawnLocations[TSRandom.Range(0, spawnLocations.Count)].position;
+        yield return respawnTime;
         //spawning the powerup
         TrueSyncManager.SyncedInstantiate(powerUp, newPosition.ToTSVector(), TSQuaternion.identity);
-        yield return respawnTime;
+        
         //setting the boolean, canSpawn, to true
         canSpawn = true;
     }

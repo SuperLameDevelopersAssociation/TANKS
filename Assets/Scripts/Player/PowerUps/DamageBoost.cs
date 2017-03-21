@@ -20,7 +20,7 @@ public class DamageBoost : MonoBehaviour {
             else
             {
                 TrueSyncManager.SyncedStartCoroutine(playerShooting.GiveDamageBoost(mulitplier, duration));
-                TrueSyncManager.SyncedDestroy(this.gameObject);
+                Destroy(gameObject);
             }
         }
     }
