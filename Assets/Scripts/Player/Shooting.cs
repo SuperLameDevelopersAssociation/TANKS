@@ -36,8 +36,6 @@ public class Shooting : TrueSyncBehaviour
     [HideInInspector]
     public float fireFreq;
     [HideInInspector]
-    public float cooldown;
-    [HideInInspector]
     public double damageMulitplier = 1;
 
     ObjectPooling objectPool;
@@ -61,8 +59,6 @@ public class Shooting : TrueSyncBehaviour
 
     private GameObject gunBarrel;
     private GameObject turretWrangler;
-
-    public int poolSize = 10;
 
 	void Start() 
 	{

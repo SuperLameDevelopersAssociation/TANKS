@@ -8,7 +8,6 @@ public class ShootingEditor : Editor
     public SerializedProperty
         currentWeapon_Prop,
         weaponType_Prop,
-        projectileType_Prop,
         sustainedProjectile_Prop,
         damage_Prop,
         prjectileSpeed_Prop,
@@ -16,15 +15,12 @@ public class ShootingEditor : Editor
         overheatMax_Prop,
         heatUp_Prop,
         cooldownHeatDownAmt_Prop,
-        overheatedHeatDownAmt_Prop,
-        cooldown_Prop,
-        poolSize_Prop;
+        overheatedHeatDownAmt_Prop;
 
     void OnEnable()
     {
         currentWeapon_Prop = serializedObject.FindProperty("currentWeapon");
         weaponType_Prop = serializedObject.FindProperty("weaponType");
-        projectileType_Prop = serializedObject.FindProperty("projectileType");
         sustainedProjectile_Prop = serializedObject.FindProperty("sustainedProjectile");
         damage_Prop = serializedObject.FindProperty("damage");
         prjectileSpeed_Prop = serializedObject.FindProperty("projectileSpeed");
@@ -33,8 +29,6 @@ public class ShootingEditor : Editor
         heatUp_Prop = serializedObject.FindProperty("heatUpAmount");
         cooldownHeatDownAmt_Prop = serializedObject.FindProperty("cooldownHeatDownAmt");
         overheatedHeatDownAmt_Prop = serializedObject.FindProperty("overheatedHeatDownAmt");
-        cooldown_Prop = serializedObject.FindProperty("cooldown");
-        poolSize_Prop = serializedObject.FindProperty("poolSize");
     }
 
     public override void OnInspectorGUI()
@@ -53,14 +47,11 @@ public class ShootingEditor : Editor
             case Shooting.CurrentWeapon.Projectile: //if a projectile based system              
                 prjectileSpeed_Prop.floatValue = EditorGUILayout.FloatField(new GUIContent("Projectile Speed"), prjectileSpeed_Prop.floatValue);
                 fireFreq_Prop.floatValue = EditorGUILayout.FloatField(new GUIContent("Fire Frequency"), fireFreq_Prop.floatValue);
-                poolSize_Prop.intValue = EditorGUILayout.IntField(new GUIContent("Pool Size"), poolSize_Prop.intValue);
-                EditorGUILayout.PropertyField(projectileType_Prop, new GUIContent("Projectile Object"));
                 break;
             case Shooting.CurrentWeapon.Laser:      // if a non-projectile based system
             case Shooting.CurrentWeapon.Flamethrower:
                 overheatMax_Prop.intValue = EditorGUILayout.IntField(new GUIContent("Overheat Max"), overheatMax_Prop.intValue);
                 heatUp_Prop.floatValue = EditorGUILayout.FloatField(new GUIContent("Heat Up Amount"), heatUp_Prop.floatValue);
-                cooldown_Prop.floatValue = EditorGUILayout.FloatField(new GUIContent("Weapon Cooldown"), cooldown_Prop.floatValue);
                 cooldownHeatDownAmt_Prop.floatValue = EditorGUILayout.FloatField(new GUIContent("Cooldown Regenation Normal Amount"), cooldownHeatDownAmt_Prop.floatValue);
                 overheatedHeatDownAmt_Prop.floatValue = EditorGUILayout.FloatField(new GUIContent("Cooldown Regenetation Overheat Amount"), overheatedHeatDownAmt_Prop.floatValue);
                 EditorGUILayout.PropertyField(sustainedProjectile_Prop, new GUIContent("Sustained Object"));

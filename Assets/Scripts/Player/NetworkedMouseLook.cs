@@ -47,9 +47,9 @@ public class NetworkedMouseLook : TrueSyncBehaviour
         if (smooth)
         {
             transform.localRotation = Quaternion.Slerp(transform.localRotation, m_CharacterTargetRot,
-                smoothTime * Time.deltaTime);
+                smoothTime * (float)TrueSyncManager.DeltaTime);
             _camera.localRotation = Quaternion.Slerp(_camera.localRotation, m_CameraTargetRot,
-                smoothTime * Time.deltaTime);
+                smoothTime * (float)TrueSyncManager.DeltaTime);
         }
         else
         {
