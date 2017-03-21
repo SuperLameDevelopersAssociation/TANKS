@@ -193,7 +193,7 @@ public class Shooting : TrueSyncBehaviour
 
         Projectile projectile = obj.GetComponent<Projectile>();    //Set the projectile script
         projectile.direction = turretWrangler.transform.forward; //Set the projectiles direction
-        projectile.actualDirection = projectile.direction.ToTSVector();
+        projectile.actualDirection = projectile.direction;
         projectile.owner = owner;   //Find the owner
         projectile.speed = projectileSpeed;
         projectile.damage = (int) (damage * damageMulitplier);//assigning the damage

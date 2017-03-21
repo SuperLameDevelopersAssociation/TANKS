@@ -13,24 +13,17 @@ public class Projectile : TrueSyncBehaviour
     public int damage; 
 
     [HideInInspector]
-    public TSVector actualDirection;
-
-    public override void OnSyncedStart()
-    {
-        // actualDirection = new TSVector(direction.x, direction.y, direction.z);
-    }
+    public Vector3 actualDirection;
 
     void OnEnable()
     {
         if(Time.timeSinceLevelLoad > 1)
             TrueSyncManager.SyncedStartCoroutine(DestroyBullet(3));
-
-        print("The damage of the bullet is " + damage);
     }
 
     public override void OnSyncedUpdate()
     {
-        transform.Translate(actualDirection.ToVector() * (float)speed * (float)TrueSyncManager.DeltaTime);   //Move the projectile
+        transform.Translate(actualDirection * (float)speed * (float)TrueSyncManager.DeltaTime);   //Move the projectile
     }
 
     public void OnTriggerEnter(Collider other)
