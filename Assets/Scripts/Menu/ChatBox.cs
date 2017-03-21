@@ -32,13 +32,13 @@ public class ChatBox : PunBehaviour
     public void MultiplayerPanel_ChatSend()
     {
         string text = this.chatInput.text;
+
         if (text != "")
         {
             this.chatInput.text = "";
 
             int indexPlayer = System.Array.IndexOf(PhotonNetwork.playerList, PhotonNetwork.player);
             MultiplayerPanel_ChatReceived(PhotonNetwork.playerName, text, indexPlayer);
-            print("The name is " + PhotonNetwork.playerName);
             photonView.RPC("MultiplayerPanel_ChatReceived", PhotonTargets.Others, PhotonNetwork.playerName, text, indexPlayer);
 
             this.chatInput.ActivateInputField();
@@ -46,13 +46,14 @@ public class ChatBox : PunBehaviour
     }
 
     [PunRPC]
-    public void MultiplayerPanel_ChatReceived(string playerName, string text, int spawnIndex)
+    public void MultiplayerPanel_ChatReceived(string name, string text, int spawnIndex)
     {
         if (spawnIndex < 0)
         {
             spawnIndex = 0;
         }
-        this.chatText.text += string.Format("{0}: {1}\n", playerName, text);
+        this.chatText.text += string.Format("{0}: {1}\n", name, text);
+
         this.chatScroll.normalizedPosition = new Vector2(0, 0);
     }
 
