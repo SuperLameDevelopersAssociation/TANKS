@@ -67,7 +67,7 @@ public class Shooting : TrueSyncBehaviour
 	void Start() 
 	{
         objectPool = GameObject.Find("PoolManager").GetComponent<ObjectPooling>();
-        sfx = gameObject.GetComponent<ShootingSFX>();
+        //sfx = gameObject.GetComponent<ShootingSFX>();
 
         if (sfx == null)
             Debug.LogError("There is no ShootingSFX attached to " + gameObject.name);
@@ -89,7 +89,6 @@ public class Shooting : TrueSyncBehaviour
     {
         //Instantiate pool
         //parameters are gameobject bullet, int number of pooled objects
-        PoolManagerScript.instance.CreatePool(projectileType, poolSize);
         if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
         {
             sustained = sustainedProjectile.GetComponent<Sustained>();
@@ -185,8 +184,7 @@ public class Shooting : TrueSyncBehaviour
     }
 
     IEnumerator FireProjectile()
-    {//This script was modified by Chris
-
+    { 
         GameObject obj = objectPool.GetPooledObject();
 
         if (obj == null)
@@ -203,7 +201,6 @@ public class Shooting : TrueSyncBehaviour
         projectile.owner = owner;   //Find the owner
         projectile.speed = projectileSpeed;
         projectile.damage = (int) (damage * damageMulitplier);//assigning the damage
-        print("Projectile Bullet damage is : " + projectile.damage);
 
         obj.SetActive(true);
 
