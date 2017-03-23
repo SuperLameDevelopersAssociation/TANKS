@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
-using System;
+using UnityEngine.Networking;
 using System.Collections;
 using UnityEngine.UI;
-using TrueSync;
 
-public class Shooting : TrueSyncBehaviour
+public class Shooting : NetworkBehaviour
 {
-    public FP magazineSize;
-    [AddTracking]
-    public FP reloadTime;
+    public short owner;
+    public int magazineSize;
+    public float reloadTime;
 
     //Sustained Based Vars
     public int overheatMax;     //Max amount of heat that can be had
@@ -17,12 +16,14 @@ public class Shooting : TrueSyncBehaviour
     public float overheatedHeatDownAmt = 2; //How fast your weapon loses heat when overheated
 
     //Projectile Based Vars
-    [AddTracking]
-    private FP ammo = 0;
-    [AddTracking]
-    private bool isReloading = false; //if isReloading = 0 then its false, else if its 1 then its true
-    [AddTracking]
-    private bool isShooting = false; //if isShooting = 0 then its false, else if its 1 then its true
+    [SyncVar]
+    private int ammo = 0;
+    [SyncVar]
+    private bool isReloading = false;
+    [SyncVar]
+    private bool isShooting = false;
+    bool fired = false;
+    bool reloaded = false;
 
     //Weapon Variables
     [HideInInspector]
@@ -44,10 +45,10 @@ public class Shooting : TrueSyncBehaviour
 
     public enum CurrentWeapon {Projectile, Laser, Flamethrower};   //This would be set in the script that instantiates the players. 
 
-    [AddTracking]
-    FP laserHeat;   //Current laser heat
-	FP _fireFreq;
-    FP timeConverter = .1; //makes coortinues run every 1/10 of second
+    [SyncVar]
+    float laserHeat;   //Current laser heat
+	float _fireFreq;
+    float timeConverter = 0.1f; //makes coroutinues run every 1/10 of second
     bool overheated;    //If the weapon is overheated
     bool cooling;
     bool isHoldingTrigger;  //Fire1 is pressed/
@@ -67,6 +68,7 @@ public class Shooting : TrueSyncBehaviour
 
 	void Start() 
 	{
+        owner = GetComponent<NetworkIdentity>().playerControllerId;
         objectPool = GameObject.Find("PoolManager").GetComponent<ObjectPooling>();
         sfx = gameObject.GetComponent<ShootingSFX>();
 
@@ -84,10 +86,7 @@ public class Shooting : TrueSyncBehaviour
         }
 
         _fireFreq = fireFreq;
-    }
 
-    public override void OnSyncedStart()
-    {
         if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
         {
             sustained = sustainedProjectile.GetComponent<Sustained>();
@@ -109,63 +108,56 @@ public class Shooting : TrueSyncBehaviour
             sustainedProjectile.SetActive(false);
         }
     }
-    public override void OnSyncedInput()
+
+    void Update()
     {
-        if (Input.GetButton("Fire1"))       //Set the inputs for fire1
-            TrueSyncInput.SetByte(2, 1);
+        if (Input.GetButton("Fire1"))
+            fired = true;
         else
-            TrueSyncInput.SetByte(2, 0);
+            fired = false;
 
         if (Input.GetKey(KeyCode.R))
-            TrueSyncInput.SetByte(3, 1);
+            reloaded = true;
         else
-            TrueSyncInput.SetByte(3, 0);
-    }
-
-    public override void OnSyncedUpdate()
-    {
-        byte fire = TrueSyncInput.GetByte(2);   //Get the input
-        byte reloadButton = TrueSyncInput.GetByte(3);
+            reloaded = false;
 
         switch (currentWeapon)
         {
-            //For right now we only have projectiles and sustained weapons so I could do an if else for this but just in case in the future we come up with some other weapon type that does not fit either of 
-            //The ones we have we would have to do a switch so i will do that for now just in case.
             case CurrentWeapon.Projectile: //If weapon is the projectile
 
                 if (!isReloading)
                 {
-                    if (reloadButton == 1) //check if reload is pressed
+                    if (reloaded) //check if reload is pressed
                     {
-                        TrueSyncManager.SyncedStartCoroutine(Reload());
+                        //StartCoroutine(CmdReload());
                     }
 
-                    if (fire == 1)         //Check if fire was pressed
+                    if (fired)         //Check if fire was pressed
                     {
                         if (!isShooting)
                         {
                             isShooting = true;
                             ammo -= 1;    //Subtract ammo
-                            TrueSyncManager.SyncedStartCoroutine(FireProjectile());
-                            if (ammo <= 0)   //Check ammo, if zero reload
-                                TrueSyncManager.SyncedStartCoroutine(Reload());
+                            //StartCoroutine(CmdFireProjectile());
+                            //if (ammo <= 0)   //Check ammo, if zero reload
+                                //StartCoroutine(CmdReload());
                         }
                     }
                 }
                 break;
             case CurrentWeapon.Laser: //If weapon is the laser
             case CurrentWeapon.Flamethrower: //If weapon is a flamethrower
-                if (fire == 1)  
+                if (fired)  
                 {
                     if (!overheated)
-                        FireSustained();
+                        CmdFireSustained();
                 }
                 else 
                 {
                     if (laserHeat >= 0)
                     {
                         sustainedProjectile.SetActive(false);
-                        TrueSyncManager.SyncedStartCoroutine(Cooling());
+                        //StartCoroutine(CmdCooling());
                         sfx.StopSustainedSFX();
                     }
                 }
@@ -173,7 +165,7 @@ public class Shooting : TrueSyncBehaviour
                 if (laserHeat < 0) //defensive code to check if laserHeat is ever negative
                     laserHeat = 0;
 
-                if (fire == 1) 
+                if (fired) 
                     isHoldingTrigger = true;
                 else
                     isHoldingTrigger = false;
@@ -182,46 +174,48 @@ public class Shooting : TrueSyncBehaviour
         }
     }
 
-    IEnumerator Reload()    //Reload and allow shooting after reloadTime
-    {
-        isReloading = true;
-        ammo = magazineSize;
-        yield return reloadTime;
-        isReloading = false;
-    }
+    //[Command]
+    //IEnumerator CmdReload()    //Reload and allow shooting after reloadTime
+    //{
+    //    isReloading = true;
+    //    ammo = magazineSize;
+    //    yield return reloadTime;
+    //    isReloading = false;
+    //}
 
-    IEnumerator FireProjectile()
-    {
-        GameObject obj = objectPool.GetPooledObject();
+    //[Command]
+    //IEnumerator CmdFireProjectile()
+    //{
+    //    GameObject obj = objectPool.GetPooledObject();
 
-        if (obj == null)
-        {
-            yield break;
-        }
+    //    if (obj == null)
+    //    {
+    //        yield break;
+    //    }
 
-        obj.transform.position = gunBarrel.transform.position;
-        obj.transform.rotation = transform.rotation;
+    //    obj.transform.position = gunBarrel.transform.position;
+    //    obj.transform.rotation = transform.rotation;
 
-        Projectile projectile = obj.GetComponent<Projectile>();    //Set the projectile script
-        projectile.direction = gunBarrel.transform.up; //Set the projectiles direction
-        projectile.actualDirection = projectile.direction;
-        projectile.owner = owner;   //Find the owner
-        projectile.speed = projectileSpeed;
-        projectile.damage = (int) (damage * damageMulitplier);//assigning the damage
+    //    Projectile projectile = obj.GetComponent<Projectile>();    //Set the projectile script
+    //    projectile.direction = gunBarrel.transform.up; //Set the projectiles direction
+    //    //projectile.owner = owner;   //Find the owner
+    //    projectile.speed = projectileSpeed;
+    //    projectile.damage = (int) (damage * damageMulitplier);//assigning the damage
 
-        obj.SetActive(true);
+    //    obj.SetActive(true);
 
-        muzzleFlash.SetActive(true);
+    //    muzzleFlash.SetActive(true);
 
-        sfx.PlayProjectileSFX();
+    //    sfx.PlayProjectileSFX();
 
-        yield return _fireFreq;
+    //    yield return new WaitForSeconds(_fireFreq);
 
-        muzzleFlash.SetActive(false);
-        isShooting = false;
-    }
+    //    muzzleFlash.SetActive(false);
+    //    isShooting = false;
+    //}
 
-    void FireSustained()
+    [Command]
+    void CmdFireSustained()
     {
         if(!sustainedProjectile.activeInHierarchy)
         {
@@ -234,43 +228,47 @@ public class Shooting : TrueSyncBehaviour
 
         if(laserHeat >= overheatMax)
         {
-            TrueSyncManager.SyncedStartCoroutine(Overheated());
+            //StartCoroutine(CmdOverheated());
         }
     }
-    IEnumerator Overheated()
-    {
-        overheated = true;
-        sustainedProjectile.SetActive(false);
-        sfx.StopSustainedSFX();
 
-        for (FP i = laserHeat; i > 0; i = i - 1)
-        {
-            if(!isHoldingTrigger)
-            {
-                laserHeat = laserHeat - overheatedHeatDownAmt;
-                yield return timeConverter;
-                if (laserHeat <= 0)
-                {
-                    overheated = false;
-                }
-            }
-            else //traps the IEnumerator until the trigger is let gone
-            {
-                i = i + 1;
-                yield return 0;
-            }
-        }
-    }
-    IEnumerator Cooling()
-    {
-        if(!cooling && !overheated)
-        {
-            cooling = true;
-            laserHeat = laserHeat - cooldownHeatDownAmt;
-            yield return timeConverter;
-            cooling = false;
-        }
-    }
+    //[Command]
+    //IEnumerator CmdOverheated()
+    //{
+    //    overheated = true;
+    //    sustainedProjectile.SetActive(false);
+    //    sfx.StopSustainedSFX();
+
+    //    for (float i = laserHeat; i > 0; i = i - 1)
+    //    {
+    //        if(!isHoldingTrigger)
+    //        {
+    //            laserHeat = laserHeat - overheatedHeatDownAmt;
+    //            yield return new WaitForSeconds(timeConverter);
+    //            if (laserHeat <= 0)
+    //            {
+    //                overheated = false;
+    //            }
+    //        }
+    //        else //traps the IEnumerator until the trigger is let gone
+    //        {
+    //            i = i + 1;
+    //            yield return new WaitForSeconds(0);
+    //        }
+    //    }
+    //}
+
+    //[Command]
+    //IEnumerator CmdCooling()
+    //{
+    //    if(!cooling && !overheated)
+    //    {
+    //        cooling = true;
+    //        laserHeat = laserHeat - cooldownHeatDownAmt;
+    //        yield return new WaitForSeconds(timeConverter);
+    //        cooling = false;
+    //    }
+    //}
 
     void OnGUI()
     {
@@ -278,10 +276,11 @@ public class Shooting : TrueSyncBehaviour
     }
 
     //===============Give Damage Boost (Called By DamageBoost)===========
-    public IEnumerator GiveDamageBoost(double multiplier,  int duration)
-    {
-        damageMulitplier = multiplier;
-        yield return duration;
-        damageMulitplier = 1;
-    }
+    //[Command]
+    //public IEnumerator CmdGiveDamageBoost(double multiplier,  int duration)
+    //{
+    //    damageMulitplier = multiplier;
+    //    yield return new WaitForSeconds(duration);
+    //    damageMulitplier = 1;
+    //}
 }

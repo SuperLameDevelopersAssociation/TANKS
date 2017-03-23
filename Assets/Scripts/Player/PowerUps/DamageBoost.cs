@@ -19,7 +19,7 @@ public class DamageBoost : MonoBehaviour {
                 Debug.LogError("There is no shooting script on " + other.gameObject.name);
             else
             {
-                TrueSyncManager.SyncedStartCoroutine(playerShooting.GiveDamageBoost(mulitplier, duration));
+                //TrueSyncManager.SyncedStartCoroutine(playerShooting.CmdGiveDamageBoost(mulitplier, duration));
                 Destroy(gameObject);
             }
         }

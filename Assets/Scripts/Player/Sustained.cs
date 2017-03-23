@@ -1,9 +1,10 @@
 ﻿using UnityEngine;
-using TrueSync;
+using UnityEngine.Networking;
 using System.Collections;
 
-public class Sustained : TrueSyncBehaviour
+public class Sustained : NetworkBehaviour
 {
+    public short owner;
     [HideInInspector]
     public int damage;
     [Tooltip("How often the sustained weapon does to the target")]
@@ -20,19 +21,20 @@ public class Sustained : TrueSyncBehaviour
                 Health hitPlayer = other.gameObject.GetComponent<Health>();     //Reference the players movement script
                 if (hitPlayer.owner != owner)   //Checks to see if the player hit is an enemy and not yourself
                 {
-                    hitPlayer.TakeDamage(damage, this.owner.Id);                    
-                    TrueSyncManager.SyncedStartCoroutine(SendDamage());
+                    hitPlayer.TakeDamage(damage, owner);
+                    //StartCoroutine(CmdSendDamage());
                 }
             }
         }
     }
 
-    IEnumerator SendDamage()
-    {
-        isWaiting = true;
-        yield return 1;
-        isWaiting = false;
-    }
+    //[Command]
+    //IEnumerator CmdSendDamage()
+    //{
+    //    isWaiting = true;
+    //    yield return 1;
+    //    isWaiting = false;
+    //}
 
     public void OnTriggerExit(Collider other)
     {

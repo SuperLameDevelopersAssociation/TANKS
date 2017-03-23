@@ -1,29 +1,27 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
-using TrueSync;
 
-public class Projectile : TrueSyncBehaviour
+public class Projectile : NetworkBehaviour
 {
+    public short owner;
     [HideInInspector]
-    public FP speed = 15;           //Store speed for projectile
+    public float speed = 15;           //Store speed for projectile
     [HideInInspector]
     public Vector3 direction;       //Store the direction
 
     [HideInInspector]
     public int damage; 
 
-    [HideInInspector]
-    public Vector3 actualDirection;
+    //void OnEnable()
+    //{
+    //    if(Time.timeSinceLevelLoad > 1)
+    //        TrueSyncManager.SyncedStartCoroutine(CmdDestroyBullet(3));
+    //}
 
-    void OnEnable()
+    void Update()
     {
-        if(Time.timeSinceLevelLoad > 1)
-            TrueSyncManager.SyncedStartCoroutine(DestroyBullet(3));
-    }
-
-    public override void OnSyncedUpdate()
-    {
-        transform.Translate(actualDirection * (float)speed * (float)TrueSyncManager.DeltaTime, Space.World);   //Move the projectile
+        transform.Translate(direction * speed * Time.deltaTime, Space.World);   //Move the projectile
     }
 
     public void OnTriggerEnter(Collider other)
@@ -31,17 +29,20 @@ public class Projectile : TrueSyncBehaviour
         if (other.gameObject.tag == "Player")   //Checks if collided with player
         {
             Health hitPlayer = other.gameObject.GetComponent<Health>();     //Reference the players movement script
-            if (hitPlayer.owner.Id != this.owner.Id)   //Checks to see if the player hit is an enemy and not yourself
+            if (hitPlayer.owner != owner)   //Checks to see if the player hit is an enemy and not yourself
             {
-                hitPlayer.TakeDamage(damage, this.owner.Id);
-                TrueSyncManager.SyncedStartCoroutine(DestroyBullet(0));
+                hitPlayer.TakeDamage(damage, owner);
+                //StartCoroutine(CmdDestroyBullet(0));
+                CmdDestroyBullet(0);
             }
         }
+
     }
 
-    IEnumerator DestroyBullet(FP waitTime)
+    [Command]
+    void CmdDestroyBullet(float waitTime)
     {
-        yield return waitTime;
+        //yield return new WaitForSeconds(waitTime);
         gameObject.SetActive(false);
     }
 }

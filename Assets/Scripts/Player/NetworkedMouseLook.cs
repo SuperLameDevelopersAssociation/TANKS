@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using TrueSync;
+using UnityEngine.Networking;
 
-public class NetworkedMouseLook : TrueSyncBehaviour
+public class NetworkedMouseLook : NetworkBehaviour
 {
     public int XSensitivity = 2;
     public int YSensitivity = 2;
@@ -22,8 +22,11 @@ public class NetworkedMouseLook : TrueSyncBehaviour
 
     public Transform _camera;
 
+    float xRot;
+    float yRot;
+
     // Use this for initialization
-    public override void OnSyncedStart () {
+    void Start () {
         m_CharacterTargetRot = transform.localRotation;
         m_CameraTargetRot = _camera.localRotation;
 
@@ -32,32 +35,21 @@ public class NetworkedMouseLook : TrueSyncBehaviour
         print(_animator.gameObject.name);
     }
 
-    public override void OnSyncedInput()
-    {
-        FP yRot = Input.GetAxis("Mouse X") * XSensitivity;
-        FP xRot = Input.GetAxis("Mouse Y") * YSensitivity;
-
-        TrueSyncInput.SetFP(4, yRot);
-        TrueSyncInput.SetFP(5, xRot);
-    }
-
     // Update is called once per frame
-    public override void OnSyncedUpdate () {
-        FP yRot = TrueSyncInput.GetFP(4);
-        FP xRot = TrueSyncInput.GetFP(5);
+    void Update () {
+        yRot = Input.GetAxis("Mouse X") * XSensitivity;
+        xRot = Input.GetAxis("Mouse Y") * YSensitivity;
 
-        m_CharacterTargetRot *= Quaternion.Euler(0f, (float)yRot, 0f);
-        m_CameraTargetRot *= Quaternion.Euler(-(float)xRot, 0f, 0f);
+        m_CharacterTargetRot *= Quaternion.Euler(0f, yRot, 0f);
+        m_CameraTargetRot *= Quaternion.Euler(-xRot, 0f, 0f);
 
         if (clampVerticalRotation)
             m_CameraTargetRot = ClampRotationAroundXAxis(m_CameraTargetRot);
 
         if (smooth)
         {
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, m_CharacterTargetRot,
-                smoothTime * (float)TrueSyncManager.DeltaTime);
-            _camera.localRotation = Quaternion.Slerp(_camera.localRotation, m_CameraTargetRot,
-                smoothTime * (float)TrueSyncManager.DeltaTime);
+            transform.localRotation = Quaternion.Slerp(transform.localRotation, m_CharacterTargetRot, smoothTime * Time.deltaTime);
+            _camera.localRotation = Quaternion.Slerp(_camera.localRotation, m_CameraTargetRot, smoothTime * Time.deltaTime);
         }
         else
         {

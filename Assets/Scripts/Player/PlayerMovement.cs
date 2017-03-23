@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using TrueSync;
+using UnityEngine.Networking;
 
-public class PlayerMovement : TrueSyncBehaviour
+public class PlayerMovement : NetworkBehaviour
 {
     public GameObject _camera;
     public int speed = 10;
@@ -10,55 +10,56 @@ public class PlayerMovement : TrueSyncBehaviour
     public Animator wheels;
 
     private bool hasAnimator;
+    float accell;
+    float steer;
 
-    public override void OnSyncedStart()
+    void Start()
     {
-        //transform.position = new Vector3(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50));
-
         if (_camera == null)
             _camera = transform.FindChild("Camera").gameObject;
 
-        if (TrueSyncManager.LocalPlayer == owner)
+        if (isLocalPlayer)
             _camera.SetActive(true);
 
-        if (wheels == null)
-        {
-            Debug.Log(gameObject.name + "does not have a wheel animator");
-            hasAnimator = false;
-        }
-        else
-        {
-            hasAnimator = true;
-        }
+        //if (wheels == null)
+        //{
+        //    Debug.Log(gameObject.name + "does not have a wheel animator");
+        //    hasAnimator = false;
+        //}
+        //else
+        //{
+        //    hasAnimator = true;
+        //}
             
     }
 
-    public override void OnSyncedInput()
+    [ClientCallback]
+    void Update()
     {
-        FP accell = Input.GetAxis("Vertical");
-        FP steer = Input.GetAxis("Horizontal");
+        if (!isLocalPlayer)
+            return;
 
-        TrueSyncInput.SetFP(0, accell);
-        TrueSyncInput.SetFP(1, steer);
+        accell = Input.GetAxis("Vertical");
+        steer = Input.GetAxis("Horizontal");
+
+        accell *= speed * Time.deltaTime;
+        steer *= rotationSpeed * Time.deltaTime;
+
+        CmdMove(accell, steer);
+
+        //if (hasAnimator)
+        //{
+        //    if (accell != 0)
+        //        wheels.SetBool("IsMoving", true);
+        //    else
+        //        wheels.SetBool("IsMoving", false);
+        //}
     }
 
-    public override void OnSyncedUpdate()
+    [Command]
+    public void CmdMove(float accellVal, float steerVal)
     {
-        FP accell = TrueSyncInput.GetFP(0);
-        FP steer = TrueSyncInput.GetFP(1);
-
-        accell *= speed * TrueSyncManager.DeltaTime;
-        steer *= rotationSpeed * TrueSyncManager.DeltaTime;
-
-        transform.Translate(0, 0, (float)accell, Space.Self);
-        transform.Rotate(0, (float)steer, 0);
-
-        if (hasAnimator)
-        {
-            if (accell != 0)
-                wheels.SetBool("IsMoving", true);
-            else
-                wheels.SetBool("IsMoving", false);
-        }
+        transform.Translate(0, 0, accellVal, Space.Self);
+        transform.Rotate(0, steerVal, 0);
     }
 }

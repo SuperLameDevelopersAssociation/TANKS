@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
-using TrueSync;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 using System.Collections;
 
-public class Health : TrueSyncBehaviour
+public class Health : NetworkBehaviour
 {
+    public short owner;
     public int maxHealth;
-    [AddTracking]
+    [SyncVar]
     public int currHealth;
     private int defenseDamage = 0;
     private int originalMaxHealth;
@@ -28,15 +29,13 @@ public class Health : TrueSyncBehaviour
 		healthBar.value = maxHealth;
         originalMaxHealth = maxHealth;
         SetArmor();
-	}
-
-    public override void OnSyncedStart()
-    {
         currHealth = maxHealth;
 		SetHealthBar();
-        pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
-        sManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
+        owner = GetComponent<NetworkIdentity>().playerControllerId;
+        //pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
+        //sManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
     }
+
 
     public void TakeDamage(int damage, int playerID)
     {
@@ -47,7 +46,6 @@ public class Health : TrueSyncBehaviour
         if (defenseBoost)
         {                                 // Check if the defense boost is depleted.
             defenseDamage += damage;
-            print("Defense depletion is now at : " + defenseDamage);
             if (defenseDamage >= 100)
             {
                 EndDefenseBoost();
@@ -56,12 +54,12 @@ public class Health : TrueSyncBehaviour
 
         if (currHealth <= 0)
         {
-            sManager.Respawn(owner.Id);
-            int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
-            int killerId = (playerID - 1);
+            //sManager.Respawn(owner.Id);
+            //int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
+            //int killerId = (playerID - 1);
             currHealth = maxHealth;
             healthBar.value = currHealth;
-            pManager.AwardPoints(killerId, killedId);
+            //pManager.AwardPoints(killerId, killedId);
         }
     }
     
@@ -94,10 +92,10 @@ public class Health : TrueSyncBehaviour
 		healthBar.value = currHealth;
 	}
 
-    void OnGUI()
-    {
-        GUI.Label(new Rect(10, 100 + 30 * owner.Id, 300, 30), "player: " + owner.Id + ", health: " + currHealth);
-    }
+    //void OnGUI()
+    //{
+    //    GUI.Label(new Rect(10, 100 + 30 * owner.Id, 300, 30), "player: " + owner.Id + ", health: " + currHealth);
+    //}
 
     public void DefenseBoost(int _maxHealth)
     {
@@ -106,7 +104,6 @@ public class Health : TrueSyncBehaviour
             maxHealth += _maxHealth;
             currHealth += _maxHealth;
             defenseBoost = true;
-            print("the maxHealth is now: " + maxHealth);
         }
     }
 
