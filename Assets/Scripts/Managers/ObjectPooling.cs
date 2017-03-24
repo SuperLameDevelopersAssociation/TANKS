@@ -1,29 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
-using TrueSync;
 
-public class ObjectPooling : TrueSyncBehaviour
+public class ObjectPooling : MonoBehaviour
 {
     public GameObject[] pooledObject;
     public int pooledAmount;
-    public float waitTime = 0.001f;
     public bool willGrow = true;
 
-    FP _waitTime;
     public List<GameObject> pooledObjects;
     
-    public override void OnSyncedStart()
+    void Start()
     {
-        _waitTime = waitTime;
         pooledObjects = new List<GameObject>();
 
         for (int i = 0; i < pooledAmount; i++)
         {
-            TrueSyncManager.SyncedStartCoroutine(InstantiatePool(waitTime));
-            //GameObject obj = (GameObject)Instantiate(pooledObject);
-            //obj.SetActive(false);
-            //pooledObjects.Add(obj);
+            InstantiatePool();
         }
     }
 
@@ -41,7 +35,7 @@ public class ObjectPooling : TrueSyncBehaviour
         {
             for (int j = 0; j < pooledObject.Length; j++)
             {
-                GameObject obj = TrueSyncManager.SyncedInstantiate(pooledObject[j]);
+                GameObject obj = NetworkManager.Instantiate(pooledObject[j], Vector3.zero, Quaternion.identity) as GameObject;
                 obj.transform.parent = transform;
                 pooledObjects.Add(obj);
                 return obj;
@@ -51,16 +45,15 @@ public class ObjectPooling : TrueSyncBehaviour
         return null;
     }
 
-    IEnumerator InstantiatePool(float waitTime)
+    void InstantiatePool()
     {
         for (int k = 0; k < pooledObject.Length; k++)
         {
-            GameObject obj = TrueSyncManager.SyncedInstantiate(pooledObject[k]);
+            GameObject obj = NetworkManager.Instantiate(pooledObject[k], Vector3.zero, Quaternion.identity) as GameObject;
             obj.transform.parent = transform;
 
             obj.SetActive(false);
             pooledObjects.Add(obj);
         }
-        yield return _waitTime;
     }
 }

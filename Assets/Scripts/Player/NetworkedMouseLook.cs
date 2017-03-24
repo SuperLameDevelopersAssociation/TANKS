@@ -31,12 +31,15 @@ public class NetworkedMouseLook : NetworkBehaviour
         m_CameraTargetRot = _camera.localRotation;
 
         _animator = GetComponentInChildren<Animator>();
-
-        print(_animator.gameObject.name);
     }
 
     // Update is called once per frame
     void Update () {
+        UpdateCursorLock();
+
+        if (NotSoPausedPauseMenu.isOn)
+            return;
+
         yRot = Input.GetAxis("Mouse X") * XSensitivity;
         xRot = Input.GetAxis("Mouse Y") * YSensitivity;
 
@@ -56,7 +59,7 @@ public class NetworkedMouseLook : NetworkBehaviour
             transform.localRotation = m_CharacterTargetRot;
             _camera.localRotation = m_CameraTargetRot;
         }
-        UpdateCursorLock();
+        
         SetCameraAngleInAnimator();
     }
 

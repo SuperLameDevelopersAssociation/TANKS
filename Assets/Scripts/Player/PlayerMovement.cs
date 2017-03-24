@@ -39,6 +39,9 @@ public class PlayerMovement : NetworkBehaviour
         if (!isLocalPlayer)
             return;
 
+        if (NotSoPausedPauseMenu.isOn)
+            return;
+
         accell = Input.GetAxis("Vertical");
         steer = Input.GetAxis("Horizontal");
 

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Shooting : NetworkBehaviour
 {
-    public short owner;
+    public byte owner;
     public int magazineSize;
     public float reloadTime;
 
@@ -41,17 +41,18 @@ public class Shooting : NetworkBehaviour
     [HideInInspector]
     public double damageMulitplier = 1;
 
-    ObjectPooling objectPool;
+    NetworkedObjectPooling objectPool;
 
     public enum CurrentWeapon {Projectile, Laser, Flamethrower};   //This would be set in the script that instantiates the players. 
 
     [SyncVar]
-    float laserHeat;   //Current laser heat
+    float laserHeat;                            //Current laser heat
 	float _fireFreq;
-    float timeConverter = 0.1f; //makes coroutinues run every 1/10 of second
-    bool overheated;    //If the weapon is overheated
+    float timeConverter = 0.1f;                 //makes coroutinues run every 1/10 of second
+    bool overheated;                            //If the weapon is overheated
     bool cooling;
-    bool isHoldingTrigger;  //Fire1 is pressed/
+    bool isHoldingTrigger;                      //Fire1 is pressed
+    bool isWaiting;
 
     public CurrentWeapon currentWeapon;
 
@@ -66,10 +67,11 @@ public class Shooting : NetworkBehaviour
 
     public int poolSize = 10;
 
+    [Client]
 	void Start() 
 	{
-        owner = GetComponent<NetworkIdentity>().playerControllerId;
-        objectPool = GameObject.Find("PoolManager").GetComponent<ObjectPooling>();
+        owner = (byte)GetComponent<NetworkIdentity>().netId.Value;
+        objectPool = GameObject.Find("PoolManager").GetComponent<NetworkedObjectPooling>();
         sfx = gameObject.GetComponent<ShootingSFX>();
 
         if (sfx == null)
@@ -105,18 +107,22 @@ public class Shooting : NetworkBehaviour
                 muzzleFlash.SetActive(false);
 
             ammo = magazineSize;
+            ammoText.text = ammo.ToString();
             sustainedProjectile.SetActive(false);
         }
     }
 
     void Update()
     {
-        if (Input.GetButton("Fire1"))
+        if (NotSoPausedPauseMenu.isOn)
+            return;
+
+        if (Input.GetButtonDown("Fire1"))
             fired = true;
         else
             fired = false;
 
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
             reloaded = true;
         else
             reloaded = false;
@@ -129,18 +135,19 @@ public class Shooting : NetworkBehaviour
                 {
                     if (reloaded) //check if reload is pressed
                     {
-                        //StartCoroutine(CmdReload());
+                        StartCoroutine(Reload());
                     }
 
                     if (fired)         //Check if fire was pressed
                     {
-                        if (!isShooting)
+                        if (!isShooting && !isWaiting)
                         {
                             isShooting = true;
                             ammo -= 1;    //Subtract ammo
-                            //StartCoroutine(CmdFireProjectile());
-                            //if (ammo <= 0)   //Check ammo, if zero reload
-                                //StartCoroutine(CmdReload());
+                            CmdFireProjectile();
+
+                            if (ammo <= 0)   //Check ammo, if zero reload
+                                StartCoroutine(Reload());
                         }
                     }
                 }
@@ -174,45 +181,54 @@ public class Shooting : NetworkBehaviour
         }
     }
 
-    //[Command]
-    //IEnumerator CmdReload()    //Reload and allow shooting after reloadTime
-    //{
-    //    isReloading = true;
-    //    ammo = magazineSize;
-    //    yield return reloadTime;
-    //    isReloading = false;
-    //}
+    [Server]
+    IEnumerator Reload()    //Reload and allow shooting after reloadTime
+    {
+        isReloading = true;
+        ammo = magazineSize;
+        yield return reloadTime;
+        isReloading = false;
+    }
 
-    //[Command]
-    //IEnumerator CmdFireProjectile()
-    //{
-    //    GameObject obj = objectPool.GetPooledObject();
+    [Command]
+    void CmdFireProjectile()
+    {
+        // Set up bullet on server
+        GameObject obj = objectPool.GetFromPool(gunBarrel.transform.position, transform.rotation);
 
-    //    if (obj == null)
-    //    {
-    //        yield break;
-    //    }
+        if (obj == null)
+        {
+            return;
+        }
 
-    //    obj.transform.position = gunBarrel.transform.position;
-    //    obj.transform.rotation = transform.rotation;
+        Projectile projectile = obj.GetComponent<Projectile>();     //Set the projectile script
+        projectile.direction = gunBarrel.transform.up;              //Set the projectiles direction
+        projectile.owner = owner;                                   //Assigning the owner
+        projectile.speed = projectileSpeed;
+        projectile.damage = (int)(damage * damageMulitplier);       //assigning the damage
+        obj.GetComponent<Rigidbody>().velocity = projectile.direction * projectileSpeed;
 
-    //    Projectile projectile = obj.GetComponent<Projectile>();    //Set the projectile script
-    //    projectile.direction = gunBarrel.transform.up; //Set the projectiles direction
-    //    //projectile.owner = owner;   //Find the owner
-    //    projectile.speed = projectileSpeed;
-    //    projectile.damage = (int) (damage * damageMulitplier);//assigning the damage
+        muzzleFlash.SetActive(true);
 
-    //    obj.SetActive(true);
+        sfx.PlayProjectileSFX();
 
-    //    muzzleFlash.SetActive(true);
+        NetworkServer.Spawn(obj, objectPool.assetId);               // spawn bullet on client, custom spawn handler will be called     
 
-    //    sfx.PlayProjectileSFX();
+        StartCoroutine(Wait(_fireFreq));
 
-    //    yield return new WaitForSeconds(_fireFreq);
+        muzzleFlash.SetActive(false);
+        isShooting = false;
+    }
 
-    //    muzzleFlash.SetActive(false);
-    //    isShooting = false;
-    //}
+    IEnumerator Wait(float waitTime)
+    {
+        if (!isWaiting)
+        {
+            isWaiting = true;
+            yield return new WaitForSeconds(waitTime);
+            isWaiting = false;
+        }
+    }
 
     [Command]
     void CmdFireSustained()

@@ -4,26 +4,34 @@ using System.Collections;
 
 public class Projectile : NetworkBehaviour
 {
-    public short owner;
+    public byte owner;
     [HideInInspector]
     public float speed = 15;           //Store speed for projectile
-    [HideInInspector]
+    [HideInInspector, SyncVar]
     public Vector3 direction;       //Store the direction
 
     [HideInInspector]
-    public int damage; 
+    public int damage;
 
-    //void OnEnable()
-    //{
-    //    if(Time.timeSinceLevelLoad > 1)
-    //        TrueSyncManager.SyncedStartCoroutine(CmdDestroyBullet(3));
-    //}
+    NetworkedObjectPooling objectPool;
 
-    void Update()
+    void Start()
     {
-        transform.Translate(direction * speed * Time.deltaTime, Space.World);   //Move the projectile
+        objectPool = GameObject.Find("PoolManager").GetComponent<NetworkedObjectPooling>();
     }
 
+    void OnEnable()
+    {
+        if (Time.timeSinceLevelLoad > 1)
+            StartCoroutine(DestroyBullet(3));
+    }
+
+    //void Update()
+    //{
+    //    CmdMoveProjectile();
+    //}
+
+    [Server]
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")   //Checks if collided with player
@@ -32,17 +40,21 @@ public class Projectile : NetworkBehaviour
             if (hitPlayer.owner != owner)   //Checks to see if the player hit is an enemy and not yourself
             {
                 hitPlayer.TakeDamage(damage, owner);
-                //StartCoroutine(CmdDestroyBullet(0));
-                CmdDestroyBullet(0);
+                StartCoroutine(DestroyBullet(0));
             }
         }
-
     }
 
     [Command]
-    void CmdDestroyBullet(float waitTime)
+    void CmdMoveProjectile()
     {
-        //yield return new WaitForSeconds(waitTime);
-        gameObject.SetActive(false);
+        transform.Translate(direction * speed * Time.deltaTime, Space.World);   //Move the projectile
+    }
+
+    IEnumerator DestroyBullet(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        objectPool.UnSpawnObject(gameObject);
+        NetworkServer.UnSpawn(gameObject);
     }
 }

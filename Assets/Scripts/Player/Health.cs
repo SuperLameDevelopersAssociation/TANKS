@@ -5,7 +5,7 @@ using System.Collections;
 
 public class Health : NetworkBehaviour
 {
-    public short owner;
+    public byte owner;
     public int maxHealth;
     [SyncVar]
     public int currHealth;
@@ -31,11 +31,10 @@ public class Health : NetworkBehaviour
         SetArmor();
         currHealth = maxHealth;
 		SetHealthBar();
-        owner = GetComponent<NetworkIdentity>().playerControllerId;
+        owner = (byte)GetComponent<NetworkIdentity>().netId.Value;
         //pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
         //sManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
     }
-
 
     public void TakeDamage(int damage, int playerID)
     {
@@ -55,7 +54,7 @@ public class Health : NetworkBehaviour
         if (currHealth <= 0)
         {
             //sManager.Respawn(owner.Id);
-            //int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
+            //int killedId = (this.owner - 1); //both minus one to make it work with indexs
             //int killerId = (playerID - 1);
             currHealth = maxHealth;
             healthBar.value = currHealth;
