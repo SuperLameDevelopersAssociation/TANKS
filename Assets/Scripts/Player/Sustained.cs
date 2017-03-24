@@ -12,7 +12,7 @@ public class Sustained : NetworkBehaviour
 
     private bool isWaiting = false;
 
-    [Server]
+    [ServerCallback]
     public void OnTriggerStay (Collider other)
     {
         if (!isWaiting)

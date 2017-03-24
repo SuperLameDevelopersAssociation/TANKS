@@ -22,7 +22,7 @@ public class Projectile : NetworkBehaviour
             StartCoroutine(DestroyBullet(3));
     }
 
-    [Server]
+    [ServerCallback]
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")   //Checks if collided with player
