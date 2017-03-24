@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Shooting : NetworkBehaviour
 {
     public byte owner;
-    public int magazineSize;
-    public float reloadTime;
+    
+    public float reloadTime = 2f;
 
     //Sustained Based Vars
     public int overheatMax;     //Max amount of heat that can be had
@@ -16,8 +16,10 @@ public class Shooting : NetworkBehaviour
     public float overheatedHeatDownAmt = 2; //How fast your weapon loses heat when overheated
 
     //Projectile Based Vars
-    [SyncVar]
-    private int ammo = 0;
+    [SerializeField]
+    int magazineSize = 50;
+    [SerializeField]
+    int ammo = 0;
     [SyncVar]
     private bool isReloading = false;
     [SyncVar]
@@ -65,13 +67,11 @@ public class Shooting : NetworkBehaviour
     private GameObject turretWrangler;
     private GameObject muzzleFlash;
 
-    public int poolSize = 10;
-
-    [Client]
 	void Start() 
 	{
         owner = (byte)GetComponent<NetworkIdentity>().netId.Value;
         objectPool = GameObject.Find("PoolManager").GetComponent<NetworkedObjectPooling>();
+        CmdInitOnServer();
         sfx = gameObject.GetComponent<ShootingSFX>();
 
         if (sfx == null)
@@ -85,7 +85,7 @@ public class Shooting : NetworkBehaviour
         else
         {
             Debug.LogError("There is no text object called Ammmo.");
-        }
+        }        
 
         _fireFreq = fireFreq;
 
@@ -107,9 +107,18 @@ public class Shooting : NetworkBehaviour
                 muzzleFlash.SetActive(false);
 
             ammo = magazineSize;
-            ammoText.text = ammo.ToString();
+            SetAmmoText();
             sustainedProjectile.SetActive(false);
         }
+    }
+
+    [Command]
+    void CmdInitOnServer()
+    {
+        objectPool = GameObject.Find("PoolManager").GetComponent<NetworkedObjectPooling>();
+        sustained = sustainedProjectile.GetComponent<Sustained>();
+        sustained.damage = damage;
+        sustained.owner = owner;
     }
 
     void Update()
@@ -117,7 +126,7 @@ public class Shooting : NetworkBehaviour
         if (NotSoPausedPauseMenu.isOn)
             return;
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButton("Fire1"))
             fired = true;
         else
             fired = false;
@@ -135,19 +144,17 @@ public class Shooting : NetworkBehaviour
                 {
                     if (reloaded) //check if reload is pressed
                     {
-                        StartCoroutine(Reload());
+                        CallReload();
                     }
 
                     if (fired)         //Check if fire was pressed
                     {
                         if (!isShooting && !isWaiting)
                         {
-                            isShooting = true;
-                            ammo -= 1;    //Subtract ammo
-                            CmdFireProjectile();
+                            Fire();
 
                             if (ammo <= 0)   //Check ammo, if zero reload
-                                StartCoroutine(Reload());
+                                CallReload();
                         }
                     }
                 }
@@ -157,14 +164,14 @@ public class Shooting : NetworkBehaviour
                 if (fired)  
                 {
                     if (!overheated)
-                        CmdFireSustained();
+                        FireSustained();
                 }
                 else 
                 {
                     if (laserHeat >= 0)
                     {
                         sustainedProjectile.SetActive(false);
-                        //StartCoroutine(CmdCooling());
+                        StartCoroutine(Cooling());
                         sfx.StopSustainedSFX();
                     }
                 }
@@ -181,43 +188,50 @@ public class Shooting : NetworkBehaviour
         }
     }
 
-    [Server]
-    IEnumerator Reload()    //Reload and allow shooting after reloadTime
+    [Client]
+    void CallReload()
     {
-        isReloading = true;
+        Debug.LogError("reloading");
+        if (!isReloading)
+        {
+            isReloading = true;
+            Invoke("Reload", reloadTime);
+        }
+    }
+    
+    void Reload()    //Reload and allow shooting after reloadTime
+    {        
         ammo = magazineSize;
-        yield return reloadTime;
+        SetAmmoText();
         isReloading = false;
     }
 
-    [Command]
-    void CmdFireProjectile()
+    void Fire()
     {
-        // Set up bullet on server
-        GameObject obj = objectPool.GetFromPool(gunBarrel.transform.position, transform.rotation);
-
-        if (obj == null)
-        {
-            return;
-        }
-
-        Projectile projectile = obj.GetComponent<Projectile>();     //Set the projectile script
-        projectile.direction = gunBarrel.transform.up;              //Set the projectiles direction
-        projectile.owner = owner;                                   //Assigning the owner
-        projectile.speed = projectileSpeed;
-        projectile.damage = (int)(damage * damageMulitplier);       //assigning the damage
-        obj.GetComponent<Rigidbody>().velocity = projectile.direction * projectileSpeed;
-
+        isShooting = true;
         muzzleFlash.SetActive(true);
-
         sfx.PlayProjectileSFX();
-
-        NetworkServer.Spawn(obj, objectPool.assetId);               // spawn bullet on client, custom spawn handler will be called     
-
+        int _damage = (int)(damage * damageMulitplier);
+        CmdFireProjectile(gunBarrel.transform.position, gunBarrel.transform.up, owner, projectileSpeed, _damage);
         StartCoroutine(Wait(_fireFreq));
-
         muzzleFlash.SetActive(false);
         isShooting = false;
+        ammo -= 1;              //Subtract ammo
+        SetAmmoText();
+    }
+
+    [Command]
+    void CmdFireProjectile( Vector3 position, Vector3 direction, byte anOwner, float speed, int damage)
+    {
+        Debug.LogError(objectPool);
+        var obj = objectPool.GetFromPool(position);                             //Grab bullet from pool
+
+        Projectile projectile = obj.GetComponent<Projectile>();                 //Set the projectile script
+        projectile.owner = anOwner;                                             //Assigning the owner
+        projectile.damage = damage;                                             //assigning the damage
+        obj.GetComponent<Rigidbody>().velocity = direction * speed;
+
+        NetworkServer.Spawn(obj);                                               // spawn bullet on client, custom spawn handler will be called      , objectPool.assetId
     }
 
     IEnumerator Wait(float waitTime)
@@ -230,63 +244,65 @@ public class Shooting : NetworkBehaviour
         }
     }
 
-    [Command]
-    void CmdFireSustained()
+    void FireSustained()
     {
-        if(!sustainedProjectile.activeInHierarchy)
-        {
-            sustainedProjectile.SetActive(true);
-            sfx.PlaySustainedSFX(currentWeapon.ToString());
-        }
+        int _myDamage = (int)(damage * damageMulitplier);
+        CmdFireSustained(_myDamage);
 
-        sustained.damage = (int) (damage * damageMulitplier);
+        if (!sustainedProjectile.activeInHierarchy)
+            sfx.PlaySustainedSFX(currentWeapon.ToString());
+
         laserHeat = laserHeat + heatUpAmount;
 
-        if(laserHeat >= overheatMax)
+        if (laserHeat >= overheatMax)
+            StartCoroutine(Overheated());
+    }
+
+    [Command]
+    void CmdFireSustained(int damage)
+    {        
+        sustainedProjectile.SetActive(true);
+        sustained.damage = damage;
+    }
+
+    IEnumerator Overheated()
+    {
+        overheated = true;
+        sustainedProjectile.SetActive(false);
+        sfx.StopSustainedSFX();
+
+        for (float i = laserHeat; i > 0; i--)
         {
-            //StartCoroutine(CmdOverheated());
+            if (!isHoldingTrigger)
+            {
+                laserHeat = laserHeat - overheatedHeatDownAmt;
+                yield return new WaitForSeconds(timeConverter);
+                if (laserHeat <= 0)
+                {
+                    overheated = false;
+                }
+            }
+            else //traps the IEnumerator until the trigger is let gone
+            {
+                i++;
+                yield return new WaitForSeconds(0);
+            }
         }
     }
 
-    //[Command]
-    //IEnumerator CmdOverheated()
-    //{
-    //    overheated = true;
-    //    sustainedProjectile.SetActive(false);
-    //    sfx.StopSustainedSFX();
+    IEnumerator Cooling()
+    {
+        if (!cooling && !overheated)
+        {
+            cooling = true;
+            laserHeat = laserHeat - cooldownHeatDownAmt;
+            yield return new WaitForSeconds(timeConverter);
+            cooling = false;
+        }
+    }
 
-    //    for (float i = laserHeat; i > 0; i = i - 1)
-    //    {
-    //        if(!isHoldingTrigger)
-    //        {
-    //            laserHeat = laserHeat - overheatedHeatDownAmt;
-    //            yield return new WaitForSeconds(timeConverter);
-    //            if (laserHeat <= 0)
-    //            {
-    //                overheated = false;
-    //            }
-    //        }
-    //        else //traps the IEnumerator until the trigger is let gone
-    //        {
-    //            i = i + 1;
-    //            yield return new WaitForSeconds(0);
-    //        }
-    //    }
-    //}
-
-    //[Command]
-    //IEnumerator CmdCooling()
-    //{
-    //    if(!cooling && !overheated)
-    //    {
-    //        cooling = true;
-    //        laserHeat = laserHeat - cooldownHeatDownAmt;
-    //        yield return new WaitForSeconds(timeConverter);
-    //        cooling = false;
-    //    }
-    //}
-
-    void OnGUI()
+    [Client]
+    void SetAmmoText()
     {
         ammoText.text = " " + ammo + " / " + magazineSize;
     }

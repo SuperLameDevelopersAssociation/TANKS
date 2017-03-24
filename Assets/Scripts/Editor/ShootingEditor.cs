@@ -15,6 +15,8 @@ public class ShootingEditor : Editor
         overheatMax_Prop,
         heatUp_Prop,
         cooldownHeatDownAmt_Prop,
+        magazineSize_Prop,
+        reloadTime_Prop,
         overheatedHeatDownAmt_Prop;
 
     void OnEnable()
@@ -29,6 +31,8 @@ public class ShootingEditor : Editor
         heatUp_Prop = serializedObject.FindProperty("heatUpAmount");
         cooldownHeatDownAmt_Prop = serializedObject.FindProperty("cooldownHeatDownAmt");
         overheatedHeatDownAmt_Prop = serializedObject.FindProperty("overheatedHeatDownAmt");
+        magazineSize_Prop = serializedObject.FindProperty("magazineSize");
+        reloadTime_Prop = serializedObject.FindProperty("reloadTime");
     }
 
     public override void OnInspectorGUI()
@@ -47,6 +51,8 @@ public class ShootingEditor : Editor
             case Shooting.CurrentWeapon.Projectile: //if a projectile based system              
                 prjectileSpeed_Prop.floatValue = EditorGUILayout.FloatField(new GUIContent("Projectile Speed"), prjectileSpeed_Prop.floatValue);
                 fireFreq_Prop.floatValue = EditorGUILayout.FloatField(new GUIContent("Fire Frequency"), fireFreq_Prop.floatValue);
+                magazineSize_Prop.intValue = EditorGUILayout.IntField(new GUIContent("Magazine Size"), magazineSize_Prop.intValue);
+                reloadTime_Prop.floatValue = EditorGUILayout.FloatField(new GUIContent("Reload Time"), reloadTime_Prop.floatValue);
                 break;
             case Shooting.CurrentWeapon.Laser:      // if a non-projectile based system
             case Shooting.CurrentWeapon.Flamethrower:

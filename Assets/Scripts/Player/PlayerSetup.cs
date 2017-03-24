@@ -9,12 +9,15 @@ public class PlayerSetup : NetworkBehaviour
 
     void Start()
     {
-        if(!isLocalPlayer)
+        if (!isLocalPlayer)
         {
-            for(int i = 0; i < componentsToDisable.Length; i++)
+            gameObject.name = "RemotePlayer";
+            for (int i = 0; i < componentsToDisable.Length; i++)
             {
                 componentsToDisable[i].enabled = false;
             }
         }
+        else
+            gameObject.name = "LocalPlayer";
     }
 }

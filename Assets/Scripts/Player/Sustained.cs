@@ -12,6 +12,7 @@ public class Sustained : NetworkBehaviour
 
     private bool isWaiting = false;
 
+    [Server]
     public void OnTriggerStay (Collider other)
     {
         if (!isWaiting)
@@ -21,14 +22,13 @@ public class Sustained : NetworkBehaviour
                 Health hitPlayer = other.gameObject.GetComponent<Health>();     //Reference the players movement script
                 if (hitPlayer.owner != owner)   //Checks to see if the player hit is an enemy and not yourself
                 {
-                    hitPlayer.TakeDamage(damage, owner);
+                    hitPlayer.RpcTakeDamage(damage, owner);
                     StartCoroutine(SendDamage());
                 }
             }
         }
     }
 
-    [Client]
     IEnumerator SendDamage()
     {
         isWaiting = true;

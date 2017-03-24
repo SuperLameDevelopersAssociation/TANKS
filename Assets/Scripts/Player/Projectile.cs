@@ -5,10 +5,6 @@ using System.Collections;
 public class Projectile : NetworkBehaviour
 {
     public byte owner;
-    [HideInInspector]
-    public float speed = 15;           //Store speed for projectile
-    [HideInInspector, SyncVar]
-    public Vector3 direction;       //Store the direction
 
     [HideInInspector]
     public int damage;
@@ -26,11 +22,6 @@ public class Projectile : NetworkBehaviour
             StartCoroutine(DestroyBullet(3));
     }
 
-    //void Update()
-    //{
-    //    CmdMoveProjectile();
-    //}
-
     [Server]
     public void OnTriggerEnter(Collider other)
     {
@@ -39,16 +30,10 @@ public class Projectile : NetworkBehaviour
             Health hitPlayer = other.gameObject.GetComponent<Health>();     //Reference the players movement script
             if (hitPlayer.owner != owner)   //Checks to see if the player hit is an enemy and not yourself
             {
-                hitPlayer.TakeDamage(damage, owner);
+                hitPlayer.RpcTakeDamage(damage, owner);
                 StartCoroutine(DestroyBullet(0));
             }
         }
-    }
-
-    [Command]
-    void CmdMoveProjectile()
-    {
-        transform.Translate(direction * speed * Time.deltaTime, Space.World);   //Move the projectile
     }
 
     IEnumerator DestroyBullet(float waitTime)

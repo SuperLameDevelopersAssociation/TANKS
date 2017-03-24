@@ -17,24 +17,27 @@ public class NetworkedObjectPooling : MonoBehaviour {
     {
         assetId = m_Prefab.GetComponent<NetworkIdentity>().assetId;
         m_Pool = new GameObject[m_ObjectPoolSize];
+
+        //Creating the pool
         for (int i = 0; i < m_ObjectPoolSize; ++i)
         {
             m_Pool[i] = (GameObject)Instantiate(m_Prefab, Vector3.zero, Quaternion.identity);
             m_Pool[i].name = "PoolObject" + i;
+            m_Pool[i].transform.SetParent(transform);
             m_Pool[i].SetActive(false);
         }
 
         ClientScene.RegisterSpawnHandler(assetId, SpawnObject, UnSpawnObject);
     }
 
-    public GameObject GetFromPool(Vector3 position, Quaternion rotation)
+    //Grabs an object from the pool and sets its position and rotation
+    public GameObject GetFromPool(Vector3 position)
     {
         foreach (var obj in m_Pool)
         {
             if (!obj.activeInHierarchy)
             {
                 obj.transform.position = position;
-                obj.transform.rotation = rotation;
                 obj.SetActive(true);
                 return obj;
             }
@@ -45,7 +48,7 @@ public class NetworkedObjectPooling : MonoBehaviour {
 
     public GameObject SpawnObject(Vector3 position, NetworkHash128 assetId)
     {
-        return GetFromPool(position, Quaternion.identity);
+        return GetFromPool(position);
     }
 
     public void UnSpawnObject(GameObject spawned)

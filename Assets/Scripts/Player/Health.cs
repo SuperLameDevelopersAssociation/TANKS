@@ -36,7 +36,8 @@ public class Health : NetworkBehaviour
         //sManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
     }
 
-    public void TakeDamage(int damage, int playerID)
+    [ClientRpc]
+    public void RpcTakeDamage(int damage, int playerID)
     {
         damage -= (int)(damage * armorBonus);               //apply armor bonus
         currHealth -= damage;

@@ -13,13 +13,11 @@ public class PlayerMovement : NetworkBehaviour
     float accell;
     float steer;
 
+    Rigidbody rb;
+
     void Start()
     {
-        if (_camera == null)
-            _camera = transform.FindChild("Camera").gameObject;
-
-        if (isLocalPlayer)
-            _camera.SetActive(true);
+        rb = GetComponent<Rigidbody>();
 
         //if (wheels == null)
         //{
@@ -33,7 +31,6 @@ public class PlayerMovement : NetworkBehaviour
             
     }
 
-    [ClientCallback]
     void Update()
     {
         if (!isLocalPlayer)
@@ -45,11 +42,6 @@ public class PlayerMovement : NetworkBehaviour
         accell = Input.GetAxis("Vertical");
         steer = Input.GetAxis("Horizontal");
 
-        accell *= speed * Time.deltaTime;
-        steer *= rotationSpeed * Time.deltaTime;
-
-        CmdMove(accell, steer);
-
         //if (hasAnimator)
         //{
         //    if (accell != 0)
@@ -59,10 +51,25 @@ public class PlayerMovement : NetworkBehaviour
         //}
     }
 
-    [Command]
-    public void CmdMove(float accellVal, float steerVal)
+    void FixedUpdate()
     {
-        transform.Translate(0, 0, accellVal, Space.Self);
-        transform.Rotate(0, steerVal, 0);
+        if (!isLocalPlayer)
+            return;
+
+        Move();
+        Turn();
+    }
+
+    void Move()
+    {
+        Vector3 movement = transform.forward * accell * speed * Time.deltaTime;
+        rb.MovePosition(rb.position + movement);
+    }
+
+    void Turn()
+    {
+        float turn = steer * rotationSpeed * Time.deltaTime;
+        Quaternion inputRotation = Quaternion.Euler(0f, turn, 0f);
+        rb.MoveRotation(rb.rotation * inputRotation);
     }
 }
