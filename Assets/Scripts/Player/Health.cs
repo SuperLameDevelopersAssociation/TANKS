@@ -12,6 +12,9 @@ public class Health : TrueSyncBehaviour
     private int originalMaxHealth;
     private bool defenseBoost = false;
 
+    //[HideInInspector]
+    public bool inSpawn = true;
+
     PointsManager pManager;
     SpawnManager sManager;
 
@@ -38,8 +41,15 @@ public class Health : TrueSyncBehaviour
         sManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
     }
 
+    public override void OnSyncedUpdate()
+    {
+        TakeDamage(1, 1);
+    }
+
     public void TakeDamage(int damage, int playerID)
     {
+        if (inSpawn) return;
+
         damage -= (int)(damage * armorBonus);               //apply armor bonus
         currHealth -= damage;
 		healthBar.value = currHealth;
@@ -56,12 +66,24 @@ public class Health : TrueSyncBehaviour
 
         if (currHealth <= 0)
         {
+            int killedId = 0;
+            int killerId = 0;
             //tsTransform.position = new TSVector(TSRandom.Range(-50, 50), 0, TSRandom.Range(-50, 50)); //respawn randomly
             //tsTransform.rotation = TSQuaternion.identity;
-            sManager.Respawn(owner.Id);
-            //gameObject.GetComponent<TSRigidBody>().velocity = TSVector.zero;
-            int killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
-            int killerId = (playerID - 1);
+            if (owner.Id == 0) // you are offline then
+            {
+                TrueSyncManager.SyncedStartCoroutine(sManager.Respawn(1));
+                //killedId = (1); //both minus one to make it work with indexs
+                //killerId = (1);
+            }
+            else
+            {
+                TrueSyncManager.SyncedStartCoroutine(sManager.Respawn(owner.Id));
+                killedId = (this.owner.Id - 1); //both minus one to make it work with indexs
+                killerId = (playerID - 1);
+            }
+               
+            
             currHealth = maxHealth;
             healthBar.value = currHealth;
             pManager.AwardPoints(killerId, killedId);
