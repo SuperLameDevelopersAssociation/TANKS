@@ -222,7 +222,6 @@ public class Shooting : NetworkBehaviour
     [Command]
     void CmdFireProjectile( Vector3 position, Vector3 direction, byte anOwner, float speed, int damage)
     {
-        Debug.LogError(objectPool);
         var obj = objectPool.GetFromPool(position);                             //Grab bullet from pool
 
         Projectile projectile = obj.GetComponent<Projectile>();                 //Set the projectile script

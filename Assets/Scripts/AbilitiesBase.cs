@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
-using TrueSync;
 
-public class AbilitiesBase : TrueSyncBehaviour
+public class AbilitiesBase : NetworkBehaviour
 {
-    [AddTracking, HideInInspector]
-    public FP cooldown;
+    [SerializeField]
+    float cooldown;
    
-    public FP Cooldown
+    public float Cooldown
     {
         get { return cooldown; }
         set { cooldown = value; }
     }
 
-    public virtual void ActivatePower(){}
+    [Command]
+    public virtual void CmdActivatePower(bool activate) { }
 }
