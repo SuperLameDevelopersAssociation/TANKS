@@ -170,7 +170,7 @@ public class Shooting : NetworkBehaviour
                 {
                     if (laserHeat >= 0)
                     {
-                        sustainedProjectile.SetActive(false);
+                        CmdFireSustained(false);
                         StartCoroutine(Cooling());
                         sfx.StopSustainedSFX();
                     }
@@ -191,7 +191,6 @@ public class Shooting : NetworkBehaviour
     [Client]
     void CallReload()
     {
-        Debug.LogError("reloading");
         if (!isReloading)
         {
             isReloading = true;
@@ -246,8 +245,8 @@ public class Shooting : NetworkBehaviour
 
     void FireSustained()
     {
-        int _myDamage = (int)(damage * damageMulitplier);
-        CmdFireSustained(_myDamage);
+        sustained.damage = (int)(damage * damageMulitplier);
+        CmdFireSustained(true);
 
         if (!sustainedProjectile.activeInHierarchy)
             sfx.PlaySustainedSFX(currentWeapon.ToString());
@@ -259,16 +258,21 @@ public class Shooting : NetworkBehaviour
     }
 
     [Command]
-    void CmdFireSustained(int damage)
-    {        
-        sustainedProjectile.SetActive(true);
-        sustained.damage = damage;
+    void CmdFireSustained(bool showSustained)
+    {
+        RpcShowSustained(showSustained);                
+    }
+
+    [ClientRpc]
+    void RpcShowSustained(bool isActive)
+    {
+        sustainedProjectile.SetActive(isActive);
     }
 
     IEnumerator Overheated()
     {
         overheated = true;
-        sustainedProjectile.SetActive(false);
+        CmdFireSustained(false);
         sfx.StopSustainedSFX();
 
         for (float i = laserHeat; i > 0; i--)
