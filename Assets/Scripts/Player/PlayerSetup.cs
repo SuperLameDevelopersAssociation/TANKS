@@ -7,7 +7,10 @@ public class PlayerSetup : NetworkBehaviour
     [SerializeField]
     Behaviour[] componentsToDisable;
     //[HideInInspector]
+    [SyncVar]
     public byte ID;
+    [HideInInspector]
+    public Transform spawnPoint;
 
     void Start()
     {
@@ -21,16 +24,10 @@ public class PlayerSetup : NetworkBehaviour
         }
         else
         {
-            gameObject.name = "LocalPlayer";
+            gameObject.name = "LocalPlayer";            
         }
-    }
 
-    [ClientRpc]
-    public void RpcSetID(byte myID)
-    {
-        Debug.LogError("Set ID: " + myID);
-        ID = myID;
-        GetComponent<Health>().ID = myID;
-        GetComponent<Shooting>().ID = myID;
+        GetComponent<Health>().ID = ID;
+        GetComponent<Shooting>().ID = ID;
     }
 }

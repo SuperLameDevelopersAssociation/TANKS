@@ -14,7 +14,6 @@ public class Health : NetworkBehaviour
     private bool defenseBoost = false;
 
     PointsManager pManager;
-    SpawnManager sManager;
 
 	public Slider healthBar;
 
@@ -23,7 +22,7 @@ public class Health : NetworkBehaviour
 
     float armorBonus;
 
-	IEnumerator Start()
+	void Start()
 	{        
         healthBar.maxValue = maxHealth;
 		healthBar.value = 0;
@@ -31,10 +30,6 @@ public class Health : NetworkBehaviour
         SetArmor();
         currHealth = maxHealth;
 		SetHealthBar();
-        yield return new WaitForSeconds(1);
-        //pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
-        sManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
-        Debug.LogError("Player " + gameObject.name + " ID " + ID);
     }
 
     [ClientRpc]
@@ -55,13 +50,22 @@ public class Health : NetworkBehaviour
 
         if (currHealth <= 0)
         {
-            //sManager.CmdRespawn(ID);
+            StartCoroutine(Respawn());
             //int killedId = (this.owner - 1); //both minus one to make it work with indexs
-            //int killerId = (playerID - 1);
-            currHealth = maxHealth;
-            SetHealthBar();
+            //int killerId = (playerID - 1);            
             //pManager.CmdAwardPoints(killerId, killedId);
         }
+    }
+
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(GameManager.instance.respawnTime);
+        Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
+        transform.position = _spawnPoint.position;
+        transform.rotation = _spawnPoint.rotation;
+
+        currHealth = maxHealth;
+        SetHealthBar();
     }
     
     //Sets the resistance given by armor and lowers speed according to the armor level

@@ -332,6 +332,13 @@ namespace Prototype.NetworkLobby
             if (_lobbyHooks)
                 _lobbyHooks.OnLobbyServerSceneLoadedForPlayer(this, lobbyPlayer, gamePlayer);
 
+            LobbyPlayer lp = lobbyPlayer.GetComponent<LobbyPlayer>();
+
+            if(lp != null)
+            {
+                GameManager.RegisterPlayer(lp.slot, gamePlayer);
+            }
+
             return true;
         }
 
