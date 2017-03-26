@@ -33,7 +33,7 @@ public class Health : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void RpcTakeDamage(int damage, int playerID)
+    public void RpcTakeDamage(int damage, byte murdererID)
     {
         damage -= (int)(damage * armorBonus);               //apply armor bonus
         currHealth -= damage;
@@ -52,8 +52,10 @@ public class Health : NetworkBehaviour
         {
             StartCoroutine(Respawn());
             //int killedId = (this.owner - 1); //both minus one to make it work with indexs
-            //int killerId = (playerID - 1);            
-            //pManager.CmdAwardPoints(killerId, killedId);
+            //int killerId = (playerID - 1);
+            print("IN murderer: " + murdererID);
+            print("IN ID: " + ID);
+            GameManager.instance.AwardPoints(murdererID, ID);
         }
     }
 
