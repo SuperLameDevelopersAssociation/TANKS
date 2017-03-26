@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
-using TrueSync;
 
-//christopher koester
-public class PowerUpManagerScript : TrueSyncBehaviour
+public class PowerUpManagerScript : NetworkBehaviour
 {
     public List<Transform> spawnLocations = new List<Transform>();
     [Tooltip("The amount of time between powerups")]
@@ -13,33 +12,27 @@ public class PowerUpManagerScript : TrueSyncBehaviour
     public GameObject[] prefabs;
     GameObject powerUp; //the curent spawned power up
 
-    public override void OnSyncedStart()
-    {
-       //prefabs = (Resources.LoadAll("PowerUps")); //loading all prefabs from the resources/powerups folder
-    }
-
     //Update is called once per frame
-    public override void OnSyncedUpdate()
+    void Update()
     {
         if (canSpawn && GameObject.FindWithTag("Powerup") == null)
         {
-            TrueSyncManager.SyncedStartCoroutine(Respawn());
+            Invoke("CmdPickupRespawn", respawnTime);
         }
     }
     //waiting to respawn an item (if no other item exists)
-    IEnumerator Respawn()
+    [Command]
+    void CmdPickupRespawn()
     {//this function should be called each time after a player picks up a powerup
         canSpawn = false;
         //Iterate through the recources folder and choose from a random powerup
-        powerUp = prefabs[TSRandom.Range(0, prefabs.Length)];
+        powerUp = prefabs[Random.Range(0, prefabs.Length)];
         // since it is checking if this exists on update, best to be defensive and make sure it is here
         powerUp.tag.Equals("Powerup"); 
         //randomizing the spawn location for the powerup
-        Vector3 newPosition = spawnLocations[TSRandom.Range(0, spawnLocations.Count)].position;
-        yield return respawnTime;
+        Vector3 newPosition = spawnLocations[Random.Range(0, spawnLocations.Count)].position;
         //spawning the powerup
-        TrueSyncManager.SyncedInstantiate(powerUp, newPosition.ToTSVector(), TSQuaternion.identity);
-        
+        NetworkManager.Instantiate(powerUp, newPosition, Quaternion.identity);        
         //setting the boolean, canSpawn, to true
         canSpawn = true;
     }

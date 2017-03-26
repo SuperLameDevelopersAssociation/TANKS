@@ -5,7 +5,7 @@ using System.Collections;
 
 public class Health : NetworkBehaviour
 {
-    public byte owner;
+    public byte ID;
     public int maxHealth;
     [SyncVar]
     public int currHealth;
@@ -23,17 +23,18 @@ public class Health : NetworkBehaviour
 
     float armorBonus;
 
-	void Start()
-	{
+	IEnumerator Start()
+	{        
         healthBar.maxValue = maxHealth;
-		healthBar.value = maxHealth;
+		healthBar.value = 0;
         originalMaxHealth = maxHealth;
         SetArmor();
         currHealth = maxHealth;
 		SetHealthBar();
-        owner = (byte)GetComponent<NetworkIdentity>().netId.Value;
+        yield return new WaitForSeconds(1);
         //pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
-        //sManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
+        sManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
+        Debug.LogError("Player " + gameObject.name + " ID " + ID);
     }
 
     [ClientRpc]
@@ -41,7 +42,7 @@ public class Health : NetworkBehaviour
     {
         damage -= (int)(damage * armorBonus);               //apply armor bonus
         currHealth -= damage;
-		healthBar.value = currHealth;
+        SetHealthBar();
 
         if (defenseBoost)
         {                                 // Check if the defense boost is depleted.
@@ -54,12 +55,12 @@ public class Health : NetworkBehaviour
 
         if (currHealth <= 0)
         {
-            //sManager.Respawn(owner.Id);
+            //sManager.CmdRespawn(ID);
             //int killedId = (this.owner - 1); //both minus one to make it work with indexs
             //int killerId = (playerID - 1);
             currHealth = maxHealth;
-            healthBar.value = currHealth;
-            //pManager.AwardPoints(killerId, killedId);
+            SetHealthBar();
+            //pManager.CmdAwardPoints(killerId, killedId);
         }
     }
     
@@ -70,12 +71,13 @@ public class Health : NetworkBehaviour
         GetComponent<PlayerMovement>().speed -= Mathf.CeilToInt(GetComponent<PlayerMovement>().speed * armorBonus);//Ceiling(GetComponent<PlayerMovement>().speed * armorBonus);
     }
 
-    public bool isHealthFull()
+    public bool IsHealthFull()
     {
         return currHealth == maxHealth;
     }
 
-    public void AddHealth(int extraHealth)
+    [ClientRpc]
+    public void RpcAddHealth(int extraHealth)
     {
         currHealth += extraHealth;
 
@@ -87,6 +89,7 @@ public class Health : NetworkBehaviour
         SetHealthBar();
     }
 
+    [Client]
 	public void SetHealthBar()
 	{
 		healthBar.value = currHealth;
@@ -97,7 +100,8 @@ public class Health : NetworkBehaviour
     //    GUI.Label(new Rect(10, 100 + 30 * owner.Id, 300, 30), "player: " + owner.Id + ", health: " + currHealth);
     //}
 
-    public void DefenseBoost(int _maxHealth)
+    [ClientRpc]
+    public void RpcDefenseBoost(int _maxHealth)
     {
         if (maxHealth <= originalMaxHealth)
         {

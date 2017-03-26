@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
-using TrueSync;
+using UnityEngine.Networking;
 
-public class DamageBoost : MonoBehaviour {
+public class DamageBoost : NetworkBehaviour {
 
     public double mulitplier;
     public int duration;
 
     Shooting playerShooting;
 
+    [Server]
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")   //Checks if collided with player
@@ -19,7 +20,7 @@ public class DamageBoost : MonoBehaviour {
                 Debug.LogError("There is no shooting script on " + other.gameObject.name);
             else
             {
-                //TrueSyncManager.SyncedStartCoroutine(playerShooting.CmdGiveDamageBoost(mulitplier, duration));
+                playerShooting.RpcGiveDamageBoost(mulitplier, duration);
                 Destroy(gameObject);
             }
         }

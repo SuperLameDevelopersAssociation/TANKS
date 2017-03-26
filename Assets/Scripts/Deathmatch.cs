@@ -2,9 +2,9 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using TrueSync;
+using UnityEngine.Networking;
 
-public class Deathmatch : TrueSyncBehaviour
+public class Deathmatch : NetworkBehaviour
 {
 	public Text matchTime;
 	public int matchTimeInMinutes;
@@ -14,22 +14,20 @@ public class Deathmatch : TrueSyncBehaviour
 	[HideInInspector]
 	public bool matchEnding;
 	
-	FP minutes = 5;
-	FP seconds = 0;
+	float minutes = 5;
+	float seconds = 0;
 	PointsManager pointsManager;
 
+    [Server]
     void Start()
     {
         pointsManager = GameObject.Find("GameManager").GetComponent<PointsManager>();
         pointsManager.deathmatchActive = true;
-    }
-
-	public override void OnSyncedStart()
-	{
         minutes = matchTimeInMinutes;
     }
 
-    public override void OnSyncedUpdate()
+    [Server]
+    void Update()
 	{
 		if (seconds <= 0) 
 		{
@@ -38,19 +36,26 @@ public class Deathmatch : TrueSyncBehaviour
 		} 
 		else if ((int)seconds >= 0) 
 		{
-			seconds -= TrueSyncManager.DeltaTime;
+			seconds -= Time.deltaTime;
 		}
 
 		if (minutes <= 0 && seconds <= 0) 
 		{
-            TrueSyncManager.SyncedStartCoroutine(MatchEnding ());
+            RpcEndMatch ();
 		}
 
-        if(!matchEnding)
-		    matchTime.text = string.Format("{0:#00}:{1:00}", minutes, (int)seconds);
+        RpcUpdateTimerText();
 	}
 
-	public IEnumerator MatchEnding()
+    [ClientRpc]
+    void RpcUpdateTimerText()
+    {
+        if (!matchEnding)
+            matchTime.text = string.Format("{0:#00}:{1:00}", minutes, (int)seconds);
+    }
+
+    [ClientRpc]
+	public void RpcEndMatch()
 	{
 		if (!matchEnding) 
 		{
@@ -62,8 +67,12 @@ public class Deathmatch : TrueSyncBehaviour
             else
                 matchTime.text = "Tie!";
 
-            yield return matchEndingTime;
-			SceneManager.LoadScene ("GameOver");
+            Invoke("EndGame", matchEndingTime);
 		}
-	}    
+	}
+
+    void EndGame()
+    {
+        SceneManager.LoadScene("GameOver");
+    }
 }

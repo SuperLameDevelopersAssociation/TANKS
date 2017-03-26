@@ -4,7 +4,6 @@ using UnityEngine.Networking;
 
 public class PlayerMovement : NetworkBehaviour
 {
-    public GameObject _camera;
     public int speed = 10;
     public int rotationSpeed = 150;
     public Animator wheels;

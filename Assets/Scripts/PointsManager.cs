@@ -1,14 +1,12 @@
 ﻿using UnityEngine.UI;
 using UnityEngine;
-using System.Collections;
-using TrueSync;
+using System.Collections.Generic;
+using UnityEngine.Networking;
 
-public class PointsManager : TrueSyncBehaviour 
+public class PointsManager : NetworkBehaviour 
 {
-    [AddTracking]
-    byte[] kills;
-    [AddTracking]
-    byte[] deaths;
+    SyncListInt kills;
+    SyncListInt deaths;
 
     public Text output;
 	[HideInInspector]
@@ -18,56 +16,57 @@ public class PointsManager : TrueSyncBehaviour
 	int killAmount;
     int playerIndex;
 
+    [Server]
 	void Start()
 	{
         if (deathmatchActive)
         {
             deathmatch = GameObject.FindGameObjectWithTag("DeathMatch").GetComponent<Deathmatch>();
         }
+
+        for(int i = 0; i < NetworkManager.singleton.numPlayers; i++)
+        kills.Add(0);
+        deaths.Add(0);
+
+        RpcUpdateText();
     }
 
-    public override void OnSyncedStart()
-    {
-        kills = new byte[numberOfPlayers];
-        deaths = new byte[numberOfPlayers];
-        
-        UpdateText();
-    }
-
-    public void AwardPoints(int indexKiller, int indexKilled)
+    [Command]
+    public void CmdAwardPoints(int indexKiller, int indexKilled)
     {
         kills[indexKiller]++;
         deaths[indexKilled]++;
-        UpdateText();
+        RpcUpdateText();
 
 		if (deathmatchActive) 
 		{
 			if (kills [indexKiller] >= deathmatch.killsToWin) 
 			{
-				TrueSyncManager.SyncedStartCoroutine (deathmatch.MatchEnding ());
+				deathmatch.RpcEndMatch ();
 			}
 		}
     }
 
-    public void UpdateText()
+    [ClientRpc]
+    public void RpcUpdateText()
     {
         output.text = "";
-        for (int index = 0; index < numberOfPlayers; index++)
+        for (int index = 0; index < NetworkManager.singleton.numPlayers; index++)
         {
             output.text += "Player: " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";
         }
     }
 
+    [Server]
     public int PlayerThatWon()
     {
-        for (int i = 0; i < kills.Length; i++)
+        for (int i = 0; i < kills.Count; i++)
         {
             int lastAmt = kills[i];
             if (lastAmt > killAmount)
             {
                 playerIndex = i;
                 killAmount = lastAmt;
-                print("Kill Amt: " + killAmount);
             }
             else if (lastAmt == killAmount)
             {

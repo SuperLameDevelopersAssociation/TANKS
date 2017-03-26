@@ -1,33 +1,72 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
-public class SpawnManager : MonoBehaviour
+public class SpawnManager : NetworkBehaviour
 {
-    [HideInInspector]
-    public List<GameObject> players;
+    //[HideInInspector]
+    public SyncList<GameObject> players;
+    public List<GameObject> _players;
     public List<GameObject> spawnPoints;
+    bool spawned;
 
-    // Use this for initialization
-    void Start()
+    void Update()
     {
-        foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player"))
+        if (isServer)
         {
-            players.Add(player);
+            if (!spawned)
+            {
+                if (_players.Count < NetworkManager.singleton.numPlayers)
+                {
+                    RpcPopulatePlayerList();
+                    CmdPopulatePlayerList();
+                    _players = GameObject.FindGameObjectsWithTag("Player").ToList();
+                }
+                else if (_players.Count == NetworkManager.singleton.numPlayers)
+                {
+                    spawned = true;
+                    for (int i = 0; i < _players.Count; i++)
+                        players.Add(_players[i]);
+                    CmdSpawnPlayers();
+                }
+            }
         }
-
-        SpawnPlayers();
     }
 
-    void SpawnPlayers()
+    [ClientRpc]
+    void RpcPopulatePlayerList()
+    {
+        _players = GameObject.FindGameObjectsWithTag("Player").ToList();
+    }
+
+    [Command]
+    void CmdPopulatePlayerList()
+    {
+        _players = GameObject.FindGameObjectsWithTag("Player").ToList();
+    }
+
+    [Command]
+    void CmdSpawnPlayers()
     {
         for (byte i = 1; i <= players.Count; i++)
         {
-            Respawn(i);
+            players[i - 1].GetComponent<PlayerSetup>().RpcSetID(i);
+            RpcRespawn(i);
         }
     }
 
-    public void Respawn(byte playerID)
+    //[Command]
+    //void RpcSetPlayerID()
+    //{
+    //    Debug.LogError("Set id");
+    //    player.GetComponent<PlayerSetup>().RpcSetID(ID);
+    //    //Debug.LogError("Player: " + player.name + " ID: " + ID);
+    //}
+
+    [ClientRpc]
+    public void RpcRespawn(byte playerID)
     {
         Vector3 spawnPos = spawnPoints[playerID - 1].transform.position;
         players[playerID - 1].transform.position = new Vector3(spawnPos.x, 0, spawnPos.z);

@@ -15,7 +15,7 @@ public class CloakingAbility : AbilitiesBase
 
     public KeyCode activationKey;                                   //key to activate the power
 
-    void Awake()
+    void Start()
     {
         originalChildrenRender = GetComponentsInChildren<Renderer>();
         mats = new Material[originalChildrenRender.Length];         //Set length of array

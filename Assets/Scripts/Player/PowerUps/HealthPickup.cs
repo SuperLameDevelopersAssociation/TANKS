@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
-using TrueSync;
+using UnityEngine.Networking;
 
-public class HealthPickup : MonoBehaviour 
+public class HealthPickup : NetworkBehaviour 
 {
     public int gainedHealth = 15;
 
 	Health playerHealth;
 
+    [Server]
 	public void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.tag == "Player")   //Checks if collided with player
@@ -16,10 +17,10 @@ public class HealthPickup : MonoBehaviour
 
 			if (playerHealth == null) //checks to see if the health script is attached
 				Debug.LogError("There is no health script on " + other.gameObject.name);
-			else if (!playerHealth.isHealthFull()) //don't want to pick up the health if health if full
+			else if (!playerHealth.IsHealthFull()) //don't want to pick up the health if health if full
 			{
-                playerHealth.AddHealth(gainedHealth);
-				Destroy(this.gameObject);
+                playerHealth.RpcAddHealth(gainedHealth);
+				Destroy(gameObject);
 			}
 		}
 	}

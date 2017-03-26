@@ -1,13 +1,11 @@
 ﻿using UnityEngine;
-using TrueSync;
-using System.Collections;
 
-public class BasicLoopingSFX : TrueSyncBehaviour {
+public class BasicLoopingSFX : MonoBehaviour {
 
     public AudioSource source;
     public AudioClip sfx;
 
-    public override void OnSyncedStart()
+    void Start()
     {
         if (source == null)
         {
@@ -23,10 +21,7 @@ public class BasicLoopingSFX : TrueSyncBehaviour {
         {
             source.loop = true;
             source.clip = sfx;
-
             source.Play();
         }
     }
-
-
 }

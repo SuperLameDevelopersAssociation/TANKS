@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Shooting : NetworkBehaviour
 {
-    public byte owner;
+    public byte ID;
     
     public float reloadTime = 2f;
 
@@ -55,6 +55,7 @@ public class Shooting : NetworkBehaviour
     bool cooling;
     bool isHoldingTrigger;                      //Fire1 is pressed
     bool isWaiting;
+    bool damageBoosted;
 
     public CurrentWeapon currentWeapon;
 
@@ -69,7 +70,7 @@ public class Shooting : NetworkBehaviour
 
 	void Start() 
 	{
-        owner = (byte)GetComponent<NetworkIdentity>().netId.Value;
+        //ID = (byte)GetComponent<NetworkIdentity>().netId.Value;
         objectPool = GameObject.Find("PoolManager").GetComponent<NetworkedObjectPooling>();
         CmdInitOnServer();
         sfx = gameObject.GetComponent<ShootingSFX>();
@@ -93,7 +94,7 @@ public class Shooting : NetworkBehaviour
         {
             sustained = sustainedProjectile.GetComponent<Sustained>();
             sustained.damage = damage;
-            sustained.owner = owner;
+            sustained.ID = ID;
         }
         else
         {
@@ -118,7 +119,7 @@ public class Shooting : NetworkBehaviour
         objectPool = GameObject.Find("PoolManager").GetComponent<NetworkedObjectPooling>();
         sustained = sustainedProjectile.GetComponent<Sustained>();
         sustained.damage = damage;
-        sustained.owner = owner;
+        sustained.ID = ID;
     }
 
     void Update()
@@ -211,7 +212,7 @@ public class Shooting : NetworkBehaviour
         muzzleFlash.SetActive(true);
         sfx.PlayProjectileSFX();
         int _damage = (int)(damage * damageMulitplier);
-        CmdFireProjectile(gunBarrel.transform.position, gunBarrel.transform.up, owner, projectileSpeed, _damage);
+        CmdFireProjectile(gunBarrel.transform.position, gunBarrel.transform.up, ID, projectileSpeed, _damage);
         StartCoroutine(Wait(_fireFreq));
         muzzleFlash.SetActive(false);
         isShooting = false;
@@ -220,12 +221,12 @@ public class Shooting : NetworkBehaviour
     }
 
     [Command]
-    void CmdFireProjectile( Vector3 position, Vector3 direction, byte anOwner, float speed, int damage)
+    void CmdFireProjectile( Vector3 position, Vector3 direction, byte ownerID, float speed, int damage)
     {
         var obj = objectPool.GetFromPool(position);                             //Grab bullet from pool
 
         Projectile projectile = obj.GetComponent<Projectile>();                 //Set the projectile script
-        projectile.owner = anOwner;                                             //Assigning the owner
+        projectile.ID = ownerID;                                             //Assigning the owner
         projectile.damage = damage;                                             //assigning the damage
         obj.GetComponent<Rigidbody>().velocity = direction * speed;
 
@@ -311,11 +312,21 @@ public class Shooting : NetworkBehaviour
     }
 
     //===============Give Damage Boost (Called By DamageBoost)===========
-    //[Command]
-    //public IEnumerator CmdGiveDamageBoost(double multiplier,  int duration)
-    //{
-    //    damageMulitplier = multiplier;
-    //    yield return new WaitForSeconds(duration);
-    //    damageMulitplier = 1;
-    //}
+    [ClientRpc]
+    public void RpcGiveDamageBoost(double multiplier, int duration)
+    {
+        damageBoosted = true;
+        damageMulitplier = multiplier;
+        if (damageBoosted)
+        {
+            Invoke("CmdEndDamageBoost", duration);
+            damageBoosted = false;
+        }
+    }
+
+    [Command]
+    void CmdEndDamageBoost()
+    {
+        RpcGiveDamageBoost(1, 0);
+    }
 }
