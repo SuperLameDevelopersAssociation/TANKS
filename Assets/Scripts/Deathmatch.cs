@@ -6,7 +6,7 @@ using TrueSync;
 
 public class Deathmatch : TrueSyncBehaviour
 {
-	public Text matchTime;
+	public string matchTime;
 	public int matchTimeInMinutes;
 	public byte killsToWin;
 	public int matchEndingTime;
@@ -17,6 +17,11 @@ public class Deathmatch : TrueSyncBehaviour
 	FP minutes = 5;
 	FP seconds = 0;
 	PointsManager pointsManager;
+
+    public string MatchTime {
+        get { return matchTime; }
+        set { value = matchTime; }
+    }
 
     void Start()
     {
@@ -46,8 +51,11 @@ public class Deathmatch : TrueSyncBehaviour
             TrueSyncManager.SyncedStartCoroutine(MatchEnding ());
 		}
 
-        if(!matchEnding)
-		    matchTime.text = string.Format("{0:#00}:{1:00}", minutes, (int)seconds);
+        if (!matchEnding)
+        {
+            matchTime = string.Format("{0:#00}:{1:00}", minutes, (int)seconds);
+        }
+            
 	}
 
 	public IEnumerator MatchEnding()
@@ -58,9 +66,9 @@ public class Deathmatch : TrueSyncBehaviour
 
 			int player = pointsManager.PlayerThatWon ();
             if (player != 100)
-                matchTime.text = "Player " + (player + 1) + " Won!";
+                matchTime = "Player " + (player + 1) + " Won!";
             else
-                matchTime.text = "Tie!";
+                matchTime = "Tie!";
 
             yield return matchEndingTime;
 			SceneManager.LoadScene ("GameOver");
