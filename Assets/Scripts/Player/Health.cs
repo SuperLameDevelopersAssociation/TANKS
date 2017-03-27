@@ -21,12 +21,21 @@ public class Health : TrueSyncBehaviour
 
     float armorBonus;
 
+	DamageSFX damageSound;
+	Shooting currentWeapon;
+
 	void Start()
 	{
         healthBar.maxValue = maxHealth;
 		healthBar.value = maxHealth;
         originalMaxHealth = maxHealth;
         SetArmor();
+		damageSound.gameObject.GetComponent<DamageSFX>();
+		currentWeapon.gameObject.GetComponent<Shooting>();
+		currentWeapon 
+
+		if (damageSound == null)
+			Debug.LogError ("There is no DamageSFX script attached to " + gameObject.name);
 	}
 
     public override void OnSyncedStart()
@@ -41,6 +50,8 @@ public class Health : TrueSyncBehaviour
         damage -= (int)(damage * armorBonus);               //apply armor bonus
         currHealth -= damage;
 		healthBar.value = currHealth;
+
+		damageSound.PlayDamageSFX ();
 
         if (defenseBoost)
         {                                 // Check if the defense boost is depleted.
