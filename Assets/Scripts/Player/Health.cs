@@ -32,7 +32,6 @@ public class Health : TrueSyncBehaviour
         SetArmor();
 		damageSound.gameObject.GetComponent<DamageSFX>();
 		currentWeapon.gameObject.GetComponent<Shooting>();
-		currentWeapon 
 
 		if (damageSound == null)
 			Debug.LogError ("There is no DamageSFX script attached to " + gameObject.name);
@@ -51,7 +50,7 @@ public class Health : TrueSyncBehaviour
         currHealth -= damage;
 		healthBar.value = currHealth;
 
-		damageSound.PlayDamageSFX ();
+		damageSound.PlayDamageSFX (currentWeapon.ToString());
 
         if (defenseBoost)
         {                                 // Check if the defense boost is depleted.
@@ -74,6 +73,8 @@ public class Health : TrueSyncBehaviour
             healthBar.value = currHealth;
             pManager.AwardPoints(killerId, killedId);
         }
+
+		damageSound.StopDamageSFX();
     }
     
     //Sets the resistance given by armor and lowers speed according to the armor level
