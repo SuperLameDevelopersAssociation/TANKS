@@ -12,7 +12,9 @@ public class DamageSFX : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
-		if (mainSound == null)
+        mainSound.loop = false;
+
+        if (mainSound == null)
 			Debug.LogError ("there is no main audio source attached to DamageSFX");
 		else
 			mainSound.playOnAwake = false;
@@ -22,15 +24,15 @@ public class DamageSFX : MonoBehaviour
 	{
 		if (type == "Projectile") {
 			mainSound.clip = bullet;
-			mainSound.loop = false;
+			//mainSound.loop = false;
 			mainSound.Play ();
 		} else if (type == "Laser") {
 			mainSound.clip = burn;
-			mainSound.loop = true;
+			//mainSound.loop = true;
 			mainSound.Play ();
 		} else if (type == "Flamethrower") {
 			mainSound.clip = sizzle;
-			mainSound.loop = true;
+			//mainSound.loop = true;
 			mainSound.Play ();
 		} else
 			Debug.LogError ("There are no sfx clips attatched");

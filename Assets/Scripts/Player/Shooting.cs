@@ -95,6 +95,7 @@ public class Shooting : TrueSyncBehaviour
         {
             sustained = sustainedProjectile.GetComponent<Sustained>();
             sustained.damage = damage;
+            sustained.owner = owner;
         }
         else
         {
