@@ -7,7 +7,7 @@ public class PlayerMovement : TrueSyncBehaviour
     public GameObject _camera;
     public int speed = 10;
     public int rotationSpeed = 150;
-    public Animator wheels;
+    Animator wheels;
 
     private int speedStore;
     private int rotationStore;
@@ -26,15 +26,12 @@ public class PlayerMovement : TrueSyncBehaviour
         if (TrueSyncManager.LocalPlayer == owner)
             _camera.SetActive(true);
 
+        wheels = GetComponent<Animator>();
+
         if (wheels == null)
-        {
-            Debug.Log(gameObject.name + "does not have a wheel animator");
             hasAnimator = false;
-        }
         else
-        {
             hasAnimator = true;
-        }
 
         speedStore = speed;
         rotationStore = rotationSpeed;
@@ -58,16 +55,15 @@ public class PlayerMovement : TrueSyncBehaviour
         accell *= speed * TrueSyncManager.DeltaTime;
         steer *= rotationSpeed * TrueSyncManager.DeltaTime;
 
-        tsTransform.Translate(0, 0, accell, Space.Self);
-        tsTransform.Rotate(0, steer, 0);
-
         if (hasAnimator)
         {
-            if (accell != 0)
-                wheels.SetBool("IsMoving", true);
-            else
-                wheels.SetBool("IsMoving", false);
-        }
+            //getting the direction and speed of tank for the tread animations
+            wheels.SetFloat("velocity", (float)accell * (speed * 10));
+            wheels.SetFloat("rotation", (float)steer * (speed * 10));
+        }   
+
+        tsTransform.Translate(0, 0, accell, Space.Self);
+        tsTransform.Rotate(0, steer, 0);
     }
 
     public void StopMovement()
