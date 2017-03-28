@@ -312,21 +312,14 @@ public class Shooting : NetworkBehaviour
     }
 
     //===============Give Damage Boost (Called By DamageBoost)===========
-    [ClientRpc]
-    public void RpcGiveDamageBoost(double multiplier, int duration)
+    public IEnumerator GiveDamageBoost(double multiplier, int duration)
     {
-        damageBoosted = true;
-        damageMulitplier = multiplier;
-        if (damageBoosted)
-        {
-            Invoke("CmdEndDamageBoost", duration);
-            damageBoosted = false;
-        }
-    }
 
-    [Command]
-    void CmdEndDamageBoost()
-    {
-        RpcGiveDamageBoost(1, 0);
+        print("DamageBoast started");
+        damageMulitplier = multiplier;
+        yield return new WaitForSeconds(duration);
+        damageMulitplier = 1;
+
+        print("DamageBoast over");
     }
 }

@@ -20,7 +20,7 @@ public class DamageBoost : NetworkBehaviour {
                 Debug.LogError("There is no shooting script on " + other.gameObject.name);
             else
             {
-                playerShooting.RpcGiveDamageBoost(mulitplier, duration);
+                StartCoroutine(playerShooting.GiveDamageBoost(mulitplier, duration));
                 Destroy(gameObject);
             }
         }
