@@ -39,9 +39,11 @@ public class Projectile : TrueSyncBehaviour
             if (hitPlayer.owner.Id != this.owner.Id)   //Checks to see if the player hit is an enemy and not yourself
             {
                 hitPlayer.TakeDamage(damage, this.owner.Id);
-                TrueSyncManager.SyncedStartCoroutine(DestroyBullet(0));
+                //TrueSyncManager.SyncedStartCoroutine(DestroyBullet(0));
             }
         }
+
+        gameObject.SetActive(false);
     }
 
     IEnumerator DestroyBullet(FP waitTime)
