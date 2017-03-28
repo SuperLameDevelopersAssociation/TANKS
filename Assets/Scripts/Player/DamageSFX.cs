@@ -25,11 +25,11 @@ public class DamageSFX : MonoBehaviour
 			mainSound.loop = false;
 			mainSound.Play ();
 		} else if (type == "Laser") {
-			mainSound.clip = sizzle;
+			mainSound.clip = burn;
 			mainSound.loop = true;
 			mainSound.Play ();
 		} else if (type == "Flamethrower") {
-			mainSound.clip = burn;
+			mainSound.clip = sizzle;
 			mainSound.loop = true;
 			mainSound.Play ();
 		} else
