@@ -62,11 +62,6 @@ public class Health : NetworkBehaviour
         {
             respawning = true;
             StartCoroutine(Respawn());
-            //int killedId = (this.owner - 1); //both minus one to make it work with indexs
-            //int killerId = (playerID - 1);
-            print("IN murderer: " + murdererID);
-            print("IN ID: " + ID);
-            Debug.LogError("Awarding Points");
             GameManager.instance.AwardPoints(murdererID, ID);
         }
     }
