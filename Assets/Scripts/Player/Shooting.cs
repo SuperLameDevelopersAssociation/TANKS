@@ -65,6 +65,31 @@ public class Shooting : TrueSyncBehaviour
 
     public int poolSize = 10;
 
+    void Awake()
+    {
+        if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
+        {
+            sustained = sustainedProjectile.GetComponent<Sustained>();
+            sustained.gameObject.SetActive(false);
+            sustained.damage = damage;
+            sustained.owner = owner;
+        }
+        else
+        {
+            turretWrangler = transform.FindChild("TurretWrangler").gameObject;
+            gunBarrel = turretWrangler.transform.FindChild("Projectile Control").FindChild("Box019").transform.FindChild("GunBarrel").gameObject;
+            muzzleFlash = turretWrangler.transform.FindChild("Projectile Control").transform.FindChild("Box019").FindChild("Gun 1 Projectile").FindChild("Muzzle Flash").gameObject;
+
+            if (muzzleFlash == null)
+                Debug.LogError("There is no muzzleFlash on " + gameObject.name);
+            else
+                muzzleFlash.SetActive(false);
+
+            ammo = magazineSize;
+            sustainedProjectile.SetActive(false);
+        }
+    }
+
 	void Start() 
 	{
         objectPool = GameObject.Find("PoolManager").GetComponent<ObjectPooling>();
@@ -84,33 +109,37 @@ public class Shooting : TrueSyncBehaviour
         }
 
         _fireFreq = fireFreq;
+        UpdateText();
     }
 
     public override void OnSyncedStart()
     {
         //Instantiate pool
         //parameters are gameobject bullet, int number of pooled objects
-        PoolManagerScript.instance.CreatePool(projectileType, poolSize);
-        if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
-        {
-            sustained = sustainedProjectile.GetComponent<Sustained>();
-            sustained.damage = damage;
-            sustained.owner = owner;
-        }
-        else
-        {
-            turretWrangler = transform.FindChild("TurretWrangler").gameObject;
-            gunBarrel = turretWrangler.transform.FindChild("Projectile Control").FindChild("Box019").transform.FindChild("GunBarrel").gameObject;
-            muzzleFlash = turretWrangler.transform.FindChild("Projectile Control").transform.FindChild("Box019").FindChild("Gun 1 Projectile").FindChild("Muzzle Flash").gameObject;
+        //PoolManagerScript.instance.CreatePool(projectileType, poolSize);
+        //if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
+        //{
+        //    sustained = sustainedProjectile.GetComponent<Sustained>();
+        //    sustained.gameObject.SetActive(false);
+        //    sustained.damage = damage;
+        //    sustained.owner = owner;
+        //    Debug.LogError("sustained owner: " + sustained.owner.Id);
+        //    Debug.LogError("shooting owner: " + owner.Id);
+        //}
+        //else
+        //{
+        //    turretWrangler = transform.FindChild("TurretWrangler").gameObject;
+        //    gunBarrel = turretWrangler.transform.FindChild("Projectile Control").FindChild("Box019").transform.FindChild("GunBarrel").gameObject;
+        //    muzzleFlash = turretWrangler.transform.FindChild("Projectile Control").transform.FindChild("Box019").FindChild("Gun 1 Projectile").FindChild("Muzzle Flash").gameObject;
 
-            if (muzzleFlash == null)
-                Debug.LogError("There is no muzzleFlash on " + gameObject.name);
-            else
-                muzzleFlash.SetActive(false);
+        //    if (muzzleFlash == null)
+        //        Debug.LogError("There is no muzzleFlash on " + gameObject.name);
+        //    else
+        //        muzzleFlash.SetActive(false);
 
-            ammo = magazineSize;
-            sustainedProjectile.SetActive(false);
-        }
+        //    ammo = magazineSize;
+        //    sustainedProjectile.SetActive(false);
+        //}
     }
     public override void OnSyncedInput()
     {
@@ -141,6 +170,7 @@ public class Shooting : TrueSyncBehaviour
                     if (reloadButton == 1) //check if reload is pressed
                     {
                         TrueSyncManager.SyncedStartCoroutine(Reload());
+                        UpdateText();
                     }
 
                     if (fire == 1)         //Check if fire was pressed
@@ -149,9 +179,13 @@ public class Shooting : TrueSyncBehaviour
                         {
                             isShooting = true;
                             ammo -= 1;    //Subtract ammo
+                            UpdateText();
                             TrueSyncManager.SyncedStartCoroutine(FireProjectile());
                             if (ammo <= 0)   //Check ammo, if zero reload
+                            {
                                 TrueSyncManager.SyncedStartCoroutine(Reload());
+                                UpdateText();
+                            }
                         }
                     }
                 }
@@ -281,7 +315,7 @@ public class Shooting : TrueSyncBehaviour
         }
     }
 
-    void OnGUI()
+    void UpdateText()
     {
         ammoText.text = " " + ammo + " / " + magazineSize;
     }

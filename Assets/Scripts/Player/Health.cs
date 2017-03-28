@@ -33,7 +33,7 @@ public class Health : TrueSyncBehaviour
 		damageSound = gameObject.GetComponent<DamageSFX>();
 		currentWeapon = gameObject.GetComponent<Shooting>();
 
-		if (damageSound == null)
+        if (damageSound == null)
 			Debug.LogError ("There is no DamageSFX script attached to " + gameObject.name);
 	}
 
