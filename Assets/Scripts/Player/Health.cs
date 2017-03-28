@@ -21,6 +21,7 @@ public class Health : NetworkBehaviour
     public int armorLevel;
 
     float armorBonus;
+    bool respawning;
 
 	void Start()
 	{        
@@ -30,6 +31,15 @@ public class Health : NetworkBehaviour
         SetArmor();
         currHealth = maxHealth;
 		SetHealthBar();
+        CmdSetHealth();
+    }
+
+    [Command]
+    void CmdSetHealth()
+    {
+        originalMaxHealth = maxHealth;
+        SetArmor();
+        currHealth = maxHealth;
     }
 
     [ClientRpc]
@@ -48,13 +58,15 @@ public class Health : NetworkBehaviour
             }
         }
 
-        if (currHealth <= 0)
+        if (currHealth <= 0 && !respawning)
         {
+            respawning = true;
             StartCoroutine(Respawn());
             //int killedId = (this.owner - 1); //both minus one to make it work with indexs
             //int killerId = (playerID - 1);
             print("IN murderer: " + murdererID);
             print("IN ID: " + ID);
+            Debug.LogError("Awarding Points");
             GameManager.instance.AwardPoints(murdererID, ID);
         }
     }
@@ -68,6 +80,7 @@ public class Health : NetworkBehaviour
 
         currHealth = maxHealth;
         SetHealthBar();
+        respawning = false;
     }
     
     //Sets the resistance given by armor and lowers speed according to the armor level
