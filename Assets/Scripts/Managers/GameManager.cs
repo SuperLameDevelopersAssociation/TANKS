@@ -140,7 +140,7 @@ public class GameManager : NetworkBehaviour
             else
                 matchTime.text = "Tie!";
 
-            //SceneManager.LoadScene("Lobby");
+            SceneManager.LoadScene(0);
         }
     }
 

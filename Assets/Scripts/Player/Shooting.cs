@@ -326,10 +326,8 @@ public class Shooting : NetworkBehaviour
     //===============Give Damage Boost (Called By DamageBoost)===========
     public IEnumerator GiveDamageBoost(float multiplier, int duration)
     {
-        Debug.LogError("DamageBoast started");
         damageMulitplier = multiplier;
         yield return new WaitForSeconds(duration);
         damageMulitplier = 1;
-        Debug.LogError("DamageBoast over");
     }
 }
