@@ -20,6 +20,7 @@ public class DefensePickup : NetworkBehaviour {
             else
             {
                 playerHealth.RpcDefenseBoost(defenseMaxHealth);
+                NetworkServer.UnSpawn(gameObject);
                 Destroy(gameObject);
             }
         }

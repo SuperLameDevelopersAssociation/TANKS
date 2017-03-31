@@ -20,7 +20,8 @@ public class HealthPickup : NetworkBehaviour
 			else if (!playerHealth.IsHealthFull()) //don't want to pick up the health if health if full
 			{
                 playerHealth.RpcAddHealth(gainedHealth);
-				Destroy(gameObject);
+                NetworkServer.UnSpawn(gameObject);
+                Destroy(gameObject);
 			}
 		}
 	}

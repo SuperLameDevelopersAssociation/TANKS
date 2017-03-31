@@ -24,18 +24,21 @@ public class PowerUpManagerScript : NetworkBehaviour
     }
 
     //waiting to respawn an item (if no other item exists)
-    [Command]
+    //[Command]
+    [Server]
     void CmdPickupRespawn()
-    {//this function should be called each time after a player picks up a powerup
+    {
+        //this function should be called each time after a player picks up a powerup
         //canSpawn = false;
         //Iterate through the recources folder and choose from a random powerup
         powerUp = prefabs[Random.Range(0, prefabs.Length)];
         // since it is checking if this exists on update, best to be defensive and make sure it is here
-        powerUp.tag.Equals("Powerup"); 
+        powerUp.tag = "Powerup";
         //randomizing the spawn location for the powerup
         Vector3 newPosition = spawnLocations[Random.Range(0, spawnLocations.Count)].position;
         //spawning the powerup
         currentPowerUp = NetworkManager.Instantiate(powerUp, newPosition, Quaternion.identity) as GameObject;
+        NetworkServer.Spawn(currentPowerUp);
         //setting the boolean, canSpawn, to true
         canSpawn = true;
     }

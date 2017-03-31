@@ -311,14 +311,20 @@ public class Shooting : NetworkBehaviour
         ammoText.text = " " + ammo + " / " + magazineSize;
     }
 
+    [Command]
+    public void CmdGiveDamageBoost(float multiplier, int duration)
+    {
+        RpcGiveDamageBoost(multiplier, duration);
+    }
+
     [ClientRpc]
-    public void RpcGiveDamageBoost(double multiplier, int duration)
+    public void RpcGiveDamageBoost(float multiplier, int duration)
     {
         StartCoroutine(GiveDamageBoost(multiplier, duration));
     }
 
     //===============Give Damage Boost (Called By DamageBoost)===========
-    public IEnumerator GiveDamageBoost(double multiplier, int duration)
+    public IEnumerator GiveDamageBoost(float multiplier, int duration)
     {
         Debug.LogError("DamageBoast started");
         damageMulitplier = multiplier;

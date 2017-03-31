@@ -22,6 +22,4 @@ public class StartMenuScript : MonoBehaviour
     {//quits the damn game
         Application.Quit();
     }
-
-
 }

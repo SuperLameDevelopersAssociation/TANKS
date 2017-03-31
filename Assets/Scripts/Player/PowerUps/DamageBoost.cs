@@ -4,12 +4,11 @@ using UnityEngine.Networking;
 
 public class DamageBoost : NetworkBehaviour {
 
-    public double mulitplier;
+    public float mulitplier;
     public int duration;
 
     Shooting playerShooting;
 
-    [Server]
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")   //Checks if collided with player
@@ -20,7 +19,8 @@ public class DamageBoost : NetworkBehaviour {
                 Debug.LogError("There is no shooting script on " + other.gameObject.name);
             else
             {
-                playerShooting.RpcGiveDamageBoost(mulitplier, duration);
+                playerShooting.CmdGiveDamageBoost(mulitplier, duration);
+                NetworkServer.UnSpawn(gameObject);
                 Destroy(gameObject);
             }
         }
