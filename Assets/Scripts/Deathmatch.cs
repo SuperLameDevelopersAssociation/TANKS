@@ -6,13 +6,14 @@ using TrueSync;
 
 public class Deathmatch : TrueSyncBehaviour
 {
-	public string matchTime;
 	public int matchTimeInMinutes;
 	public byte killsToWin;
 	public int matchEndingTime;
 
-	[HideInInspector]
-	public bool matchEnding;
+    [HideInInspector]
+    public string matchTime;
+    [HideInInspector]
+    public bool matchEnding;
 	
 	FP minutes = 5;
 	FP seconds = 0;
@@ -53,7 +54,7 @@ public class Deathmatch : TrueSyncBehaviour
 
         if (!matchEnding)
         {
-            matchTime = string.Format("{0:#00}:{1:00}", minutes, (int)seconds);
+            matchTime = string.Format("{0:0#}{1:0#}", minutes, (int)seconds);
         }
             
 	}
