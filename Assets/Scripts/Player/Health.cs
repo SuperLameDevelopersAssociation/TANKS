@@ -66,6 +66,12 @@ public class Health : NetworkBehaviour
         }
     }
 
+    [ClientRpc]
+    public void RpcHasDied()
+    {
+        StartCoroutine(Respawn());
+    }
+
     IEnumerator Respawn()
     {
         yield return new WaitForSeconds(GameManager.instance.respawnTime);
@@ -77,7 +83,7 @@ public class Health : NetworkBehaviour
         SetHealthBar();
         respawning = false;
     }
-    
+
     //Sets the resistance given by armor and lowers speed according to the armor level
     public void SetArmor()
     {
