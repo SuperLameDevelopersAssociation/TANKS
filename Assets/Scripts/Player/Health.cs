@@ -19,6 +19,7 @@ public class Health : TrueSyncBehaviour
     public bool inSpawn = true;
 
     public Text healthPercent;
+    public Image healthImage;
 
     PointsManager pManager;
     SpawnManager sManager;
@@ -43,6 +44,7 @@ public class Health : TrueSyncBehaviour
         currHealth = maxHealth;
         GetTextPercentHealth(healthPercent);
         SetHealthBar();
+        healthImage.color = GetHealthColor();
         pManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<PointsManager>();
         sManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<SpawnManager>();
     }
@@ -61,8 +63,7 @@ public class Health : TrueSyncBehaviour
 		healthBar.value = currHealth;
 
         GetTextPercentHealth(healthPercent);
-
-        //print("The Health is " + currHealth + ". The color is " + GetHealthColor());
+        healthImage.color = GetHealthColor();
 
         if (defenseBoost)
         {                                 // Check if the defense boost is depleted.
@@ -142,6 +143,7 @@ public class Health : TrueSyncBehaviour
         }
 
         SetHealthBar();
+        healthImage.color = GetHealthColor();
     }
 
 	public void SetHealthBar()

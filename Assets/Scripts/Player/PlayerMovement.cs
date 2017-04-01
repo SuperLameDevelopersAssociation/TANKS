@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using TrueSync;
 
@@ -7,6 +8,9 @@ public class PlayerMovement : TrueSyncBehaviour
     public GameObject _camera;
     public int speed = 10;
     public int rotationSpeed = 150;
+
+    public Text textSpeed;
+
     Animator wheels;
 
     private int speedStore;
@@ -64,6 +68,10 @@ public class PlayerMovement : TrueSyncBehaviour
 
         tsTransform.Translate(0, 0, accell, Space.Self);
         tsTransform.Rotate(0, steer, 0);
+
+        int conversion = (int)(accell * 62);
+
+        textSpeed.text = conversion + " km/h ";
     }
 
     public void StopMovement()
