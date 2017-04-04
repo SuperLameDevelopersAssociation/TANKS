@@ -36,22 +36,22 @@ public class SonicSpeedAbility : AbilitiesBase
     {
         byte abilityKeyPressed = TrueSyncInput.GetByte(6);
 
-        if (abilityKeyPressed == 1)              
+        if (abilityKeyPressed == 1 && _cooldown <= 0)              
             ActivatePower();
 
         if (_cooldown > 0)                                                          
             _cooldown -= TrueSyncManager.DeltaTime;
 
+        _duration = duration;
     }
 
     public override void ActivatePower()
     {
-        _duration = duration;
+        GetComponent<PlayerMovement>().speed *= 2;
         if (_duration > 0)                                                           //Subtract delta time from the overall time
         {
-            GetComponent<PlayerMovement>().speed *= 2;
             _duration -= TrueSyncManager.DeltaTime;
-        }  
+        }
         else if (_duration <= 0)
         {
             _cooldown = 5;                                                          //Reset the cooldown
