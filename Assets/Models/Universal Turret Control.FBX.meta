@@ -79,7 +79,7 @@ ModelImporter:
     4300022: Object008
     4300024: Cylinder026
     4300026: Box019
-    7400000: FullAnimation
+    7400000: Take 001
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -103,7 +103,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: FullAnimation
+      name: Take 001
       takeName: Take 001
       firstFrame: 0
       lastFrame: 100
@@ -113,7 +113,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

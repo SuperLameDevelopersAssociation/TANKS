@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using TrueSync;
 
 public class PlayerMovement : TrueSyncBehaviour
@@ -8,13 +9,15 @@ public class PlayerMovement : TrueSyncBehaviour
     public int speed = 10;
     public int rotationSpeed = 150;
     public Animator wheels;
+    public Renderer[] tracks;
+    public Material forwardMat;
+    public Material backMat;
+    public bool isTank1;
 
+    List<ScrollText> scrollText;
     private int speedStore;
     private int rotationStore;
     private bool hasAnimator;
-
-    void Start()
-    { }
 
     public override void OnSyncedStart()
     {
@@ -38,13 +41,18 @@ public class PlayerMovement : TrueSyncBehaviour
 
         speedStore = speed;
         rotationStore = rotationSpeed;
-            
+        scrollText = new List<ScrollText>();
+        for(int i = 0; i < tracks.Length; i++)
+        {
+            scrollText.Add(tracks[i].GetComponent<ScrollText>());
+            scrollText[i].enabled = false;
+        }
     }
 
     public override void OnSyncedInput()
     {
-        FP accell = Input.GetAxis("Vertical");
-        FP steer = Input.GetAxis("Horizontal");
+        FP accell = Input.GetAxisRaw("Vertical");
+        FP steer = Input.GetAxisRaw("Horizontal");
 
         TrueSyncInput.SetFP(0, accell);
         TrueSyncInput.SetFP(1, steer);
@@ -63,10 +71,23 @@ public class PlayerMovement : TrueSyncBehaviour
 
         if (hasAnimator)
         {
-            if (accell != 0)
-                wheels.SetBool("IsMoving", true);
+            if(isTank1)
+            {
+                wheels.SetFloat("rotation", (float)steer);
+                wheels.SetFloat("velocity", (float)accell);
+                print("Rotation: " + (float)steer);
+                print("velocity: " + (float)accell);
+
+                print("AnimRotation " + wheels.GetFloat("rotation"));
+                print("AnimVelocity " + wheels.GetFloat("velocity"));
+            }
             else
-                wheels.SetBool("IsMoving", false);
+            {
+                if (accell != 0)
+                    wheels.SetBool("IsMoving", true);
+                else
+                    wheels.SetBool("IsMoving", false);
+            }
         }
     }
 
