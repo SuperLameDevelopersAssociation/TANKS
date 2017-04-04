@@ -75,11 +75,6 @@ public class PlayerMovement : TrueSyncBehaviour
             {
                 wheels.SetFloat("rotation", (float)steer);
                 wheels.SetFloat("velocity", (float)accell);
-                print("Rotation: " + (float)steer);
-                print("velocity: " + (float)accell);
-
-                print("AnimRotation " + wheels.GetFloat("rotation"));
-                print("AnimVelocity " + wheels.GetFloat("velocity"));
             }
             else
             {
