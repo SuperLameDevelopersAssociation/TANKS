@@ -14,13 +14,14 @@ public class GameManager : NetworkBehaviour
     public byte killsToWin;
     public int matchEndingTime;
     public float respawnTime;
-    [HideInInspector]
     public List<Transform> spawnPoints;
     private static Dictionary<byte, GameObject> playerList = new Dictionary<byte, GameObject>();
     public List<byte> kills;
     public List<byte> deaths;
 
+    [SyncVar]
     float minutes = 5;
+    [SyncVar]
     float seconds = 0;
 
     bool isTie;

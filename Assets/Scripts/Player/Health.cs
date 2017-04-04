@@ -42,6 +42,12 @@ public class Health : NetworkBehaviour
         currHealth = maxHealth;
     }
 
+    [Command]
+    public void CmdTakeDamage(int damage, byte murdererID)
+    {
+        RpcTakeDamage(damage, murdererID);
+    }
+
     [ClientRpc]
     public void RpcTakeDamage(int damage, byte murdererID)
     {
@@ -69,7 +75,7 @@ public class Health : NetworkBehaviour
     IEnumerator Respawn()
     {
         yield return new WaitForSeconds(GameManager.instance.respawnTime);
-        Transform _spawnPoint = NetworkManager.singleton.GetStartPosition();
+        Transform _spawnPoint = GameManager.instance.spawnPoints[ID].transform;
         transform.position = _spawnPoint.position;
         transform.rotation = _spawnPoint.rotation;
 
