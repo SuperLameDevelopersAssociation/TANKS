@@ -9,7 +9,6 @@ public class GameManager : NetworkBehaviour
 {
     public static GameManager instance;
     public Text output;
-    public Text matchTime;
     public int matchTimeInMinutes;
     public byte killsToWin;
     public int matchEndingTime;
@@ -28,7 +27,8 @@ public class GameManager : NetworkBehaviour
     bool deathmatchActive;
     [HideInInspector]
     public bool matchEnding;
-    
+
+    public string matchTime;
 
     void Awake()
     {
@@ -121,12 +121,13 @@ public class GameManager : NetworkBehaviour
         {
             output.text += "Player: " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";     
         }
+
     }
 
     void UpdateTimerText()
     {
         if (!matchEnding)
-            matchTime.text = string.Format("{0:#00}:{1:00}", minutes, (int)seconds);
+            matchTime = string.Format("{0:#00}{1:00}", minutes, (int)seconds);
     }
 
     public void EndMatch()
@@ -137,9 +138,9 @@ public class GameManager : NetworkBehaviour
 
             byte player = PlayerThatWon();
             if (player != 100)
-                matchTime.text = "Player " + (player + 1) + " Won!";
+                output.text = "Player " + (player + 1) + " Won!";
             else
-                matchTime.text = "Tie!";
+                output.text = "Tie!";
 
             SceneManager.LoadScene(0);
         }

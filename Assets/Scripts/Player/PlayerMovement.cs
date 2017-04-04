@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.Networking;
 
@@ -7,6 +8,8 @@ public class PlayerMovement : NetworkBehaviour
     public int speed = 10;
     public int rotationSpeed = 150;
     public Animator wheels;
+
+    public Text textSpeed;
 
     private bool hasAnimator;
     float accell;
@@ -40,6 +43,11 @@ public class PlayerMovement : NetworkBehaviour
 
         accell = Input.GetAxis("Vertical");
         steer = Input.GetAxis("Horizontal");
+
+
+        int conversion = (int)(accell * 62);
+
+        textSpeed.text = conversion + " km/h ";
 
         //if (hasAnimator)
         //{

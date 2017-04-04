@@ -9,6 +9,14 @@ public class Health : NetworkBehaviour
     public int maxHealth;
     [SyncVar]
     public int currHealth;
+
+    [Header("Health UI")]
+    public int yellowColorHealth = 68;
+    public int redColorHealth = 17;
+
+    public Text healthPercent;
+    public Image healthImage;
+
     private int defenseDamage = 0;
     private int originalMaxHealth;
     private bool defenseBoost = false;
@@ -17,13 +25,19 @@ public class Health : NetworkBehaviour
 
 	public Slider healthBar;
 
+    [SyncVar]
+    public bool inSpawn = true;
+
     [Range(1, 5)]
     public int armorLevel;
 
     float armorBonus;
     bool respawning;
 
-	void Start()
+    DamageSFX damageSound;
+    Shooting currentWeapon;
+
+    void Start()
 	{        
         healthBar.maxValue = maxHealth;
 		healthBar.value = 0;
@@ -31,7 +45,18 @@ public class Health : NetworkBehaviour
         SetArmor();
         currHealth = maxHealth;
 		SetHealthBar();
+        SetHealthUI();
         CmdSetHealth();
+
+        damageSound = gameObject.GetComponent<DamageSFX>();
+
+        if (damageSound == null)
+        { 
+            Debug.LogError("There is no DamageSFX script attached to " + gameObject.name);
+        }
+
+        currentWeapon = gameObject.GetComponent<Shooting>();
+
     }
 
     [Command]
@@ -51,9 +76,15 @@ public class Health : NetworkBehaviour
     [ClientRpc]
     public void RpcTakeDamage(int damage, byte murdererID)
     {
+        if (inSpawn) return;
+
         damage -= (int)(damage * armorBonus);               //apply armor bonus
         currHealth -= damage;
         SetHealthBar();
+        SetHealthUI();
+
+
+        damageSound.PlayDamageSFX(currentWeapon.currentWeapon.ToString());
 
         if (defenseBoost)
         {                                 // Check if the defense boost is depleted.
@@ -83,7 +114,27 @@ public class Health : NetworkBehaviour
         SetHealthBar();
         respawning = false;
     }
-    
+
+    //---translates the amount of health into a color--
+    public Color32 GetHealthColor()
+    {
+        float percent = ((float)currHealth / maxHealth);
+
+        percent = (percent * 100);
+
+        if (percent < redColorHealth)
+            return Color.red;
+        else if (percent < yellowColorHealth)
+            return Color.yellow;
+        else
+            return Color.green;
+    }
+
+    public void GetTextPercentHealth(Text healthText)
+    {
+        healthText.text = "" + currHealth + " / " + maxHealth;
+    }
+
     //Sets the resistance given by armor and lowers speed according to the armor level
     public void SetArmor()
     {
@@ -114,6 +165,13 @@ public class Health : NetworkBehaviour
 	{
 		healthBar.value = currHealth;
 	}
+
+    [Client]
+    public void SetHealthUI()
+    {
+        GetTextPercentHealth(healthPercent);
+        healthImage.color = GetHealthColor();
+    }
 
     //void OnGUI()
     //{
