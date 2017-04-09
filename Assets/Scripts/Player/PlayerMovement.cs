@@ -7,7 +7,7 @@ public class PlayerMovement : NetworkBehaviour
 {
     public int speed = 10;
     public int rotationSpeed = 150;
-    private Animator wheels;
+    public Animator wheels;
 
     public Text textSpeed;
 
@@ -21,7 +21,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        wheels = GetComponent<Animator>();
+       // wheels = GetComponent<Animator>();
 
         if (wheels == null)
         {
