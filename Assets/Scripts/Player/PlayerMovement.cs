@@ -7,7 +7,7 @@ public class PlayerMovement : NetworkBehaviour
 {
     public int speed = 10;
     public int rotationSpeed = 150;
-    public Animator wheels;
+    private Animator wheels;
 
     public Text textSpeed;
 
@@ -21,16 +21,17 @@ public class PlayerMovement : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        //if (wheels == null)
-        //{
-        //    Debug.Log(gameObject.name + "does not have a wheel animator");
-        //    hasAnimator = false;
-        //}
-        //else
-        //{
-        //    hasAnimator = true;
-        //}
-            
+        wheels = GetComponent<Animator>();
+
+        if (wheels == null)
+        {
+            hasAnimator = false;
+        }
+        else
+        {
+            hasAnimator = true;
+        }
+
     }
 
     void Update()
@@ -44,18 +45,17 @@ public class PlayerMovement : NetworkBehaviour
         accell = Input.GetAxis("Vertical");
         steer = Input.GetAxis("Horizontal");
 
-
         int conversion = (int)(accell * 62);
 
         textSpeed.text = conversion + " km/h ";
 
-        //if (hasAnimator)
-        //{
-        //    if (accell != 0)
-        //        wheels.SetBool("IsMoving", true);
-        //    else
-        //        wheels.SetBool("IsMoving", false);
-        //}
+        if (hasAnimator)
+        {
+            //getting the direction and speed of tank for the tread animations
+            wheels.SetFloat("velocity", (float)accell * (speed * 10));
+            wheels.SetFloat("rotation", (float)steer * (speed * 10));
+        }
+       
     }
 
     void FixedUpdate()
