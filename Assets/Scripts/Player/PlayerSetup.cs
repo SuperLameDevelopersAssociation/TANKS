@@ -29,9 +29,17 @@ public class PlayerSetup : NetworkBehaviour
 
         GetComponent<Health>().ID = ID;
         GetComponent<Shooting>().ID = ID;
+/*
+        Debug.LogError(transform.position);
 
-        //Debug.LogError(transform.position);
+        if (transform.position == Vector3.zero)
+        {
+            Debug.LogError("Reset the point");
 
-        //if(transform)
+            Transform _spawnPoint = GameManager.instance.spawnPoints[3].transform;
+            transform.position = _spawnPoint.position;
+            transform.rotation = _spawnPoint.rotation;
+        }
+*/
     }
 }
