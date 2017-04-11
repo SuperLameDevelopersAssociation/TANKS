@@ -29,5 +29,9 @@ public class PlayerSetup : NetworkBehaviour
 
         GetComponent<Health>().ID = ID;
         GetComponent<Shooting>().ID = ID;
+
+        //Debug.LogError(transform.position);
+
+        //if(transform)
     }
 }

@@ -10,6 +10,12 @@ public class Timer : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+        if (GameManager.instance == null)
+        {
+            Debug.Log("The instance is null");
+            return;
+        }
+
         matchCount = GameManager.instance.matchTime.Length;
 
         if (matchCount == 5)

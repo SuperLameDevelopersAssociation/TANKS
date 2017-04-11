@@ -112,6 +112,7 @@ public class Health : NetworkBehaviour
 
         currHealth = maxHealth;
         SetHealthBar();
+        SetHealthUI();
         respawning = false;
     }
 
