@@ -5,7 +5,6 @@ using System.Collections;
 public class ColorSetter : NetworkBehaviour
 {
     public Color32 tankColor;
-
     public Renderer[] originalChildrenRender;                       //Grab the current children render so they can be reset after ability is done
     Renderer[] cloakedChildrenRender;                               //copy of the current children renders so they can be changed to cloaking ability
     public Material[] mats;                                         //gather all materials setup for the cloaking
@@ -37,12 +36,13 @@ public class ColorSetter : NetworkBehaviour
     [Command]
     void CmdServerColor()
     {
-        RpcSetColor();
         for (int i = 0; i < cloakedChildrenRender.Length; i++)
         {
             cloakedChildrenRender[i].material.color = tankColor;                      //Change materials to cloaked material
         }
         print("This has on command occured");
+
+        RpcSetColor();
     }
 
     [ClientRpc] //Activates power on all clients
@@ -55,9 +55,4 @@ public class ColorSetter : NetworkBehaviour
 
         print("This has occured");
     }
-
-    // Update is called once per frame
-    void Update () {
-	
-	}
 }
