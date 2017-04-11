@@ -28,7 +28,7 @@ public class GameManager : NetworkBehaviour
     [HideInInspector]
     public bool matchEnding;
 
-    public string matchTime;
+    public string matchTime = "";
 
     void Awake()
     {
