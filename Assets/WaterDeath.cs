@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class WaterDeath : MonoBehaviour
+public class WaterDeath : NetworkBehaviour
 {
     void OnTriggerEnter(Collider other)
     {

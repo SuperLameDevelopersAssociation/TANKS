@@ -100,13 +100,14 @@ public class GameManager : NetworkBehaviour
 
     public void AwardPoints(byte murdererID, byte deadmanID)
     {
+        if(murdererID <= kills.Count)
         kills[murdererID]++;
         deaths[deadmanID]++;
         UpdateText();
 
         if (deathmatchActive)
         {
-            if (kills[murdererID] >= killsToWin)
+            if (murdererID <= kills.Count && kills[murdererID] >= killsToWin)
             {
                 EndMatch();
             }
