@@ -1,0 +1,567 @@
+fileFormatVersion: 2
+guid: 8a1584ddefe8c494983053f95a664eef
+timeCreated: 1491915479
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: 5 Mini Blade 001
+    100002: 5 Mini Blade 002
+    100004: 5 Mini Blade 003
+    100006: 5 Mini Blade 004
+    100008: 5 Mini Blade 005
+    100010: 5 Mini Blade Pole 001
+    100012: 5 Mini Blade Pole 002
+    100014: 5 Mini Blade Pole 003
+    100016: 5 Mini Blade Pole 004
+    100018: 5 Mini Blade Pole 005
+    100020: 6 Bent Pole v1 001
+    100022: 6 Bent Pole v1 002
+    100024: 6 Bent Pole v1 003
+    100026: 6 Bent Pole v1 004
+    100028: 6 Bent Pole v1 005
+    100030: 6 Bent Pole v1 006
+    100032: 6 Cloth Blade v1 001
+    100034: 6 Cloth Blade v1 002
+    100036: 6 Cloth Blade v1 003
+    100038: 6 Cloth Blade v1 004
+    100040: 6 Cloth Blade v1 005
+    100042: 6 Cloth Blade v1 006
+    100044: //RootNode
+    100046: Blade Origin Wheel (6 Blades Cloth)
+    100048: Main Building
+    100050: Mini Blade Origin Axel
+    100052: Mini Blade Origin Wheel (5 Blades Mini (72 deg))
+    100054: Mini Mill Arm Supports
+    100056: Water Wheel Board01
+    100058: Water Wheel Board02
+    100060: Water Wheel Board03
+    100062: Water Wheel Board04
+    100064: Water Wheel Board05
+    100066: Water Wheel Board06
+    100068: Water Wheel Board07
+    100070: Water Wheel Board08
+    100072: Water Wheel Board09
+    100074: Water Wheel Board10
+    100076: Water Wheel Board11
+    100078: Water Wheel Board12
+    100080: Water Wheel Board13
+    100082: Water Wheel Board14
+    100084: Water Wheel Board15
+    100086: Water Wheel Board16
+    100088: Water Wheel Board17
+    100090: Water Wheel Board18
+    100092: Water Wheel Board19
+    100094: Water Wheel Board20
+    100096: Water Wheel Board21
+    100098: Water Wheel Board22
+    100100: Water Wheel Board23
+    100102: Water Wheel Board24
+    100104: Water Wheel Board25
+    100106: Water Wheel Board26
+    100108: Water Wheel Board27
+    100110: Water Wheel Board28
+    100112: Water Wheel Board29
+    100114: Water Wheel Board30
+    100116: Water Wheel Board31
+    100118: Water Wheel Board32
+    100120: Water Wheel Board33
+    100122: Water Wheel Board34
+    100124: Water Wheel Board35
+    100126: Water Wheel Board36
+    100128: Water Wheel Body
+    100130: Water Wheel Center
+    100132: WW Axle
+    400000: 5 Mini Blade 001
+    400002: 5 Mini Blade 002
+    400004: 5 Mini Blade 003
+    400006: 5 Mini Blade 004
+    400008: 5 Mini Blade 005
+    400010: 5 Mini Blade Pole 001
+    400012: 5 Mini Blade Pole 002
+    400014: 5 Mini Blade Pole 003
+    400016: 5 Mini Blade Pole 004
+    400018: 5 Mini Blade Pole 005
+    400020: 6 Bent Pole v1 001
+    400022: 6 Bent Pole v1 002
+    400024: 6 Bent Pole v1 003
+    400026: 6 Bent Pole v1 004
+    400028: 6 Bent Pole v1 005
+    400030: 6 Bent Pole v1 006
+    400032: 6 Cloth Blade v1 001
+    400034: 6 Cloth Blade v1 002
+    400036: 6 Cloth Blade v1 003
+    400038: 6 Cloth Blade v1 004
+    400040: 6 Cloth Blade v1 005
+    400042: 6 Cloth Blade v1 006
+    400044: //RootNode
+    400046: Blade Origin Wheel (6 Blades Cloth)
+    400048: Main Building
+    400050: Mini Blade Origin Axel
+    400052: Mini Blade Origin Wheel (5 Blades Mini (72 deg))
+    400054: Mini Mill Arm Supports
+    400056: Water Wheel Board01
+    400058: Water Wheel Board02
+    400060: Water Wheel Board03
+    400062: Water Wheel Board04
+    400064: Water Wheel Board05
+    400066: Water Wheel Board06
+    400068: Water Wheel Board07
+    400070: Water Wheel Board08
+    400072: Water Wheel Board09
+    400074: Water Wheel Board10
+    400076: Water Wheel Board11
+    400078: Water Wheel Board12
+    400080: Water Wheel Board13
+    400082: Water Wheel Board14
+    400084: Water Wheel Board15
+    400086: Water Wheel Board16
+    400088: Water Wheel Board17
+    400090: Water Wheel Board18
+    400092: Water Wheel Board19
+    400094: Water Wheel Board20
+    400096: Water Wheel Board21
+    400098: Water Wheel Board22
+    400100: Water Wheel Board23
+    400102: Water Wheel Board24
+    400104: Water Wheel Board25
+    400106: Water Wheel Board26
+    400108: Water Wheel Board27
+    400110: Water Wheel Board28
+    400112: Water Wheel Board29
+    400114: Water Wheel Board30
+    400116: Water Wheel Board31
+    400118: Water Wheel Board32
+    400120: Water Wheel Board33
+    400122: Water Wheel Board34
+    400124: Water Wheel Board35
+    400126: Water Wheel Board36
+    400128: Water Wheel Body
+    400130: Water Wheel Center
+    400132: WW Axle
+    2300000: 5 Mini Blade 001
+    2300002: 5 Mini Blade 002
+    2300004: 5 Mini Blade 003
+    2300006: 5 Mini Blade 004
+    2300008: 5 Mini Blade 005
+    2300010: 5 Mini Blade Pole 001
+    2300012: 5 Mini Blade Pole 002
+    2300014: 5 Mini Blade Pole 003
+    2300016: 5 Mini Blade Pole 004
+    2300018: 5 Mini Blade Pole 005
+    2300020: 6 Bent Pole v1 001
+    2300022: 6 Bent Pole v1 002
+    2300024: 6 Bent Pole v1 003
+    2300026: 6 Bent Pole v1 004
+    2300028: 6 Bent Pole v1 005
+    2300030: 6 Bent Pole v1 006
+    2300032: 6 Cloth Blade v1 001
+    2300034: 6 Cloth Blade v1 002
+    2300036: 6 Cloth Blade v1 003
+    2300038: 6 Cloth Blade v1 004
+    2300040: 6 Cloth Blade v1 005
+    2300042: 6 Cloth Blade v1 006
+    2300044: Blade Origin Wheel (6 Blades Cloth)
+    2300046: Main Building
+    2300048: Mini Blade Origin Axel
+    2300050: Mini Blade Origin Wheel (5 Blades Mini (72 deg))
+    2300052: Mini Mill Arm Supports
+    2300054: Water Wheel Board01
+    2300056: Water Wheel Board02
+    2300058: Water Wheel Board03
+    2300060: Water Wheel Board04
+    2300062: Water Wheel Board05
+    2300064: Water Wheel Board06
+    2300066: Water Wheel Board07
+    2300068: Water Wheel Board08
+    2300070: Water Wheel Board09
+    2300072: Water Wheel Board10
+    2300074: Water Wheel Board11
+    2300076: Water Wheel Board12
+    2300078: Water Wheel Board13
+    2300080: Water Wheel Board14
+    2300082: Water Wheel Board15
+    2300084: Water Wheel Board16
+    2300086: Water Wheel Board17
+    2300088: Water Wheel Board18
+    2300090: Water Wheel Board19
+    2300092: Water Wheel Board20
+    2300094: Water Wheel Board21
+    2300096: Water Wheel Board22
+    2300098: Water Wheel Board23
+    2300100: Water Wheel Board24
+    2300102: Water Wheel Board25
+    2300104: Water Wheel Board26
+    2300106: Water Wheel Board27
+    2300108: Water Wheel Board28
+    2300110: Water Wheel Board29
+    2300112: Water Wheel Board30
+    2300114: Water Wheel Board31
+    2300116: Water Wheel Board32
+    2300118: Water Wheel Board33
+    2300120: Water Wheel Board34
+    2300122: Water Wheel Board35
+    2300124: Water Wheel Board36
+    2300126: Water Wheel Body
+    2300128: Water Wheel Center
+    2300130: WW Axle
+    3300000: 5 Mini Blade 001
+    3300002: 5 Mini Blade 002
+    3300004: 5 Mini Blade 003
+    3300006: 5 Mini Blade 004
+    3300008: 5 Mini Blade 005
+    3300010: 5 Mini Blade Pole 001
+    3300012: 5 Mini Blade Pole 002
+    3300014: 5 Mini Blade Pole 003
+    3300016: 5 Mini Blade Pole 004
+    3300018: 5 Mini Blade Pole 005
+    3300020: 6 Bent Pole v1 001
+    3300022: 6 Bent Pole v1 002
+    3300024: 6 Bent Pole v1 003
+    3300026: 6 Bent Pole v1 004
+    3300028: 6 Bent Pole v1 005
+    3300030: 6 Bent Pole v1 006
+    3300032: 6 Cloth Blade v1 001
+    3300034: 6 Cloth Blade v1 002
+    3300036: 6 Cloth Blade v1 003
+    3300038: 6 Cloth Blade v1 004
+    3300040: 6 Cloth Blade v1 005
+    3300042: 6 Cloth Blade v1 006
+    3300044: Blade Origin Wheel (6 Blades Cloth)
+    3300046: Main Building
+    3300048: Mini Blade Origin Axel
+    3300050: Mini Blade Origin Wheel (5 Blades Mini (72 deg))
+    3300052: Mini Mill Arm Supports
+    3300054: Water Wheel Board01
+    3300056: Water Wheel Board02
+    3300058: Water Wheel Board03
+    3300060: Water Wheel Board04
+    3300062: Water Wheel Board05
+    3300064: Water Wheel Board06
+    3300066: Water Wheel Board07
+    3300068: Water Wheel Board08
+    3300070: Water Wheel Board09
+    3300072: Water Wheel Board10
+    3300074: Water Wheel Board11
+    3300076: Water Wheel Board12
+    3300078: Water Wheel Board13
+    3300080: Water Wheel Board14
+    3300082: Water Wheel Board15
+    3300084: Water Wheel Board16
+    3300086: Water Wheel Board17
+    3300088: Water Wheel Board18
+    3300090: Water Wheel Board19
+    3300092: Water Wheel Board20
+    3300094: Water Wheel Board21
+    3300096: Water Wheel Board22
+    3300098: Water Wheel Board23
+    3300100: Water Wheel Board24
+    3300102: Water Wheel Board25
+    3300104: Water Wheel Board26
+    3300106: Water Wheel Board27
+    3300108: Water Wheel Board28
+    3300110: Water Wheel Board29
+    3300112: Water Wheel Board30
+    3300114: Water Wheel Board31
+    3300116: Water Wheel Board32
+    3300118: Water Wheel Board33
+    3300120: Water Wheel Board34
+    3300122: Water Wheel Board35
+    3300124: Water Wheel Board36
+    3300126: Water Wheel Body
+    3300128: Water Wheel Center
+    3300130: WW Axle
+    4300000: Main Building
+    4300002: Mini Mill Arm Supports
+    4300004: Mini Blade Origin Axel
+    4300006: WW Axle
+    4300008: Water Wheel Center
+    4300010: Water Wheel Board36
+    4300012: Water Wheel Board35
+    4300014: Water Wheel Board34
+    4300016: Water Wheel Board33
+    4300018: Water Wheel Board32
+    4300020: Water Wheel Board31
+    4300022: Water Wheel Board30
+    4300024: Water Wheel Board29
+    4300026: Water Wheel Board28
+    4300028: Water Wheel Board27
+    4300030: Water Wheel Board26
+    4300032: Water Wheel Board25
+    4300034: Water Wheel Board24
+    4300036: Water Wheel Board23
+    4300038: Water Wheel Board22
+    4300040: Water Wheel Board21
+    4300042: Water Wheel Board20
+    4300044: Water Wheel Board19
+    4300046: Water Wheel Board18
+    4300048: Water Wheel Board17
+    4300050: Water Wheel Board16
+    4300052: Water Wheel Board15
+    4300054: Water Wheel Board14
+    4300056: Water Wheel Board13
+    4300058: Water Wheel Board12
+    4300060: Water Wheel Board11
+    4300062: Water Wheel Board10
+    4300064: Water Wheel Board09
+    4300066: Water Wheel Board08
+    4300068: Water Wheel Board07
+    4300070: Water Wheel Board06
+    4300072: Water Wheel Board05
+    4300074: Water Wheel Board04
+    4300076: Water Wheel Board03
+    4300078: Water Wheel Board02
+    4300080: Water Wheel Board01
+    4300082: Water Wheel Body
+    4300084: Mini Blade Origin Wheel (5 Blades Mini (72 deg))
+    4300086: 5 Mini Blade Pole 001
+    4300088: 5 Mini Blade Pole 003
+    4300090: 5 Mini Blade Pole 004
+    4300092: 5 Mini Blade Pole 005
+    4300094: 5 Mini Blade 001
+    4300096: 5 Mini Blade 002
+    4300098: 5 Mini Blade 003
+    4300100: 5 Mini Blade 004
+    4300102: 5 Mini Blade 005
+    4300104: 5 Mini Blade Pole 002
+    4300106: Blade Origin Wheel (6 Blades Cloth)
+    4300108: 6 Bent Pole v1 001
+    4300110: 6 Cloth Blade v1 001
+    4300112: 6 Bent Pole v1 002
+    4300114: 6 Cloth Blade v1 002
+    4300116: 6 Bent Pole v1 003
+    4300118: 6 Cloth Blade v1 003
+    4300120: 6 Bent Pole v1 004
+    4300122: 6 Cloth Blade v1 004
+    4300124: 6 Bent Pole v1 005
+    4300126: 6 Cloth Blade v1 005
+    4300128: 6 Bent Pole v1 006
+    4300130: 6 Cloth Blade v1 006
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)/6 Bent Pole v1 001
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)/6 Bent Pole v1 002
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)/6 Bent Pole v1 003
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)/6 Bent Pole v1 004
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)/6 Bent Pole v1 005
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)/6 Bent Pole v1 006
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)/6 Cloth Blade v1 001
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)/6 Cloth Blade v1 002
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)/6 Cloth Blade v1 003
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)/6 Cloth Blade v1 004
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)/6 Cloth Blade v1 005
+        weight: 1
+      - path: Blade Origin Wheel (6 Blades Cloth)/6 Cloth Blade v1 006
+        weight: 1
+      - path: Main Building
+        weight: 1
+      - path: Mini Blade Origin Wheel (5 Blades Mini (72 deg))
+        weight: 1
+      - path: Mini Blade Origin Wheel (5 Blades Mini (72 deg))/5 Mini Blade 001
+        weight: 1
+      - path: Mini Blade Origin Wheel (5 Blades Mini (72 deg))/5 Mini Blade 002
+        weight: 1
+      - path: Mini Blade Origin Wheel (5 Blades Mini (72 deg))/5 Mini Blade 003
+        weight: 1
+      - path: Mini Blade Origin Wheel (5 Blades Mini (72 deg))/5 Mini Blade 004
+        weight: 1
+      - path: Mini Blade Origin Wheel (5 Blades Mini (72 deg))/5 Mini Blade 005
+        weight: 1
+      - path: Mini Blade Origin Wheel (5 Blades Mini (72 deg))/5 Mini Blade Pole 001
+        weight: 1
+      - path: Mini Blade Origin Wheel (5 Blades Mini (72 deg))/5 Mini Blade Pole 002
+        weight: 1
+      - path: Mini Blade Origin Wheel (5 Blades Mini (72 deg))/5 Mini Blade Pole 003
+        weight: 1
+      - path: Mini Blade Origin Wheel (5 Blades Mini (72 deg))/5 Mini Blade Pole 004
+        weight: 1
+      - path: Mini Blade Origin Wheel (5 Blades Mini (72 deg))/5 Mini Blade Pole 005
+        weight: 1
+      - path: Mini Mill Arm Supports
+        weight: 1
+      - path: Mini Mill Arm Supports/Mini Blade Origin Axel
+        weight: 1
+      - path: WW Axle
+        weight: 1
+      - path: WW Axle/Water Wheel Center
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board01
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board02
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board03
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board04
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board05
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board06
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board07
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board08
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board09
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board10
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board11
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board12
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board13
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board14
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board15
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board16
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board17
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board18
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board19
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board20
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board21
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board22
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board23
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board24
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board25
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board26
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board27
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board28
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board29
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board30
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board31
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board32
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board33
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board34
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board35
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Board36
+        weight: 1
+      - path: WW Axle/Water Wheel Center/Water Wheel Body
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
