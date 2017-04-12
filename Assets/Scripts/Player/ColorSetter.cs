@@ -9,8 +9,7 @@ public class ColorSetter : NetworkBehaviour
     Renderer[] cloakedChildrenRender;                               //copy of the current children renders so they can be changed to cloaking ability
     public Material[] mats;                                         //gather all materials setup for the cloaking
 
-    // Use this for initialization
-    void Start ()
+    void Awake()
     {
         originalChildrenRender = GetComponentsInChildren<Renderer>();
         mats = new Material[originalChildrenRender.Length];         //Set length of array
@@ -19,8 +18,18 @@ public class ColorSetter : NetworkBehaviour
         for (int i = 0; i < originalChildrenRender.Length; i++)
             mats[i] = originalChildrenRender[i].material;           //Set mats array to originalChildrenRender
 
+        for (int i = 0; i < cloakedChildrenRender.Length; i++)
+        {
+            cloakedChildrenRender[i].material.color = tankColor;                      //Change materials to cloaked material
+        }
+
         CmdFindObjects();
         CmdServerColor();
+    }
+
+    void Start()
+    {
+        
     }
 
     [Command]
@@ -36,12 +45,6 @@ public class ColorSetter : NetworkBehaviour
     [Command]
     void CmdServerColor()
     {
-        for (int i = 0; i < cloakedChildrenRender.Length; i++)
-        {
-            cloakedChildrenRender[i].material.color = tankColor;                      //Change materials to cloaked material
-        }
-        print("This has on command occured");
-
         RpcSetColor();
     }
 
@@ -53,6 +56,6 @@ public class ColorSetter : NetworkBehaviour
             cloakedChildrenRender[i].material.color = tankColor;                      //Change materials to cloaked material
         }
 
-        print("This has occured");
+        Debug.LogError("This has occured");
     }
 }
