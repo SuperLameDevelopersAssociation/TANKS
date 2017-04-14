@@ -44,12 +44,15 @@ public class PlayerSetup : NetworkBehaviour
         {
             case 0:
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Projectile;
+                GetComponent<Health>().armorLevel = 1;
                 break;
             case 1:
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Laser;
+                GetComponent<Health>().armorLevel = 2;
                 break;
             case 2:
-                GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Flamethrower;                
+                GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Flamethrower;
+                GetComponent<Health>().armorLevel = 3;
                 break;
             default:
                 break;
@@ -69,7 +72,6 @@ public class PlayerSetup : NetworkBehaviour
             else
             {
                 weaponObjects[i].SetActive(false);
-                //tankModels[i].SetActive(false);
             }
         }
 /*

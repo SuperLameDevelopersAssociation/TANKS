@@ -28,7 +28,7 @@ public class Health : NetworkBehaviour
     [SyncVar]
     public bool inSpawn = true;
 
-    [Range(1, 5)]
+    [SyncVar, Range(1, 5)]
     public int armorLevel;
 
     float armorBonus;
@@ -42,11 +42,10 @@ public class Health : NetworkBehaviour
         healthBar.maxValue = maxHealth;
 		healthBar.value = 0;
         originalMaxHealth = maxHealth;
-        SetArmor();
+        Invoke("SetArmor", 1);
         currHealth = maxHealth;
 		SetHealthBar();
         SetHealthUI();
-        CmdSetHealth();
 
         damageSound = gameObject.GetComponent<DamageSFX>();
 
@@ -56,15 +55,6 @@ public class Health : NetworkBehaviour
         }
 
         currentWeapon = gameObject.GetComponent<Shooting>();
-
-    }
-
-    [Command]
-    void CmdSetHealth()
-    {
-        originalMaxHealth = maxHealth;
-        SetArmor();
-        currHealth = maxHealth;
     }
 
     [Command]
