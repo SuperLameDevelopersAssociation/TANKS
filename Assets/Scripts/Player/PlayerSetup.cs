@@ -9,6 +9,8 @@ public class PlayerSetup : NetworkBehaviour
     [SerializeField]
     GameObject[] weaponObjects;
     [SerializeField]
+    GameObject[] tankModels;
+    [SerializeField]
     GameObject turretWrangler;
     [SyncVar]
     public byte ID;
@@ -36,7 +38,9 @@ public class PlayerSetup : NetworkBehaviour
 
         GetComponent<Health>().ID = ID;
         GetComponent<Shooting>().ID = ID;
-        switch(tankSelected)
+        GetComponent<PlayerMovement>().wheels = tankModels[tankSelected].GetComponent<Animator>();
+
+        switch (tankSelected)
         {
             case 0:
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Projectile;
@@ -45,7 +49,7 @@ public class PlayerSetup : NetworkBehaviour
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Laser;
                 break;
             case 2:
-                GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Flamethrower;
+                GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Flamethrower;                
                 break;
             default:
                 break;
@@ -56,11 +60,17 @@ public class PlayerSetup : NetworkBehaviour
             if (i == tankSelected)
             {
                 weaponObjects[i].SetActive(true);
+                tankModels[i].SetActive(true);
                 anim.animator = weaponObjects[i].GetComponent<Animator>();
+                anim.SetParameterAutoSend(0, true);
+                anim.SetParameterAutoSend(1, true);
                 turretWrangler.GetComponent<NetworkedMouseLook>().animator = anim.animator;
             }
             else
+            {
                 weaponObjects[i].SetActive(false);
+                //tankModels[i].SetActive(false);
+            }
         }
 /*
         Debug.LogError(transform.position);

@@ -37,7 +37,7 @@ public class Health : NetworkBehaviour
     DamageSFX damageSound;
     Shooting currentWeapon;
 
-    void Start()
+    void Awake()
 	{        
         healthBar.maxValue = maxHealth;
 		healthBar.value = 0;
@@ -82,7 +82,6 @@ public class Health : NetworkBehaviour
         currHealth -= damage;
         SetHealthBar();
         SetHealthUI();
-
 
         damageSound.PlayDamageSFX(currentWeapon.currentWeapon.ToString());
 
