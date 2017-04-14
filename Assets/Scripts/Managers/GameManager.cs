@@ -70,12 +70,13 @@ public class GameManager : NetworkBehaviour
         UpdateTimerText();
     }
 
-    public static void RegisterPlayer(byte ID, GameObject player)
+    public static void RegisterPlayer(byte ID, GameObject player, int tankSelected)
     {
         if (!playerList.ContainsKey(ID))
         {
             playerList.Add(ID, player);
-            player.GetComponent<PlayerSetup>().ID = ID;            
+            player.GetComponent<PlayerSetup>().ID = ID;
+            player.GetComponent<PlayerSetup>().tankSelected = tankSelected;
         }
     }
 

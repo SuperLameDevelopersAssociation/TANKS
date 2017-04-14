@@ -31,9 +31,15 @@ public class Shooting : NetworkBehaviour
     [HideInInspector]
     public GameObject projectileType;
     [HideInInspector]
-    public GameObject sustainedProjectile;
+    public GameObject laserObject;
     [HideInInspector]
-    public int damage;
+    public GameObject flamethrowerObject;
+    [HideInInspector]
+    public int projectileDamage;
+    [HideInInspector]
+    public int flamethrowerDamage;
+    [HideInInspector]
+    public int laserDamage;
     [HideInInspector]
     public float projectileSpeed;
     [HideInInspector]
@@ -72,7 +78,7 @@ public class Shooting : NetworkBehaviour
 	{
         //ID = (byte)GetComponent<NetworkIdentity>().netId.Value;
         objectPool = GameObject.Find("PoolManager").GetComponent<NetworkedObjectPooling>();
-        CmdInitOnServer();
+        CmdInitOnServer(currentWeapon.ToString());
         sfx = gameObject.GetComponent<ShootingSFX>();
 
         if (sfx == null)
@@ -90,10 +96,16 @@ public class Shooting : NetworkBehaviour
 
         _fireFreq = fireFreq;
 
-        if (currentWeapon.Equals(CurrentWeapon.Flamethrower) || currentWeapon.Equals(CurrentWeapon.Laser))
+        if (currentWeapon.Equals(CurrentWeapon.Flamethrower))
         {
-            sustained = sustainedProjectile.GetComponent<Sustained>();
-            sustained.damage = damage;
+            sustained = flamethrowerObject.GetComponent<Sustained>();
+            sustained.damage = flamethrowerDamage;
+            sustained.ID = ID;
+        }
+        else if(currentWeapon.Equals(CurrentWeapon.Laser))
+        {
+            sustained = laserObject.GetComponent<Sustained>();
+            sustained.damage = laserDamage;
             sustained.ID = ID;
         }
         else
@@ -109,17 +121,28 @@ public class Shooting : NetworkBehaviour
 
             ammo = magazineSize;
             SetAmmoText();
-            sustainedProjectile.SetActive(false);
+            flamethrowerObject.SetActive(false);
+            laserObject.SetActive(false);
         }
     }
 
     [Command]
-    void CmdInitOnServer()
+    void CmdInitOnServer(string currentWeap)
     {
         objectPool = GameObject.Find("PoolManager").GetComponent<NetworkedObjectPooling>();
-        sustained = sustainedProjectile.GetComponent<Sustained>();
-        sustained.damage = damage;
-        sustained.ID = ID;
+        if (currentWeap == CurrentWeapon.Flamethrower.ToString())
+        {
+            sustained = flamethrowerObject.GetComponent<Sustained>();
+            sustained.damage = flamethrowerDamage;
+            sustained.ID = ID;
+        }
+        else if(currentWeap == CurrentWeapon.Flamethrower.ToString())
+        {
+            sustained = laserObject.GetComponent<Sustained>();
+            sustained.damage = laserDamage;
+            sustained.ID = ID;
+        }
+        
     }
 
     void Update()
@@ -165,13 +188,13 @@ public class Shooting : NetworkBehaviour
                 if (fired)  
                 {
                     if (!overheated)
-                        FireSustained();
+                        FireSustained(currentWeapon.ToString());
                 }
                 else 
                 {
                     if (laserHeat >= 0)
                     {
-                        CmdFireSustained(false);
+                        CmdFireSustained(false, currentWeapon.ToString());
                         StartCoroutine(Cooling());
                         sfx.StopSustainedSFX();
                     }
@@ -211,7 +234,7 @@ public class Shooting : NetworkBehaviour
         isShooting = true;
         muzzleFlash.SetActive(true);
         sfx.PlayProjectileSFX();
-        int _damage = (int)(damage * damageMulitplier);
+        int _damage = (int)(projectileDamage * damageMulitplier);
         CmdFireProjectile(gunBarrel.transform.position, gunBarrel.transform.up, ID, projectileSpeed, _damage);
         StartCoroutine(Wait(_fireFreq));
         muzzleFlash.SetActive(false);
@@ -243,13 +266,24 @@ public class Shooting : NetworkBehaviour
         }
     }
 
-    void FireSustained()
+    void FireSustained(string currentWeap)
     {
-        sustained.damage = (int)(damage * damageMulitplier);
-        CmdFireSustained(true);
+        if (currentWeap == CurrentWeapon.Flamethrower.ToString())
+        {
+            sustained.damage = (int)(flamethrowerDamage * damageMulitplier);
+            CmdFireSustained(true, currentWeap);
 
-        if (!sustainedProjectile.activeInHierarchy)
-            sfx.PlaySustainedSFX(currentWeapon.ToString());
+            if (!flamethrowerObject.activeInHierarchy)
+                sfx.PlaySustainedSFX(currentWeapon.ToString());
+        }
+        else if (currentWeap == CurrentWeapon.Laser.ToString())
+        {
+            sustained.damage = (int)(laserDamage * damageMulitplier);
+            CmdFireSustained(true, currentWeap);
+
+            if (!laserObject.activeInHierarchy)
+                sfx.PlaySustainedSFX(currentWeapon.ToString());
+        }
 
         laserHeat = laserHeat + heatUpAmount;
 
@@ -258,21 +292,24 @@ public class Shooting : NetworkBehaviour
     }
 
     [Command]
-    void CmdFireSustained(bool showSustained)
+    void CmdFireSustained(bool showSustained, string currentWeap)
     {
-        RpcShowSustained(showSustained);                
+        RpcShowSustained(showSustained, currentWeap);                
     }
 
     [ClientRpc]
-    void RpcShowSustained(bool isActive)
+    void RpcShowSustained(bool isActive, string currentWeap)
     {
-        sustainedProjectile.SetActive(isActive);
+        if (currentWeap == CurrentWeapon.Flamethrower.ToString())
+            flamethrowerObject.SetActive(isActive);
+        else if (currentWeap == CurrentWeapon.Laser.ToString())
+            laserObject.SetActive(isActive);
     }
 
     IEnumerator Overheated()
     {
         overheated = true;
-        CmdFireSustained(false);
+        CmdFireSustained(false, currentWeapon.ToString());
         sfx.StopSustainedSFX();
 
         for (float i = laserHeat; i > 0; i--)

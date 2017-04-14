@@ -17,7 +17,7 @@ public class NetworkedMouseLook : NetworkBehaviour
     private Quaternion m_CameraTargetRot;
     private bool m_cursorIsLocked = true;
 
-    private Animator _animator;
+    public Animator animator;
     private float aimAngle;
 
     public Transform _camera;
@@ -30,7 +30,7 @@ public class NetworkedMouseLook : NetworkBehaviour
         m_CharacterTargetRot = transform.localRotation;
         m_CameraTargetRot = _camera.localRotation;
 
-        _animator = GetComponentInChildren<Animator>();
+        //animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -127,7 +127,7 @@ public class NetworkedMouseLook : NetworkBehaviour
             aimAngle = 360 - _camera.localRotation.eulerAngles.x; //when looking up, it goes from 360 downwards
 
 
-        _animator.SetFloat("shootAngle", aimAngle);
+        animator.SetFloat("shootAngle", aimAngle);
         //print("The rotation of the camera is " + aimAngle);
 
     }

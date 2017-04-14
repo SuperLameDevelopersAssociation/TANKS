@@ -17,6 +17,7 @@ namespace Prototype.NetworkLobby
 
         public Button colorButton;
         public InputField nameInput;
+        public Dropdown tankSelectDropdown;
         public Button readyButton;
         public Button waitingPlayerButton;
         public Button removePlayerButton;
@@ -29,6 +30,8 @@ namespace Prototype.NetworkLobby
         public string playerName = "";
         [SyncVar(hook = "OnMyColor")]
         public Color playerColor = Color.white;
+        [SyncVar(hook = "OnMyTank")]
+        public int tankSelected;
 
         public Color OddRowColor = new Color(250.0f / 255.0f, 250.0f / 255.0f, 250.0f / 255.0f, 1.0f);
         public Color EvenRowColor = new Color(180.0f / 255.0f, 180.0f / 255.0f, 180.0f / 255.0f, 1.0f);
@@ -64,6 +67,7 @@ namespace Prototype.NetworkLobby
             //will be created with the right value currently on server
             OnMyName(playerName);
             OnMyColor(playerColor);
+            OnMyTank(tankSelected);
         }
 
         public override void OnStartAuthority()
@@ -90,6 +94,7 @@ namespace Prototype.NetworkLobby
         {
             nameInput.interactable = false;
             removePlayerButton.interactable = NetworkServer.active;
+            tankSelectDropdown.interactable = false;
 
             ChangeReadyButtonColor(NotReadyColor);
 
@@ -102,6 +107,7 @@ namespace Prototype.NetworkLobby
         void SetupLocalPlayer()
         {
             nameInput.interactable = true;
+            tankSelectDropdown.interactable = true;
             remoteIcone.gameObject.SetActive(false);
             localIcone.gameObject.SetActive(true);
 
@@ -112,7 +118,7 @@ namespace Prototype.NetworkLobby
 
             ChangeReadyButtonColor(JoinColor);
 
-            readyButton.transform.GetChild(0).GetComponent<Text>().text = "JOIN";
+            readyButton.transform.GetChild(0).GetComponent<Text>().text = "READY";
             readyButton.interactable = true;
 
             //have to use child count of player prefab already setup as "this.slot" is not set yet
@@ -128,6 +134,9 @@ namespace Prototype.NetworkLobby
 
             colorButton.onClick.RemoveAllListeners();
             colorButton.onClick.AddListener(OnColorClicked);
+
+            tankSelectDropdown.onValueChanged.RemoveAllListeners();
+            tankSelectDropdown.onValueChanged.AddListener(delegate { OnTankSelected(); });
 
             readyButton.onClick.RemoveAllListeners();
             readyButton.onClick.AddListener(OnReadyClicked);
@@ -162,17 +171,19 @@ namespace Prototype.NetworkLobby
                 readyButton.interactable = false;
                 colorButton.interactable = false;
                 nameInput.interactable = false;
+                tankSelectDropdown.interactable = false;
             }
             else
             {
                 ChangeReadyButtonColor(isLocalPlayer ? JoinColor : NotReadyColor);
 
                 Text textComponent = readyButton.transform.GetChild(0).GetComponent<Text>();
-                textComponent.text = isLocalPlayer ? "JOIN" : "...";
+                textComponent.text = isLocalPlayer ? "READY" : "...";
                 textComponent.color = Color.white;
                 readyButton.interactable = isLocalPlayer;
                 colorButton.interactable = isLocalPlayer;
                 nameInput.interactable = isLocalPlayer;
+                tankSelectDropdown.interactable = isLocalPlayer;
             }
         }
 
@@ -195,6 +206,12 @@ namespace Prototype.NetworkLobby
             colorButton.GetComponent<Image>().color = newColor;
         }
 
+        public void OnMyTank(int tankNum)
+        {
+            tankSelected = tankNum;
+            tankSelectDropdown.value = tankNum;
+        }
+
         //===== UI Handler
 
         //Note that those handler use Command function, as we need to change the value on the server not locally
@@ -202,6 +219,11 @@ namespace Prototype.NetworkLobby
         public void OnColorClicked()
         {
             CmdColorChange();
+        }
+
+        public void OnTankSelected()
+        {
+            CmdTankSelected(tankSelectDropdown.value);
         }
 
         public void OnReadyClicked()
@@ -283,6 +305,12 @@ namespace Prototype.NetworkLobby
             }
 
             playerColor = Colors[idx];
+        }
+
+        [Command]
+        public void CmdTankSelected(int tankNum)
+        {
+            tankSelected = tankNum;
         }
 
         [Command]

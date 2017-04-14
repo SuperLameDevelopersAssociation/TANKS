@@ -336,7 +336,7 @@ namespace Prototype.NetworkLobby
 
             if(lp != null)
             {
-                GameManager.RegisterPlayer(lp.slot, gamePlayer);
+                GameManager.RegisterPlayer(lp.slot, gamePlayer, lp.tankSelected);
             }
 
             return true;
