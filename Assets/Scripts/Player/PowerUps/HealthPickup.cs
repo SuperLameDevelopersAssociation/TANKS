@@ -5,8 +5,15 @@ using UnityEngine.Networking;
 public class HealthPickup : NetworkBehaviour 
 {
     public int gainedHealth = 15;
+    public float destroyTime;
 
 	Health playerHealth;
+
+    void OnEnable()
+    {
+        if (Time.timeSinceLevelLoad > 1)
+            StartCoroutine(Destroy(destroyTime));
+    }
 
     [Server]
 	public void OnTriggerEnter(Collider other)
@@ -25,4 +32,11 @@ public class HealthPickup : NetworkBehaviour
 			}
 		}
 	}
+
+    IEnumerator Destroy(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        NetworkServer.UnSpawn(gameObject);
+        Destroy(gameObject);
+    }
 }

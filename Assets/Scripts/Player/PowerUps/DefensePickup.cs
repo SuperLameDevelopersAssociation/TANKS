@@ -5,8 +5,15 @@ using UnityEngine.Networking;
 public class DefensePickup : NetworkBehaviour {
 
     public int defenseMaxHealth = 100;
+    public float destroyTime;
 
     Health playerHealth;
+
+    void OnEnable()
+    {
+        if (Time.timeSinceLevelLoad > 1)
+            StartCoroutine(Destroy(destroyTime));
+    }
 
     [Server]
     public void OnTriggerEnter(Collider other)
@@ -24,5 +31,12 @@ public class DefensePickup : NetworkBehaviour {
                 Destroy(gameObject);
             }
         }
+    }
+
+    IEnumerator Destroy(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        NetworkServer.UnSpawn(gameObject);
+        Destroy(gameObject);
     }
 }

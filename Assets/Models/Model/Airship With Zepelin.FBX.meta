@@ -388,7 +388,7 @@ ModelImporter:
     4300144: Tube005
     4300146: Tube006
     4300148: Tube007
-    7400000: Take 001
+    7400000: Propeller
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -410,7 +410,193 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Propeller
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: Box002
+        weight: 1
+      - path: Box004
+        weight: 1
+      - path: Box005
+        weight: 1
+      - path: Box006
+        weight: 1
+      - path: Box007
+        weight: 1
+      - path: Box009
+        weight: 1
+      - path: Capsule003
+        weight: 1
+      - path: Cone001
+        weight: 1
+      - path: Cylinder004
+        weight: 1
+      - path: Cylinder005
+        weight: 1
+      - path: Cylinder006
+        weight: 1
+      - path: Cylinder007
+        weight: 1
+      - path: Damper001
+        weight: 1
+      - path: Line001
+        weight: 1
+      - path: Line002
+        weight: 1
+      - path: Line003
+        weight: 1
+      - path: Line004
+        weight: 1
+      - path: Line005
+        weight: 1
+      - path: Line010
+        weight: 1
+      - path: Line011
+        weight: 1
+      - path: Line013
+        weight: 1
+      - path: Line014
+        weight: 1
+      - path: Line015
+        weight: 1
+      - path: Line016
+        weight: 1
+      - path: Line017
+        weight: 1
+      - path: Line018
+        weight: 1
+      - path: Line019
+        weight: 1
+      - path: Line020
+        weight: 1
+      - path: Line021
+        weight: 1
+      - path: Line022
+        weight: 1
+      - path: Line023
+        weight: 1
+      - path: Line024
+        weight: 1
+      - path: Object001
+        weight: 1
+      - path: Object002
+        weight: 1
+      - path: Object003
+        weight: 1
+      - path: Object006
+        weight: 1
+      - path: Object007
+        weight: 1
+      - path: Object008
+        weight: 1
+      - path: Object009
+        weight: 1
+      - path: Object010
+        weight: 1
+      - path: Object011
+        weight: 1
+      - path: Object012
+        weight: 1
+      - path: Object013
+        weight: 1
+      - path: Object014
+        weight: 1
+      - path: Object015
+        weight: 1
+      - path: Object016
+        weight: 1
+      - path: Object017
+        weight: 1
+      - path: Object019
+        weight: 1
+      - path: Object020
+        weight: 1
+      - path: Object021
+        weight: 1
+      - path: Object022
+        weight: 1
+      - path: Object023
+        weight: 1
+      - path: Object024
+        weight: 1
+      - path: Object025
+        weight: 1
+      - path: Object026
+        weight: 1
+      - path: Object027
+        weight: 1
+      - path: Object029
+        weight: 1
+      - path: Object030
+        weight: 1
+      - path: Object031
+        weight: 1
+      - path: Object032
+        weight: 1
+      - path: OilTank001
+        weight: 1
+      - path: OilTank003
+        weight: 1
+      - path: OilTank004
+        weight: 1
+      - path: OilTank005
+        weight: 1
+      - path: OilTank006
+        weight: 1
+      - path: OilTank007
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      - path: Sphere002
+        weight: 1
+      - path: Torus001
+        weight: 1
+      - path: Torus002
+        weight: 1
+      - path: Tube001
+        weight: 1
+      - path: Tube002
+        weight: 1
+      - path: Tube003
+        weight: 1
+      - path: Tube004
+        weight: 1
+      - path: Tube005
+        weight: 1
+      - path: Tube006
+        weight: 1
+      - path: Tube007
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

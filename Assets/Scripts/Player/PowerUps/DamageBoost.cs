@@ -6,9 +6,17 @@ public class DamageBoost : NetworkBehaviour {
 
     public float mulitplier;
     public int duration;
+    public float destroyTime;
 
     Shooting playerShooting;
 
+    void OnEnable()
+    {
+        if (Time.timeSinceLevelLoad > 1)
+            StartCoroutine(Destroy(destroyTime));
+    }
+
+    [Server]
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")   //Checks if collided with player
@@ -24,5 +32,12 @@ public class DamageBoost : NetworkBehaviour {
                 Destroy(gameObject);
             }
         }
+    }
+
+    IEnumerator Destroy(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        NetworkServer.UnSpawn(gameObject);
+        Destroy(gameObject);
     }
 }
