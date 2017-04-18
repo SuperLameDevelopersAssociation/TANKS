@@ -46,7 +46,7 @@ public class SonicAbility : AbilitiesBase
 		{
 			_duration = duration;                                                       //Set FP to the float
 			activated = true;                                                           //Set the flag up
-
+			GetComponent<PlayerMovement>().speed *= 2;
 		}
 		else
 		{
