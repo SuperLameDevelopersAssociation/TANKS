@@ -10,19 +10,19 @@ public class Timer : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        if (GameManager.instance == null)
+        if (GameManager.GetInstance == null)
         {
             Debug.Log("The instance is null");
             return;
         }
 
-        matchCount = GameManager.instance.matchTime.Length;
+        matchCount = GameManager.GetInstance.matchTime.Length;
 
         if (matchCount == 5)
         {
             for (int i = 0; i < matchCount; i++)
             {
-                timers[i].text = GameManager.instance.matchTime[i].ToString();
+                timers[i].text = GameManager.GetInstance.matchTime[i].ToString();
             }
         }
         else if (matchCount == 4)
@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour {
             timers[0].text = "0";
             for (int i = 1; i < matchCount; i++)
             {
-                timers[i].text = GameManager.instance.matchTime[i].ToString();
+                timers[i].text = GameManager.GetInstance.matchTime[i].ToString();
             }
         }
         else if (matchCount < 4)
@@ -39,7 +39,7 @@ public class Timer : MonoBehaviour {
             timers[1].text = "0";
             for (int i = 2; i < matchCount; i++)
             {
-                timers[i].text = GameManager.instance.matchTime[i].ToString();
+                timers[i].text = GameManager.GetInstance.matchTime[i].ToString();
             }
         }
 

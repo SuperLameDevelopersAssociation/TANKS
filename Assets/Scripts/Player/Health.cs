@@ -99,14 +99,14 @@ public class Health : NetworkBehaviour
         {
             respawning = true;
             StartCoroutine(Respawn());
-            GameManager.instance.AwardPoints(murdererID, ID);
+            GameManager.GetInstance.AwardPoints(murdererID, ID);
         }
     }
 
     IEnumerator Respawn()
     {
-        yield return new WaitForSeconds(GameManager.instance.respawnTime);
-        Transform _spawnPoint = GameManager.instance.spawnPoints[ID].transform;
+        yield return new WaitForSeconds(GameManager.GetInstance.respawnTime);
+        Transform _spawnPoint = GameManager.GetInstance.spawnPoints[ID].transform;
         transform.position = _spawnPoint.position;
         transform.rotation = _spawnPoint.rotation;
 
