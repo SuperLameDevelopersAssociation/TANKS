@@ -41,8 +41,8 @@ public class GameManager : NetworkBehaviour
     public List<Transform> spawnPoints;
 
     private bool isTie;
-    public bool deathmatchActive;
-    public bool teamDeathmatchActive;
+    public static bool deathmatchActive;
+    public static bool teamDeathmatchActive;
     private static Dictionary<byte, GameObject> playerList = new Dictionary<byte, GameObject>();
     #endregion
 
@@ -59,20 +59,26 @@ public class GameManager : NetworkBehaviour
         teamA = new List<int>();
         teamB = new List<int>();
 
+        print("team?: " + teamDeathmatchActive);
+        print("Dm? : " + deathmatchActive);
+
         for (int i = 0; i < Prototype.NetworkLobby.LobbyManager.s_Singleton._playerNumber; i++)
         {
             kills.Add(0);
             deaths.Add(0);
 
-            if ((i + 3) % 2 == 1)
+            if (teamDeathmatchActive)
             {
-                teamA.Add(i);
-                print(i + " goes to team A.");
-            }
-            else
-            {
-                teamB.Add(i);
-                print(i + " goes to team B.");
+                if ((i + 3) % 2 == 1)
+                {
+                    teamA.Add(i);
+                    print(i + " goes to team A.");
+                }
+                else
+                {
+                    teamB.Add(i);
+                    print(i + " goes to team B.");
+                }
             }
         }
 
@@ -262,4 +268,5 @@ public class GameManager : NetworkBehaviour
     {
         SceneManager.LoadScene(0);
     }
+
 }

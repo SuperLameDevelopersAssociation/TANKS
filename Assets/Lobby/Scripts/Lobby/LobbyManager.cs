@@ -46,6 +46,8 @@ namespace Prototype.NetworkLobby
         //used to disconnect a client properly when exiting the matchmaker
         [HideInInspector]
         public bool _isMatchmaking = false;
+        public bool teamDeathmatchMode = false;
+        public bool deathmatchMode = false;
 
         protected bool _disconnectServer = false;
         
@@ -66,6 +68,8 @@ namespace Prototype.NetworkLobby
 
             SetServerInfo("Offline", "None");
         }
+
+        
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
         {
@@ -221,9 +225,6 @@ namespace Prototype.NetworkLobby
             conn.Send(MsgKicked, new KickMsg());
         }
 
-
-
-
         public void KickedMessageHandler(NetworkMessage netMsg)
         {
             infoPanel.Display("Kicked by Server", "Close", null);
@@ -337,6 +338,8 @@ namespace Prototype.NetworkLobby
             if(lp != null)
             {
                 GameManager.RegisterPlayer(lp.slot, gamePlayer);
+                GameManager.teamDeathmatchActive = teamDeathmatchMode;
+                GameManager.deathmatchActive = deathmatchMode;
             }
 
             return true;
@@ -423,6 +426,17 @@ namespace Prototype.NetworkLobby
         {
             ChangeTo(mainMenuPanel);
             infoPanel.Display("Cient error : " + (errorCode == 6 ? "timeout" : errorCode.ToString()), "Close", null);
+        }
+        public bool Team_Mode
+        {
+            get { return teamDeathmatchMode; }
+            set { teamDeathmatchMode = value; }
+        }
+
+        public bool Deathmatch_Mode
+        {
+            get { return deathmatchMode; }
+            set { deathmatchMode = value; }
         }
     }
 }
