@@ -36,6 +36,7 @@ public class Health : NetworkBehaviour
 
     DamageSFX damageSound;
     Shooting currentWeapon;
+    DeathAnimation deathAnim;
 
     void Start()
 	{        
@@ -53,6 +54,13 @@ public class Health : NetworkBehaviour
         if (damageSound == null)
         { 
             Debug.LogError("There is no DamageSFX script attached to " + gameObject.name);
+        }
+
+        deathAnim = gameObject.GetComponent<DeathAnimation>();
+
+        if (deathAnim == null)
+        {
+            Debug.LogError("There is no death Animation attached to " + gameObject.name);
         }
 
         currentWeapon = gameObject.GetComponent<Shooting>();
@@ -83,7 +91,6 @@ public class Health : NetworkBehaviour
         SetHealthBar();
         SetHealthUI();
 
-
         damageSound.PlayDamageSFX(currentWeapon.currentWeapon.ToString());
 
         if (defenseBoost)
@@ -98,6 +105,7 @@ public class Health : NetworkBehaviour
         if (currHealth <= 0 && !respawning)
         {
             respawning = true;
+            
             StartCoroutine(Respawn());
             GameManager.instance.AwardPoints(murdererID, ID);
         }
@@ -105,7 +113,9 @@ public class Health : NetworkBehaviour
 
     IEnumerator Respawn()
     {
+        deathAnim.CmdSetTankState(false);
         yield return new WaitForSeconds(GameManager.instance.respawnTime);
+        deathAnim.CmdSetTankState(true);
         Transform _spawnPoint = GameManager.instance.spawnPoints[ID].transform;
         transform.position = _spawnPoint.position;
         transform.rotation = _spawnPoint.rotation;
