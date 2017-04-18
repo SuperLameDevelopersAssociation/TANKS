@@ -112,6 +112,19 @@ public class Shooting : NetworkBehaviour
             sustainedProjectile.SetActive(false);
         }
     }
+    
+    public void ResetAmmo()
+    {
+        if(currentWeapon.Equals(CurrentWeapon.Projectile))
+        {
+            ammo = magazineSize;
+            SetAmmoText();
+        }
+        else
+        {
+            laserHeat = 0;
+        }
+    }
 
     [Command]
     void CmdInitOnServer()
