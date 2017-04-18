@@ -7,28 +7,44 @@ using System.Linq;
 
 public class GameManager : NetworkBehaviour
 {
-    public static GameManager instance;
-    public Text output;
-    public int matchTimeInMinutes;
+    #region Variables
+    //----------- Deathmatch ------------
     public byte killsToWin;
-    public int matchEndingTime;
-    public float respawnTime;
-    public List<Transform> spawnPoints;
-    private static Dictionary<byte, GameObject> playerList = new Dictionary<byte, GameObject>();
     public List<byte> kills;
     public List<byte> deaths;
+
+    //------------ TeamDeathmatch --------
+    public byte teamKillsToWin;
+    public int teamA_kills;
+    public int teamB_kills;
+
+    private List<int> teamA;
+    private List<int> teamB;
+
+    //-------------- Timer ---------------
+    [HideInInspector]
+    public bool matchEnding;
+    public int matchTimeInMinutes;
+    public float respawnTime;
+    public Text output;
+    public Text results;
+    public string matchTime;
+    public GameObject EndGamePanel;
 
     [SyncVar]
     float minutes = 5;
     [SyncVar]
     float seconds = 0;
 
-    bool isTie;
-    bool deathmatchActive;
-    [HideInInspector]
-    public bool matchEnding;
+    // ------------- Gameplay -------------
+    public static GameManager instance;
+    public List<Transform> spawnPoints;
 
-    public string matchTime = "";
+    private bool isTie;
+    public bool deathmatchActive;
+    public bool teamDeathmatchActive;
+    private static Dictionary<byte, GameObject> playerList = new Dictionary<byte, GameObject>();
+    #endregion
 
     void Awake()
     {
@@ -40,12 +56,26 @@ public class GameManager : NetworkBehaviour
 
     void Start()
     {
+        teamA = new List<int>();
+        teamB = new List<int>();
+
         for (int i = 0; i < Prototype.NetworkLobby.LobbyManager.s_Singleton._playerNumber; i++)
         {
             kills.Add(0);
             deaths.Add(0);
+
+            if ((i + 3) % 2 == 1)
+            {
+                teamA.Add(i);
+                print(i + " goes to team A.");
+            }
+            else
+            {
+                teamB.Add(i);
+                print(i + " goes to team B.");
+            }
         }
-        deathmatchActive = true;
+
         minutes = matchTimeInMinutes;
         UpdateText();
     }
@@ -75,7 +105,7 @@ public class GameManager : NetworkBehaviour
         if (!playerList.ContainsKey(ID))
         {
             playerList.Add(ID, player);
-            player.GetComponent<PlayerSetup>().ID = ID;            
+            player.GetComponent<PlayerSetup>().ID = ID;
         }
     }
 
@@ -101,17 +131,36 @@ public class GameManager : NetworkBehaviour
 
     public void AwardPoints(byte murdererID, byte deadmanID)
     {
-        kills[murdererID]++;
-        deaths[deadmanID]++;
-        UpdateText();
-
         if (deathmatchActive)
         {
+            kills[murdererID]++;
+            deaths[deadmanID]++;
             if (kills[murdererID] >= killsToWin)
             {
                 EndMatch();
             }
         }
+        else if (teamDeathmatchActive)
+        {
+            if (teamA.Contains(murdererID) && !teamA.Contains(deadmanID))
+            {
+                kills[murdererID]++;
+                deaths[deadmanID]++;
+                teamA_kills++;
+            }
+            else if (teamB.Contains(murdererID) && !teamB.Contains(deadmanID))
+            {
+                kills[murdererID]++;
+                deaths[deadmanID]++;
+                teamB_kills++;
+            }
+
+            if (teamA_kills >= teamKillsToWin || teamB_kills >= teamKillsToWin)
+            {
+                EndMatch();
+            }
+        }
+        UpdateText();
     }
 
     void UpdateText()
@@ -119,9 +168,13 @@ public class GameManager : NetworkBehaviour
         output.text = "";
         for (int index = 0; index < kills.Count; index++)
         {
-            output.text += "Player: " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";     
+            output.text += "Player: " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";
         }
 
+        if (teamDeathmatchActive)
+        {
+            output.text += "Team A: " + teamA_kills + "  Team B: " + teamB_kills + "\n";
+        }
     }
 
     void UpdateTimerText()
@@ -135,14 +188,29 @@ public class GameManager : NetworkBehaviour
         if (!matchEnding)
         {
             matchEnding = true;
+            EndGamePanel.SetActive(true);
 
-            byte player = PlayerThatWon();
-            if (player != 100)
-                output.text = "Player " + (player + 1) + " Won!";
-            else
-                output.text = "Tie!";
+            if (deathmatchActive)
+            {
+                byte player = PlayerThatWon();
+                if (player != 100)
+                    output.text = "Player " + (player + 1) + " Won!";
+                else
+                    output.text = "Tie!";
+            }
 
-            SceneManager.LoadScene(0);
+            if (teamDeathmatchActive)
+            {
+                string team = TeamThatWon();
+                if (team != "Tie")
+                {
+                    output.text = "Team " + team + " Won!";
+                }
+                else
+                    output.text = " Tie! ";
+
+                LoadMainMenu();
+            }
         }
     }
 
@@ -168,9 +236,30 @@ public class GameManager : NetworkBehaviour
             }
         }
 
-        if(isTie)
+        if (isTie)
             return 100; //This just means its a tie.
 
         return playerID;
+    }
+
+    public string TeamThatWon()
+    {
+        if (teamA_kills > teamB_kills)
+        {
+            return "A";
+        }
+        else if (teamB_kills > teamA_kills)
+        {
+            return "B";
+        }
+        else
+        {
+            return "Tie";        //This just means its a tie.
+        }
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
