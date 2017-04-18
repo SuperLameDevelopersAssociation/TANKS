@@ -37,16 +37,16 @@ public class Health : NetworkBehaviour
     DamageSFX damageSound;
     Shooting currentWeapon;
 
-    void Start()
+    void Awake()
 	{        
         healthBar.maxValue = maxHealth;
 		healthBar.value = 0;
         originalMaxHealth = maxHealth;
-        SetArmor();
+        Invoke("SetArmor", 1);
         currHealth = maxHealth;
 		SetHealthBar();
         SetHealthUI();
-        CmdSetHealth();
+        Invoke("CmdSetHealth", 1);
 
         damageSound = gameObject.GetComponent<DamageSFX>();
 
