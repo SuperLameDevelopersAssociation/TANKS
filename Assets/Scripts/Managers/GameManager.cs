@@ -7,7 +7,15 @@ using System.Linq;
 
 public class GameManager : NetworkBehaviour
 {
-    public static GameManager instance;
+    private static GameManager instance;
+    public static GameManager GetInstance
+    {
+        get
+        {
+            return instance;
+        }
+    }
+
     public Text output;
     public int matchTimeInMinutes;
     public byte killsToWin;
@@ -30,12 +38,17 @@ public class GameManager : NetworkBehaviour
 
     public string matchTime = "";
 
+    private GameManager() { }
+
+    public static bool isInstanceNull()
+    {
+        Debug.Log("Check instance:" + instance);
+        return instance != null;
+    }
+
     void Awake()
     {
-        if (instance != null)
-            Debug.LogError("More than one GameManager in scene.");
-        else
-            instance = this;
+        instance = this;
     }
 
     void Start()

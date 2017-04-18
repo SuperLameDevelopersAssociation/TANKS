@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
-//using System.Collections;
+using System.Collections;
 
 public class PlayerSetup : NetworkBehaviour 
 {
@@ -29,17 +29,23 @@ public class PlayerSetup : NetworkBehaviour
 
         GetComponent<Health>().ID = ID;
         GetComponent<Shooting>().ID = ID;
-/*
+
         Debug.LogError(transform.position);
 
         if (transform.position == Vector3.zero)
         {
             Debug.LogError("Reset the point");
 
-            Transform _spawnPoint = GameManager.instance.spawnPoints[3].transform;
-            transform.position = _spawnPoint.position;
-            transform.rotation = _spawnPoint.rotation;
+            StartCoroutine(Spawn());
         }
-*/
+
+    }
+
+    IEnumerator Spawn()
+    {
+        yield return new WaitUntil(GameManager.isInstanceNull);
+        Transform _spawnPoint = GameManager.GetInstance.spawnPoints[ID].transform;
+        transform.position = _spawnPoint.position;
+        transform.rotation = _spawnPoint.rotation;
     }
 }
