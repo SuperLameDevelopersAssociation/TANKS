@@ -47,6 +47,15 @@ public class AudioMixerManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            PlayerPrefs.DeleteAll();
+            print("Prefs Reset");
+        }
+    }
+
     public void SetMasterVolume()
     {
         mixer.SetFloat("MasterVolume", masterVolumeSlider.value);
