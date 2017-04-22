@@ -16,7 +16,7 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public Text output;
+    public Text score;
     public int matchTimeInMinutes;
     public byte killsToWin;
     public int matchEndingTime;
@@ -26,8 +26,7 @@ public class GameManager : NetworkBehaviour
     public List<byte> kills;
     public List<byte> deaths;
 
-    [SyncVar]
-    float minutes = 5;
+    int minutes = 5;
     [SyncVar]
     float seconds = 0;
 
@@ -42,7 +41,6 @@ public class GameManager : NetworkBehaviour
 
     public static bool isInstanceNull()
     {
-        Debug.Log("Check instance:" + instance);
         return instance != null;
     }
 
@@ -60,7 +58,7 @@ public class GameManager : NetworkBehaviour
         }
         deathmatchActive = true;
         minutes = matchTimeInMinutes;
-        UpdateText();
+        UpdateScoreText();
     }
 
     void Update()
@@ -117,7 +115,7 @@ public class GameManager : NetworkBehaviour
     {
         kills[murdererID]++;
         deaths[deadmanID]++;
-        UpdateText();
+        UpdateScoreText();
 
         if (deathmatchActive)
         {
@@ -128,12 +126,12 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    void UpdateText()
+    void UpdateScoreText()
     {
-        output.text = "";
+        score.text = "";
         for (int index = 0; index < kills.Count; index++)
         {
-            output.text += "Player: " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";     
+            score.text += "Player: " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";     
         }
 
     }
@@ -152,9 +150,9 @@ public class GameManager : NetworkBehaviour
 
             byte player = PlayerThatWon();
             if (player != 100)
-                output.text = "Player " + (player + 1) + " Won!";
+                score.text = "Player " + (player + 1) + " Won!";
             else
-                output.text = "Tie!";
+                score.text = "Tie!";
 
             SceneManager.LoadScene(0);
         }
