@@ -111,7 +111,8 @@ public class Health : NetworkBehaviour
         transform.rotation = _spawnPoint.rotation;
 
         currHealth = maxHealth;
-        GetComponent<Shooting>().ResetAmmo();
+        if(isLocalPlayer)
+            currentWeapon.ResetAmmo();
         SetHealthBar();
         SetHealthUI();
         respawning = false;

@@ -58,6 +58,7 @@ public class GameManager : NetworkBehaviour
         }
         deathmatchActive = true;
         minutes = matchTimeInMinutes;
+        seconds = 1;
         UpdateScoreText();
     }
 
