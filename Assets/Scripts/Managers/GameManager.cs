@@ -27,9 +27,7 @@ public class GameManager : NetworkBehaviour
     public int matchTimeInMinutes;
     public float respawnTime;
     public Text output;
-    public Text results;
     public string matchTime;
-    public GameObject EndGamePanel;
 
     [SyncVar]
     float minutes = 5;
@@ -61,6 +59,8 @@ public class GameManager : NetworkBehaviour
 
         print("team?: " + teamDeathmatchActive);
         print("Dm? : " + deathmatchActive);
+
+        teamDeathmatchActive = true;
 
         for (int i = 0; i < Prototype.NetworkLobby.LobbyManager.s_Singleton._playerNumber; i++)
         {
@@ -194,7 +194,6 @@ public class GameManager : NetworkBehaviour
         if (!matchEnding)
         {
             matchEnding = true;
-            EndGamePanel.SetActive(true);
 
             if (deathmatchActive)
             {
@@ -214,9 +213,8 @@ public class GameManager : NetworkBehaviour
                 }
                 else
                     output.text = " Tie! ";
-
-                LoadMainMenu();
             }
+            LoadMainMenu();
         }
     }
 

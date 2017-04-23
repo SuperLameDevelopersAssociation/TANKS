@@ -427,11 +427,14 @@ namespace Prototype.NetworkLobby
             ChangeTo(mainMenuPanel);
             infoPanel.Display("Cient error : " + (errorCode == 6 ? "timeout" : errorCode.ToString()), "Close", null);
         }
+
+        
         public bool Team_Mode
         {
             get { return teamDeathmatchMode; }
             set { teamDeathmatchMode = value; }
         }
+
 
         public bool Deathmatch_Mode
         {
