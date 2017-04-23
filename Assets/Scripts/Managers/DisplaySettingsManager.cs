@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using UnityEngine.UI;
 using System.IO;
@@ -73,14 +74,21 @@ public class DisplaySettingsManager : MonoBehaviour
 
     public void LoadSettings()
     {
-        gameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText(Application.persistentDataPath + "/gamesettings.json"));
-        fullscreenToggle.isOn = gameSettings.fullscreen;
-        resolutionDropdown.value = gameSettings.resolutionIndex;
-        textureQualityDropdown.value = gameSettings.textureQuality;
-        antialiasingDropdown.value = gameSettings.antialiasing;
-        vSyncDropdown.value = gameSettings.vSync;
+        try
+        {
+            gameSettings = JsonUtility.FromJson<GameSettings>(File.ReadAllText(Application.persistentDataPath + "/gamesettings.json"));
+            fullscreenToggle.isOn = gameSettings.fullscreen;
+            resolutionDropdown.value = gameSettings.resolutionIndex;
+            textureQualityDropdown.value = gameSettings.textureQuality;
+            antialiasingDropdown.value = gameSettings.antialiasing;
+            vSyncDropdown.value = gameSettings.vSync;
 
-        Screen.fullScreen = gameSettings.fullscreen;
-        resolutionDropdown.RefreshShownValue();
+            Screen.fullScreen = gameSettings.fullscreen;
+            resolutionDropdown.RefreshShownValue();
+        }
+        catch(Exception e)
+        {
+            Debug.LogError(e.Message);
+        }
     }
 }
