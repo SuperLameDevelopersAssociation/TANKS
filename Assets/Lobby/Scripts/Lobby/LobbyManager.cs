@@ -338,8 +338,8 @@ namespace Prototype.NetworkLobby
             if(lp != null)
             {
                 GameManager.RegisterPlayer(lp.slot, gamePlayer);
-                GameManager.teamDeathmatchActive = teamDeathmatchMode;
-                GameManager.deathmatchActive = deathmatchMode;
+                //GameManager.teamDeathmatchActive = teamDeathmatchMode;
+                //GameManager.deathmatchActive = deathmatchMode;
             }
 
             return true;

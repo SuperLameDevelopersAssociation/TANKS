@@ -27,6 +27,7 @@ public class GameManager : NetworkBehaviour
     public int matchTimeInMinutes;
     public float respawnTime;
     public Text output;
+    public Text results;
     public string matchTime;
 
     [SyncVar]
@@ -37,15 +38,19 @@ public class GameManager : NetworkBehaviour
     // ------------- Gameplay -------------
     public static GameManager instance;
     public List<Transform> spawnPoints;
-
-    private bool isTie;
     public static bool deathmatchActive;
     public static bool teamDeathmatchActive;
+
+    private bool returnToMenu;
+    private bool isTie;
+    public GameObject endPanel;
     private static Dictionary<byte, GameObject> playerList = new Dictionary<byte, GameObject>();
     #endregion
 
     void Awake()
     {
+        //Time.timeScale = 1;
+
         if (instance != null)
             Debug.LogError("More than one GameManager in scene.");
         else
@@ -104,6 +109,11 @@ public class GameManager : NetworkBehaviour
         }
 
         UpdateTimerText();
+
+        if (returnToMenu && Input.GetKeyDown(KeyCode.Space))
+        {
+            LoadMainMenu();
+        }
     }
 
     public static void RegisterPlayer(byte ID, GameObject player)
@@ -194,27 +204,45 @@ public class GameManager : NetworkBehaviour
         if (!matchEnding)
         {
             matchEnding = true;
+            endPanel.SetActive(true);
+            output.gameObject.SetActive(false);
 
             if (deathmatchActive)
             {
                 byte player = PlayerThatWon();
                 if (player != 100)
-                    output.text = "Player " + (player + 1) + " Won!";
+                    results.text = "Player " + (player + 1) + " Won! \n";
                 else
-                    output.text = "Tie!";
+                    results.text = "Tie! \n";
+
+                for (int index = 0; index < kills.Count; index++)
+                {
+                    results.text += "Player: " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";
+                }
             }
 
             if (teamDeathmatchActive)
             {
+                
                 string team = TeamThatWon();
                 if (team != "Tie")
                 {
-                    output.text = "Team " + team + " Won!";
+                    results.text = "Team " + team + " Won! \n\n";
                 }
                 else
-                    output.text = " Tie! ";
+                    results.text = " Tie! \n";
+
+                for (int index = 0; index < kills.Count; index++)
+                {
+                    results.text += "Player: " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";
+                }
+
+                results.text += "\nTeam A: " + teamA_kills + "  Team B: " + teamB_kills + "\n";             
             }
-            LoadMainMenu();
+
+            results.text += "\n\n Press the Space bar to return to Main Menu. ";
+            returnToMenu = true;
+            Time.timeScale = 0;
         }
     }
 
