@@ -83,7 +83,6 @@ public class Health : NetworkBehaviour
         SetHealthBar();
         SetHealthUI();
 
-
         damageSound.PlayDamageSFX(currentWeapon.currentWeapon.ToString());
 
         if (defenseBoost)
@@ -111,8 +110,10 @@ public class Health : NetworkBehaviour
         transform.rotation = _spawnPoint.rotation;
 
         currHealth = maxHealth;
-        if(isLocalPlayer)
+
+        if (isLocalPlayer)
             currentWeapon.ResetAmmo();
+
         SetHealthBar();
         SetHealthUI();
         respawning = false;

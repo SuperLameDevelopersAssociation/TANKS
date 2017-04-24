@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Networking;
 //using System.Collections;
 
@@ -12,6 +13,8 @@ public class PlayerSetup : NetworkBehaviour
     GameObject[] tankModels;
     [SerializeField]
     GameObject turretWrangler;
+    [SerializeField]
+    Sprite[] healthImages;
     [SyncVar]
     public byte ID;
     [HideInInspector]
@@ -44,14 +47,17 @@ public class PlayerSetup : NetworkBehaviour
         {
             case 0:
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Projectile;
+                GetComponent<Health>().healthImage.sprite = healthImages[0];
                 GetComponent<Health>().armorLevel = 1;
                 break;
             case 1:
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Laser;
+                GetComponent<Health>().healthImage.sprite = healthImages[1];
                 GetComponent<Health>().armorLevel = 2;
                 break;
             case 2:
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Flamethrower;
+                GetComponent<Health>().healthImage.sprite = healthImages[2];
                 GetComponent<Health>().armorLevel = 3;
                 break;
             default:

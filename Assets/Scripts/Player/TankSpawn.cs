@@ -8,7 +8,6 @@ public class TankSpawn : MonoBehaviour
         if (other.gameObject.tag == "Spawn")
         {
             this.GetComponent<Health>().inSpawn = false;
-            print(this.GetComponent<Health>().inSpawn + " : for we have left spawn");
         }
     }
 }
