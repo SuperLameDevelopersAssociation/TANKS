@@ -8,8 +8,8 @@ public class BasePickup : NetworkBehaviour
 
     void OnEnable()
     {
-        if (Time.timeSinceLevelLoad > 1)
-            StartCoroutine(Destroy(destroyTime));
+        //if (Time.timeSinceLevelLoad > 1)
+            //StartCoroutine(Destroy(destroyTime));
     }
 
     IEnumerator Destroy(float waitTime)
