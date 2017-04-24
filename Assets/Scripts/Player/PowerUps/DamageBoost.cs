@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class DamageBoost : NetworkBehaviour {
+public class DamageBoost : BasePickup {
 
     public float mulitplier;
     public int duration;

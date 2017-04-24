@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class HealthPickup : NetworkBehaviour 
+public class HealthPickup : BasePickup 
 {
     public int gainedHealth = 15;
 

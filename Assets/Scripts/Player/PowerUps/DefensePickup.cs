@@ -2,8 +2,8 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class DefensePickup : NetworkBehaviour {
-
+public class DefensePickup : BasePickup
+{ 
     public int defenseMaxHealth = 100;
 
     Health playerHealth;
