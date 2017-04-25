@@ -3,18 +3,18 @@ using UnityEngine.Networking;
 
 public class SonicAbility : AbilitiesBase 
 {
-	PlayerMovement speed;
+	PlayerMovement speed;           //grabs the player's speed from 
 
 	float _cooldown = 0;
-	public float duration = 10;
+	public float duration = 10;     //sets the length of the ability to 10 seconds
 	float _duration;
-	public KeyCode activateKey;
-	bool activated;
+	public KeyCode activateKey;     //sets the key that activates the ability
+	bool activated;                 //indicates if the ability is active or not
 
 	// Use this for initialization
 	void Start () 
 	{
-		speed = gameObject.GetComponent<PlayerMovement>();
+		speed = gameObject.GetComponent<PlayerMovement>();      //sets the speed to the local speed variable
 	}
 	
 	// Update is called once per frame
@@ -37,7 +37,7 @@ public class SonicAbility : AbilitiesBase
 	[Command]
 	public override void CmdActivatePower(bool activate)
 	{
-		RpcActivatePower(activate);
+		RpcActivatePower(activate); 
 	}
 
 	void RpcActivatePower(bool activate)
@@ -52,6 +52,7 @@ public class SonicAbility : AbilitiesBase
 		{
 			_cooldown = 5;                                                              //Reset the cooldown
 			activated = false;                                                          //Turn off the flag
-		}
-	}
+            GetComponent<PlayerMovement>().speed /= 2;
+        }
+    }
 }
