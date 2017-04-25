@@ -3,56 +3,59 @@ using UnityEngine.Networking;
 
 public class SonicAbility : AbilitiesBase 
 {
-	PlayerMovement speed;           //grabs the player's speed from 
+    PlayerMovement speed;           //grabs the player's speed from 
 
-	float _cooldown = 0;
-	public float duration = 10;     //sets the length of the ability to 10 seconds
-	float _duration;
-	public KeyCode activateKey;     //sets the key that activates the ability
-	bool activated;                 //indicates if the ability is active or not
+    float _cooldown = 0;
+    public float duration = 10;     //sets the length of the ability to 10 seconds
+    float _duration;
+    public KeyCode activateKey;     //sets the key that activates the ability
+    bool activated;                 //indicates if the ability is active or not
 
-	// Use this for initialization
-	void Start () 
-	{
-		speed = gameObject.GetComponent<PlayerMovement>();      //sets the speed to the local speed variable
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		if (Input.GetKeyDown(activateKey) && _cooldown <= 0 && !activated)            //Input is pressed and cooldown is zeroed and not already turned on
-			CmdActivatePower(true);                                                         
+    // Use this for initialization
+    void Start()
+    {
+        speed = gameObject.GetComponent<PlayerMovement>();      //sets the speed to the local speed variable
+    }
 
-		if (_cooldown > 0)                                                              //Subtract delta time from the overall time
-			_cooldown -= Time.deltaTime;
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(activateKey) && _cooldown <= 0 && !activated)            //Input is pressed and cooldown is zeroed and not already turned on
+            CmdActivatePower(true);
 
-		if(_duration > 0)                                                               //Subtract delta time from the overall time
-			_duration -= Time.deltaTime;
-		else if(_duration <= 0 && activated)
-		{
-			CmdActivatePower(false);
-		}
-	}
+        if (_cooldown > 0)                                                              //Subtract delta time from the overall time
+            _cooldown -= Time.deltaTime;
 
-	[Command]
-	public override void CmdActivatePower(bool activate)
-	{
-		RpcActivatePower(activate); 
-	}
+        if (_duration > 0)                                                               //Subtract delta time from the overall time
+            _duration -= Time.deltaTime;
+        else if (_duration <= 0 && activated)
+        {
+            CmdActivatePower(false);
+        }
+    }
 
-	void RpcActivatePower(bool activate)
-	{
-		if (activate)
-		{
-			_duration = duration;                                                       //Set FP to the float
-			activated = true;                                                           //Set the flag up
-			GetComponent<PlayerMovement>().speed *= 2;
-		}
-		else
-		{
-			_cooldown = 5;                                                              //Reset the cooldown
-			activated = false;                                                          //Turn off the flag
+    [Command]
+    public override void CmdActivatePower(bool activate)
+    {
+        RpcActivatePower(activate);
+    }
+
+    [ClientRpc]
+    void RpcActivatePower(bool activate)
+    {
+        if (activate)
+        {
+            _duration = duration;                                                       //Set FP to the float
+            activated = true;                                                           //Set the flag up
+            GetComponent<PlayerMovement>().speed *= 2;
+        }
+        else
+        {
+            _cooldown = 5;                                                              //Reset the cooldown
+            activated = false;                                                          //Turn off the flag
             GetComponent<PlayerMovement>().speed /= 2;
         }
     }
+
+
 }
