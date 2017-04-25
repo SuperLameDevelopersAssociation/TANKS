@@ -21,8 +21,6 @@ public class Health : NetworkBehaviour
     private int originalMaxHealth;
     private bool defenseBoost = false;
 
-    PointsManager pManager;
-
 	public Slider healthBar;
 
     [SyncVar]
