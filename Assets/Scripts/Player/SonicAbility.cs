@@ -12,7 +12,7 @@ public class SonicAbility : AbilitiesBase
     bool activated;                 //indicates if the ability is active or not
 
     // Use this for initialization
-    void Start()
+    void Awake()
     {
         speed = gameObject.GetComponent<PlayerMovement>();      //sets the speed to the local speed variable
     }
@@ -51,9 +51,9 @@ public class SonicAbility : AbilitiesBase
         }
         else
         {
+            GetComponent<PlayerMovement>().speed /= 2;
             _cooldown = 5;                                                              //Reset the cooldown
             activated = false;                                                          //Turn off the flag
-            GetComponent<PlayerMovement>().speed /= 2;
         }
     }
 
