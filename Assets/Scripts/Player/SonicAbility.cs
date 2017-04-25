@@ -34,13 +34,13 @@ public class SonicAbility : AbilitiesBase
         }
     }
 
-    [Command]
+    [Command]                                                                           //Tells the server to activate the ability
     public override void CmdActivatePower(bool activate)
     {
         RpcActivatePower(activate);
     }
 
-    [ClientRpc]
+    [ClientRpc]                                                                         //Activates the power on all clients
     void RpcActivatePower(bool activate)
     {
         if (activate)
