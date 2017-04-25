@@ -56,6 +56,4 @@ public class SonicAbility : AbilitiesBase
             activated = false;                                                          //Turn off the flag
         }
     }
-
-
 }
