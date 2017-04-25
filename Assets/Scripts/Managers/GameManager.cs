@@ -16,7 +16,7 @@ public class GameManager : NetworkBehaviour
         }
     }
 
-    public Text score;
+    public GameObject score;
     public int matchTimeInMinutes;
     public byte killsToWin;
     public int matchEndingTime;
@@ -37,6 +37,8 @@ public class GameManager : NetworkBehaviour
 
     public string matchTime = "";
 
+    private Text names;
+    private Text scores;
     private GameManager() { }
 
     public static bool isInstanceNull()
@@ -59,6 +61,8 @@ public class GameManager : NetworkBehaviour
         deathmatchActive = true;
         minutes = matchTimeInMinutes;
         seconds = 1;
+        names = score.transform.FindChild("PlayerNames").gameObject.GetComponent<Text>();
+        scores = score.transform.FindChild("KillsDeaths").gameObject.GetComponent<Text>();
         UpdateScoreText();
     }
 
@@ -129,11 +133,16 @@ public class GameManager : NetworkBehaviour
 
     void UpdateScoreText()
     {
-        score.text = "";
+        //names.text = "";
+        //scores.text = "";
         for (int index = 0; index < kills.Count; index++)
         {
-            score.text += "Player: " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";     
-        }
+            // Get typed in name.
+            string playerName = "Player";
+            names.text += string.Format("\n{0}", " Player " + (index + 1));
+            scores.text += string.Format("\n{0} \t\t\t {1}", kills[index], deaths[index]);
+        //score.text += " Name " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";     
+    }
 
     }
 
@@ -150,10 +159,11 @@ public class GameManager : NetworkBehaviour
             matchEnding = true;
 
             byte player = PlayerThatWon();
+            scores.text = "";
             if (player != 100)
-                score.text = "Player " + (player + 1) + " Won!";
+                names.text = "Player " + (player + 1) + " Won!";
             else
-                score.text = "Tie!";
+                names.text = "Tie!";
 
             SceneManager.LoadScene(0);
         }
