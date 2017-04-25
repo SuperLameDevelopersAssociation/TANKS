@@ -26,6 +26,7 @@ public class GameManager : NetworkBehaviour
     public List<byte> kills;
     public List<byte> deaths;
 
+    [SyncVar]
     int minutes = 5;
     [SyncVar]
     float seconds = 0;
