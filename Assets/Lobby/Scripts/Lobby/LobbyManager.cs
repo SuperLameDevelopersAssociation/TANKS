@@ -37,6 +37,8 @@ namespace Prototype.NetworkLobby
 
         public Text statusInfo;
         public Text hostInfo;
+        [Tooltip("The main menu before the lobby stuff")]
+        public GameObject mainPanel;
 
         //Client numPlayers from NetworkManager is always 0, so we count (throught connect/destroy in LobbyPlayer) the number
         //of players, so that even client know how many player there is.
@@ -65,6 +67,16 @@ namespace Prototype.NetworkLobby
             DontDestroyOnLoad(gameObject);
 
             SetServerInfo("Offline", "None");
+        }
+
+        void OnLevelWasLoaded()
+        {
+            if(SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                mainPanel.SetActive(true);
+                topPanel.transform.GetComponent<Image>().enabled = true;
+
+            }
         }
 
         public override void OnLobbyClientSceneChanged(NetworkConnection conn)
@@ -321,7 +333,7 @@ namespace Prototype.NetworkLobby
                     p.ToggleJoinButton(numPlayers >= minPlayers);
                 }
             }
-
+            
         }
 
         public override bool OnLobbyServerSceneLoadedForPlayer(GameObject lobbyPlayer, GameObject gamePlayer)
@@ -416,7 +428,7 @@ namespace Prototype.NetworkLobby
         public override void OnClientDisconnect(NetworkConnection conn)
         {
             base.OnClientDisconnect(conn);
-            ChangeTo(mainMenuPanel);
+            ChangeTo(mainMenuPanel);            
         }
 
         public override void OnClientError(NetworkConnection conn, int errorCode)
