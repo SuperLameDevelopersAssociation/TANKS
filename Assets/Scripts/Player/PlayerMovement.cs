@@ -15,11 +15,16 @@ public class PlayerMovement : NetworkBehaviour
     float accell;
     float steer;
 
+    int m_speed;
+    int m_rotationSpeed;
+
     Rigidbody rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        m_speed = speed;
+        m_rotationSpeed = rotationSpeed;
 
        // wheels = GetComponent<Animator>();
 
@@ -45,7 +50,7 @@ public class PlayerMovement : NetworkBehaviour
         accell = Input.GetAxis("Vertical");
         steer = Input.GetAxis("Horizontal");
 
-        int conversion = (int)(accell * 62);
+        int conversion = (int)(accell * 6 * speed);
 
         textSpeed.text = conversion + " km/h ";
 
@@ -78,5 +83,17 @@ public class PlayerMovement : NetworkBehaviour
         float turn = steer * rotationSpeed * Time.deltaTime;
         Quaternion inputRotation = Quaternion.Euler(0f, turn, 0f);
         rb.MoveRotation(rb.rotation * inputRotation);
+    }
+
+    public void MultiplySpeed(int multiplyValue)
+    {
+        speed = speed * multiplyValue;
+        rotationSpeed = rotationSpeed * multiplyValue;
+    }
+
+    public void ResetSpeed()
+    {
+        speed = m_speed;
+        rotationSpeed = m_rotationSpeed;
     }
 }

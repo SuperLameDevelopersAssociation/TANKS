@@ -47,13 +47,13 @@ public class SonicAbility : AbilitiesBase
         {
             _duration = duration;                                                       //Set FP to the float
             activated = true;                                                           //Set the flag up
-            GetComponent<PlayerMovement>().speed *= 2;
+            speed.MultiplySpeed(2);
         }
         else
         {
-            GetComponent<PlayerMovement>().speed /= 2;
             _cooldown = 5;                                                              //Reset the cooldown
             activated = false;                                                          //Turn off the flag
+            speed.ResetSpeed();
         }
     }
 }
