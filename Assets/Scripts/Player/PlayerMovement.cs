@@ -11,6 +11,8 @@ public class PlayerMovement : NetworkBehaviour
     private bool hasAnimator;
     float accell;
     float steer;
+    public int flipTimer = 30;
+    bool isFlipped = true;
 
     Rigidbody rb;
 
@@ -54,9 +56,19 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!isLocalPlayer)
             return;
-
-        Move();
-        Turn();
+        if (Vector3.Dot(transform.up, Vector3.down) < 0)
+        {
+            Move();
+            Turn();
+        }
+        else
+        {
+            if (isFlipped)
+            {
+                isFlipped = false;
+                StartCoroutine(Unflip());
+            }
+        }
     }
 
     void Move()
@@ -70,5 +82,19 @@ public class PlayerMovement : NetworkBehaviour
         float turn = steer * rotationSpeed * Time.deltaTime;
         Quaternion inputRotation = Quaternion.Euler(0f, turn, 0f);
         rb.MoveRotation(rb.rotation * inputRotation);
+    }
+    
+    IEnumerator Unflip()
+    {
+        //gameObject.transform.rotation = Quaternion.Euler; 
+        yield return new WaitForSeconds(flipTimer);
+        isFlipped = true;
+        if (Vector3.Dot(transform.up, Vector3.down) < 0)
+            yield return null;
+        else
+        {
+            transform.position = new Vector3 (transform.position.x, transform.position.y + 3, transform.position.z); 
+            transform.rotation = Quaternion.Euler(0, transform.rotation.y, 0);
+        }
     }
 }
