@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
-//using System.Collections;
+using System.Collections;
 
 public class PlayerSetup : NetworkBehaviour 
 {
@@ -15,6 +15,8 @@ public class PlayerSetup : NetworkBehaviour
     GameObject turretWrangler;
     [SerializeField]
     Sprite[] healthImages;
+    [SerializeField]
+    Behaviour[] abilties;
     [SyncVar]
     public byte ID;
     [HideInInspector]
@@ -33,10 +35,15 @@ public class PlayerSetup : NetworkBehaviour
             {
                 componentsToDisable[i].enabled = false;
             }
+
+            foreach (Behaviour ability in abilties)
+            {
+                ability.enabled = false;
+            }
         }
         else
         {
-            gameObject.name = "LocalPlayer";            
+            gameObject.name = "LocalPlayer";
         }
 
         GetComponent<Health>().ID = ID;
@@ -48,16 +55,19 @@ public class PlayerSetup : NetworkBehaviour
             case 0:
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Projectile;
                 GetComponent<Health>().healthImage.sprite = healthImages[0];
+                abilties[0].enabled = true;
                 GetComponent<Health>().armorLevel = 1;
                 break;
             case 1:
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Laser;
                 GetComponent<Health>().healthImage.sprite = healthImages[1];
+                abilties[1].enabled = true;
                 GetComponent<Health>().armorLevel = 2;
                 break;
             case 2:
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Flamethrower;
                 GetComponent<Health>().healthImage.sprite = healthImages[2];
+                abilties[2].enabled = true;
                 GetComponent<Health>().armorLevel = 3;
                 break;
             default:
@@ -80,17 +90,34 @@ public class PlayerSetup : NetworkBehaviour
                 weaponObjects[i].SetActive(false);
             }
         }
-/*
-        Debug.LogError(transform.position);
 
         if (transform.position == Vector3.zero)
         {
             Debug.LogError("Reset the point");
 
-            Transform _spawnPoint = GameManager.instance.spawnPoints[3].transform;
-            transform.position = _spawnPoint.position;
-            transform.rotation = _spawnPoint.rotation;
+            StartCoroutine(Spawn());
         }
-*/
     }
+
+    IEnumerator Spawn()
+    {
+        yield return new WaitUntil(GameManager.isInstanceNull);
+        Transform _spawnPoint = GameManager.GetInstance.spawnPoints[ID].transform;
+        transform.position = _spawnPoint.position;
+        transform.rotation = _spawnPoint.rotation;
+    }
+
+        /*
+                Debug.LogError(transform.position);
+
+                if (transform.position == Vector3.zero)
+                {
+                    Debug.LogError("Reset the point");
+
+                    Transform _spawnPoint = GameManager.instance.spawnPoints[3].transform;
+                    transform.position = _spawnPoint.position;
+                    transform.rotation = _spawnPoint.rotation;
+                }
+        */
+    
 }
