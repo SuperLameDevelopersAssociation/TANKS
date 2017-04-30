@@ -38,8 +38,10 @@ public class GameManager : NetworkBehaviour
     // ------------- Gameplay -------------
     public static GameManager instance;
     public List<Transform> spawnPoints;
-    public static bool deathmatchActive;
-    public static bool teamDeathmatchActive;
+    [SyncVar]
+    public bool deathmatchActive;
+    [SyncVar]
+    public bool teamDeathmatchActive;
 
     private bool returnToMenu;
     private bool isTie;
@@ -60,12 +62,9 @@ public class GameManager : NetworkBehaviour
     void Start()
     {
         teamA = new List<int>();
-        teamB = new List<int>();
+        teamB = new List<int>();        
 
-        print("team?: " + teamDeathmatchActive);
-        print("Dm? : " + deathmatchActive);
-
-        teamDeathmatchActive = true;
+        //teamDeathmatchActive = true;
 
         for (int i = 0; i < Prototype.NetworkLobby.LobbyManager.s_Singleton._playerNumber; i++)
         {
@@ -113,6 +112,17 @@ public class GameManager : NetworkBehaviour
         if (returnToMenu && Input.GetKeyDown(KeyCode.Space))
         {
             LoadMainMenu();
+        }
+    }
+
+    public static void SetGamemode(bool deathmatchVal, bool teamVal)
+    {
+        if (!instance.deathmatchActive && !instance.teamDeathmatchActive)
+        {
+            instance.deathmatchActive = deathmatchVal;
+            instance.teamDeathmatchActive = teamVal;
+            Debug.LogError("team?: " + instance.teamDeathmatchActive);
+            Debug.LogError("Dm? : " + instance.deathmatchActive);
         }
     }
 
