@@ -22,6 +22,7 @@ public class GameManager : NetworkBehaviour
     public int matchEndingTime;
     public float respawnTime;
     public List<Transform> spawnPoints;
+    private static Dictionary<byte, string> playerName = new Dictionary<byte, string>();
     private static Dictionary<byte, GameObject> playerList = new Dictionary<byte, GameObject>();
     public List<byte> kills;
     public List<byte> deaths;
@@ -37,8 +38,8 @@ public class GameManager : NetworkBehaviour
 
     public string matchTime = "";
 
-    private Text names;
-    private Text scores;
+    private Text namesText;
+    private Text scoresText;
     private GameManager() { }
 
     public static bool isInstanceNull()
@@ -61,8 +62,8 @@ public class GameManager : NetworkBehaviour
         deathmatchActive = true;
         minutes = matchTimeInMinutes;
         seconds = 1;
-        names = score.transform.FindChild("PlayerNames").gameObject.GetComponent<Text>();
-        scores = score.transform.FindChild("KillsDeaths").gameObject.GetComponent<Text>();
+        namesText = score.transform.FindChild("PlayerNames").gameObject.GetComponent<Text>();
+        scoresText = score.transform.FindChild("KillsDeaths").gameObject.GetComponent<Text>();
         UpdateScoreText();
     }
 
@@ -86,11 +87,12 @@ public class GameManager : NetworkBehaviour
         UpdateTimerText();
     }
 
-    public static void RegisterPlayer(byte ID, GameObject player, int tankSelected)
+    public static void RegisterPlayer(byte ID, string name, GameObject player, int tankSelected)
     {
         if (!playerList.ContainsKey(ID))
         {
             playerList.Add(ID, player);
+            playerName.Add(ID, name);
             player.GetComponent<PlayerSetup>().ID = ID;
             player.GetComponent<PlayerSetup>().tankSelected = tankSelected;
         }
@@ -133,16 +135,12 @@ public class GameManager : NetworkBehaviour
 
     void UpdateScoreText()
     {
-        //names.text = "";
-        //scores.text = "";
         for (int index = 0; index < kills.Count; index++)
         {
             // Get typed in name.
-            string playerName = "Player";
-            names.text += string.Format("\n{0}", " Player " + (index + 1));
-            scores.text += string.Format("\n{0} \t\t\t {1}", kills[index], deaths[index]);
-        //score.text += " Name " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";     
-    }
+            namesText.text += string.Format("\n{0} ", playerName[(byte)index] );
+            scoresText.text += string.Format("\n{0} \t\t\t {1}", kills[index], deaths[index]);
+        }
 
     }
 
@@ -159,11 +157,11 @@ public class GameManager : NetworkBehaviour
             matchEnding = true;
 
             byte player = PlayerThatWon();
-            scores.text = "";
+            scoresText.text = "";
             if (player != 100)
-                names.text = "Player " + (player + 1) + " Won!";
+                namesText.text = "Player " + (player + 1) + " Won!";
             else
-                names.text = "Tie!";
+                namesText.text = "Tie!";
 
             SceneManager.LoadScene(0);
         }
