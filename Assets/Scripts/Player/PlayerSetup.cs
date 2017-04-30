@@ -36,14 +36,13 @@ public class PlayerSetup : NetworkBehaviour
                 componentsToDisable[i].enabled = false;
             }
 
-            foreach (Behaviour ability in abilties)
-            {
-                ability.enabled = false;
-            }
+            
         }
         else
         {
             gameObject.name = "LocalPlayer";
+
+            abilties[tankSelected].enabled = true;
         }
 
         GetComponent<Health>().ID = ID;
@@ -55,19 +54,16 @@ public class PlayerSetup : NetworkBehaviour
             case 0:
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Projectile;
                 GetComponent<Health>().healthImage.sprite = healthImages[0];
-                abilties[0].enabled = true;
                 GetComponent<Health>().armorLevel = 1;
                 break;
             case 1:
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Laser;
                 GetComponent<Health>().healthImage.sprite = healthImages[1];
-                abilties[1].enabled = true;
                 GetComponent<Health>().armorLevel = 2;
                 break;
             case 2:
                 GetComponent<Shooting>().currentWeapon = Shooting.CurrentWeapon.Flamethrower;
                 GetComponent<Health>().healthImage.sprite = healthImages[2];
-                abilties[2].enabled = true;
                 GetComponent<Health>().armorLevel = 3;
                 break;
             default:
