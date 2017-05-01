@@ -37,7 +37,6 @@ public class GameManager : NetworkBehaviour
     public bool matchEnding;
     //public int matchTimeInMinutes;
     public float respawnTime;
-    public Text output;
     public Text results;
     public string matchTime;
 
@@ -244,7 +243,7 @@ public class GameManager : NetworkBehaviour
         {
             matchEnding = true;
             endPanel.SetActive(true);
-            output.gameObject.SetActive(false);
+            score.SetActive(false);
 
             if (deathmatchActive)
             {
