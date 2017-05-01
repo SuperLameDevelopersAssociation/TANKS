@@ -15,6 +15,10 @@ namespace Prototype.NetworkLobby
         //used on server to avoid assigning the same color to two player
         static List<int> _colorInUse = new List<int>();
 
+        public Toggle deathmatch;
+        public Toggle teamDeathmatch;
+        public Slider timeSlider;
+        public Slider scoreSlider;
         public Button colorButton;
         public InputField nameInput;
         public Dropdown tankSelectDropdown;
@@ -110,6 +114,14 @@ namespace Prototype.NetworkLobby
             tankSelectDropdown.interactable = true;
             remoteIcone.gameObject.SetActive(false);
             localIcone.gameObject.SetActive(true);
+
+            if (isServer)
+            {
+                deathmatch.gameObject.SetActive(true);
+                teamDeathmatch.gameObject.SetActive(true);
+                deathmatch.interactable = true;
+                teamDeathmatch.interactable = true;
+            }
 
             CheckRemoveButton();
 
