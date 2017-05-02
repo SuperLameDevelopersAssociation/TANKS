@@ -41,14 +41,14 @@ public class GameManager : NetworkBehaviour
     public string matchTime;
 
     [SyncVar]
-    float minutes = 1;
+    float minutes = 5;
     [SyncVar]
     float seconds = 0;
 
     // ------------- Gameplay -------------
     public List<Transform> spawnPoints;
     [SyncVar]
-    bool deathmatchActive;
+    bool deathmatchActive = true;
     [SyncVar]
     bool teamDeathmatchActive;
 
@@ -59,6 +59,7 @@ public class GameManager : NetworkBehaviour
     private static Dictionary<byte, GameObject> playerList = new Dictionary<byte, GameObject>();
     private Text namesText;
     private Text scoresText;
+    private string baseScoreText;
     private bool updatedScore = false;
     #endregion
 
@@ -219,9 +220,11 @@ public class GameManager : NetworkBehaviour
 
     void UpdateScoreText()
     {
+        namesText.text = "Player Names";
+        scoresText.text = "Kills	/	Deaths";
         for (int index = 0; index < kills.Count; index++)
         {
-            //namesText.text += string.Format("\n{0} ", playerName[(byte)index]);
+            namesText.text += "\nPlayer " + (index + 1) + " :";
             scoresText.text += string.Format("\n{0} \t\t\t {1}", kills[index], deaths[index]);
         }
 
