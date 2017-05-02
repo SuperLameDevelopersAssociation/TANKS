@@ -115,13 +115,16 @@ namespace Prototype.NetworkLobby
             remoteIcone.gameObject.SetActive(false);
             localIcone.gameObject.SetActive(true);
 
-            if (isServer)
-            {
-                deathmatch.gameObject.SetActive(true);
-                teamDeathmatch.gameObject.SetActive(true);
-                deathmatch.interactable = true;
-                teamDeathmatch.interactable = true;
-            }
+            deathmatch.gameObject.SetActive(isServer);
+            teamDeathmatch.gameObject.SetActive(isServer);
+            deathmatch.interactable = isServer;
+            teamDeathmatch.interactable = isServer;
+
+            scoreSlider.gameObject.SetActive(isServer);
+            scoreSlider.interactable = isServer;
+            timeSlider.gameObject.SetActive(isServer);
+            timeSlider.interactable = isServer;
+          
 
             CheckRemoveButton();
 

@@ -20,7 +20,7 @@ public class GameManager : NetworkBehaviour
     #region Variables
     //----------- Deathmatch ------------
     [SyncVar]
-    public byte killsToWin = 0;
+    public byte killsToWin = 5;
     public List<byte> kills;
     public List<byte> deaths;
 
@@ -41,16 +41,16 @@ public class GameManager : NetworkBehaviour
     public string matchTime;
 
     [SyncVar]
-    float minutes = 0;
+    float minutes = 1;
     [SyncVar]
     float seconds = 0;
 
     // ------------- Gameplay -------------
     public List<Transform> spawnPoints;
     [SyncVar]
-    public bool deathmatchActive;
+    bool deathmatchActive;
     [SyncVar]
-    public bool teamDeathmatchActive;
+    bool teamDeathmatchActive;
 
     private bool returnToMenu;
     private bool isTie;
@@ -59,6 +59,7 @@ public class GameManager : NetworkBehaviour
     private static Dictionary<byte, GameObject> playerList = new Dictionary<byte, GameObject>();
     private Text namesText;
     private Text scoresText;
+    private bool updatedScore = false;
     #endregion
 
     private GameManager() { }
@@ -220,7 +221,7 @@ public class GameManager : NetworkBehaviour
     {
         for (int index = 0; index < kills.Count; index++)
         {
-            namesText.text += string.Format("\n{0} ", playerName[(byte)index]);
+            //namesText.text += string.Format("\n{0} ", playerName[(byte)index]);
             scoresText.text += string.Format("\n{0} \t\t\t {1}", kills[index], deaths[index]);
         }
 

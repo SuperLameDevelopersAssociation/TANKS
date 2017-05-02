@@ -351,8 +351,8 @@ namespace Prototype.NetworkLobby
             if(lp != null)
             {
                 GameManager.RegisterPlayer(lp.slot, lp.playerName, gamePlayer, lp.tankSelected);
-                GameManager.SetGamemode(lp.deathmatch.isOn, lp.teamDeathmatch.isOn);
-                GameManager.SetGameVars((int)lp.timeSlider.value, (byte)lp.scoreSlider.value);
+                //GameManager.SetGamemode(lp.deathmatch.isOn, lp.teamDeathmatch.isOn);
+                //GameManager.SetGameVars((int)lp.timeSlider.value, (byte)lp.scoreSlider.value);
             }
 
             return true;
