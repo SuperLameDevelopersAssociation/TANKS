@@ -57,6 +57,7 @@ namespace Prototype.NetworkLobby
 
         protected LobbyHook _lobbyHooks;
 
+        public static List<string> playerNames = new List<string>();
         bool setGameVars;
 
         void Start()
@@ -351,14 +352,18 @@ namespace Prototype.NetworkLobby
             LobbyPlayer lp = lobbyPlayer.GetComponent<LobbyPlayer>();
 
             if(lp != null)
-            {                
-                GameManager.RegisterPlayer(lp.slot, gamePlayer, lp.tankSelected);
+            {
+                print(playerNames);
+                playerNames.Add(lp.playerName);
+                print("LobbyManager" + playerNames.Count);
+                GameManager.RegisterPlayer(lp.slot, gamePlayer, lp.tankSelected, lp.playerName);
                 if (!setGameVars && lp.isServer)
                 {
                     setGameVars = true;
                     GameManager.SetGamemode(lp.deathmatch.isOn, lp.teamDeathmatch.isOn);
                     GameManager.SetGameVars((int)lp.timeSlider.value, (byte)lp.scoreSlider.value);
                 }
+                GameManager.SetPlayerNames(playerNames);
             }
 
             return true;

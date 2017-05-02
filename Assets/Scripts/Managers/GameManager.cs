@@ -56,7 +56,10 @@ public class GameManager : NetworkBehaviour
     bool deathmatchActive = true;
     [SyncVar]
     bool teamDeathmatchActive;
+
     
+    static List<string> staticNames = new List<string>();
+    List<string> names = new List<string>();
 
     private bool returnToMenu;
     private bool isTie;
@@ -115,7 +118,15 @@ public class GameManager : NetworkBehaviour
 
     void Start()
     {
-        UpdateScoreText();
+        for (int i = 0; i < staticNames.Count; i++)
+        {
+            names.Add(staticNames[i]);
+            namesText.text += "\n" + names[i] + " :";
+        }
+
+        print("GameManager Awake" + names.Count);
+
+        //UpdateScoreText();
     }
 
     void Update()
@@ -149,24 +160,32 @@ public class GameManager : NetworkBehaviour
         staticTeamDeathmatchActive = teamVal;
     }
 
+    public static void SetPlayerNames(List<string> playerNames)
+    {
+        for (int i = 0; i < Prototype.NetworkLobby.LobbyManager.playerNames.Count; i++)
+        {
+            staticNames.Add(playerNames[i]);
+        }
+
+        print(playerNames.Count);
+    }
+
     public static void SetGameVars(int timer, byte score)
     {
         staticMinutes = timer;
         staticKillsToWin = score;
     }
 
-
-    public static void RegisterPlayer(byte ID, GameObject player, int tankSelected)
+    
+    public static void RegisterPlayer(byte ID, GameObject player, int tankSelected, string name)
     {
         if (!playerList.ContainsKey(ID))
         {
             playerList.Add(ID, player);
-            //playerNames.Add(name);
             player.GetComponent<PlayerSetup>().ID = ID;
             player.GetComponent<PlayerSetup>().tankSelected = tankSelected;
         }
     }
-
     public static void UnRegisterPlayer(byte ID)
     {
         playerList.Remove(ID);
@@ -228,7 +247,8 @@ public class GameManager : NetworkBehaviour
         scoresText.text = "Kills	/	Deaths";
         for (int index = 0; index < kills.Count; index++)
         {
-            namesText.text += "\nPlayer " + (index + 1) + " :";     //string.Format("\n{0} ", playerNames[(byte)index]);
+            namesText.text += "\n" + names[index] + " :";     //string.Format("\n{0} ", playerNames[(byte)index]);
+            print("UpdateScoreText " + names.Count);
             scoresText.text += string.Format("\n{0} \t\t\t {1}", kills[index], deaths[index]);
         }
 
