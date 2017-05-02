@@ -5,7 +5,7 @@ using UnityEngine.Networking;
 using UnityEngine.Networking.Types;
 using UnityEngine.Networking.Match;
 using System.Collections;
-
+using System.Collections.Generic;
 
 namespace Prototype.NetworkLobby
 {
@@ -56,6 +56,8 @@ namespace Prototype.NetworkLobby
         protected ulong _currentMatchID;
 
         protected LobbyHook _lobbyHooks;
+
+        bool setGameVars;
 
         void Start()
         {
@@ -349,10 +351,14 @@ namespace Prototype.NetworkLobby
             LobbyPlayer lp = lobbyPlayer.GetComponent<LobbyPlayer>();
 
             if(lp != null)
-            {
-                GameManager.RegisterPlayer(lp.slot, lp.playerName, gamePlayer, lp.tankSelected);
-                //GameManager.SetGamemode(lp.deathmatch.isOn, lp.teamDeathmatch.isOn);
-                //GameManager.SetGameVars((int)lp.timeSlider.value, (byte)lp.scoreSlider.value);
+            {                
+                GameManager.RegisterPlayer(lp.slot, gamePlayer, lp.tankSelected);
+                if (!setGameVars && lp.isServer)
+                {
+                    setGameVars = true;
+                    GameManager.SetGamemode(lp.deathmatch.isOn, lp.teamDeathmatch.isOn);
+                    GameManager.SetGameVars((int)lp.timeSlider.value, (byte)lp.scoreSlider.value);
+                }
             }
 
             return true;

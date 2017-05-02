@@ -97,7 +97,7 @@ public class PlayerSetup : NetworkBehaviour
 
     IEnumerator Spawn()
     {
-        yield return new WaitUntil(GameManager.isInstanceNull);
+        yield return new WaitWhile(GameManager.IsInstanceNull);
         Transform _spawnPoint = GameManager.GetInstance.spawnPoints[ID].transform;
         transform.position = _spawnPoint.position;
         transform.rotation = _spawnPoint.rotation;

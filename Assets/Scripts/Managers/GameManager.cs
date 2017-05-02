@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine.SceneManagement;
 using System.Linq;
 
@@ -19,8 +20,9 @@ public class GameManager : NetworkBehaviour
     //public Text score;
     #region Variables
     //----------- Deathmatch ------------
+    static byte staticKillsToWin = 3;
     [SyncVar]
-    public byte killsToWin = 5;
+    public byte killsToWin = 3;
     public List<byte> kills;
     public List<byte> deaths;
 
@@ -38,19 +40,23 @@ public class GameManager : NetworkBehaviour
     //public int matchTimeInMinutes;
     public float respawnTime;
     public Text results;
-    public string matchTime;
+    public string matchTime = "0000";
 
+    static float staticMinutes = 1;
     [SyncVar]
-    float minutes = 5;
+    float minutes = 1;
     [SyncVar]
     float seconds = 0;
 
     // ------------- Gameplay -------------
     public List<Transform> spawnPoints;
+    static bool staticDeathmatchActive = true;
+    static bool staticTeamDeathmatchActive  = false;
     [SyncVar]
     bool deathmatchActive = true;
     [SyncVar]
     bool teamDeathmatchActive;
+    
 
     private bool returnToMenu;
     private bool isTie;
@@ -65,18 +71,21 @@ public class GameManager : NetworkBehaviour
 
     private GameManager() { }
 
-    public static bool isInstanceNull()
+    public static bool IsInstanceNull()
     {
-        return instance != null;
+        return instance == null;
     }
 
     void Awake()
     {
-        instance = this;
-    }
+        if (instance == null)
+            instance = this;
 
-    void Start()
-    {
+        teamDeathmatchActive = staticTeamDeathmatchActive;
+        deathmatchActive = staticDeathmatchActive;
+        minutes = staticMinutes;
+        killsToWin = staticKillsToWin;
+
         teamA = new List<int>();
         teamB = new List<int>();
 
@@ -90,12 +99,10 @@ public class GameManager : NetworkBehaviour
                 if ((i + 3) % 2 == 1)
                 {
                     teamA.Add(i);
-                    print(i + " goes to team A.");
                 }
                 else
                 {
                     teamB.Add(i);
-                    print(i + " goes to team B.");
                 }
             }
         }
@@ -103,6 +110,11 @@ public class GameManager : NetworkBehaviour
         seconds = 1;
         namesText = score.transform.FindChild("PlayerNames").gameObject.GetComponent<Text>();
         scoresText = score.transform.FindChild("KillsDeaths").gameObject.GetComponent<Text>();
+        
+    }
+
+    void Start()
+    {
         UpdateScoreText();
     }
 
@@ -133,31 +145,23 @@ public class GameManager : NetworkBehaviour
 
     public static void SetGamemode(bool deathmatchVal, bool teamVal)
     {
-        if (!instance.deathmatchActive && !instance.teamDeathmatchActive)
-        {
-            instance.deathmatchActive = deathmatchVal;
-            instance.teamDeathmatchActive = teamVal;
-        }
+        staticDeathmatchActive = deathmatchVal;
+        staticTeamDeathmatchActive = teamVal;
     }
 
     public static void SetGameVars(int timer, byte score)
     {
-        //if (instance.killsToWin == 0 && instance.minutes == 0)
-        //{
-            instance.minutes = timer;
-            instance.killsToWin = score;
-
-            Debug.Log("The score to win is: " + instance.killsToWin);
-        //}
+        staticMinutes = timer;
+        staticKillsToWin = score;
     }
 
 
-    public static void RegisterPlayer(byte ID, string name, GameObject player, int tankSelected)
+    public static void RegisterPlayer(byte ID, GameObject player, int tankSelected)
     {
         if (!playerList.ContainsKey(ID))
         {
             playerList.Add(ID, player);
-            playerName.Add(ID, name);
+            //playerNames.Add(name);
             player.GetComponent<PlayerSetup>().ID = ID;
             player.GetComponent<PlayerSetup>().tankSelected = tankSelected;
         }
@@ -224,7 +228,7 @@ public class GameManager : NetworkBehaviour
         scoresText.text = "Kills	/	Deaths";
         for (int index = 0; index < kills.Count; index++)
         {
-            namesText.text += "\nPlayer " + (index + 1) + " :";
+            namesText.text += "\nPlayer " + (index + 1) + " :";     //string.Format("\n{0} ", playerNames[(byte)index]);
             scoresText.text += string.Format("\n{0} \t\t\t {1}", kills[index], deaths[index]);
         }
 
