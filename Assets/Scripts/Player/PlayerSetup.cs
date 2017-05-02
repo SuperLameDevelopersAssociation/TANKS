@@ -28,15 +28,14 @@ public class PlayerSetup : NetworkBehaviour
 
     void Start()
     {
+        abilties[tankSelected].enabled = true;
         if (!isLocalPlayer)
         {
             gameObject.name = "RemotePlayer";
             for (int i = 0; i < componentsToDisable.Length; i++)
             {
                 componentsToDisable[i].enabled = false;
-            }
-
-            
+            }            
         }
         else
         {
@@ -86,6 +85,9 @@ public class PlayerSetup : NetworkBehaviour
                 weaponObjects[i].SetActive(false);
             }
         }
+
+        if(!isLocalPlayer)
+            abilties[tankSelected].enabled = false;
 
         if (transform.position == Vector3.zero)
         {
