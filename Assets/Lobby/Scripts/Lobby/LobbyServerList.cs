@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using UnityEngine.Networking.Match;
+using UnityEngine.Networking.Types;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,6 +11,7 @@ namespace Prototype.NetworkLobby
     public class LobbyServerList : MonoBehaviour
     {
         public LobbyManager lobbyManager;
+        public LobbyMainMenu lobbyMainMenu;
 
         public RectTransform serverListRect;
         public GameObject serverEntryPrefab;
@@ -23,6 +25,7 @@ namespace Prototype.NetworkLobby
 
         void OnEnable()
         {
+           // lobbyMainMenu = GetComponentInParent<LobbyMainMenu>();
             currentPage = 0;
             previousPage = 0;
 
@@ -48,6 +51,26 @@ namespace Prototype.NetworkLobby
                 return;
             }
 
+            //MatchMaking
+
+            for (int i = 0; i < matches.Count; i++)
+            {
+                if (matches[i].currentSize <= 4 && matches.Count != 0)
+                {
+                    NetworkID networkID = matches[i].networkId;
+                    JoinMatch(networkID, lobbyManager);
+                }
+                else
+                {
+                    print("yes");
+                    if (i == matches.Count - 1)
+                    {
+                        print("3 seconds");
+                        lobbyMainMenu.OnClickCreateMatchmakingGame();
+                    }
+                }
+            }
+
             noServerFound.SetActive(false);
             foreach (Transform t in serverListRect)
                 Destroy(t.gameObject);
@@ -60,6 +83,14 @@ namespace Prototype.NetworkLobby
 
 				o.transform.SetParent(serverListRect, false);
             }
+        }
+
+        void JoinMatch(NetworkID networkID, LobbyManager lobbyManager)
+        {
+            lobbyManager.matchMaker.JoinMatch(networkID, "", "", "", 0, 0, lobbyManager.OnMatchJoined);
+            lobbyManager.backDelegate = lobbyManager.StopClientClbk;
+            lobbyManager._isMatchmaking = true;
+            lobbyManager.DisplayIsConnecting();
         }
 
         public void ChangePage(int dir)
@@ -78,6 +109,7 @@ namespace Prototype.NetworkLobby
             previousPage = currentPage;
             currentPage = page;
 			lobbyManager.matchMaker.ListMatches(page, 6, "", true, 0, 0, OnGUIMatchList);
+           // print(lobbyManager.matches.Count);
 		}
     }
 }

@@ -56,6 +56,7 @@ namespace Prototype.NetworkLobby
 
         public void OnClickCreateMatchmakingGame()
         {
+            print("Peter said this is getting called");
             lobbyManager.StartMatchMaker();
             lobbyManager.matchMaker.CreateMatch(
                 matchNameInput.text,
