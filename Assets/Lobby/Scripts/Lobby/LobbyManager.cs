@@ -352,7 +352,7 @@ namespace Prototype.NetworkLobby
 
             if(lp != null)
             {                
-                GameManager.RegisterPlayer(lp.slot, gamePlayer, lp.tankSelected);
+                GameManager.RegisterPlayer(lp.slot, gamePlayer, lp.playerColor, lp.tankSelected);
                 if (!setGameVars && lp.isServer)
                 {
                     setGameVars = true;

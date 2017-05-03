@@ -23,6 +23,10 @@ public class PlayerSetup : NetworkBehaviour
     public Transform spawnPoint;
     [SyncVar]
     public int tankSelected;
+    public Color teamOneColor;
+    public Color teamTwoColor;
+    [SyncVar]
+    public Color tankColor;
     [SerializeField]
     NetworkAnimator anim;
 
@@ -34,9 +38,7 @@ public class PlayerSetup : NetworkBehaviour
             for (int i = 0; i < componentsToDisable.Length; i++)
             {
                 componentsToDisable[i].enabled = false;
-            }
-
-            
+            }            
         }
         else
         {
@@ -87,6 +89,8 @@ public class PlayerSetup : NetworkBehaviour
             }
         }
 
+        StartCoroutine(SetColor());
+
         if (transform.position == Vector3.zero)
         {
             Debug.LogError("Reset the point");
@@ -103,17 +107,33 @@ public class PlayerSetup : NetworkBehaviour
         transform.rotation = _spawnPoint.rotation;
     }
 
-        /*
-                Debug.LogError(transform.position);
+    IEnumerator SetColor()
+    {
+        yield return new WaitWhile(GameManager.IsInstanceNull);
 
-                if (transform.position == Vector3.zero)
-                {
-                    Debug.LogError("Reset the point");
+        if (GameManager.GetInstance.deathmatchActive)
+            GetComponent<ColorSetter>().SetColor(tankColor);
+        else
+        {
+            if ((ID + 3) % 2 == 1)
+                GetComponent<ColorSetter>().SetColor(teamOneColor);
+            else
+                GetComponent<ColorSetter>().SetColor(teamTwoColor);
+        }
+            
+    }
 
-                    Transform _spawnPoint = GameManager.instance.spawnPoints[3].transform;
-                    transform.position = _spawnPoint.position;
-                    transform.rotation = _spawnPoint.rotation;
-                }
-        */
-    
+    /*
+            Debug.LogError(transform.position);
+
+            if (transform.position == Vector3.zero)
+            {
+                Debug.LogError("Reset the point");
+
+                Transform _spawnPoint = GameManager.instance.spawnPoints[3].transform;
+                transform.position = _spawnPoint.position;
+                transform.rotation = _spawnPoint.rotation;
+            }
+    */
+
 }

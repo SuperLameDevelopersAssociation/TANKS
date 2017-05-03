@@ -53,10 +53,9 @@ public class GameManager : NetworkBehaviour
     static bool staticDeathmatchActive = true;
     static bool staticTeamDeathmatchActive  = false;
     [SyncVar]
-    bool deathmatchActive = true;
+    public bool deathmatchActive = true;
     [SyncVar]
-    bool teamDeathmatchActive;
-    
+    bool teamDeathmatchActive;    
 
     private bool returnToMenu;
     private bool isTie;
@@ -74,7 +73,7 @@ public class GameManager : NetworkBehaviour
     public static bool IsInstanceNull()
     {
         return instance == null;
-    }
+    }  
 
     void Awake()
     {
@@ -156,12 +155,12 @@ public class GameManager : NetworkBehaviour
     }
 
 
-    public static void RegisterPlayer(byte ID, GameObject player, int tankSelected)
+    public static void RegisterPlayer(byte ID, GameObject player, Color color, int tankSelected)
     {
         if (!playerList.ContainsKey(ID))
         {
             playerList.Add(ID, player);
-            //playerNames.Add(name);
+            player.GetComponent<PlayerSetup>().tankColor = color;
             player.GetComponent<PlayerSetup>().ID = ID;
             player.GetComponent<PlayerSetup>().tankSelected = tankSelected;
         }
