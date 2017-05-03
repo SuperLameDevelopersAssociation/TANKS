@@ -101,12 +101,14 @@ public class Shooting : NetworkBehaviour
             sustained = flamethrowerObject.GetComponent<Sustained>();
             sustained.damage = flamethrowerDamage;
             sustained.ID = ID;
+            ammoText.gameObject.SetActive(false);
         }
         else if (currentWeapon.Equals(CurrentWeapon.Laser))
         {
             sustained = laserObject.GetComponent<Sustained>();
             sustained.damage = laserDamage;
             sustained.ID = ID;
+            ammoText.gameObject.SetActive(false);
         }
         else
         {

@@ -21,8 +21,6 @@ public class Health : NetworkBehaviour
     private int originalMaxHealth;
     private bool defenseBoost = false;
 
-	public Slider healthBar;
-
     [SyncVar]
     public bool inSpawn = true;
 
@@ -37,12 +35,9 @@ public class Health : NetworkBehaviour
 
     void Awake()
 	{        
-        healthBar.maxValue = maxHealth;
-		healthBar.value = 0;
         originalMaxHealth = maxHealth;
         Invoke("SetArmor", 1);
         currHealth = maxHealth;
-		SetHealthBar();
         SetHealthUI();
         Invoke("CmdSetHealth", 1);
 
@@ -78,7 +73,6 @@ public class Health : NetworkBehaviour
 
         damage -= (int)(damage * armorBonus);               //apply armor bonus
         currHealth -= damage;
-        SetHealthBar();
         SetHealthUI();
 
         damageSound.PlayDamageSFX(currentWeapon.currentWeapon.ToString());
@@ -112,7 +106,6 @@ public class Health : NetworkBehaviour
         if (isLocalPlayer)
             currentWeapon.ResetAmmo();
 
-        SetHealthBar();
         SetHealthUI();
         respawning = false;
     }
@@ -159,14 +152,8 @@ public class Health : NetworkBehaviour
             currHealth = maxHealth;
         }
 
-        SetHealthBar();
+        SetHealthUI();
     }
-
-    [Client]
-	public void SetHealthBar()
-	{
-		healthBar.value = currHealth;
-	}
 
     [Client]
     public void SetHealthUI()
