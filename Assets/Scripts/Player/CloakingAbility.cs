@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using System.Collections;
 
 public class CloakingAbility : AbilitiesBase
 {
@@ -15,8 +16,9 @@ public class CloakingAbility : AbilitiesBase
 
     public KeyCode activationKey;                                   //key to activate the power
 
-    void Start()
+    IEnumerator Start()
     {
+        yield return new WaitForSeconds(1);
         if (isServer)
             RpcFind();
         else
@@ -66,7 +68,6 @@ public class CloakingAbility : AbilitiesBase
                 RpcActivatePower(true);
             else
                 CmdActivatePower(true);
-
         }
 
         if (_cooldown > 0)                                                              //Subtract delta time from the overall time
