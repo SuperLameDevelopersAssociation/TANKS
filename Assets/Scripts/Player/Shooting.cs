@@ -108,6 +108,8 @@ public class Shooting : NetworkBehaviour
             sustained = laserObject.GetComponent<Sustained>();
             sustained.damage = laserDamage;
             sustained.ID = ID;
+           // Debug.LogError("ID Here is: " + ID);
+           // Debug.LogError("The ID is Now: " + sustained.ID);
             ammoText.gameObject.SetActive(false);
         }
         else
@@ -151,7 +153,7 @@ public class Shooting : NetworkBehaviour
             sustained.damage = flamethrowerDamage;
             sustained.ID = ID;
         }
-        else if (currentWeap == CurrentWeapon.Flamethrower.ToString())
+        else if (currentWeap == CurrentWeapon.Laser.ToString())
         {
             sustained = laserObject.GetComponent<Sustained>();
             sustained.damage = laserDamage;
