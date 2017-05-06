@@ -34,9 +34,7 @@ public class PlayerSetup : NetworkBehaviour
             for (int i = 0; i < componentsToDisable.Length; i++)
             {
                 componentsToDisable[i].enabled = false;
-            }
-
-            
+            }  
         }
         else
         {
@@ -87,12 +85,7 @@ public class PlayerSetup : NetworkBehaviour
             }
         }
 
-        if (transform.position == Vector3.zero)
-        {
-            Debug.LogError("Reset the point");
-
-            StartCoroutine(Spawn());
-        }
+        StartCoroutine(Spawn());
     }
 
     IEnumerator Spawn()

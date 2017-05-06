@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.Networking;
+using System.Collections;
 
 public class CloakingAbility : AbilitiesBase
 {
     float _cooldown = 0;
-    
+
     public Material cloakMaterial;                                  //Material to add to give cloaking effect
     public Renderer[] originalChildrenRender;                       //Grab the current children render so they can be reset after ability is done
     Renderer[] cloakedChildrenRender;                               //copy of the current children renders so they can be changed to cloaking ability
@@ -15,16 +16,38 @@ public class CloakingAbility : AbilitiesBase
 
     public KeyCode activationKey;                                   //key to activate the power
 
-    void Awake()
+    IEnumerator Start()
     {
+        yield return new WaitForSeconds(1);
+        if (isServer)
+            RpcFind();
+        else
+        {
+            CmdFind();
+            CmdFindObjects();
+        }
+
         originalChildrenRender = GetComponentsInChildren<Renderer>();
         mats = new Material[originalChildrenRender.Length];         //Set length of array
-        //_cooldown = cooldown;
         cloakedChildrenRender = originalChildrenRender;             //Copy array to second array
         for (int i = 0; i < originalChildrenRender.Length; i++)
             mats[i] = originalChildrenRender[i].material;           //Set mats array to originalChildrenRender
+    }
 
-        CmdFindObjects();
+    [Command]
+    void CmdFind()
+    {
+        RpcFind();
+    }
+
+    [ClientRpc]
+    void RpcFind()
+    {
+        originalChildrenRender = GetComponentsInChildren<Renderer>();
+        mats = new Material[originalChildrenRender.Length];         //Set length of array
+        cloakedChildrenRender = originalChildrenRender;             //Copy array to second array
+        for (int i = 0; i < originalChildrenRender.Length; i++)
+            mats[i] = originalChildrenRender[i].material;           //Set mats array to originalChildrenRender
     }
 
     [Command]
@@ -40,16 +63,24 @@ public class CloakingAbility : AbilitiesBase
     void Update()
     {
         if (Input.GetKeyDown(activationKey) && _cooldown <= 0 && !activated)            //Input is pressed and cooldown is zeroed and not already turned on
-            CmdActivatePower(true);                                                         
+        {
+            if (isServer)
+                RpcActivatePower(true);
+            else
+                CmdActivatePower(true);
+        }
 
         if (_cooldown > 0)                                                              //Subtract delta time from the overall time
             _cooldown -= Time.deltaTime;
 
-        if(_duration > 0)                                                               //Subtract delta time from the overall time
+        if (_duration > 0)                                                               //Subtract delta time from the overall time
             _duration -= Time.deltaTime;
-        else if(_duration <= 0 && activated)
+        else if (_duration <= 0 && activated)
         {
-            CmdActivatePower(false);
+            if (isServer)
+                RpcActivatePower(false);
+            else
+                CmdActivatePower(false);
         }
     }
 
