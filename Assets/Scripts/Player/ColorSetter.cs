@@ -11,7 +11,12 @@ public class ColorSetter : NetworkBehaviour
 
     void Awake()
     {
-        if (tankColor.a == 0) tankColor.a = 255;
+        //SetColor(tankColor);
+    }
+
+    public void SetColor(Color32 tankColor)
+    {
+        this.tankColor = tankColor;
 
         originalChildrenRender = GetComponentsInChildren<Renderer>();
         mats = new Material[originalChildrenRender.Length];         //Set length of array
@@ -27,6 +32,7 @@ public class ColorSetter : NetworkBehaviour
         CmdFindObjects();
         CmdServerColor();
     }
+
 
     [Command]
     void CmdFindObjects()
@@ -47,11 +53,10 @@ public class ColorSetter : NetworkBehaviour
     [ClientRpc] //Activates power on all clients
     void RpcSetColor()
     {
+        if (cloakedChildrenRender == null) return;
         for (int i = 0; i < cloakedChildrenRender.Length; i++)
         {
             cloakedChildrenRender[i].material.color = tankColor;                      //Change materials to cloaked material
         }
-
-        Debug.LogError("This has occured");
     }
 }

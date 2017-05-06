@@ -351,8 +351,8 @@ namespace Prototype.NetworkLobby
             LobbyPlayer lp = lobbyPlayer.GetComponent<LobbyPlayer>();
 
             if(lp != null)
-            {                
-                GameManager.RegisterPlayer(lp.slot, gamePlayer, lp.tankSelected);
+            {
+                GameManager.RegisterPlayer(lp.slot, gamePlayer, lp.playerColor, lp.tankSelected);
                 if (!setGameVars && lp.isServer)
                 {
                     setGameVars = true;
