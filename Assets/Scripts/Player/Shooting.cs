@@ -151,7 +151,7 @@ public class Shooting : NetworkBehaviour
             sustained.damage = flamethrowerDamage;
             sustained.ID = ID;
         }
-        else if (currentWeap == CurrentWeapon.Flamethrower.ToString())
+        else if (currentWeap == CurrentWeapon.Laser.ToString())
         {
             sustained = laserObject.GetComponent<Sustained>();
             sustained.damage = laserDamage;
