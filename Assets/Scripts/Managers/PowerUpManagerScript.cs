@@ -39,8 +39,8 @@ public class PowerUpManagerScript : NetworkBehaviour
         }
         else
         {
-            GameObject tempBomb = NetworkManager.Instantiate(bombPrefab, newPosition, Quaternion.identity) as GameObject;       //spawning the powerup
-            NetworkServer.Spawn(tempBomb);
+            //GameObject tempBomb = NetworkManager.Instantiate(bombPrefab, newPosition, Quaternion.identity) as GameObject;       //spawning the powerup
+            //NetworkServer.Spawn(tempBomb);
         }
         canSpawn = true;
     }
