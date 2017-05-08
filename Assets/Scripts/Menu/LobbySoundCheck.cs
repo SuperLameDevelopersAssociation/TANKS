@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class LobbySoundCheck : MonoBehaviour
@@ -9,6 +10,9 @@ public class LobbySoundCheck : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-        lobbySound.SetActive(!menuSound.activeSelf);
-	}
+        if (!SceneManager.GetActiveScene().name.Equals("Lobby"))
+            lobbySound.SetActive(false);
+        else
+            lobbySound.SetActive(!menuSound.activeSelf); 
+    }
 }

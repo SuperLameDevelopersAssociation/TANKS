@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 namespace Prototype.NetworkLobby
@@ -25,6 +26,11 @@ namespace Prototype.NetworkLobby
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 ToggleVisibility(!isDisplayed);
+            }
+
+            if (!SceneManager.GetActiveScene().name.Equals("Lobby"))
+            {
+                ToggleVisibility(false);
             }
 
         }
