@@ -235,7 +235,7 @@ public class GameManager : NetworkBehaviour
 
         if (teamDeathmatchActive)
         {
-            namesText.text += "\n";
+            namesText.text += "\n ";
             scoresText.text += "\nTeam A: " + teamA_kills + "  Team B: " + teamB_kills + "\n";
         }
 
