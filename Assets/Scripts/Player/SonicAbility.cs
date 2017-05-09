@@ -15,6 +15,7 @@ public class SonicAbility : AbilitiesBase
     void Awake()
     {
         speed = gameObject.GetComponent<PlayerMovement>();      //sets the speed to the local speed variable
+        _duration = duration;
     }
 
     // Update is called once per frame
@@ -47,7 +48,7 @@ public class SonicAbility : AbilitiesBase
         {
             _duration = duration;                                                       //Set FP to the float
             activated = true;                                                           //Set the flag up
-            speed.MultiplySpeed(2);
+            speed.MultiplySpeed(1.5);
         }
         else
         {

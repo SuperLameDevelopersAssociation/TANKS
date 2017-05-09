@@ -116,10 +116,10 @@ public class PlayerMovement : NetworkBehaviour
         }
     }
 
-    public void MultiplySpeed(int multiplyValue)
+    public void MultiplySpeed(double multiplyValue)
     {
-        speed = speed * multiplyValue;
-        rotationSpeed = rotationSpeed * multiplyValue;
+        speed = (int) (speed * multiplyValue);
+        rotationSpeed = (int) (rotationSpeed * multiplyValue);
     }
 
     public void ResetSpeed()
