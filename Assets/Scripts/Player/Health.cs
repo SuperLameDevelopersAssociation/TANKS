@@ -94,6 +94,12 @@ public class Health : NetworkBehaviour
         }
     }
 
+    [ClientRpc]
+    public void RpcHasDied()
+    {
+        StartCoroutine(Respawn());
+    }
+
     IEnumerator Respawn()
     {
         yield return new WaitForSeconds(GameManager.GetInstance.respawnTime);
@@ -167,6 +173,7 @@ public class Health : NetworkBehaviour
     {
         if (maxHealth <= originalMaxHealth)
         {
+            //start health prefab
             maxHealth += _maxHealth;
             currHealth += _maxHealth;
             defenseBoost = true;
