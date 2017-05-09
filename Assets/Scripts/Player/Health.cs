@@ -162,11 +162,6 @@ public class Health : NetworkBehaviour
         healthImage.color = GetHealthColor();
     }
 
-    //void OnGUI()
-    //{
-    //    GUI.Label(new Rect(10, 100 + 30 * owner.Id, 300, 30), "player: " + owner.Id + ", health: " + currHealth);
-    //}
-
     [ClientRpc]
     public void RpcDefenseBoost(int _maxHealth)
     {
@@ -186,6 +181,8 @@ public class Health : NetworkBehaviour
         {
             currHealth = originalMaxHealth;
         }
+
+        //turn off health prefab 
         maxHealth = originalMaxHealth;
     }
 }
