@@ -22,17 +22,17 @@ public class Sustained : NetworkBehaviour
                 Health hitPlayer = other.gameObject.GetComponent<Health>();     //Reference the players movement script
                 if (hitPlayer.ID != ID)   //Checks to see if the player hit is an enemy and not yourself
                 {
-                    hitPlayer.RpcTakeDamage(damage, ID);
-                    StartCoroutine(SendDamage());
+                    StartCoroutine(SendDamage(hitPlayer));
                 }
             }
         }
     }
 
-    IEnumerator SendDamage()
+    IEnumerator SendDamage(Health hitPlayer)
     {
         isWaiting = true;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(damageFreq);
+        hitPlayer.RpcTakeDamage(damage, ID);
         isWaiting = false;
     }
 
