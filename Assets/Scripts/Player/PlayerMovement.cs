@@ -28,20 +28,14 @@ public class PlayerMovement : NetworkBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.centerOfMass = Vector3.down;
         m_speed = speed;
         m_rotationSpeed = rotationSpeed;
 
-        // wheels = GetComponent<Animator>();
-
         if (wheels == null)
-        {
             hasAnimator = false;
-        }
         else
-        {
             hasAnimator = true;
-        }
-
     }
 
     void Update()

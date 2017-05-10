@@ -15,7 +15,9 @@ namespace Prototype.NetworkLobby
         //used on server to avoid assigning the same color to two player
         static List<int> _colorInUse = new List<int>();
 
+        [HideInInspector]
         public Toggle deathmatch;
+        [HideInInspector]
         public Toggle teamDeathmatch;
         public Slider timeSlider;
         public Slider scoreSlider;
@@ -116,10 +118,10 @@ namespace Prototype.NetworkLobby
             localIcone.gameObject.SetActive(true);
 
             //===========MATCH UI============
-            deathmatch.gameObject.SetActive(isServer);
-            teamDeathmatch.gameObject.SetActive(isServer);
-            deathmatch.interactable = isServer;
-            teamDeathmatch.interactable = isServer;
+            //deathmatch.gameObject.SetActive(isServer);
+            //teamDeathmatch.gameObject.SetActive(isServer);
+            //deathmatch.interactable = isServer;
+            //teamDeathmatch.interactable = isServer;
             
             scoreSlider.gameObject.SetActive(isServer);
             scoreSlider.interactable = isServer;
