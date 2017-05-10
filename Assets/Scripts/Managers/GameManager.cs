@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using UnityEngine.Networking.Match;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.SceneManagement;
@@ -67,6 +68,7 @@ public class GameManager : NetworkBehaviour
     private Text scoresText;
     private string baseScoreText;
     private bool updatedScore = false;
+    NetworkManager networkManager;
     #endregion
 
     private GameManager() { }
@@ -116,6 +118,7 @@ public class GameManager : NetworkBehaviour
     void Start()
     {
         UpdateScoreText();
+        networkManager = NetworkManager.singleton;
     }
 
     void Update()
@@ -340,6 +343,8 @@ public class GameManager : NetworkBehaviour
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(0);
+        MatchInfo matchInfo = networkManager.matchInfo;
+        networkManager.matchMaker.DropConnection(matchInfo.networkId, matchInfo.nodeId, 0, networkManager.OnDropConnection);
+        networkManager.StopHost();
     }
 }
