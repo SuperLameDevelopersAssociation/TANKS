@@ -211,5 +211,7 @@ public class Health : NetworkBehaviour
         //turn off shield prefab 
         if (isLocalPlayer)
             powerVisual.CmdSetBubble(false, "Shield");
+
+        SetHealthUI();
     }
 }
