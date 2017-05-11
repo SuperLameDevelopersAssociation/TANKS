@@ -57,17 +57,17 @@ public class GameManager : NetworkBehaviour
     public bool deathmatchActive = true;
     [SyncVar]
     bool teamDeathmatchActive;
-    
 
     private bool returnToMenu;
     private bool isTie;
     public GameObject endPanel;
-    private static Dictionary<byte, string> playerName = new Dictionary<byte, string>();
+    private static Dictionary<byte, string> playerNames = new Dictionary<byte, string>();
     private static Dictionary<byte, GameObject> playerList = new Dictionary<byte, GameObject>();
+    private GameObject[] players;
     private Text namesText;
     private Text scoresText;
     private string baseScoreText;
-    private bool updatedScore = false;
+
     NetworkManager networkManager;
     #endregion
 
@@ -117,7 +117,7 @@ public class GameManager : NetworkBehaviour
 
     void Start()
     {
-        UpdateScoreText();
+        StartCoroutine(AddPlayers());
         networkManager = NetworkManager.singleton;
     }
 
@@ -146,6 +146,28 @@ public class GameManager : NetworkBehaviour
         }
     }
 
+    IEnumerator AddPlayers()
+    {
+        yield return new WaitUntil(AllPlayersIn);
+
+        foreach (GameObject player in players)
+        {
+            PlayerSetup info = player.GetComponent<PlayerSetup>();
+            playerList.Add(info.ID, player);
+            playerNames.Add(info.ID, info.playerName);
+        }
+
+        UpdateScoreText();
+
+    }
+
+    bool AllPlayersIn()
+    {
+        players = GameObject.FindGameObjectsWithTag("Player");
+
+        return (players.Length == Prototype.NetworkLobby.LobbyManager.s_Singleton._playerNumber);
+    }
+
     public static void SetGamemode(bool deathmatchVal, bool teamVal)
     {
         staticDeathmatchActive = deathmatchVal;
@@ -159,12 +181,12 @@ public class GameManager : NetworkBehaviour
     }
 
 
-    public static void RegisterPlayer(byte ID, GameObject player, Color color, int tankSelected)
+    public static void RegisterPlayer(byte ID, GameObject player, string name, Color color, int tankSelected)
     {
         if (!playerList.ContainsKey(ID))
         {
-            playerList.Add(ID, player);
-            //playerNames.Add(name);
+            //playerList.Add(ID, player);
+            player.GetComponent<PlayerSetup>().playerName = name;
             player.GetComponent<PlayerSetup>().tankColor = color;
             player.GetComponent<PlayerSetup>().ID = ID;
             player.GetComponent<PlayerSetup>().tankSelected = tankSelected;
@@ -232,7 +254,7 @@ public class GameManager : NetworkBehaviour
         scoresText.text = "Kills	/	Deaths";
         for (int index = 0; index < kills.Count; index++)
         {
-            namesText.text += "\nPlayer " + (index + 1) + " :";     //string.Format("\n{0} ", playerNames[(byte)index]);
+            namesText.text += string.Format("\n{0} ", playerNames[(byte)index]); //"\nPlayer " + (index + 1) + " :";
             scoresText.text += string.Format("\n{0} \t\t\t {1}", kills[index], deaths[index]);
         }
 

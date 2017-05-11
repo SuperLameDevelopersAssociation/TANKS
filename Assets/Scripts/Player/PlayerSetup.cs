@@ -27,6 +27,8 @@ public class PlayerSetup : NetworkBehaviour
     public Color teamTwoColor;
     [SyncVar]
     public Color tankColor;
+    [SyncVar]
+    public string playerName;
     [SerializeField]
     NetworkAnimator anim;
 
