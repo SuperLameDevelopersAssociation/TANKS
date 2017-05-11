@@ -284,19 +284,18 @@ public class GameManager : NetworkBehaviour
             {
                 byte player = PlayerThatWon();
                 if (player != 100)
-                    results.text = "Player " + (player + 1) + " Won! \n";
+                    results.text = playerNames[player] + " Won! \n";
                 else
                     results.text = "Tie! \n";
 
                 for (int index = 0; index < kills.Count; index++)
                 {
-                    results.text += "Player: " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";
+                    results.text += playerNames[(byte)index] + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";
                 }
             }
 
             if (teamDeathmatchActive)
             {
-
                 string team = TeamThatWon();
                 if (team != "Tie")
                 {
@@ -307,7 +306,7 @@ public class GameManager : NetworkBehaviour
 
                 for (int index = 0; index < kills.Count; index++)
                 {
-                    results.text += "Player: " + (index + 1) + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";
+                    results.text += playerNames[(byte)index] + ". Kills: " + kills[index] + " Deaths: " + deaths[index] + "\n";
                 }
 
                 results.text += "\nTeam A: " + teamA_kills + "  Team B: " + teamB_kills + "\n";
