@@ -32,6 +32,7 @@ public class Health : NetworkBehaviour
 
     DamageSFX damageSound;
     Shooting currentWeapon;
+    PowerUpVisual powerVisual;
 
     void Awake()
 	{        
@@ -49,6 +50,7 @@ public class Health : NetworkBehaviour
         }
 
         currentWeapon = gameObject.GetComponent<Shooting>();
+        powerVisual = GetComponent<PowerUpVisual>();
 
     }
 
@@ -140,7 +142,7 @@ public class Health : NetworkBehaviour
     public void SetArmor()
     {
         armorBonus = armorLevel / 10.0f;
-        GetComponent<PlayerMovement>().speed -= Mathf.CeilToInt(GetComponent<PlayerMovement>().speed * armorBonus);//Ceiling(GetComponent<PlayerMovement>().speed * armorBonus);
+        GetComponent<PlayerMovement>().SetArmorSpeed(armorBonus); //Ceiling(GetComponent<PlayerMovement>().speed * armorBonus);
     }
 
     public bool IsHealthFull()
@@ -159,6 +161,17 @@ public class Health : NetworkBehaviour
         }
 
         SetHealthUI();
+
+        if (isLocalPlayer)
+            StartCoroutine(HealthBubble());
+        
+    }
+
+    IEnumerator HealthBubble()
+    {
+        powerVisual.CmdSetBubble(true, "Health");
+        yield return new WaitForSeconds(1.5f);
+        powerVisual.CmdSetBubble(false, "Health");
     }
 
     [Client]
@@ -173,10 +186,14 @@ public class Health : NetworkBehaviour
     {
         if (maxHealth <= originalMaxHealth)
         {
-            //start health prefab
+            //start shield prefab
             maxHealth += _maxHealth;
             currHealth += _maxHealth;
+            SetHealthUI();
             defenseBoost = true;
+
+            if (isLocalPlayer)
+                powerVisual.CmdSetBubble(true, "Shield");
         }
     }
 
@@ -189,7 +206,10 @@ public class Health : NetworkBehaviour
             currHealth = originalMaxHealth;
         }
 
-        //turn off health prefab 
         maxHealth = originalMaxHealth;
+
+        //turn off shield prefab 
+        if (isLocalPlayer)
+            powerVisual.CmdSetBubble(false, "Shield");
     }
 }

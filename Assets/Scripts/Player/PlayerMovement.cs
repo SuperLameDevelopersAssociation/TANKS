@@ -29,8 +29,6 @@ public class PlayerMovement : NetworkBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.centerOfMass = Vector3.down;
-        m_speed = speed;
-        m_rotationSpeed = rotationSpeed;
 
         if (wheels == null)
             hasAnimator = false;
@@ -77,6 +75,13 @@ public class PlayerMovement : NetworkBehaviour
                 StartCoroutine(Unflip());
             }
         }
+    }
+
+    public void SetArmorSpeed(float armorBonus)
+    {
+        speed -= Mathf.CeilToInt(speed * armorBonus);
+        m_speed = speed;
+        m_rotationSpeed = rotationSpeed;
     }
 
     void Move()

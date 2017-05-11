@@ -5,9 +5,10 @@ public class SonicAbility : AbilitiesBase
 {
     PlayerMovement speed;           //grabs the player's speed from 
 
-    float _cooldown = 0;
+    public double multiplier = 2;
     public float duration = 10;     //sets the length of the ability to 10 seconds
     float _duration;
+    float _cooldown = 0;
     public KeyCode activateKey;     //sets the key that activates the ability
     bool activated;                 //indicates if the ability is active or not
 
@@ -48,7 +49,7 @@ public class SonicAbility : AbilitiesBase
         {
             _duration = duration;                                                       //Set FP to the float
             activated = true;                                                           //Set the flag up
-            speed.MultiplySpeed(1.5);
+            speed.MultiplySpeed(multiplier);
         }
         else
         {

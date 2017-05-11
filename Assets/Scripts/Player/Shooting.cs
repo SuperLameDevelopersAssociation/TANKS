@@ -51,6 +51,7 @@ public class Shooting : NetworkBehaviour
 
     NetworkedObjectPooling objectPool;
 
+
     public enum CurrentWeapon {Projectile, Laser, Flamethrower};   //This would be set in the script that instantiates the players. 
 
     [SyncVar]
@@ -64,6 +65,7 @@ public class Shooting : NetworkBehaviour
     bool damageBoosted;
 
     public CurrentWeapon currentWeapon;
+    PowerUpVisual powerVisual;
 
     Text ammoText;
 
@@ -78,6 +80,7 @@ public class Shooting : NetworkBehaviour
 	{
         //ID = (byte)GetComponent<NetworkIdentity>().netId.Value;
         objectPool = GameObject.Find("PoolManager").GetComponent<NetworkedObjectPooling>();
+        powerVisual = GetComponent<PowerUpVisual>();
         CmdInitOnServer(currentWeapon.ToString());
         sfx = gameObject.GetComponent<ShootingSFX>();
 
@@ -378,7 +381,14 @@ public class Shooting : NetworkBehaviour
     public IEnumerator GiveDamageBoost(float multiplier, int duration)
     {
         damageMulitplier = multiplier;
+
+        if (isLocalPlayer)
+            powerVisual.CmdSetBubble(true, "Damage");
+
         yield return new WaitForSeconds(duration);
         damageMulitplier = 1;
+
+        if (isLocalPlayer)
+            powerVisual.CmdSetBubble(false, "Damage");
     }
 }
