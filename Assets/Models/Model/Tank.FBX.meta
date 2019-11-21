@@ -1,0 +1,3103 @@
+fileFormatVersion: 2
+guid: 7803ac275563f5845885376d042a6b88
+timeCreated: 1487267461
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Box001
+    100002: Box002
+    100004: Box004
+    100006: Box007
+    100008: Box008
+    100010: Box009
+    100012: Box010
+    100014: Box011
+    100016: Box012
+    100018: Box013
+    100020: Box014
+    100022: Box015
+    100024: Box016
+    100026: Box017
+    100028: Box018
+    100030: Box019
+    100032: Box021
+    100034: Box022
+    100036: Box023
+    100038: Box026
+    100040: Box027
+    100042: Box028
+    100044: Cylinder001
+    100046: Cylinder002
+    100048: Cylinder003
+    100050: Cylinder004
+    100052: Cylinder005
+    100054: Cylinder006
+    100056: Cylinder007
+    100058: Cylinder012
+    100060: Cylinder013
+    100062: Cylinder014
+    100064: Cylinder025
+    100066: Cylinder026
+    100068: Cylinder027
+    100070: Cylinder028
+    100072: Cylinder033
+    100074: Cylinder034
+    100076: Cylinder035
+    100078: Cylinder041
+    100080: Cylinder050
+    100082: Cylinder051
+    100084: Cylinder052
+    100086: Cylinder053
+    100088: Cylinder055
+    100090: Cylinder056
+    100092: Cylinder057
+    100094: Cylinder058
+    100096: Cylinder060
+    100098: Cylinder061
+    100100: Cylinder062
+    100102: Cylinder063
+    100104: Cylinder064
+    100106: Cylinder065
+    100108: Cylinder066
+    100110: Cylinder067
+    100112: Cylinder068
+    100114: Gengon001
+    100116: OilTank001
+    100118: OilTank002
+    100120: OilTank003
+    100122: OilTank004
+    100124: OilTank005
+    100126: OilTank006
+    100128: OilTank007
+    100130: OilTank008
+    100132: OilTank009
+    100134: OilTank010
+    100136: OilTank011
+    100138: OilTank012
+    100140: OilTank013
+    100142: OilTank014
+    100144: OilTank015
+    100146: Point001
+    100148: Point002
+    100150: Point003
+    100152: Point004
+    100154: Point005
+    100156: Point006
+    100158: Point007
+    100160: Point008
+    100162: Point009
+    100164: Point010
+    100166: Point011
+    100168: Point012
+    100170: Point013
+    100172: Point014
+    100174: Point015
+    100176: Point016
+    100178: Point017
+    100180: Point018
+    100182: Point019
+    100184: Point020
+    100186: Point021
+    100188: Point022
+    100190: Point023
+    100192: Point024
+    100194: Point025
+    100196: Point026
+    100198: Point027
+    100200: Point028
+    100202: Point029
+    100204: Point030
+    100206: Point031
+    100208: Point032
+    100210: Point033
+    100212: Point034
+    100214: Point035
+    100216: Point036
+    100218: Point037
+    100220: Point038
+    100222: Point039
+    100224: Point040
+    100226: Point041
+    100228: Point042
+    100230: Point043
+    100232: Point044
+    100234: Point045
+    100236: Point046
+    100238: Point047
+    100240: Point048
+    100242: Point049
+    100244: Point050
+    100246: Point051
+    100248: Point052
+    100250: Point053
+    100252: Point054
+    100254: Point055
+    100256: Point056
+    100258: Point057
+    100260: Point058
+    100262: Point059
+    100264: Point060
+    100266: Point061
+    100268: Point062
+    100270: Point103
+    100272: Point104
+    100274: Point105
+    100276: Point106
+    100278: Point107
+    100280: Point108
+    100282: Point109
+    100284: Point110
+    100286: Point111
+    100288: Point112
+    100290: Point113
+    100292: Point114
+    100294: Point115
+    100296: Point116
+    100298: Point117
+    100300: Point118
+    100302: Point119
+    100304: Point120
+    100306: Point121
+    100308: Point122
+    100310: Point123
+    100312: Point124
+    100314: Point125
+    100316: Point126
+    100318: Point127
+    100320: Point128
+    100322: Point129
+    100324: Point130
+    100326: Point131
+    100328: Point132
+    100330: Point133
+    100332: Point134
+    100334: Point135
+    100336: Point136
+    100338: Point137
+    100340: Point138
+    100342: Point139
+    100344: Point140
+    100346: Point141
+    100348: Point142
+    100350: Point143
+    100352: Point144
+    100354: Point145
+    100356: Point146
+    100358: Point147
+    100360: Point148
+    100362: Point149
+    100364: Point150
+    100366: Point151
+    100368: Point152
+    100370: Point153
+    100372: Point154
+    100374: Point155
+    100376: Point156
+    100378: Point157
+    100380: Point158
+    100382: Point159
+    100384: Point160
+    100386: Point161
+    100388: Point162
+    100390: Point163
+    100392: Point164
+    100394: Point165
+    100396: Point166
+    100398: Point167
+    100400: Point168
+    100402: Point169
+    100404: Point170
+    100406: Point171
+    100408: Point172
+    100410: Point173
+    100412: Point174
+    100414: Point175
+    100416: Point176
+    100418: Point177
+    100420: Point178
+    100422: Point179
+    100424: Point180
+    100426: Point181
+    100428: Point182
+    100430: Point183
+    100432: Point184
+    100434: Point185
+    100436: Point186
+    100438: Point187
+    100440: Point188
+    100442: Point189
+    100444: Point190
+    100446: Point191
+    100448: Point192
+    100450: Point193
+    100452: Point194
+    100454: Point195
+    100456: Point196
+    100458: Point197
+    100460: Point198
+    100462: Point199
+    100464: Point200
+    100466: Point201
+    100468: Point202
+    100470: Point203
+    100472: Point204
+    100474: Point205
+    100476: Point206
+    100478: Point207
+    100480: Point208
+    100482: Point209
+    100484: Point210
+    100486: Point211
+    100488: Point212
+    100490: Point213
+    100492: Point214
+    100494: Point215
+    100496: Point216
+    100498: Point217
+    100500: Point218
+    100502: Point219
+    100504: Point220
+    100506: Point221
+    100508: Point222
+    100510: Point223
+    100512: Point224
+    100514: Point225
+    100516: Point226
+    100518: Sphere001
+    100520: Sphere002
+    100522: Sphere003
+    100524: //RootNode
+    100526: Tread001
+    100528: Tread002
+    100530: Tread003
+    100532: Tread004
+    100534: Tread005
+    100536: Tread006
+    100538: Tread007
+    100540: Tread008
+    100542: Tread009
+    100544: Tread010
+    100546: Tread011
+    100548: Tread012
+    100550: Tread013
+    100552: Tread014
+    100554: Tread015
+    100556: Tread016
+    100558: Tread017
+    100560: Tread018
+    100562: Tread019
+    100564: Tread020
+    100566: Tread021
+    100568: Tread022
+    100570: Tread023
+    100572: Tread024
+    100574: Tread025
+    100576: Tread026
+    100578: Tread027
+    100580: Tread028
+    100582: Tread029
+    100584: Tread030
+    100586: Tread031
+    100588: Tread032
+    100590: Tread033
+    100592: Tread034
+    100594: Tread035
+    100596: Tread036
+    100598: Tread037
+    100600: Tread038
+    100602: Tread039
+    100604: Tread040
+    100606: Tread041
+    100608: Tread042
+    100610: Tread043
+    100612: Tread044
+    100614: Tread045
+    100616: Tread046
+    100618: Tread047
+    100620: Tread048
+    100622: Tread049
+    100624: Tread050
+    100626: Tread051
+    100628: Tread052
+    100630: Tread053
+    100632: Tread054
+    100634: Tread055
+    100636: Tread056
+    100638: Tread057
+    100640: Tread058
+    100642: Tread059
+    100644: Tread060
+    100646: Tread061
+    100648: Tread062
+    100650: Tread063
+    100652: Tread064
+    100654: Tread065
+    100656: Tread066
+    100658: Tread067
+    100660: Tread068
+    100662: Tread069
+    100664: Tread070
+    100666: Tread071
+    100668: Tread072
+    100670: Tread073
+    100672: Tread074
+    100674: Tread075
+    100676: Tread076
+    100678: Tread077
+    100680: Tread078
+    100682: Tread079
+    100684: Tread080
+    100686: Tread081
+    100688: Tread082
+    100690: Tread083
+    100692: Tread084
+    100694: Tread085
+    100696: Tread086
+    100698: Tread087
+    100700: Tread088
+    100702: Tread089
+    100704: Tread090
+    100706: Tread091
+    100708: Tread092
+    100710: Tread093
+    100712: Tread094
+    100714: Tread095
+    100716: Tread096
+    100718: Tread097
+    100720: Tread098
+    100722: Tread099
+    100724: Tread100
+    100726: Tread101
+    100728: Tread102
+    100730: Tread103
+    100732: Tread104
+    100734: Tread105
+    100736: Tread106
+    100738: Tread107
+    100740: Tread108
+    100742: Tread109
+    100744: Tread110
+    100746: Tread111
+    100748: Tread112
+    100750: Tread113
+    100752: Tread114
+    100754: Tread115
+    100756: Tread116
+    100758: Tread117
+    100760: Tread118
+    100762: Tread119
+    100764: Tread120
+    100766: Tread121
+    100768: Tread122
+    100770: Tread123
+    100772: Tread124
+    100774: Tread125
+    100776: Tread127
+    100778: Tread128
+    100780: Tread129
+    100782: Tread130
+    100784: Tread131
+    100786: Tread132
+    100788: Tread133
+    100790: Tread134
+    100792: Tread135
+    100794: Tread136
+    100796: Tread137
+    100798: Tread138
+    100800: Tread139
+    100802: Tread140
+    100804: Tread141
+    100806: Tread142
+    100808: Tread143
+    100810: Tread144
+    100812: Tread145
+    100814: Tread146
+    100816: Tread147
+    100818: Tread148
+    100820: Tread149
+    100822: Tread150
+    100824: Tread151
+    100826: Tread152
+    100828: Tread153
+    100830: Tread154
+    100832: Tread155
+    100834: Tread156
+    100836: Tread157
+    100838: Tread158
+    100840: Tread159
+    100842: Tread160
+    100844: Tread161
+    100846: Tread162
+    100848: Tread163
+    100850: Tread164
+    100852: Tread165
+    100854: Tread166
+    100856: Tread167
+    100858: Tread168
+    100860: Tread169
+    100862: Tread170
+    100864: Tread171
+    100866: Tread172
+    100868: Tread173
+    100870: Tread174
+    100872: Tread175
+    100874: Tread176
+    100876: Tread177
+    100878: Tread178
+    100880: Tread179
+    100882: Tread180
+    100884: Tread181
+    100886: Tread182
+    100888: Tread183
+    100890: Tread184
+    100892: Tread185
+    100894: Tread186
+    100896: Tread187
+    100898: Tread188
+    100900: Tread189
+    100902: Tread190
+    100904: Tread191
+    100906: Tread192
+    100908: Tread193
+    100910: Tread194
+    100912: Tread195
+    100914: Tread196
+    100916: Tread197
+    100918: Tread198
+    100920: Tread199
+    100922: Tread200
+    100924: Tread201
+    100926: Tread202
+    100928: Tread203
+    100930: Tread204
+    100932: Tread205
+    100934: Tread206
+    100936: Tread207
+    100938: Tread208
+    100940: Tread209
+    100942: Tread210
+    100944: Tread211
+    100946: Tread212
+    100948: Tread213
+    100950: Tread214
+    100952: Tread215
+    100954: Tread216
+    100956: Tread217
+    100958: Tread218
+    100960: Tread219
+    100962: Tread220
+    100964: Tread221
+    100966: Tread222
+    100968: Tread223
+    100970: Tread224
+    100972: Tread225
+    100974: Tread226
+    100976: Tread227
+    100978: Tread228
+    100980: Tread229
+    100982: Tread230
+    100984: Tread231
+    100986: Tread232
+    100988: Tread233
+    100990: Tread234
+    100992: Tread235
+    100994: Tread236
+    100996: Tread237
+    100998: Tread238
+    101000: Tread239
+    101002: Tread240
+    101004: Tread241
+    101006: Tread242
+    101008: Tread243
+    101010: Tread244
+    101012: Tread245
+    101014: Tread246
+    101016: Tread247
+    101018: Tread248
+    101020: Tread249
+    101022: Tread250
+    400000: Box001
+    400002: Box002
+    400004: Box004
+    400006: Box007
+    400008: Box008
+    400010: Box009
+    400012: Box010
+    400014: Box011
+    400016: Box012
+    400018: Box013
+    400020: Box014
+    400022: Box015
+    400024: Box016
+    400026: Box017
+    400028: Box018
+    400030: Box019
+    400032: Box021
+    400034: Box022
+    400036: Box023
+    400038: Box026
+    400040: Box027
+    400042: Box028
+    400044: Cylinder001
+    400046: Cylinder002
+    400048: Cylinder003
+    400050: Cylinder004
+    400052: Cylinder005
+    400054: Cylinder006
+    400056: Cylinder007
+    400058: Cylinder012
+    400060: Cylinder013
+    400062: Cylinder014
+    400064: Cylinder025
+    400066: Cylinder026
+    400068: Cylinder027
+    400070: Cylinder028
+    400072: Cylinder033
+    400074: Cylinder034
+    400076: Cylinder035
+    400078: Cylinder041
+    400080: Cylinder050
+    400082: Cylinder051
+    400084: Cylinder052
+    400086: Cylinder053
+    400088: Cylinder055
+    400090: Cylinder056
+    400092: Cylinder057
+    400094: Cylinder058
+    400096: Cylinder060
+    400098: Cylinder061
+    400100: Cylinder062
+    400102: Cylinder063
+    400104: Cylinder064
+    400106: Cylinder065
+    400108: Cylinder066
+    400110: Cylinder067
+    400112: Cylinder068
+    400114: Gengon001
+    400116: OilTank001
+    400118: OilTank002
+    400120: OilTank003
+    400122: OilTank004
+    400124: OilTank005
+    400126: OilTank006
+    400128: OilTank007
+    400130: OilTank008
+    400132: OilTank009
+    400134: OilTank010
+    400136: OilTank011
+    400138: OilTank012
+    400140: OilTank013
+    400142: OilTank014
+    400144: OilTank015
+    400146: Point001
+    400148: Point002
+    400150: Point003
+    400152: Point004
+    400154: Point005
+    400156: Point006
+    400158: Point007
+    400160: Point008
+    400162: Point009
+    400164: Point010
+    400166: Point011
+    400168: Point012
+    400170: Point013
+    400172: Point014
+    400174: Point015
+    400176: Point016
+    400178: Point017
+    400180: Point018
+    400182: Point019
+    400184: Point020
+    400186: Point021
+    400188: Point022
+    400190: Point023
+    400192: Point024
+    400194: Point025
+    400196: Point026
+    400198: Point027
+    400200: Point028
+    400202: Point029
+    400204: Point030
+    400206: Point031
+    400208: Point032
+    400210: Point033
+    400212: Point034
+    400214: Point035
+    400216: Point036
+    400218: Point037
+    400220: Point038
+    400222: Point039
+    400224: Point040
+    400226: Point041
+    400228: Point042
+    400230: Point043
+    400232: Point044
+    400234: Point045
+    400236: Point046
+    400238: Point047
+    400240: Point048
+    400242: Point049
+    400244: Point050
+    400246: Point051
+    400248: Point052
+    400250: Point053
+    400252: Point054
+    400254: Point055
+    400256: Point056
+    400258: Point057
+    400260: Point058
+    400262: Point059
+    400264: Point060
+    400266: Point061
+    400268: Point062
+    400270: Point103
+    400272: Point104
+    400274: Point105
+    400276: Point106
+    400278: Point107
+    400280: Point108
+    400282: Point109
+    400284: Point110
+    400286: Point111
+    400288: Point112
+    400290: Point113
+    400292: Point114
+    400294: Point115
+    400296: Point116
+    400298: Point117
+    400300: Point118
+    400302: Point119
+    400304: Point120
+    400306: Point121
+    400308: Point122
+    400310: Point123
+    400312: Point124
+    400314: Point125
+    400316: Point126
+    400318: Point127
+    400320: Point128
+    400322: Point129
+    400324: Point130
+    400326: Point131
+    400328: Point132
+    400330: Point133
+    400332: Point134
+    400334: Point135
+    400336: Point136
+    400338: Point137
+    400340: Point138
+    400342: Point139
+    400344: Point140
+    400346: Point141
+    400348: Point142
+    400350: Point143
+    400352: Point144
+    400354: Point145
+    400356: Point146
+    400358: Point147
+    400360: Point148
+    400362: Point149
+    400364: Point150
+    400366: Point151
+    400368: Point152
+    400370: Point153
+    400372: Point154
+    400374: Point155
+    400376: Point156
+    400378: Point157
+    400380: Point158
+    400382: Point159
+    400384: Point160
+    400386: Point161
+    400388: Point162
+    400390: Point163
+    400392: Point164
+    400394: Point165
+    400396: Point166
+    400398: Point167
+    400400: Point168
+    400402: Point169
+    400404: Point170
+    400406: Point171
+    400408: Point172
+    400410: Point173
+    400412: Point174
+    400414: Point175
+    400416: Point176
+    400418: Point177
+    400420: Point178
+    400422: Point179
+    400424: Point180
+    400426: Point181
+    400428: Point182
+    400430: Point183
+    400432: Point184
+    400434: Point185
+    400436: Point186
+    400438: Point187
+    400440: Point188
+    400442: Point189
+    400444: Point190
+    400446: Point191
+    400448: Point192
+    400450: Point193
+    400452: Point194
+    400454: Point195
+    400456: Point196
+    400458: Point197
+    400460: Point198
+    400462: Point199
+    400464: Point200
+    400466: Point201
+    400468: Point202
+    400470: Point203
+    400472: Point204
+    400474: Point205
+    400476: Point206
+    400478: Point207
+    400480: Point208
+    400482: Point209
+    400484: Point210
+    400486: Point211
+    400488: Point212
+    400490: Point213
+    400492: Point214
+    400494: Point215
+    400496: Point216
+    400498: Point217
+    400500: Point218
+    400502: Point219
+    400504: Point220
+    400506: Point221
+    400508: Point222
+    400510: Point223
+    400512: Point224
+    400514: Point225
+    400516: Point226
+    400518: Sphere001
+    400520: Sphere002
+    400522: Sphere003
+    400524: //RootNode
+    400526: Tread001
+    400528: Tread002
+    400530: Tread003
+    400532: Tread004
+    400534: Tread005
+    400536: Tread006
+    400538: Tread007
+    400540: Tread008
+    400542: Tread009
+    400544: Tread010
+    400546: Tread011
+    400548: Tread012
+    400550: Tread013
+    400552: Tread014
+    400554: Tread015
+    400556: Tread016
+    400558: Tread017
+    400560: Tread018
+    400562: Tread019
+    400564: Tread020
+    400566: Tread021
+    400568: Tread022
+    400570: Tread023
+    400572: Tread024
+    400574: Tread025
+    400576: Tread026
+    400578: Tread027
+    400580: Tread028
+    400582: Tread029
+    400584: Tread030
+    400586: Tread031
+    400588: Tread032
+    400590: Tread033
+    400592: Tread034
+    400594: Tread035
+    400596: Tread036
+    400598: Tread037
+    400600: Tread038
+    400602: Tread039
+    400604: Tread040
+    400606: Tread041
+    400608: Tread042
+    400610: Tread043
+    400612: Tread044
+    400614: Tread045
+    400616: Tread046
+    400618: Tread047
+    400620: Tread048
+    400622: Tread049
+    400624: Tread050
+    400626: Tread051
+    400628: Tread052
+    400630: Tread053
+    400632: Tread054
+    400634: Tread055
+    400636: Tread056
+    400638: Tread057
+    400640: Tread058
+    400642: Tread059
+    400644: Tread060
+    400646: Tread061
+    400648: Tread062
+    400650: Tread063
+    400652: Tread064
+    400654: Tread065
+    400656: Tread066
+    400658: Tread067
+    400660: Tread068
+    400662: Tread069
+    400664: Tread070
+    400666: Tread071
+    400668: Tread072
+    400670: Tread073
+    400672: Tread074
+    400674: Tread075
+    400676: Tread076
+    400678: Tread077
+    400680: Tread078
+    400682: Tread079
+    400684: Tread080
+    400686: Tread081
+    400688: Tread082
+    400690: Tread083
+    400692: Tread084
+    400694: Tread085
+    400696: Tread086
+    400698: Tread087
+    400700: Tread088
+    400702: Tread089
+    400704: Tread090
+    400706: Tread091
+    400708: Tread092
+    400710: Tread093
+    400712: Tread094
+    400714: Tread095
+    400716: Tread096
+    400718: Tread097
+    400720: Tread098
+    400722: Tread099
+    400724: Tread100
+    400726: Tread101
+    400728: Tread102
+    400730: Tread103
+    400732: Tread104
+    400734: Tread105
+    400736: Tread106
+    400738: Tread107
+    400740: Tread108
+    400742: Tread109
+    400744: Tread110
+    400746: Tread111
+    400748: Tread112
+    400750: Tread113
+    400752: Tread114
+    400754: Tread115
+    400756: Tread116
+    400758: Tread117
+    400760: Tread118
+    400762: Tread119
+    400764: Tread120
+    400766: Tread121
+    400768: Tread122
+    400770: Tread123
+    400772: Tread124
+    400774: Tread125
+    400776: Tread127
+    400778: Tread128
+    400780: Tread129
+    400782: Tread130
+    400784: Tread131
+    400786: Tread132
+    400788: Tread133
+    400790: Tread134
+    400792: Tread135
+    400794: Tread136
+    400796: Tread137
+    400798: Tread138
+    400800: Tread139
+    400802: Tread140
+    400804: Tread141
+    400806: Tread142
+    400808: Tread143
+    400810: Tread144
+    400812: Tread145
+    400814: Tread146
+    400816: Tread147
+    400818: Tread148
+    400820: Tread149
+    400822: Tread150
+    400824: Tread151
+    400826: Tread152
+    400828: Tread153
+    400830: Tread154
+    400832: Tread155
+    400834: Tread156
+    400836: Tread157
+    400838: Tread158
+    400840: Tread159
+    400842: Tread160
+    400844: Tread161
+    400846: Tread162
+    400848: Tread163
+    400850: Tread164
+    400852: Tread165
+    400854: Tread166
+    400856: Tread167
+    400858: Tread168
+    400860: Tread169
+    400862: Tread170
+    400864: Tread171
+    400866: Tread172
+    400868: Tread173
+    400870: Tread174
+    400872: Tread175
+    400874: Tread176
+    400876: Tread177
+    400878: Tread178
+    400880: Tread179
+    400882: Tread180
+    400884: Tread181
+    400886: Tread182
+    400888: Tread183
+    400890: Tread184
+    400892: Tread185
+    400894: Tread186
+    400896: Tread187
+    400898: Tread188
+    400900: Tread189
+    400902: Tread190
+    400904: Tread191
+    400906: Tread192
+    400908: Tread193
+    400910: Tread194
+    400912: Tread195
+    400914: Tread196
+    400916: Tread197
+    400918: Tread198
+    400920: Tread199
+    400922: Tread200
+    400924: Tread201
+    400926: Tread202
+    400928: Tread203
+    400930: Tread204
+    400932: Tread205
+    400934: Tread206
+    400936: Tread207
+    400938: Tread208
+    400940: Tread209
+    400942: Tread210
+    400944: Tread211
+    400946: Tread212
+    400948: Tread213
+    400950: Tread214
+    400952: Tread215
+    400954: Tread216
+    400956: Tread217
+    400958: Tread218
+    400960: Tread219
+    400962: Tread220
+    400964: Tread221
+    400966: Tread222
+    400968: Tread223
+    400970: Tread224
+    400972: Tread225
+    400974: Tread226
+    400976: Tread227
+    400978: Tread228
+    400980: Tread229
+    400982: Tread230
+    400984: Tread231
+    400986: Tread232
+    400988: Tread233
+    400990: Tread234
+    400992: Tread235
+    400994: Tread236
+    400996: Tread237
+    400998: Tread238
+    401000: Tread239
+    401002: Tread240
+    401004: Tread241
+    401006: Tread242
+    401008: Tread243
+    401010: Tread244
+    401012: Tread245
+    401014: Tread246
+    401016: Tread247
+    401018: Tread248
+    401020: Tread249
+    401022: Tread250
+    2300000: Box001
+    2300002: Box004
+    2300004: Box007
+    2300006: Box008
+    2300008: Box009
+    2300010: Box010
+    2300012: Box011
+    2300014: Box012
+    2300016: Box013
+    2300018: Box014
+    2300020: Box015
+    2300022: Box016
+    2300024: Box017
+    2300026: Box018
+    2300028: Box019
+    2300030: Box021
+    2300032: Box022
+    2300034: Box026
+    2300036: Box027
+    2300038: Box028
+    2300040: Cylinder001
+    2300042: Cylinder002
+    2300044: Cylinder004
+    2300046: Cylinder005
+    2300048: Cylinder006
+    2300050: Cylinder007
+    2300052: Cylinder012
+    2300054: Cylinder013
+    2300056: Cylinder014
+    2300058: Cylinder025
+    2300060: Cylinder026
+    2300062: Cylinder027
+    2300064: Cylinder028
+    2300066: Cylinder033
+    2300068: Cylinder034
+    2300070: Cylinder035
+    2300072: Cylinder050
+    2300074: Cylinder051
+    2300076: Cylinder052
+    2300078: Cylinder053
+    2300080: Cylinder055
+    2300082: Cylinder056
+    2300084: Cylinder057
+    2300086: Cylinder058
+    2300088: Cylinder060
+    2300090: Cylinder061
+    2300092: Cylinder062
+    2300094: Cylinder063
+    2300096: Cylinder064
+    2300098: Cylinder065
+    2300100: Cylinder066
+    2300102: Cylinder067
+    2300104: Cylinder068
+    2300106: OilTank001
+    2300108: OilTank002
+    2300110: OilTank003
+    2300112: OilTank004
+    2300114: OilTank005
+    2300116: OilTank006
+    2300118: OilTank007
+    2300120: OilTank008
+    2300122: OilTank009
+    2300124: OilTank010
+    2300126: OilTank011
+    2300128: OilTank012
+    2300130: OilTank013
+    2300132: OilTank014
+    2300134: OilTank015
+    2300136: Sphere003
+    2300138: Tread001
+    2300140: Tread002
+    2300142: Tread003
+    2300144: Tread004
+    2300146: Tread005
+    2300148: Tread006
+    2300150: Tread007
+    2300152: Tread008
+    2300154: Tread009
+    2300156: Tread010
+    2300158: Tread011
+    2300160: Tread012
+    2300162: Tread013
+    2300164: Tread014
+    2300166: Tread015
+    2300168: Tread016
+    2300170: Tread017
+    2300172: Tread018
+    2300174: Tread019
+    2300176: Tread020
+    2300178: Tread021
+    2300180: Tread022
+    2300182: Tread023
+    2300184: Tread024
+    2300186: Tread025
+    2300188: Tread026
+    2300190: Tread027
+    2300192: Tread028
+    2300194: Tread029
+    2300196: Tread030
+    2300198: Tread031
+    2300200: Tread032
+    2300202: Tread033
+    2300204: Tread034
+    2300206: Tread035
+    2300208: Tread036
+    2300210: Tread037
+    2300212: Tread038
+    2300214: Tread039
+    2300216: Tread040
+    2300218: Tread041
+    2300220: Tread042
+    2300222: Tread043
+    2300224: Tread044
+    2300226: Tread045
+    2300228: Tread046
+    2300230: Tread047
+    2300232: Tread048
+    2300234: Tread049
+    2300236: Tread050
+    2300238: Tread051
+    2300240: Tread052
+    2300242: Tread053
+    2300244: Tread054
+    2300246: Tread055
+    2300248: Tread056
+    2300250: Tread057
+    2300252: Tread058
+    2300254: Tread059
+    2300256: Tread060
+    2300258: Tread061
+    2300260: Tread062
+    2300262: Tread063
+    2300264: Tread064
+    2300266: Tread065
+    2300268: Tread066
+    2300270: Tread067
+    2300272: Tread068
+    2300274: Tread069
+    2300276: Tread070
+    2300278: Tread071
+    2300280: Tread072
+    2300282: Tread073
+    2300284: Tread074
+    2300286: Tread075
+    2300288: Tread076
+    2300290: Tread077
+    2300292: Tread078
+    2300294: Tread079
+    2300296: Tread080
+    2300298: Tread081
+    2300300: Tread082
+    2300302: Tread083
+    2300304: Tread084
+    2300306: Tread085
+    2300308: Tread086
+    2300310: Tread087
+    2300312: Tread088
+    2300314: Tread089
+    2300316: Tread090
+    2300318: Tread091
+    2300320: Tread092
+    2300322: Tread093
+    2300324: Tread094
+    2300326: Tread095
+    2300328: Tread096
+    2300330: Tread097
+    2300332: Tread098
+    2300334: Tread099
+    2300336: Tread100
+    2300338: Tread101
+    2300340: Tread102
+    2300342: Tread103
+    2300344: Tread104
+    2300346: Tread105
+    2300348: Tread106
+    2300350: Tread107
+    2300352: Tread108
+    2300354: Tread109
+    2300356: Tread110
+    2300358: Tread111
+    2300360: Tread112
+    2300362: Tread113
+    2300364: Tread114
+    2300366: Tread115
+    2300368: Tread116
+    2300370: Tread117
+    2300372: Tread118
+    2300374: Tread119
+    2300376: Tread120
+    2300378: Tread121
+    2300380: Tread122
+    2300382: Tread123
+    2300384: Tread124
+    2300386: Tread125
+    2300388: Tread127
+    2300390: Tread128
+    2300392: Tread129
+    2300394: Tread130
+    2300396: Tread131
+    2300398: Tread132
+    2300400: Tread133
+    2300402: Tread134
+    2300404: Tread135
+    2300406: Tread136
+    2300408: Tread137
+    2300410: Tread138
+    2300412: Tread139
+    2300414: Tread140
+    2300416: Tread141
+    2300418: Tread142
+    2300420: Tread143
+    2300422: Tread144
+    2300424: Tread145
+    2300426: Tread146
+    2300428: Tread147
+    2300430: Tread148
+    2300432: Tread149
+    2300434: Tread150
+    2300436: Tread151
+    2300438: Tread152
+    2300440: Tread153
+    2300442: Tread154
+    2300444: Tread155
+    2300446: Tread156
+    2300448: Tread157
+    2300450: Tread158
+    2300452: Tread159
+    2300454: Tread160
+    2300456: Tread161
+    2300458: Tread162
+    2300460: Tread163
+    2300462: Tread164
+    2300464: Tread165
+    2300466: Tread166
+    2300468: Tread167
+    2300470: Tread168
+    2300472: Tread169
+    2300474: Tread170
+    2300476: Tread171
+    2300478: Tread172
+    2300480: Tread173
+    2300482: Tread174
+    2300484: Tread175
+    2300486: Tread176
+    2300488: Tread177
+    2300490: Tread178
+    2300492: Tread179
+    2300494: Tread180
+    2300496: Tread181
+    2300498: Tread182
+    2300500: Tread183
+    2300502: Tread184
+    2300504: Tread185
+    2300506: Tread186
+    2300508: Tread187
+    2300510: Tread188
+    2300512: Tread189
+    2300514: Tread190
+    2300516: Tread191
+    2300518: Tread192
+    2300520: Tread193
+    2300522: Tread194
+    2300524: Tread195
+    2300526: Tread196
+    2300528: Tread197
+    2300530: Tread198
+    2300532: Tread199
+    2300534: Tread200
+    2300536: Tread201
+    2300538: Tread202
+    2300540: Tread203
+    2300542: Tread204
+    2300544: Tread205
+    2300546: Tread206
+    2300548: Tread207
+    2300550: Tread208
+    2300552: Tread209
+    2300554: Tread210
+    2300556: Tread211
+    2300558: Tread212
+    2300560: Tread213
+    2300562: Tread214
+    2300564: Tread215
+    2300566: Tread216
+    2300568: Tread217
+    2300570: Tread218
+    2300572: Tread219
+    2300574: Tread220
+    2300576: Tread221
+    2300578: Tread222
+    2300580: Tread223
+    2300582: Tread224
+    2300584: Tread225
+    2300586: Tread226
+    2300588: Tread227
+    2300590: Tread228
+    2300592: Tread229
+    2300594: Tread230
+    2300596: Tread231
+    2300598: Tread232
+    2300600: Tread233
+    2300602: Tread234
+    2300604: Tread235
+    2300606: Tread236
+    2300608: Tread237
+    2300610: Tread238
+    2300612: Tread239
+    2300614: Tread240
+    2300616: Tread241
+    2300618: Tread242
+    2300620: Tread243
+    2300622: Tread244
+    2300624: Tread245
+    2300626: Tread246
+    2300628: Tread247
+    2300630: Tread248
+    2300632: Tread249
+    2300634: Tread250
+    3300000: Box001
+    3300002: Box004
+    3300004: Box007
+    3300006: Box008
+    3300008: Box009
+    3300010: Box010
+    3300012: Box011
+    3300014: Box012
+    3300016: Box013
+    3300018: Box014
+    3300020: Box015
+    3300022: Box016
+    3300024: Box017
+    3300026: Box018
+    3300028: Box019
+    3300030: Box021
+    3300032: Box022
+    3300034: Box026
+    3300036: Box027
+    3300038: Box028
+    3300040: Cylinder001
+    3300042: Cylinder002
+    3300044: Cylinder004
+    3300046: Cylinder005
+    3300048: Cylinder006
+    3300050: Cylinder007
+    3300052: Cylinder012
+    3300054: Cylinder013
+    3300056: Cylinder014
+    3300058: Cylinder025
+    3300060: Cylinder026
+    3300062: Cylinder027
+    3300064: Cylinder028
+    3300066: Cylinder033
+    3300068: Cylinder034
+    3300070: Cylinder035
+    3300072: Cylinder050
+    3300074: Cylinder051
+    3300076: Cylinder052
+    3300078: Cylinder053
+    3300080: Cylinder055
+    3300082: Cylinder056
+    3300084: Cylinder057
+    3300086: Cylinder058
+    3300088: Cylinder060
+    3300090: Cylinder061
+    3300092: Cylinder062
+    3300094: Cylinder063
+    3300096: Cylinder064
+    3300098: Cylinder065
+    3300100: Cylinder066
+    3300102: Cylinder067
+    3300104: Cylinder068
+    3300106: OilTank001
+    3300108: OilTank002
+    3300110: OilTank003
+    3300112: OilTank004
+    3300114: OilTank005
+    3300116: OilTank006
+    3300118: OilTank007
+    3300120: OilTank008
+    3300122: OilTank009
+    3300124: OilTank010
+    3300126: OilTank011
+    3300128: OilTank012
+    3300130: OilTank013
+    3300132: OilTank014
+    3300134: OilTank015
+    3300136: Sphere003
+    3300138: Tread001
+    3300140: Tread002
+    3300142: Tread003
+    3300144: Tread004
+    3300146: Tread005
+    3300148: Tread006
+    3300150: Tread007
+    3300152: Tread008
+    3300154: Tread009
+    3300156: Tread010
+    3300158: Tread011
+    3300160: Tread012
+    3300162: Tread013
+    3300164: Tread014
+    3300166: Tread015
+    3300168: Tread016
+    3300170: Tread017
+    3300172: Tread018
+    3300174: Tread019
+    3300176: Tread020
+    3300178: Tread021
+    3300180: Tread022
+    3300182: Tread023
+    3300184: Tread024
+    3300186: Tread025
+    3300188: Tread026
+    3300190: Tread027
+    3300192: Tread028
+    3300194: Tread029
+    3300196: Tread030
+    3300198: Tread031
+    3300200: Tread032
+    3300202: Tread033
+    3300204: Tread034
+    3300206: Tread035
+    3300208: Tread036
+    3300210: Tread037
+    3300212: Tread038
+    3300214: Tread039
+    3300216: Tread040
+    3300218: Tread041
+    3300220: Tread042
+    3300222: Tread043
+    3300224: Tread044
+    3300226: Tread045
+    3300228: Tread046
+    3300230: Tread047
+    3300232: Tread048
+    3300234: Tread049
+    3300236: Tread050
+    3300238: Tread051
+    3300240: Tread052
+    3300242: Tread053
+    3300244: Tread054
+    3300246: Tread055
+    3300248: Tread056
+    3300250: Tread057
+    3300252: Tread058
+    3300254: Tread059
+    3300256: Tread060
+    3300258: Tread061
+    3300260: Tread062
+    3300262: Tread063
+    3300264: Tread064
+    3300266: Tread065
+    3300268: Tread066
+    3300270: Tread067
+    3300272: Tread068
+    3300274: Tread069
+    3300276: Tread070
+    3300278: Tread071
+    3300280: Tread072
+    3300282: Tread073
+    3300284: Tread074
+    3300286: Tread075
+    3300288: Tread076
+    3300290: Tread077
+    3300292: Tread078
+    3300294: Tread079
+    3300296: Tread080
+    3300298: Tread081
+    3300300: Tread082
+    3300302: Tread083
+    3300304: Tread084
+    3300306: Tread085
+    3300308: Tread086
+    3300310: Tread087
+    3300312: Tread088
+    3300314: Tread089
+    3300316: Tread090
+    3300318: Tread091
+    3300320: Tread092
+    3300322: Tread093
+    3300324: Tread094
+    3300326: Tread095
+    3300328: Tread096
+    3300330: Tread097
+    3300332: Tread098
+    3300334: Tread099
+    3300336: Tread100
+    3300338: Tread101
+    3300340: Tread102
+    3300342: Tread103
+    3300344: Tread104
+    3300346: Tread105
+    3300348: Tread106
+    3300350: Tread107
+    3300352: Tread108
+    3300354: Tread109
+    3300356: Tread110
+    3300358: Tread111
+    3300360: Tread112
+    3300362: Tread113
+    3300364: Tread114
+    3300366: Tread115
+    3300368: Tread116
+    3300370: Tread117
+    3300372: Tread118
+    3300374: Tread119
+    3300376: Tread120
+    3300378: Tread121
+    3300380: Tread122
+    3300382: Tread123
+    3300384: Tread124
+    3300386: Tread125
+    3300388: Tread127
+    3300390: Tread128
+    3300392: Tread129
+    3300394: Tread130
+    3300396: Tread131
+    3300398: Tread132
+    3300400: Tread133
+    3300402: Tread134
+    3300404: Tread135
+    3300406: Tread136
+    3300408: Tread137
+    3300410: Tread138
+    3300412: Tread139
+    3300414: Tread140
+    3300416: Tread141
+    3300418: Tread142
+    3300420: Tread143
+    3300422: Tread144
+    3300424: Tread145
+    3300426: Tread146
+    3300428: Tread147
+    3300430: Tread148
+    3300432: Tread149
+    3300434: Tread150
+    3300436: Tread151
+    3300438: Tread152
+    3300440: Tread153
+    3300442: Tread154
+    3300444: Tread155
+    3300446: Tread156
+    3300448: Tread157
+    3300450: Tread158
+    3300452: Tread159
+    3300454: Tread160
+    3300456: Tread161
+    3300458: Tread162
+    3300460: Tread163
+    3300462: Tread164
+    3300464: Tread165
+    3300466: Tread166
+    3300468: Tread167
+    3300470: Tread168
+    3300472: Tread169
+    3300474: Tread170
+    3300476: Tread171
+    3300478: Tread172
+    3300480: Tread173
+    3300482: Tread174
+    3300484: Tread175
+    3300486: Tread176
+    3300488: Tread177
+    3300490: Tread178
+    3300492: Tread179
+    3300494: Tread180
+    3300496: Tread181
+    3300498: Tread182
+    3300500: Tread183
+    3300502: Tread184
+    3300504: Tread185
+    3300506: Tread186
+    3300508: Tread187
+    3300510: Tread188
+    3300512: Tread189
+    3300514: Tread190
+    3300516: Tread191
+    3300518: Tread192
+    3300520: Tread193
+    3300522: Tread194
+    3300524: Tread195
+    3300526: Tread196
+    3300528: Tread197
+    3300530: Tread198
+    3300532: Tread199
+    3300534: Tread200
+    3300536: Tread201
+    3300538: Tread202
+    3300540: Tread203
+    3300542: Tread204
+    3300544: Tread205
+    3300546: Tread206
+    3300548: Tread207
+    3300550: Tread208
+    3300552: Tread209
+    3300554: Tread210
+    3300556: Tread211
+    3300558: Tread212
+    3300560: Tread213
+    3300562: Tread214
+    3300564: Tread215
+    3300566: Tread216
+    3300568: Tread217
+    3300570: Tread218
+    3300572: Tread219
+    3300574: Tread220
+    3300576: Tread221
+    3300578: Tread222
+    3300580: Tread223
+    3300582: Tread224
+    3300584: Tread225
+    3300586: Tread226
+    3300588: Tread227
+    3300590: Tread228
+    3300592: Tread229
+    3300594: Tread230
+    3300596: Tread231
+    3300598: Tread232
+    3300600: Tread233
+    3300602: Tread234
+    3300604: Tread235
+    3300606: Tread236
+    3300608: Tread237
+    3300610: Tread238
+    3300612: Tread239
+    3300614: Tread240
+    3300616: Tread241
+    3300618: Tread242
+    3300620: Tread243
+    3300622: Tread244
+    3300624: Tread245
+    3300626: Tread246
+    3300628: Tread247
+    3300630: Tread248
+    3300632: Tread249
+    3300634: Tread250
+    4300000: Box001
+    4300002: Sphere003
+    4300004: Box004
+    4300006: OilTank001
+    4300008: Cylinder001
+    4300010: Cylinder002
+    4300012: Box007
+    4300014: Cylinder004
+    4300016: Cylinder005
+    4300018: Cylinder006
+    4300020: Cylinder007
+    4300022: OilTank002
+    4300024: OilTank003
+    4300026: OilTank004
+    4300028: Cylinder012
+    4300030: Cylinder013
+    4300032: Cylinder014
+    4300034: Box008
+    4300036: Box009
+    4300038: OilTank005
+    4300040: OilTank006
+    4300042: Cylinder025
+    4300044: Box010
+    4300046: OilTank007
+    4300048: OilTank008
+    4300050: Cylinder026
+    4300052: Box011
+    4300054: OilTank009
+    4300056: OilTank010
+    4300058: Cylinder027
+    4300060: Box012
+    4300062: OilTank011
+    4300064: OilTank012
+    4300066: Cylinder028
+    4300068: Cylinder033
+    4300070: Cylinder034
+    4300072: Cylinder035
+    4300074: Box013
+    4300076: OilTank013
+    4300078: Box014
+    4300080: OilTank014
+    4300082: Box015
+    4300084: Box016
+    4300086: Box017
+    4300088: Box018
+    4300090: OilTank015
+    4300092: Box019
+    4300094: Box021
+    4300096: Box022
+    4300098: Tread001
+    4300100: Cylinder050
+    4300102: Cylinder051
+    4300104: Cylinder052
+    4300106: Box026
+    4300108: Cylinder053
+    4300110: Box027
+    4300112: Cylinder055
+    4300114: Cylinder056
+    4300116: Cylinder057
+    4300118: Box028
+    4300120: Cylinder058
+    4300122: Cylinder060
+    4300124: Cylinder061
+    4300126: Tread002
+    4300128: Tread003
+    4300130: Tread004
+    4300132: Tread005
+    4300134: Tread006
+    4300136: Tread007
+    4300138: Tread008
+    4300140: Tread009
+    4300142: Tread010
+    4300144: Tread011
+    4300146: Tread012
+    4300148: Tread013
+    4300150: Tread014
+    4300152: Tread015
+    4300154: Tread016
+    4300156: Tread017
+    4300158: Tread018
+    4300160: Tread019
+    4300162: Tread020
+    4300164: Tread021
+    4300166: Tread022
+    4300168: Tread023
+    4300170: Tread024
+    4300172: Tread025
+    4300174: Tread026
+    4300176: Tread027
+    4300178: Tread028
+    4300180: Tread029
+    4300182: Tread030
+    4300184: Tread031
+    4300186: Tread032
+    4300188: Tread033
+    4300190: Tread034
+    4300192: Tread035
+    4300194: Tread036
+    4300196: Tread037
+    4300198: Tread038
+    4300200: Tread039
+    4300202: Tread040
+    4300204: Tread041
+    4300206: Tread042
+    4300208: Tread043
+    4300210: Tread044
+    4300212: Tread045
+    4300214: Tread046
+    4300216: Tread047
+    4300218: Tread048
+    4300220: Tread049
+    4300222: Tread050
+    4300224: Tread051
+    4300226: Tread052
+    4300228: Tread053
+    4300230: Tread054
+    4300232: Tread055
+    4300234: Tread056
+    4300236: Tread057
+    4300238: Tread058
+    4300240: Tread059
+    4300242: Tread060
+    4300244: Tread061
+    4300246: Tread062
+    4300248: Tread063
+    4300250: Cylinder062
+    4300252: Cylinder063
+    4300254: Cylinder064
+    4300256: Cylinder065
+    4300258: Tread064
+    4300260: Tread065
+    4300262: Tread066
+    4300264: Tread067
+    4300266: Tread068
+    4300268: Tread069
+    4300270: Tread070
+    4300272: Tread071
+    4300274: Tread072
+    4300276: Tread073
+    4300278: Tread074
+    4300280: Tread075
+    4300282: Tread076
+    4300284: Tread077
+    4300286: Tread078
+    4300288: Tread079
+    4300290: Tread080
+    4300292: Tread081
+    4300294: Tread082
+    4300296: Tread083
+    4300298: Tread084
+    4300300: Tread085
+    4300302: Tread086
+    4300304: Tread087
+    4300306: Tread088
+    4300308: Tread089
+    4300310: Tread090
+    4300312: Tread091
+    4300314: Tread092
+    4300316: Tread093
+    4300318: Tread094
+    4300320: Tread095
+    4300322: Tread096
+    4300324: Tread097
+    4300326: Tread098
+    4300328: Tread099
+    4300330: Tread100
+    4300332: Tread101
+    4300334: Tread102
+    4300336: Tread103
+    4300338: Tread104
+    4300340: Tread105
+    4300342: Tread106
+    4300344: Tread107
+    4300346: Tread108
+    4300348: Tread109
+    4300350: Tread110
+    4300352: Tread111
+    4300354: Tread112
+    4300356: Tread113
+    4300358: Tread114
+    4300360: Tread115
+    4300362: Tread116
+    4300364: Tread117
+    4300366: Tread118
+    4300368: Tread119
+    4300370: Tread120
+    4300372: Tread121
+    4300374: Tread122
+    4300376: Tread123
+    4300378: Tread124
+    4300380: Tread125
+    4300382: Cylinder066
+    4300384: Cylinder067
+    4300386: Cylinder068
+    4300388: Tread127
+    4300390: Tread128
+    4300392: Tread129
+    4300394: Tread130
+    4300396: Tread131
+    4300398: Tread132
+    4300400: Tread133
+    4300402: Tread134
+    4300404: Tread135
+    4300406: Tread136
+    4300408: Tread137
+    4300410: Tread138
+    4300412: Tread139
+    4300414: Tread140
+    4300416: Tread141
+    4300418: Tread142
+    4300420: Tread143
+    4300422: Tread144
+    4300424: Tread145
+    4300426: Tread146
+    4300428: Tread147
+    4300430: Tread148
+    4300432: Tread149
+    4300434: Tread150
+    4300436: Tread151
+    4300438: Tread152
+    4300440: Tread153
+    4300442: Tread154
+    4300444: Tread155
+    4300446: Tread156
+    4300448: Tread157
+    4300450: Tread158
+    4300452: Tread159
+    4300454: Tread160
+    4300456: Tread161
+    4300458: Tread162
+    4300460: Tread163
+    4300462: Tread164
+    4300464: Tread165
+    4300466: Tread166
+    4300468: Tread167
+    4300470: Tread168
+    4300472: Tread169
+    4300474: Tread170
+    4300476: Tread171
+    4300478: Tread172
+    4300480: Tread173
+    4300482: Tread174
+    4300484: Tread175
+    4300486: Tread176
+    4300488: Tread177
+    4300490: Tread178
+    4300492: Tread179
+    4300494: Tread180
+    4300496: Tread181
+    4300498: Tread182
+    4300500: Tread183
+    4300502: Tread184
+    4300504: Tread185
+    4300506: Tread186
+    4300508: Tread187
+    4300510: Tread188
+    4300512: Tread189
+    4300514: Tread190
+    4300516: Tread191
+    4300518: Tread192
+    4300520: Tread193
+    4300522: Tread194
+    4300524: Tread195
+    4300526: Tread196
+    4300528: Tread197
+    4300530: Tread198
+    4300532: Tread199
+    4300534: Tread200
+    4300536: Tread201
+    4300538: Tread202
+    4300540: Tread203
+    4300542: Tread204
+    4300544: Tread205
+    4300546: Tread206
+    4300548: Tread207
+    4300550: Tread208
+    4300552: Tread209
+    4300554: Tread210
+    4300556: Tread211
+    4300558: Tread212
+    4300560: Tread213
+    4300562: Tread214
+    4300564: Tread215
+    4300566: Tread216
+    4300568: Tread217
+    4300570: Tread218
+    4300572: Tread219
+    4300574: Tread220
+    4300576: Tread221
+    4300578: Tread222
+    4300580: Tread223
+    4300582: Tread224
+    4300584: Tread225
+    4300586: Tread226
+    4300588: Tread227
+    4300590: Tread228
+    4300592: Tread229
+    4300594: Tread230
+    4300596: Tread231
+    4300598: Tread232
+    4300600: Tread233
+    4300602: Tread234
+    4300604: Tread235
+    4300606: Tread236
+    4300608: Tread237
+    4300610: Tread238
+    4300612: Tread239
+    4300614: Tread240
+    4300616: Tread241
+    4300618: Tread242
+    4300620: Tread243
+    4300622: Tread244
+    4300624: Tread245
+    4300626: Tread246
+    4300628: Tread247
+    4300630: Tread248
+    4300632: Tread249
+    4300634: Tread250
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: Box002
+        weight: 1
+      - path: Box004
+        weight: 1
+      - path: Box007
+        weight: 1
+      - path: Box008
+        weight: 1
+      - path: Box009
+        weight: 1
+      - path: Box010
+        weight: 1
+      - path: Box011
+        weight: 1
+      - path: Box012
+        weight: 1
+      - path: Box013
+        weight: 1
+      - path: Box013/OilTank013
+        weight: 1
+      - path: Box014
+        weight: 1
+      - path: Box014/OilTank014
+        weight: 1
+      - path: Box015
+        weight: 1
+      - path: Box016
+        weight: 1
+      - path: Box017
+        weight: 1
+      - path: Box018
+        weight: 1
+      - path: Box019
+        weight: 1
+      - path: Box021
+        weight: 1
+      - path: Box022
+        weight: 1
+      - path: Box023
+        weight: 1
+      - path: Box026
+        weight: 1
+      - path: Box027
+        weight: 1
+      - path: Box028
+        weight: 1
+      - path: Cylinder001
+        weight: 1
+      - path: Cylinder002
+        weight: 1
+      - path: Cylinder003
+        weight: 1
+      - path: Cylinder004
+        weight: 1
+      - path: Cylinder005
+        weight: 1
+      - path: Cylinder006
+        weight: 1
+      - path: Cylinder007
+        weight: 1
+      - path: Cylinder012
+        weight: 1
+      - path: Cylinder013
+        weight: 1
+      - path: Cylinder014
+        weight: 1
+      - path: Cylinder025
+        weight: 1
+      - path: Cylinder026
+        weight: 1
+      - path: Cylinder027
+        weight: 1
+      - path: Cylinder028
+        weight: 1
+      - path: Cylinder033
+        weight: 1
+      - path: Cylinder034
+        weight: 1
+      - path: Cylinder035
+        weight: 1
+      - path: Cylinder041
+        weight: 1
+      - path: Cylinder050
+        weight: 1
+      - path: Cylinder051
+        weight: 1
+      - path: Cylinder052
+        weight: 1
+      - path: Cylinder053
+        weight: 1
+      - path: Cylinder055
+        weight: 1
+      - path: Cylinder056
+        weight: 1
+      - path: Cylinder057
+        weight: 1
+      - path: Cylinder058
+        weight: 1
+      - path: Cylinder060
+        weight: 1
+      - path: Cylinder061
+        weight: 1
+      - path: Cylinder062
+        weight: 1
+      - path: Cylinder063
+        weight: 1
+      - path: Cylinder064
+        weight: 1
+      - path: Cylinder065
+        weight: 1
+      - path: Cylinder066
+        weight: 1
+      - path: Cylinder067
+        weight: 1
+      - path: Cylinder068
+        weight: 1
+      - path: Gengon001
+        weight: 1
+      - path: OilTank001
+        weight: 1
+      - path: OilTank002
+        weight: 1
+      - path: OilTank003
+        weight: 1
+      - path: OilTank004
+        weight: 1
+      - path: OilTank005
+        weight: 1
+      - path: OilTank006
+        weight: 1
+      - path: OilTank007
+        weight: 1
+      - path: OilTank008
+        weight: 1
+      - path: OilTank009
+        weight: 1
+      - path: OilTank010
+        weight: 1
+      - path: OilTank011
+        weight: 1
+      - path: OilTank012
+        weight: 1
+      - path: OilTank015
+        weight: 1
+      - path: Point001
+        weight: 1
+      - path: Point001/Tread064
+        weight: 1
+      - path: Point002
+        weight: 1
+      - path: Point002/Tread065
+        weight: 1
+      - path: Point003
+        weight: 1
+      - path: Point003/Tread066
+        weight: 1
+      - path: Point004
+        weight: 1
+      - path: Point004/Tread067
+        weight: 1
+      - path: Point005
+        weight: 1
+      - path: Point005/Tread068
+        weight: 1
+      - path: Point006
+        weight: 1
+      - path: Point006/Tread069
+        weight: 1
+      - path: Point007
+        weight: 1
+      - path: Point007/Tread070
+        weight: 1
+      - path: Point008
+        weight: 1
+      - path: Point008/Tread071
+        weight: 1
+      - path: Point009
+        weight: 1
+      - path: Point009/Tread072
+        weight: 1
+      - path: Point010
+        weight: 1
+      - path: Point010/Tread073
+        weight: 1
+      - path: Point011
+        weight: 1
+      - path: Point011/Tread074
+        weight: 1
+      - path: Point012
+        weight: 1
+      - path: Point012/Tread075
+        weight: 1
+      - path: Point013
+        weight: 1
+      - path: Point013/Tread076
+        weight: 1
+      - path: Point014
+        weight: 1
+      - path: Point014/Tread077
+        weight: 1
+      - path: Point015
+        weight: 1
+      - path: Point015/Tread078
+        weight: 1
+      - path: Point016
+        weight: 1
+      - path: Point016/Tread079
+        weight: 1
+      - path: Point017
+        weight: 1
+      - path: Point017/Tread080
+        weight: 1
+      - path: Point018
+        weight: 1
+      - path: Point018/Tread081
+        weight: 1
+      - path: Point019
+        weight: 1
+      - path: Point019/Tread082
+        weight: 1
+      - path: Point020
+        weight: 1
+      - path: Point020/Tread083
+        weight: 1
+      - path: Point021
+        weight: 1
+      - path: Point021/Tread084
+        weight: 1
+      - path: Point022
+        weight: 1
+      - path: Point022/Tread085
+        weight: 1
+      - path: Point023
+        weight: 1
+      - path: Point023/Tread086
+        weight: 1
+      - path: Point024
+        weight: 1
+      - path: Point024/Tread087
+        weight: 1
+      - path: Point025
+        weight: 1
+      - path: Point025/Tread088
+        weight: 1
+      - path: Point026
+        weight: 1
+      - path: Point026/Tread089
+        weight: 1
+      - path: Point027
+        weight: 1
+      - path: Point027/Tread090
+        weight: 1
+      - path: Point028
+        weight: 1
+      - path: Point028/Tread091
+        weight: 1
+      - path: Point029
+        weight: 1
+      - path: Point029/Tread092
+        weight: 1
+      - path: Point030
+        weight: 1
+      - path: Point030/Tread093
+        weight: 1
+      - path: Point031
+        weight: 1
+      - path: Point031/Tread094
+        weight: 1
+      - path: Point032
+        weight: 1
+      - path: Point032/Tread095
+        weight: 1
+      - path: Point033
+        weight: 1
+      - path: Point033/Tread096
+        weight: 1
+      - path: Point034
+        weight: 1
+      - path: Point034/Tread097
+        weight: 1
+      - path: Point035
+        weight: 1
+      - path: Point035/Tread098
+        weight: 1
+      - path: Point036
+        weight: 1
+      - path: Point036/Tread099
+        weight: 1
+      - path: Point037
+        weight: 1
+      - path: Point037/Tread100
+        weight: 1
+      - path: Point038
+        weight: 1
+      - path: Point038/Tread101
+        weight: 1
+      - path: Point039
+        weight: 1
+      - path: Point039/Tread102
+        weight: 1
+      - path: Point040
+        weight: 1
+      - path: Point040/Tread103
+        weight: 1
+      - path: Point041
+        weight: 1
+      - path: Point041/Tread104
+        weight: 1
+      - path: Point042
+        weight: 1
+      - path: Point042/Tread105
+        weight: 1
+      - path: Point043
+        weight: 1
+      - path: Point043/Tread106
+        weight: 1
+      - path: Point044
+        weight: 1
+      - path: Point044/Tread107
+        weight: 1
+      - path: Point045
+        weight: 1
+      - path: Point045/Tread108
+        weight: 1
+      - path: Point046
+        weight: 1
+      - path: Point046/Tread109
+        weight: 1
+      - path: Point047
+        weight: 1
+      - path: Point047/Tread110
+        weight: 1
+      - path: Point048
+        weight: 1
+      - path: Point048/Tread111
+        weight: 1
+      - path: Point049
+        weight: 1
+      - path: Point049/Tread112
+        weight: 1
+      - path: Point050
+        weight: 1
+      - path: Point050/Tread113
+        weight: 1
+      - path: Point051
+        weight: 1
+      - path: Point051/Tread114
+        weight: 1
+      - path: Point052
+        weight: 1
+      - path: Point052/Tread115
+        weight: 1
+      - path: Point053
+        weight: 1
+      - path: Point053/Tread116
+        weight: 1
+      - path: Point054
+        weight: 1
+      - path: Point054/Tread117
+        weight: 1
+      - path: Point055
+        weight: 1
+      - path: Point055/Tread118
+        weight: 1
+      - path: Point056
+        weight: 1
+      - path: Point056/Tread119
+        weight: 1
+      - path: Point057
+        weight: 1
+      - path: Point057/Tread120
+        weight: 1
+      - path: Point058
+        weight: 1
+      - path: Point058/Tread121
+        weight: 1
+      - path: Point059
+        weight: 1
+      - path: Point059/Tread122
+        weight: 1
+      - path: Point060
+        weight: 1
+      - path: Point060/Tread123
+        weight: 1
+      - path: Point061
+        weight: 1
+      - path: Point061/Tread124
+        weight: 1
+      - path: Point062
+        weight: 1
+      - path: Point062/Tread125
+        weight: 1
+      - path: Point103
+        weight: 1
+      - path: Point103/Tread127
+        weight: 1
+      - path: Point104
+        weight: 1
+      - path: Point104/Tread128
+        weight: 1
+      - path: Point105
+        weight: 1
+      - path: Point105/Tread129
+        weight: 1
+      - path: Point106
+        weight: 1
+      - path: Point106/Tread130
+        weight: 1
+      - path: Point107
+        weight: 1
+      - path: Point107/Tread131
+        weight: 1
+      - path: Point108
+        weight: 1
+      - path: Point108/Tread132
+        weight: 1
+      - path: Point109
+        weight: 1
+      - path: Point109/Tread133
+        weight: 1
+      - path: Point110
+        weight: 1
+      - path: Point110/Tread134
+        weight: 1
+      - path: Point111
+        weight: 1
+      - path: Point111/Tread135
+        weight: 1
+      - path: Point112
+        weight: 1
+      - path: Point112/Tread136
+        weight: 1
+      - path: Point113
+        weight: 1
+      - path: Point113/Tread137
+        weight: 1
+      - path: Point114
+        weight: 1
+      - path: Point114/Tread138
+        weight: 1
+      - path: Point115
+        weight: 1
+      - path: Point115/Tread139
+        weight: 1
+      - path: Point116
+        weight: 1
+      - path: Point116/Tread140
+        weight: 1
+      - path: Point117
+        weight: 1
+      - path: Point117/Tread141
+        weight: 1
+      - path: Point118
+        weight: 1
+      - path: Point118/Tread142
+        weight: 1
+      - path: Point119
+        weight: 1
+      - path: Point119/Tread143
+        weight: 1
+      - path: Point120
+        weight: 1
+      - path: Point120/Tread144
+        weight: 1
+      - path: Point121
+        weight: 1
+      - path: Point121/Tread145
+        weight: 1
+      - path: Point122
+        weight: 1
+      - path: Point122/Tread146
+        weight: 1
+      - path: Point123
+        weight: 1
+      - path: Point123/Tread147
+        weight: 1
+      - path: Point124
+        weight: 1
+      - path: Point124/Tread148
+        weight: 1
+      - path: Point125
+        weight: 1
+      - path: Point125/Tread149
+        weight: 1
+      - path: Point126
+        weight: 1
+      - path: Point126/Tread150
+        weight: 1
+      - path: Point127
+        weight: 1
+      - path: Point127/Tread151
+        weight: 1
+      - path: Point128
+        weight: 1
+      - path: Point128/Tread152
+        weight: 1
+      - path: Point129
+        weight: 1
+      - path: Point129/Tread153
+        weight: 1
+      - path: Point130
+        weight: 1
+      - path: Point130/Tread154
+        weight: 1
+      - path: Point131
+        weight: 1
+      - path: Point131/Tread155
+        weight: 1
+      - path: Point132
+        weight: 1
+      - path: Point132/Tread156
+        weight: 1
+      - path: Point133
+        weight: 1
+      - path: Point133/Tread157
+        weight: 1
+      - path: Point134
+        weight: 1
+      - path: Point134/Tread158
+        weight: 1
+      - path: Point135
+        weight: 1
+      - path: Point135/Tread159
+        weight: 1
+      - path: Point136
+        weight: 1
+      - path: Point136/Tread160
+        weight: 1
+      - path: Point137
+        weight: 1
+      - path: Point137/Tread161
+        weight: 1
+      - path: Point138
+        weight: 1
+      - path: Point138/Tread162
+        weight: 1
+      - path: Point139
+        weight: 1
+      - path: Point139/Tread163
+        weight: 1
+      - path: Point140
+        weight: 1
+      - path: Point140/Tread164
+        weight: 1
+      - path: Point141
+        weight: 1
+      - path: Point141/Tread165
+        weight: 1
+      - path: Point142
+        weight: 1
+      - path: Point142/Tread166
+        weight: 1
+      - path: Point143
+        weight: 1
+      - path: Point143/Tread167
+        weight: 1
+      - path: Point144
+        weight: 1
+      - path: Point144/Tread168
+        weight: 1
+      - path: Point145
+        weight: 1
+      - path: Point145/Tread169
+        weight: 1
+      - path: Point146
+        weight: 1
+      - path: Point146/Tread170
+        weight: 1
+      - path: Point147
+        weight: 1
+      - path: Point147/Tread171
+        weight: 1
+      - path: Point148
+        weight: 1
+      - path: Point148/Tread172
+        weight: 1
+      - path: Point149
+        weight: 1
+      - path: Point149/Tread173
+        weight: 1
+      - path: Point150
+        weight: 1
+      - path: Point150/Tread174
+        weight: 1
+      - path: Point151
+        weight: 1
+      - path: Point151/Tread175
+        weight: 1
+      - path: Point152
+        weight: 1
+      - path: Point152/Tread176
+        weight: 1
+      - path: Point153
+        weight: 1
+      - path: Point153/Tread177
+        weight: 1
+      - path: Point154
+        weight: 1
+      - path: Point154/Tread178
+        weight: 1
+      - path: Point155
+        weight: 1
+      - path: Point155/Tread179
+        weight: 1
+      - path: Point156
+        weight: 1
+      - path: Point156/Tread180
+        weight: 1
+      - path: Point157
+        weight: 1
+      - path: Point157/Tread181
+        weight: 1
+      - path: Point158
+        weight: 1
+      - path: Point158/Tread182
+        weight: 1
+      - path: Point159
+        weight: 1
+      - path: Point159/Tread183
+        weight: 1
+      - path: Point160
+        weight: 1
+      - path: Point160/Tread184
+        weight: 1
+      - path: Point161
+        weight: 1
+      - path: Point161/Tread185
+        weight: 1
+      - path: Point162
+        weight: 1
+      - path: Point162/Tread186
+        weight: 1
+      - path: Point163
+        weight: 1
+      - path: Point163/Tread187
+        weight: 1
+      - path: Point164
+        weight: 1
+      - path: Point164/Tread188
+        weight: 1
+      - path: Point165
+        weight: 1
+      - path: Point165/Tread189
+        weight: 1
+      - path: Point166
+        weight: 1
+      - path: Point166/Tread190
+        weight: 1
+      - path: Point167
+        weight: 1
+      - path: Point167/Tread191
+        weight: 1
+      - path: Point168
+        weight: 1
+      - path: Point168/Tread192
+        weight: 1
+      - path: Point169
+        weight: 1
+      - path: Point169/Tread193
+        weight: 1
+      - path: Point170
+        weight: 1
+      - path: Point170/Tread194
+        weight: 1
+      - path: Point171
+        weight: 1
+      - path: Point171/Tread195
+        weight: 1
+      - path: Point172
+        weight: 1
+      - path: Point172/Tread196
+        weight: 1
+      - path: Point173
+        weight: 1
+      - path: Point173/Tread197
+        weight: 1
+      - path: Point174
+        weight: 1
+      - path: Point174/Tread198
+        weight: 1
+      - path: Point175
+        weight: 1
+      - path: Point175/Tread199
+        weight: 1
+      - path: Point176
+        weight: 1
+      - path: Point176/Tread200
+        weight: 1
+      - path: Point177
+        weight: 1
+      - path: Point177/Tread201
+        weight: 1
+      - path: Point178
+        weight: 1
+      - path: Point178/Tread202
+        weight: 1
+      - path: Point179
+        weight: 1
+      - path: Point179/Tread203
+        weight: 1
+      - path: Point180
+        weight: 1
+      - path: Point180/Tread204
+        weight: 1
+      - path: Point181
+        weight: 1
+      - path: Point181/Tread205
+        weight: 1
+      - path: Point182
+        weight: 1
+      - path: Point182/Tread206
+        weight: 1
+      - path: Point183
+        weight: 1
+      - path: Point183/Tread207
+        weight: 1
+      - path: Point184
+        weight: 1
+      - path: Point184/Tread208
+        weight: 1
+      - path: Point185
+        weight: 1
+      - path: Point185/Tread209
+        weight: 1
+      - path: Point186
+        weight: 1
+      - path: Point186/Tread210
+        weight: 1
+      - path: Point187
+        weight: 1
+      - path: Point187/Tread211
+        weight: 1
+      - path: Point188
+        weight: 1
+      - path: Point188/Tread212
+        weight: 1
+      - path: Point189
+        weight: 1
+      - path: Point189/Tread213
+        weight: 1
+      - path: Point190
+        weight: 1
+      - path: Point190/Tread214
+        weight: 1
+      - path: Point191
+        weight: 1
+      - path: Point191/Tread215
+        weight: 1
+      - path: Point192
+        weight: 1
+      - path: Point192/Tread216
+        weight: 1
+      - path: Point193
+        weight: 1
+      - path: Point193/Tread217
+        weight: 1
+      - path: Point194
+        weight: 1
+      - path: Point194/Tread218
+        weight: 1
+      - path: Point195
+        weight: 1
+      - path: Point195/Tread219
+        weight: 1
+      - path: Point196
+        weight: 1
+      - path: Point196/Tread220
+        weight: 1
+      - path: Point197
+        weight: 1
+      - path: Point197/Tread221
+        weight: 1
+      - path: Point198
+        weight: 1
+      - path: Point198/Tread222
+        weight: 1
+      - path: Point199
+        weight: 1
+      - path: Point199/Tread223
+        weight: 1
+      - path: Point200
+        weight: 1
+      - path: Point200/Tread224
+        weight: 1
+      - path: Point201
+        weight: 1
+      - path: Point201/Tread225
+        weight: 1
+      - path: Point202
+        weight: 1
+      - path: Point202/Tread226
+        weight: 1
+      - path: Point203
+        weight: 1
+      - path: Point203/Tread227
+        weight: 1
+      - path: Point204
+        weight: 1
+      - path: Point204/Tread228
+        weight: 1
+      - path: Point205
+        weight: 1
+      - path: Point205/Tread229
+        weight: 1
+      - path: Point206
+        weight: 1
+      - path: Point206/Tread230
+        weight: 1
+      - path: Point207
+        weight: 1
+      - path: Point207/Tread231
+        weight: 1
+      - path: Point208
+        weight: 1
+      - path: Point208/Tread232
+        weight: 1
+      - path: Point209
+        weight: 1
+      - path: Point209/Tread233
+        weight: 1
+      - path: Point210
+        weight: 1
+      - path: Point210/Tread234
+        weight: 1
+      - path: Point211
+        weight: 1
+      - path: Point211/Tread235
+        weight: 1
+      - path: Point212
+        weight: 1
+      - path: Point212/Tread236
+        weight: 1
+      - path: Point213
+        weight: 1
+      - path: Point213/Tread237
+        weight: 1
+      - path: Point214
+        weight: 1
+      - path: Point214/Tread238
+        weight: 1
+      - path: Point215
+        weight: 1
+      - path: Point215/Tread239
+        weight: 1
+      - path: Point216
+        weight: 1
+      - path: Point216/Tread240
+        weight: 1
+      - path: Point217
+        weight: 1
+      - path: Point217/Tread241
+        weight: 1
+      - path: Point218
+        weight: 1
+      - path: Point218/Tread242
+        weight: 1
+      - path: Point219
+        weight: 1
+      - path: Point219/Tread243
+        weight: 1
+      - path: Point220
+        weight: 1
+      - path: Point220/Tread244
+        weight: 1
+      - path: Point221
+        weight: 1
+      - path: Point221/Tread245
+        weight: 1
+      - path: Point222
+        weight: 1
+      - path: Point222/Tread246
+        weight: 1
+      - path: Point223
+        weight: 1
+      - path: Point223/Tread247
+        weight: 1
+      - path: Point224
+        weight: 1
+      - path: Point224/Tread248
+        weight: 1
+      - path: Point225
+        weight: 1
+      - path: Point225/Tread249
+        weight: 1
+      - path: Point226
+        weight: 1
+      - path: Point226/Tread250
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      - path: Sphere002
+        weight: 1
+      - path: Sphere003
+        weight: 1
+      - path: Tread001
+        weight: 1
+      - path: Tread002
+        weight: 1
+      - path: Tread003
+        weight: 1
+      - path: Tread004
+        weight: 1
+      - path: Tread005
+        weight: 1
+      - path: Tread006
+        weight: 1
+      - path: Tread007
+        weight: 1
+      - path: Tread008
+        weight: 1
+      - path: Tread009
+        weight: 1
+      - path: Tread010
+        weight: 1
+      - path: Tread011
+        weight: 1
+      - path: Tread012
+        weight: 1
+      - path: Tread013
+        weight: 1
+      - path: Tread014
+        weight: 1
+      - path: Tread015
+        weight: 1
+      - path: Tread016
+        weight: 1
+      - path: Tread017
+        weight: 1
+      - path: Tread018
+        weight: 1
+      - path: Tread019
+        weight: 1
+      - path: Tread020
+        weight: 1
+      - path: Tread021
+        weight: 1
+      - path: Tread022
+        weight: 1
+      - path: Tread023
+        weight: 1
+      - path: Tread024
+        weight: 1
+      - path: Tread025
+        weight: 1
+      - path: Tread026
+        weight: 1
+      - path: Tread027
+        weight: 1
+      - path: Tread028
+        weight: 1
+      - path: Tread029
+        weight: 1
+      - path: Tread030
+        weight: 1
+      - path: Tread031
+        weight: 1
+      - path: Tread032
+        weight: 1
+      - path: Tread033
+        weight: 1
+      - path: Tread034
+        weight: 1
+      - path: Tread035
+        weight: 1
+      - path: Tread036
+        weight: 1
+      - path: Tread037
+        weight: 1
+      - path: Tread038
+        weight: 1
+      - path: Tread039
+        weight: 1
+      - path: Tread040
+        weight: 1
+      - path: Tread041
+        weight: 1
+      - path: Tread042
+        weight: 1
+      - path: Tread043
+        weight: 1
+      - path: Tread044
+        weight: 1
+      - path: Tread045
+        weight: 1
+      - path: Tread046
+        weight: 1
+      - path: Tread047
+        weight: 1
+      - path: Tread048
+        weight: 1
+      - path: Tread049
+        weight: 1
+      - path: Tread050
+        weight: 1
+      - path: Tread051
+        weight: 1
+      - path: Tread052
+        weight: 1
+      - path: Tread053
+        weight: 1
+      - path: Tread054
+        weight: 1
+      - path: Tread055
+        weight: 1
+      - path: Tread056
+        weight: 1
+      - path: Tread057
+        weight: 1
+      - path: Tread058
+        weight: 1
+      - path: Tread059
+        weight: 1
+      - path: Tread060
+        weight: 1
+      - path: Tread061
+        weight: 1
+      - path: Tread062
+        weight: 1
+      - path: Tread063
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

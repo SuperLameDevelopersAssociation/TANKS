@@ -1,0 +1,644 @@
+fileFormatVersion: 2
+guid: 8c42f4a2e2e0d544784bec91741ebd97
+timeCreated: 1488119671
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Box001
+    100002: Box002
+    100004: Box004
+    100006: Box007
+    100008: Box008
+    100010: Box009
+    100012: Box010
+    100014: Box011
+    100016: Box012
+    100018: Box013
+    100020: Box014
+    100022: Box015
+    100024: Box016
+    100026: Box017
+    100028: Box018
+    100030: Box019
+    100032: Box021
+    100034: Box022
+    100036: Box023
+    100038: Box026
+    100040: Box027
+    100042: Box028
+    100044: Cylinder001
+    100046: Cylinder002
+    100048: Cylinder003
+    100050: Cylinder004
+    100052: Cylinder005
+    100054: Cylinder006
+    100056: Cylinder007
+    100058: Cylinder012
+    100060: Cylinder013
+    100062: Cylinder014
+    100064: Cylinder025
+    100066: Cylinder026
+    100068: Cylinder027
+    100070: Cylinder028
+    100072: Cylinder033
+    100074: Cylinder034
+    100076: Cylinder035
+    100078: Cylinder041
+    100080: Cylinder050
+    100082: Cylinder051
+    100084: Cylinder052
+    100086: Cylinder053
+    100088: Cylinder055
+    100090: Cylinder056
+    100092: Cylinder057
+    100094: Cylinder058
+    100096: Cylinder060
+    100098: Cylinder061
+    100100: Cylinder062
+    100102: Cylinder063
+    100104: Cylinder064
+    100106: Cylinder065
+    100108: Cylinder066
+    100110: Cylinder067
+    100112: Cylinder068
+    100114: Gengon001
+    100116: OilTank001
+    100118: OilTank002
+    100120: OilTank003
+    100122: OilTank004
+    100124: OilTank005
+    100126: OilTank006
+    100128: OilTank007
+    100130: OilTank008
+    100132: OilTank009
+    100134: OilTank010
+    100136: OilTank011
+    100138: OilTank012
+    100140: OilTank013
+    100142: OilTank014
+    100144: OilTank015
+    100146: Path Front Right004
+    100148: Path Front Right005
+    100150: Path Front Right006
+    100152: Path Front Right007
+    100154: Sphere001
+    100156: Sphere002
+    100158: Sphere003
+    100160: //RootNode
+    400000: Box001
+    400002: Box002
+    400004: Box004
+    400006: Box007
+    400008: Box008
+    400010: Box009
+    400012: Box010
+    400014: Box011
+    400016: Box012
+    400018: Box013
+    400020: Box014
+    400022: Box015
+    400024: Box016
+    400026: Box017
+    400028: Box018
+    400030: Box019
+    400032: Box021
+    400034: Box022
+    400036: Box023
+    400038: Box026
+    400040: Box027
+    400042: Box028
+    400044: Cylinder001
+    400046: Cylinder002
+    400048: Cylinder003
+    400050: Cylinder004
+    400052: Cylinder005
+    400054: Cylinder006
+    400056: Cylinder007
+    400058: Cylinder012
+    400060: Cylinder013
+    400062: Cylinder014
+    400064: Cylinder025
+    400066: Cylinder026
+    400068: Cylinder027
+    400070: Cylinder028
+    400072: Cylinder033
+    400074: Cylinder034
+    400076: Cylinder035
+    400078: Cylinder041
+    400080: Cylinder050
+    400082: Cylinder051
+    400084: Cylinder052
+    400086: Cylinder053
+    400088: Cylinder055
+    400090: Cylinder056
+    400092: Cylinder057
+    400094: Cylinder058
+    400096: Cylinder060
+    400098: Cylinder061
+    400100: Cylinder062
+    400102: Cylinder063
+    400104: Cylinder064
+    400106: Cylinder065
+    400108: Cylinder066
+    400110: Cylinder067
+    400112: Cylinder068
+    400114: Gengon001
+    400116: OilTank001
+    400118: OilTank002
+    400120: OilTank003
+    400122: OilTank004
+    400124: OilTank005
+    400126: OilTank006
+    400128: OilTank007
+    400130: OilTank008
+    400132: OilTank009
+    400134: OilTank010
+    400136: OilTank011
+    400138: OilTank012
+    400140: OilTank013
+    400142: OilTank014
+    400144: OilTank015
+    400146: Path Front Right004
+    400148: Path Front Right005
+    400150: Path Front Right006
+    400152: Path Front Right007
+    400154: Sphere001
+    400156: Sphere002
+    400158: Sphere003
+    400160: //RootNode
+    2300000: Box001
+    2300002: Box004
+    2300004: Box007
+    2300006: Box008
+    2300008: Box009
+    2300010: Box010
+    2300012: Box011
+    2300014: Box012
+    2300016: Box013
+    2300018: Box014
+    2300020: Box015
+    2300022: Box016
+    2300024: Box017
+    2300026: Box018
+    2300028: Box019
+    2300030: Box021
+    2300032: Box022
+    2300034: Box026
+    2300036: Box027
+    2300038: Box028
+    2300040: Cylinder001
+    2300042: Cylinder002
+    2300044: Cylinder004
+    2300046: Cylinder005
+    2300048: Cylinder006
+    2300050: Cylinder007
+    2300052: Cylinder012
+    2300054: Cylinder013
+    2300056: Cylinder014
+    2300058: Cylinder025
+    2300060: Cylinder026
+    2300062: Cylinder027
+    2300064: Cylinder028
+    2300066: Cylinder033
+    2300068: Cylinder034
+    2300070: Cylinder035
+    2300072: Cylinder050
+    2300074: Cylinder051
+    2300076: Cylinder052
+    2300078: Cylinder053
+    2300080: Cylinder055
+    2300082: Cylinder056
+    2300084: Cylinder057
+    2300086: Cylinder058
+    2300088: Cylinder060
+    2300090: Cylinder061
+    2300092: Cylinder062
+    2300094: Cylinder063
+    2300096: Cylinder064
+    2300098: Cylinder065
+    2300100: Cylinder066
+    2300102: Cylinder067
+    2300104: Cylinder068
+    2300106: OilTank001
+    2300108: OilTank002
+    2300110: OilTank003
+    2300112: OilTank004
+    2300114: OilTank005
+    2300116: OilTank006
+    2300118: OilTank007
+    2300120: OilTank008
+    2300122: OilTank009
+    2300124: OilTank010
+    2300126: OilTank011
+    2300128: OilTank012
+    2300130: OilTank013
+    2300132: OilTank014
+    2300134: OilTank015
+    2300136: Path Front Right004
+    2300138: Path Front Right005
+    2300140: Path Front Right006
+    2300142: Path Front Right007
+    2300144: Sphere003
+    3300000: Box001
+    3300002: Box004
+    3300004: Box007
+    3300006: Box008
+    3300008: Box009
+    3300010: Box010
+    3300012: Box011
+    3300014: Box012
+    3300016: Box013
+    3300018: Box014
+    3300020: Box015
+    3300022: Box016
+    3300024: Box017
+    3300026: Box018
+    3300028: Box019
+    3300030: Box021
+    3300032: Box022
+    3300034: Box026
+    3300036: Box027
+    3300038: Box028
+    3300040: Cylinder001
+    3300042: Cylinder002
+    3300044: Cylinder004
+    3300046: Cylinder005
+    3300048: Cylinder006
+    3300050: Cylinder007
+    3300052: Cylinder012
+    3300054: Cylinder013
+    3300056: Cylinder014
+    3300058: Cylinder025
+    3300060: Cylinder026
+    3300062: Cylinder027
+    3300064: Cylinder028
+    3300066: Cylinder033
+    3300068: Cylinder034
+    3300070: Cylinder035
+    3300072: Cylinder050
+    3300074: Cylinder051
+    3300076: Cylinder052
+    3300078: Cylinder053
+    3300080: Cylinder055
+    3300082: Cylinder056
+    3300084: Cylinder057
+    3300086: Cylinder058
+    3300088: Cylinder060
+    3300090: Cylinder061
+    3300092: Cylinder062
+    3300094: Cylinder063
+    3300096: Cylinder064
+    3300098: Cylinder065
+    3300100: Cylinder066
+    3300102: Cylinder067
+    3300104: Cylinder068
+    3300106: OilTank001
+    3300108: OilTank002
+    3300110: OilTank003
+    3300112: OilTank004
+    3300114: OilTank005
+    3300116: OilTank006
+    3300118: OilTank007
+    3300120: OilTank008
+    3300122: OilTank009
+    3300124: OilTank010
+    3300126: OilTank011
+    3300128: OilTank012
+    3300130: OilTank013
+    3300132: OilTank014
+    3300134: OilTank015
+    3300136: Path Front Right004
+    3300138: Path Front Right005
+    3300140: Path Front Right006
+    3300142: Path Front Right007
+    3300144: Sphere003
+    4300000: Box001
+    4300002: Sphere003
+    4300004: Box004
+    4300006: OilTank001
+    4300008: Cylinder001
+    4300010: Cylinder002
+    4300012: Box007
+    4300014: Cylinder004
+    4300016: Cylinder005
+    4300018: Cylinder006
+    4300020: Cylinder007
+    4300022: OilTank002
+    4300024: OilTank003
+    4300026: OilTank004
+    4300028: Cylinder012
+    4300030: Cylinder013
+    4300032: Cylinder014
+    4300034: Box008
+    4300036: Box009
+    4300038: OilTank005
+    4300040: OilTank006
+    4300042: Cylinder025
+    4300044: Box010
+    4300046: OilTank007
+    4300048: OilTank008
+    4300050: Cylinder026
+    4300052: Box011
+    4300054: OilTank009
+    4300056: OilTank010
+    4300058: Cylinder027
+    4300060: Box012
+    4300062: OilTank011
+    4300064: OilTank012
+    4300066: Cylinder028
+    4300068: Cylinder033
+    4300070: Cylinder034
+    4300072: Cylinder035
+    4300074: Box013
+    4300076: OilTank013
+    4300078: Box014
+    4300080: OilTank014
+    4300082: Box015
+    4300084: Box016
+    4300086: Box017
+    4300088: Box018
+    4300090: OilTank015
+    4300092: Box019
+    4300094: Box021
+    4300096: Box022
+    4300098: Cylinder050
+    4300100: Cylinder051
+    4300102: Cylinder052
+    4300104: Box026
+    4300106: Cylinder053
+    4300108: Box027
+    4300110: Cylinder055
+    4300112: Cylinder056
+    4300114: Cylinder057
+    4300116: Box028
+    4300118: Cylinder058
+    4300120: Cylinder060
+    4300122: Cylinder061
+    4300124: Cylinder062
+    4300126: Cylinder063
+    4300128: Cylinder064
+    4300130: Cylinder065
+    4300132: Cylinder066
+    4300134: Cylinder067
+    4300136: Cylinder068
+    4300138: Path Front Right004
+    4300140: Path Front Right005
+    4300142: Path Front Right006
+    4300144: Path Front Right007
+    7400000: Take 001
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 100
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Box001
+        weight: 1
+      - path: Box002
+        weight: 1
+      - path: Box004
+        weight: 1
+      - path: Box007
+        weight: 1
+      - path: Box008
+        weight: 1
+      - path: Box009
+        weight: 1
+      - path: Box010
+        weight: 1
+      - path: Box011
+        weight: 1
+      - path: Box012
+        weight: 1
+      - path: Box013
+        weight: 1
+      - path: Box013/OilTank013
+        weight: 1
+      - path: Box014
+        weight: 1
+      - path: Box014/OilTank014
+        weight: 1
+      - path: Box015
+        weight: 1
+      - path: Box016
+        weight: 1
+      - path: Box017
+        weight: 1
+      - path: Box018
+        weight: 1
+      - path: Box019
+        weight: 1
+      - path: Box021
+        weight: 1
+      - path: Box022
+        weight: 1
+      - path: Box023
+        weight: 1
+      - path: Box026
+        weight: 1
+      - path: Box027
+        weight: 1
+      - path: Box028
+        weight: 1
+      - path: Cylinder001
+        weight: 1
+      - path: Cylinder002
+        weight: 1
+      - path: Cylinder003
+        weight: 1
+      - path: Cylinder004
+        weight: 1
+      - path: Cylinder005
+        weight: 1
+      - path: Cylinder006
+        weight: 1
+      - path: Cylinder007
+        weight: 1
+      - path: Cylinder012
+        weight: 1
+      - path: Cylinder013
+        weight: 1
+      - path: Cylinder014
+        weight: 1
+      - path: Cylinder025
+        weight: 1
+      - path: Cylinder026
+        weight: 1
+      - path: Cylinder027
+        weight: 1
+      - path: Cylinder028
+        weight: 1
+      - path: Cylinder033
+        weight: 1
+      - path: Cylinder034
+        weight: 1
+      - path: Cylinder035
+        weight: 1
+      - path: Cylinder041
+        weight: 1
+      - path: Cylinder050
+        weight: 1
+      - path: Cylinder051
+        weight: 1
+      - path: Cylinder052
+        weight: 1
+      - path: Cylinder053
+        weight: 1
+      - path: Cylinder055
+        weight: 1
+      - path: Cylinder056
+        weight: 1
+      - path: Cylinder057
+        weight: 1
+      - path: Cylinder058
+        weight: 1
+      - path: Cylinder060
+        weight: 1
+      - path: Cylinder061
+        weight: 1
+      - path: Cylinder062
+        weight: 1
+      - path: Cylinder063
+        weight: 1
+      - path: Cylinder064
+        weight: 1
+      - path: Cylinder065
+        weight: 1
+      - path: Cylinder066
+        weight: 1
+      - path: Cylinder067
+        weight: 1
+      - path: Cylinder068
+        weight: 1
+      - path: Gengon001
+        weight: 1
+      - path: OilTank001
+        weight: 1
+      - path: OilTank002
+        weight: 1
+      - path: OilTank003
+        weight: 1
+      - path: OilTank004
+        weight: 1
+      - path: OilTank005
+        weight: 1
+      - path: OilTank006
+        weight: 1
+      - path: OilTank007
+        weight: 1
+      - path: OilTank008
+        weight: 1
+      - path: OilTank009
+        weight: 1
+      - path: OilTank010
+        weight: 1
+      - path: OilTank011
+        weight: 1
+      - path: OilTank012
+        weight: 1
+      - path: OilTank015
+        weight: 1
+      - path: Path Front Right004
+        weight: 1
+      - path: Path Front Right005
+        weight: 1
+      - path: Path Front Right006
+        weight: 1
+      - path: Path Front Right007
+        weight: 1
+      - path: Sphere001
+        weight: 1
+      - path: Sphere002
+        weight: 1
+      - path: Sphere003
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
